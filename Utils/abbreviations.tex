@@ -1,0 +1,50 @@
+%\thispagestyle{plain}
+%\chaptermark{Abbreviation}
+\addcontentsline{toc}{chapter}{Abbreviations} \noindent
+%\renewcommand{\nomname}{List of Abbreviations}
+
+%--- Acronyms -----------------------------------------------------------------%
+% \acrodef{label}[acronym]{written out form} % acronym syntax
+%\acrodef{etacar}[$\eta$ Car]{Eta Carinae}   % acronym example
+%--- Acronyms -----------------------------------------------------------------%
+% how to use acronyms:
+% \ac = use acronym, first time write both, full name and acronym
+% \acf = use full name (text + acronym)
+% \acs = only use acronym
+% \acl = only use long text
+% \acp, acfp, acsp, aclp = use plural form for acronym (append 's')
+% \acsu, aclu = write + mark as used
+% \acfi = write full name in italics and acronym in normal style
+% \acused = mark acronym as used
+% \acfip = full, emphasized, plural, used
+%--- Acronyms -----------------------------------------------------------------%
+
+\chapter*{List of Abbreviations}
+\begin{multicols}{2}
+\begin{acronym}
+        \acro{bo}[BO]{Black-box Optimization}
+        \acro{dnn}[DNN]{Deep Neural Network}
+        \acro{ei}[EI]{Expected Improvement}
+        \acro{es}[ES]{Entropy Search}
+        \acro{pes}[PES]{Predictive Entropy Search}
+        \acro{mes}[MES]{Max-value Entropy Search}
+        \acro{kg}[KG]{Knowledge Gradient}
+        \acro{gp}[GP]{Gaussian Process}
+        \acrodefplural{gp}{Gaussian Processes}
+        \acro{lcb}[LCB]{Lower Confidence Bound}
+        \acro{ntk}[NTK]{Neural Tangent Kernel}
+        \acro{rkhs}[RKHS]{Reproducing Kernel Hilbert Space}
+        \acro{pde}[PDE]{Partial Differential Equation}
+        \acro{pinn}[PINN]{Physics-Informed Neural Network}
+        \acro{ts}[TS]{Thompson Sampling}
+        \acro{ucb}[UCB]{Upper Confidence Bound}
+        \acro{rf}[RF]{Random Forest}
+        \acro{bnn}[BNN]{Bayesian Neural Network}
+        \acro{deepgp}[Deep GP]{Deep Gaussian Process}
+        \acro{mig}[MIG]{Maximum Information Gain}
+        \acro{relu}[ReLU]{Rectified Linear Unit}
+        \acro{PI}[PI]{Probability of Improvement}
+        \acro{cdf}[CDF]{Cumulative Distribution Function}
+        \acro{pdf}[PDF]{Probability Density Function}
+\end{acronym}
+\end{multicols}

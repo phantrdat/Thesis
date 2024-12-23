@@ -1,0 +1,587 @@
+\chapter{Background} % Main chapter title
+
+\label{chap:background} 
+
+% Define some commands to keep the formatting separated from the content 
+This chapter provides a structured exploration of black-box optimization, beginning with the basic mathematical concepts necessary for understanding the subject. Section \ref{section:math_backgrounds} introduces the fundamental mathematical tools and principles that support optimization theory, ensuring a solid foundation for later discussions. Section \ref{section:optimization_introduction} provides a general overview of optimization, distinguishing between local and global approaches and highlighting their respective roles and applications.
+
+In Section \ref{section:black_box_optimization}, we shift our focus to black-box optimization, examining the challenges posed by functions that are expensive to evaluate or lack explicit mathematical representation. Section \ref{section:bo_unknown_constraints} extends this discussion by addressing problems with unknown constraints, emphasizing strategies to effectively explore feasible regions in such complex scenarios. Section \ref{section:bo_physics} explores how incorporating physics-based knowledge into optimization frameworks can improve both solution accuracy and computational efficiency. Finally, in Section \ref{section:bo_further_research}, we conclude the chapter by outlining potential future research directions, focusing on unresolved challenges and emerging opportunities in black-box optimization.
+
+\section{Essential Mathematics Backgrounds}
+\label{section:math_backgrounds}
+\subsection{Gaussian and Sub-Gaussian Random Variables}
+\subsubsection{Gaussian Random Variables}  
+Gaussian random variables, also known as normal random variables, are fundamental in probability theory and statistics. A Gaussian random variable \( X \) is fully characterized by its mean \( \mu \) and variance \( \sigma^2 \), and its probability density function (PDF) is given by:  
+\[
+f_X(x) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(x - \mu)^2}{2\sigma^2}\right), \quad x \in \mathbb{R}.
+\]  
+The tails of a Gaussian distribution decay exponentially, meaning the probability of large deviations from the mean diminishes rapidly. Specifically, for \( X \sim \mathcal{N}(\mu, \sigma^2) \), the tail probability can be bounded as:  
+\[
+\mathbb{P}(|X - \mu| > t) \leq 2 \exp\left(-\frac{t^2}{2\sigma^2}\right), \quad t > 0.
+\]  
+
+This exponential decay of tail probabilities is a key property that makes Gaussian distributions central to statistical theory and concentration inequalities. However, many random variables in practice exhibit similar tail behaviors without necessarily following the exact Gaussian distribution. This motivates the broader class of \textit{sub-Gaussian random variables}.  
+
+\subsubsection{Sub-Gaussian Random Variables}  
+A random variable \( X \) is sub-Gaussian if its tail probabilities decay at least as fast as those of a Gaussian random variable. Intuitively, sub-Gaussian random variables are those whose deviations from their mean are tightly controlled, similar to or better than the Gaussian case.  
+
+Formally, \( X \) is sub-Gaussian if there exists a constant \( \sigma > 0 \) such that for all \( t > 0 \):  
+\[
+\mathbb{P}(|X - \mathbb{E}[X]| > t) \leq 2 \exp\left(-\frac{t^2}{2\sigma^2}\right).
+\]  
+Here, \( \sigma^2 \) is called the \textit{sub-Gaussian variance parameter}, and it provides a measure of the "spread" of the random variable, analogous to the variance in a Gaussian distribution.  
+
+An equivalent definition involves the moment generating function (MGF). A random variable \( X \) is sub-Gaussian if there exists a constant \( \sigma > 0 \) such that:  
+\[
+\mathbb{E}[\exp(\lambda(X - \mathbb{E}[X]))] \leq \exp\left(\frac{\lambda^2 \sigma^2}{2}\right), \quad \forall \lambda \in \mathbb{R}.
+\]  
+
+Many common random variables exhibit sub-Gaussian behavior, including Gaussian, bounded, and discrete random variables. Below are some illustrative examples:  
+\begin{itemize}
+    \item \textbf{Gaussian Random Variables:} Any Gaussian random variable \( X \sim \mathcal{N}(\mu, \sigma^2) \) is inherently sub-Gaussian, with \( \sigma^2 \) as its variance.  
+    \item \textbf{Bounded Random Variables:} If \( X \) is a bounded random variable, i.e., \( |X| \leq B \) almost surely, then \( X \) is sub-Gaussian with \( \sigma \leq B \).  
+    \item \textbf{Rademacher Random Variables:} A Rademacher random variable, which takes values \( \pm 1 \) with equal probability, is sub-Gaussian with \( \sigma = 1 \).  
+\end{itemize}  
+
+Sub-Gaussian random variables exhibit several important properties that make them useful in probabilistic analyses, particularly when handling extreme deviations and ensuring concentration of measure. These properties include:  
+\begin{itemize}
+    \item \textbf{Tight Tail Bounds:} Sub-Gaussian random variables satisfy exponential tail bounds, making them useful in scenarios where extreme deviations must be controlled.  
+    \item \textbf{Closed under Affine Transformations:} If \( X \) is sub-Gaussian, then \( aX + b \) is also sub-Gaussian, with the sub-Gaussian parameter scaled by \( |a| \).  
+    \item \textbf{Sum of Independent Sub-Gaussians:} If \( X_1, X_2, \dots, X_n \) are independent sub-Gaussian random variables, their sum \( S_n = \sum_{i=1}^n X_i \) is also sub-Gaussian, with the variance parameter satisfying \( \sigma^2_{S_n} = \sum_{i=1}^n \sigma_i^2 \).  
+\end{itemize} 
+
+While sub-Gaussian random variables provide valuable tools for modeling uncertainties in single values, many real-world problems cannot be modeled with single values, as these problems often deal with the uncertainty over entire functions. Therefore, it becomes necessary to capture the dependencies between the values of the function at different locations or times, which implies a need for working with joint distributions. The key challenge arises when dealing with functions, which can take values at infinitely many points, thus requiring a notion of probability distributions over functions. In the next section,  we introduce \acf{gp}, which is the natural extension of the normal distribution from the case of individual random variables to function spaces.
+
+\subsection{Gaussian Process}
+\label{section:gaussian_process}
+A \acf{gp} is a finite collection of normally distributed random variables with each having a multivariate normal distribution. \ac{gp} offers a prior distribution over smooth functions and are completely specified by a mean function, $\mu(\mathbf{x})$ and covariance function, $k(\mathbf{x}, \mathbf{x}^\prime)$. We have \begin{equation}
+    \label{def:GP}
+    f({\bf x})\sim\mathrm{GP}(\mu({\bf x}),k({\bf x},{\bf x}^\prime))
+\end{equation}
+where the mean and variance of a normal distribution is returned as the value of $f(\mathbf{x})$ for an arbitrary $\mathbf{x}$. Without loss in generality, $f(\mathbf{x})$ values can be assumed as a realization of random variables with prior mean as zero thus making the Gaussian process fully specified by the covariance matrix \citep{rasmussen2006gaussian}. There are many popular covariance functions including Mat\'ern kernel, Linear kernel, Squared Exponential kernel. These kernels will be briefly introduced in the next section.
+
+% In that the Squared Exponential (SE) kernel is a popular choice.
+
+% \begin{equation}
+%      \left.k({\bf x},{\bf x}^{\prime}) = \exp (-\frac{1}{2 \ell^{2}} \norm{\bf x - \bf x^{\prime}}^{2}) \right.
+% \end{equation}
+% In the above kernel, $\ell$ is a length scale parameter related to the smoothness of the function. When $\mathbf{x}_i$ and $\mathbf{x}_j$
+% values get close together, this function returns high value and else it returns value close to 0.
+We assume that function values ${\mathbf{y}}_{1:t} = f(\mathbf{x}_{1:t})+\epsilon_{1:t}$ corresponding to the initial points $\mathbf{x}_{1:t}$ are sampled
+from the prior Gaussian process. Collectively we denote the observations as $\mathcal{D}_{1:t} = \{\mathbf{x}_{1:t}, \mathbf{y}_{1:t}\}$. The function
+values $f(\mathbf{x}_{1:t})$ follow a multivariate Gaussian distribution $\mathcal{N}(0, \mathbf{K}_t)$, where
+\[ \mathbf{K}_t = \begin{bmatrix} 
+    k(\mathbf{x}_1, \mathbf{x}_1) & \dots  & k(\mathbf{x}_1, \mathbf{x}_t)\\
+    \vdots & \ddots & \vdots\\
+    k(\mathbf{x}_t, \mathbf{x}_1) & \dots  & k(\mathbf{x}_t, \mathbf{x}_t)
+    \end{bmatrix}
+\]
+Given a new point $\mathbf{x}_{t+1}$, then $\mathbf{x}_{t+1},  y_{1:t}$ and $f(\mathbf{x}_{t+1})$ are jointly Gaussian. By the properties of Gaussian process we
+can write
+
+\[
+\begin{pmatrix}
+\mathbf{y}_{1:t} \\
+f(\mathbf{x}_{t+1})
+\end{pmatrix} \sim \mathcal{N}\left(0, \begin{bmatrix}
+\mathbf{K}_t & \mathbf{k}_{1:t} \\
+\mathbf{k}_{1:t}^\top & k(\mathbf{x}_{t+1}, \mathbf{x}_{t+1})
+\end{bmatrix} \right), 
+\]
+where $\mathbf{k}_{1:t} = \begin{bmatrix}
+k(\mathbf{x}_{t+1}, \mathbf{x}_1) & k(\mathbf{x}_{t+1}, \mathbf{x}_2) & \dots & k(\mathbf{x}_{t+1}, \mathbf{x}_t)
+\end{bmatrix}$.
+
+Then using Sherman-Morrison-Woodbury formula in \citet{rasmussen2006gaussian}, the predictive distribution is:
+\[ \mathbb{P}(y_{t+1} \lvert \mathcal{D}_{1:t}, \mathbf{x}_{t+1})= \mathcal{N}(\mu_t(\mathbf{x}_{t+1}), \sigma_t^2(\mathbf{x}_{t+1})), 
+\]
+where the predictive mean is $\mu_t(\mathbf{x}_{t+1}) = \mathbf{k}_{1:t}^\top \mathbf{K}_t^{-1} \mathbf{y}_{1:t}$ and variance $\sigma_{t}^{2}({\bf x}_{t+1}) = k({\bf x}_{t+1},{\bf x}_{t+1})-{\bf k}_{1:t}^{\top} \mathbf{K}_t^{-1}{\bf k}_{1:t}$. 
+
+\subsection{Kernels}
+\label{section:kernels}
+In the context of \acfp{gp}, kernels (also known as covariance functions) play a crucial role in defining the prior belief about the function being modeled. A kernel, denoted as $k(\mathbf{x}, \mathbf{x}^\prime)$, quantifies the similarity or correlation between function values at two input locations, $\mathbf{x}$ and $\mathbf{x}^\prime$. It is symmetric, positive semi-definite, and it defines the properties of the functions sampled from the \ac{gp} prior. These properties ensure that the resulting covariance matrix constructed using this kernel will be valid (positive semi-definite), which is necessary for the Gaussian Process to be well-defined.
+
+The choice of kernel is a critical aspect of \ac{gp} modeling, as it directly impacts the smoothness, complexity, and overall behavior of the functions that the model is capable of representing. Different kernels encode different assumptions about the underlying function we are attempting to model, and it is crucial to carefully consider these assumptions when choosing a kernel for a specific task. From the perspective of Bayesian inference, the kernel can be seen as the main source of prior information about the properties of the functions we are modeling. Therefore, it is essential to choose a kernel that is appropriate for the structure and characteristics that one might expect from the function. We now consider some common types of kernels, each with its own assumptions and characteristics:
+
+\paragraph{Linear Kernel:}
+The linear kernel is defined as:
+\[k(\mathbf{x}, \mathbf{x}^\prime) = \mathbf{x}^T \mathbf{x}^\prime\]
+where $\mathbf{x}$ and $\mathbf{x}^\prime$ are vectors in the input space. This kernel models the assumption that the function values are linearly related to the inputs. The resulting functions are linear combinations of the input variables. This kernel is useful when there is a reason to assume that the underlying data has a linear structure, or when working with high-dimensional data where the kernel has less sensitivity to changes in the input. However, this kernel is often too restrictive for complex functions due to its lack of flexibility and can't capture non-linear patterns. 
+
+\paragraph{Squared Exponential (RBF) Kernel}
+
+The squared exponential kernel, also known as the Radial Basis Function (RBF) kernel, is defined as:
+\[ k(\mathbf{x}, \mathbf{x}^\prime) = \exp\left(-\frac{\norm{\mathbf{x} - \mathbf{x}^\prime}^2}{2\ell^2}\right),\]
+where $\ell$ is the length-scale parameter. The RBF kernel assumes that the function values are highly correlated when the inputs are close to each other. The parameter $\ell$ controls the "reach" of the correlation; a larger $\ell$ implies that the function values are correlated even when the inputs are farther apart. This kernel is associated with infinitely smooth functions, which implies that the functions represented with this kernel do not have sharp changes or rapid variations. The RBF kernel is widely used for its flexibility and its ability to model non-linear functions, and also because its parameter controls the range of smoothness of the represented functions. However, its isotropic nature might make it not ideal in scenarios where the different dimensions have different degrees of correlation.
+
+\paragraph{Mat\'ern Kernel}
+
+The Mat\'ern kernel is a more general kernel and is defined as:
+\[ k(\mathbf{x}, \mathbf{x}^\prime) = \frac{2^{1-\nu}}{\Gamma(\nu)}\left(\frac{\sqrt{2\nu}\norm{\mathbf{x}-\mathbf{x}^\prime}}{\ell}\right)^\nu K_\nu\left(\frac{\sqrt{2\nu}\norm{\mathbf{x}-\mathbf{x}^\prime}}{\ell}\right)\]
+where $\nu > 0$ is the smoothness parameter, $\ell$ is the length-scale parameter, and $K_\nu$ is the modified Bessel function of the second kind. The Mat\'ern kernel is a generalization of the RBF kernel, which is obtained in the limit of large $\nu$.  This kernel allows for controlling the smoothness of the underlying function, providing a continuous range of possibilities. The smoothness of functions associated with the Mat\'ern kernel is determined by the parameter $\nu$. A low $\nu$ implies less smooth functions, whereas, as $\nu$ increases, the functions become increasingly smoother. This parameter also has an impact on the convergence of Bayesian Optimization algorithms. Mat\'ern kernels with different smoothness parameters have also been found to have a crucial effect in the generalization capacity of Gaussian Process models, as it reflects the trade-off between modeling data and having a smooth prior \citep{rasmussen2006gaussian}. The Mat\'ern kernel allows the flexibility of the RBF kernel, but includes an additional parameter that enables one to control the smoothness of the modeled function. This parameter is not present in the case of RBF kernels.
+
+The choice of the kernel is not merely a matter of convenience; it directly influences the properties of the function space over which the Gaussian process operates. Selecting an appropriate kernel demands a careful understanding of the underlying assumptions of each kernel type and considering the characteristics of the function to be modeled. Kernels enable us to encode our prior beliefs about the function, and hence, proper selection is crucial for the efficiency and generalization capability of our Gaussian Process model. We have presented three common kernels that are often used in practice, and their differences highlight the importance of selecting the appropriate kernel for the task. The theoretical properties of these kernels can be found in the literature. Choosing between them requires an understanding of the properties of the data and the functions to be modeled.
+\subsection{Maximum Information Gain}
+\label{section:MIG}
+In the context of machine learning and information theory, \ac{mig} is a principle used to select features, queries, or actions that yield the highest amount of information about an unknown variable of interest. The concept of information gain is rooted in Shannon’s entropy theory and measures the reduction in uncertainty about a random variable after observing another variable. 
+
+\subsubsection{Entropy}
+\label{section:entropy}
+Entropy is a measure of the uncertainty or unpredictability in a random variable. For a discrete random variable $X$ with possible outcomes $\mathbf{x} \in \mathcal{X}$ and probability distribution $p(X)$, the entropy $H(X)$ is defined as:
+\[
+H(X) = - \sum_{\mathbf{x} \in \mathcal{X}} p(\mathbf{x}) \log p(\mathbf{x}).
+\]
+This entropy value represents the average number of bits required to encode information about the variable $X$. When we consider a second random variable $Y$, we can examine how much observing $Y$ reduces uncertainty about $X$, which is the basis for defining information gain.
+
+The \textit{conditional entropy} of $X$ given $Y$, denoted $H(X|Y)$, measures the remaining uncertainty about $X$ after observing $Y$. It is defined as:
+\[
+H(X|Y) = - \sum_{\mathbf{y} \in \mathcal{Y}} p(\mathbf{y}) \sum_{\mathbf{x} \in \mathcal{X}} p(\mathbf{x} | \mathbf{y}) \log p(\mathbf{x} | \mathbf{y}).
+\]
+The conditional entropy quantifies the uncertainty in $X$ given that we know $Y$. If observing $Y$ provides information about $X$, we expect $H(X|Y) < H(X)$.
+
+\subsubsection{Mutual Information}
+
+The \textit{mutual information} $IG(X; Y)$ between two random variables $X$ and $Y$ is defined as the reduction in entropy of $X$ after observing $Y$, and is given by:
+\[
+IG(X; Y) = H(X) - H(X|Y).
+\]
+This quantity represents the average reduction in uncertainty about $X$ provided by knowledge of $Y$. Alternatively, it can also be expressed in terms of the mutual information $I(X; Y)$ between $X$ and $Y$:
+\[
+IG(X; Y) = I(X; Y),
+\]
+where mutual information is defined as:
+\[
+I(X; Y) = \sum_{\mathbf{x} \in \mathcal{X}} \sum_{\mathbf{y} \in \mathcal{Y}} p(\mathbf{x}, \mathbf{y}) \log \frac{p(\mathbf{x}, \mathbf{y})}{p(\mathbf{x}) p(\mathbf{y})}.
+\]
+Mutual information is symmetric and non-negative, i.e., $I(X; Y) = I(Y; X) \geq 0$, and measures the amount of shared information between $X$ and $Y$.
+
+While the concept of Mutual Information generally quantifies the reduction in uncertainty about one random variable when observing another, its application becomes specialized within the context of \acp{gp}. Specifically, when using a \ac{gp} to learn an unknown function $f$, the information gain is redefined as the mutual information between the noisy observations (the function values at chosen points) and the true, underlying function values $f$. This specialization allows us to analyze the effectiveness of our \ac{gp} learning process based on the information provided by our observed data. 
+\subsubsection{Maximum Information Gain in GP regression}
+
+Assume we have a \ac{gp} prior over \( f \) with mean function \( \mu(\mathbf{x}) \) and covariance \( k(\mathbf{x}, \mathbf{x}^\prime) \). After $t$ steps, the model receives an input sequence $\mathcal{X}_t = (\mathbf{x}_1, \mathbf{x}_2, \dots  \mathbf{x}_t)$ and observes noisy rewards $\mathbf{y}_t = (y_1, y_2, \dots, y_t)$. The \emph{information gain} at step $t$, quantifies the reduction in uncertainty about $f$ after observing $\mathbf{y}_t$, defined as the mutual information between  $\mathbf{y}_t$ and $f$:
+\[
+I(\mathbf{y}_t; f) \coloneqq  H(\mathbf{y}_t) - H(\mathbf{y}_t \rvert f), 
+\]
+where $H$ denotes the entropy. To obtain the closed-form expression of information gain, one needs to introduce a GP model where $f$ is assumed to be a zero mean GP indexed on $\mathcal X$ with kernel $k$. Let $\mathbf{f}_t = [\left(f(\mathbf{x}_1), f(\mathbf{x}_1), \dots, f(\mathbf{x}_t)] \right)$ be the corresponding true function values.  From \citet{cover1999elements}, the mutual information between two multivariate Gaussian random variables is: 
+\[ I(\mathbf{y}_t; f) = I(\mathbf{y}_t; \mathbf{f}_t) = \frac{1}{2} \log \det (\mathbf{I}_t + \lambda^{-1}\mathbf{K}_t), \]
+where $\lambda > 0$ is a regularization parameter, $\mathbf{K}_t$ is the covariance kernel matrix of the points \( \{\mathbf{x}_1, \dots, \mathbf{x}_n\} \),
+and \( \mathbf{I}_t \) is the identity matrix.
+
+
+The Information Gain obtained is highly dependent on the specific locations where observations are made. To address this variability, the \acf{mig} after observing $t$ data points, represented as $\gamma_t$, is introduced as an upper bound. Instead of focusing on a particular point selection, \ac{mig} quantifies the maximum possible information that could be gained from any set of $t$ points in the input space. \ac{mig} provides an input-independent and kernel-specific bound on the information that can be acquired:
+
+\[ \gamma_t := \max_{\mathcal{A} \subset \mathcal{X}, \lvert \mathcal{A} \rvert = t} I(\mathbf{y}_A; \mathbf{f}_A),\]
+
+As mentioned above, $\mathcal{A}$ represents a set of $t$ input points in the input space $\mathcal{X}$, $\mathbf{y}_\mathcal{A}$ denotes the noisy observations of the objective function $f$ at these points, and $\mathbf{f}_\mathcal{A}$ represents the corresponding function values \textit{without} noise. $I(\mathbf{y}_\mathcal{A}; \mathbf{f}_\mathcal{A})$ is the mutual information between the observed data $\mathbf{y}_\mathcal{A}$ and the underlying function values $\mathbf{f}_\mathcal{A}$. Basically, the \ac{mig} quantifies the maximum amount of information that \textit{any} set of $t$ points could possibly reveal about the unknown objective function $f$. Specifically, the \ac{mig} serves as an upper bound on the information obtained by any selection of $t$ points. This means that even in the worst-case scenario (i.e., the scenario where we choose the least informative set of points within the optimization algorithm), the amount of information gained will never surpass the \ac{mig}. The work by \citet{srinivas2009gaussian} provides crucial kernel-specific bounds on the \ac{mig}. Specifically, they analyzed three common kernels: Linear, RBF, and Mat\'ern introduced in Section \ref{section:kernels}. The bounds on \ac{mig} for these kernels are:
+
+\begin{itemize}
+    \item \textbf{Linear Kernel:}
+    The MIG is bounded by
+    \[ \gamma_t = \mathcal{O}(d \log t),\]
+    where $d$ is the input dimension.
+
+    \item \textbf{Squared Exponential (RBF) Kernel:} The \ac{mig} for RBF kernel is bounded by:
+    \[ \gamma_t = \mathcal{O}((\log t)^{d+1}). \]
+
+
+    \item \textbf{Mat\'ern Kernel:} For a specific smoothness parameter $\nu$ of Mat\'ern kernel, the \ac{mig} has a bound:
+     \[ \gamma_t = \mathcal{O} \left( t^\frac{d(d+1)}{2\nu+ d(d+1)} \log t \right). \]
+    
+\end{itemize}
+
+
+
+
+
+\subsection{\acf{rkhs}}
+\label{background:rkhs}
+\acp{rkhs} provide a rigorous framework for dealing with functions in high-dimensional spaces using kernel methods, which are central in machine learning, functional analysis, and statistics. Formally, \acp{rkhs} are Hilbert spaces associated with a positive definite kernel, allowing efficient manipulation of functions via inner products and enabling regularization in infinite-dimensional settings.
+
+\subsubsection{Hilbert Spaces and Inner Products}
+
+A \textit{Hilbert space} $\mathcal{H}$ is a complete vector space equipped with an inner product $\langle \cdot, \cdot \rangle_{\mathcal{H}}$ such that every Cauchy sequence in $\mathcal{H}$ converges in $\mathcal{H}$. Completeness is crucial for ensuring that limits of function sequences (e.g., solutions to optimization problems) lie within the space.
+
+For an inner product space $\mathcal{H}$, the norm induced by the inner product is given by:
+\[
+\norm{f}_{\mathcal{H}} = \sqrt{\langle f, f \rangle_{\mathcal{H}}}.
+\]
+
+\subsubsection{Kernel Functions and Positive Definiteness}
+
+Let $\mathcal{X}$ be an input space, typically $\mathbb{R}^d$, and let $k: \mathcal{X} \times \mathcal{X} \to \mathbb{R}$ be a \textit{kernel function}. A function $k$ is called \textit{positive definite} if for any finite set of points $\{\mathbf{x}_1, \dots, \mathbf{x}_n\} \subset \mathcal{X}$ and any $\mathbf{c} = (c_1, \dots, c_n) \in \mathbb{R}^n$, we have:
+\[
+\sum_{i=1}^n \sum_{j=1}^n c_i c_j k(\mathbf{x}_i, \mathbf{x}_j) \geq 0.
+\]
+This property ensures that $k$ can serve as a similarity measure and enables the construction of a unique \ac{rkhs} associated with $k$.
+
+\subsubsection{Constructing RKHS: The Moore-Aronszajn Theorem}
+
+A central result in \ac{rkhs} theory is the \textit{Moore-Aronszajn Theorem}, which guarantees the existence of a unique \ac{rkhs} for any positive definite kernel $k$. The theorem states:
+
+\begin{theorem}[Moore-Aronszajn]
+For any positive definite kernel $k$ on $\mathcal{X} \times \mathcal{X}$, there exists a unique Hilbert space $\mathcal{H}$ of functions $f: \mathcal{X} \to \mathbb{R}$ such that:
+\begin{enumerate}
+    \item $k(\mathbf{x}, \cdot) \in \mathcal{H}$ for all $\mathbf{x} \in \mathcal{X}$,
+    \item For every $f \in \mathcal{H}$ and $\mathbf{x} \in \mathcal{X}$, $f(\mathbf{x}) = \langle f, k(\mathbf{x}, \cdot) \rangle_{\mathcal{H}}$, called the \textit{reproducing property}.
+\end{enumerate}
+\end{theorem}
+This theorem allows us to construct $\mathcal{H}$ as the \textit{completion} of the span of the functions $\{k(\mathbf{x}, \cdot) : \mathbf{x} \in \mathcal{X}\}$ with respect to the inner product $\langle \cdot, \cdot \rangle_{\mathcal{H}}$.
+
+\subsubsection{Inner Product and Norm in RKHS}
+
+Given two functions $f, g \in \mathcal{H}$ represented as finite linear combinations of kernel functions, i.e., $f = \sum_{i=1}^n \alpha_i k(\mathbf{x}_i, \cdot)$ and $g = \sum_{j=1}^m \beta_j k(\mathbf{y}_j, \cdot)$, the inner product in $\mathcal{H}$ can be computed as:
+\[
+\langle f, g \rangle_{\mathcal{H}} = \sum_{i=1}^n \sum_{j=1}^m \alpha_i \beta_j k(\mathbf{x}_i, \mathbf{y}_j).
+\]
+The corresponding norm is:
+\[
+\norm{f}_{\mathcal{H}} = \sqrt{\langle f, f \rangle_{\mathcal{H}}} = \sqrt{\sum_{i=1}^n \sum_{j=1}^n \alpha_i \alpha_j k(\mathbf{x}_i, \mathbf{x}_j)}.
+\]
+This norm represents the ``smoothness'' or ``complexity'' of functions in $\mathcal{H}$, with higher values corresponding to more complex functions.
+
+\subsubsection{Reproducing Property and Point-wise Evaluation}
+
+A crucial property in \ac{rkhs} is the \textit{reproducing property}, which allows pointwise evaluation of functions $f \in \mathcal{H}$ using the inner product. For any $f \in \mathcal{H}$ and $\mathbf{x} \in \mathcal{X}$,
+\[
+f(\mathbf{x}) = \langle f, k(\mathbf{x}, \cdot) \rangle_{\mathcal{H}}.
+\]
+This property simplifies function evaluations to inner products, making it possible to evaluate functions at any point without explicitly knowing the form of $f$.
+
+\subsubsection{Representer Theorem}
+
+In many machine learning applications, we wish to minimize a regularized empirical risk functional of the form:
+\[
+\min_{f \in \mathcal{H}} \sum_{i=1}^n L(y_i, f(\mathbf{x}_i)) + \lambda \norm{f}_{\mathcal{H}}^2,
+\]
+where $L$ is a loss function (e.g., squared loss for regression) and $\lambda > 0$ is a regularization parameter. The \textit{Representer Theorem} asserts that the solution to this optimization problem can be represented as a linear combination of kernel evaluations at the training points:
+\[
+f^*(\mathbf{x}) = \sum_{i=1}^n \alpha_i k(\mathbf{x}_i, \mathbf{x}),
+\]
+where the coefficients $\alpha_i$ can be found by solving a finite-dimensional problem. This reduces the complexity of optimization from the infinite-dimensional space $\mathcal{H}$ to a finite-dimensional space of size $n$, greatly simplifying computation.
+
+\subsubsection{Regularization and Smoothness in RKHS}
+
+The \ac{rkhs} norm $\norm{f}_{\mathcal{H}}$ provides a measure of the smoothness of $f$. When we regularize by minimizing $\norm{f}_{\mathcal{H}}^2$, we control the complexity of the function, effectively penalizing highly oscillatory or rough functions. This form of regularization is particularly relevant in \textit{kernel ridge regression} and \textit{support vector machines}, where the objective function is minimized subject to a smoothness constraint in $\mathcal{H}$.
+
+\subsubsection{Examples of Kernels and Corresponding RKHS}
+
+\begin{itemize}
+    \item \textbf{Linear Kernel} $k(\mathbf{x}, \mathbf{y}) = \mathbf{x}^T \mathbf{y}$: The \ac{rkhs} corresponding to this kernel is the space of linear functions $f(\mathbf{x}) = \mathbf{w}^T \mathbf{x}$.
+    \item \textbf{Polynomial Kernel} $k(\mathbf{x}, \mathbf{y}) = (\mathbf{x}^T \mathbf{y} + c)^p$: This kernel represents polynomial functions of degree $p$, enabling polynomial feature spaces.
+    \item \textbf{Gaussian (RBF) Kernel} $k(\mathbf{x}, \mathbf{y}) = \exp\left(-\frac{\|\mathbf{x} - \mathbf{y}\|^2}{2\sigma^2}\right)$: The \ac{rkhs} for this kernel includes all smooth functions, making it particularly effective for non-linear, smooth function approximation.
+\end{itemize}
+
+
+\section{Introduction to Optimization}
+\label{section:optimization_introduction}
+\subsection{Gradient-Based Optimization}
+\subsection{Derivative-Free Optimization}
+
+\section{Black-box Optimization}
+\label{section:black_box_optimization}
+\subsection{Introduction to Black-box Optimization}
+In previous sections, Gradient-Based Optimization and Derivative-Free Optimization are introduced. While gradient-based methods leverage explicit derivative information and derivative-free methods only rely on function evaluations, both assume some level of access to the structure or behavior of the objective function. \acf{bo}, in contrast, deals with scenarios where the objective function is a black-box, allowing evaluation only through expensive and potentially noisy queries. This requires suitable approaches that balance efficiency and accuracy while navigating the unknown landscape of the function.  Mathematically, \ac{bo} is the process of finding the optimal solution to a problem where the objective function  $f(\mathbf{x})$ is unknown or analytically intractable. The function $f(\mathbf{x})$ is accessible only through point-wise evaluations, typically via simulations, experiments, or complex computations. This makes \ac{bo} particularly challenging, as each evaluation can be computationally expensive or time-consuming.  
+
+\paragraph{Problem Definition}
+
+The goal of black-box optimization is to solve the following problem:  
+\[
+x^* = \arg\min_{x \in \mathcal{X}} f(x),
+\]  
+where $\mathcal{X} \subseteq \mathbb{R}^d$ represents the feasible domain, which may include constraints. Unlike traditional optimization methods, \ac{bo} assumes no explicit knowledge of \( f(x) \), such as its gradients or function form.  Black-box functions often exhibit the following characteristics:  
+\begin{itemize}
+    \item \textbf{Expensive Evaluations}: Each query to \( f(x) \) incurs a high computational or physical cost. 
+    \item \textbf{High Dimensionality}: The input space \( \mathcal{X} \) may be high-dimensional, increasing the difficulty of efficient exploration. 
+    \item \textbf{Noisy Observations}: Evaluations of \( f(x) \) may be corrupted by noise, represented as:  
+   \[
+   y(x) = f(x) + \epsilon,
+   \]  
+   where $\epsilon$ is the noise and often assumed to follow a Gaussian distribution $\epsilon \sim \mathcal{N}(0, \sigma^2)$
+\item \textbf{Complex Constraints}: The search space \( \mathcal{X} \) may include unknown or black-box constraints \( g_i(x) \leq 0 \), \( i = 1, \dots, m \)
+\end{itemize}
+
+% ### Exploration vs. Exploitation  
+
+A key challenge in \ac{bo} is balancing ``exploration'', searching unvisited areas to discover new optima, and ``exploitation'', refining evaluations near promising regions. This balance is often managed using acquisition functions \( a(x) \), guiding the search by estimating the utility of sampling at \( x \).  
+
+% ### Mathematical Framework  
+
+Let \( \mathcal{D}_n = \{(x_i, y_i)\}_{i=1}^n \) represent the data collected after \( n \) evaluations, where \( x_i \in \mathcal{X} \) are the sampled points and \( y_i = f(x_i) + \epsilon \) are the observed responses. A surrogate model \( \hat{f}(x | \mathcal{D}_n) \) is constructed to approximate \( f(x) \) based on \( \mathcal{D}_n \). The next evaluation point \( x_{n+1} \) is chosen to optimize the acquisition function:  
+\[
+x_{n+1} = \arg\min_{x \in \mathcal{X}} a(x | \mathcal{D}_n).
+\]  
+
+
+
+% ### Applications of Black-box Optimization  
+
+% Black-box optimization is widely used in various domains, including:  
+% 1. **Hyperparameter Optimization:** Selecting optimal parameters for machine learning models.  
+% 2. **Engineering Design:** Optimizing structures, materials, or systems with simulation-based evaluations.  
+% 3. **Scientific Discovery:** Identifying optimal conditions for experiments or chemical processes.  
+
+% ### Challenges and Future Directions  
+
+% Black-box optimization faces several challenges, including scalability to high-dimensional problems, handling multi-objective or constrained optimization, and improving efficiency for noisy or dynamic environments. Recent advances, such as surrogate models, physics-informed optimization, and deep learning-based methods, aim to address these limitations and extend the applicability of BBO to more complex scenarios.  
+
+\subsection{Surrogates Models}
+In black-box optimization, the objective function is often expensive to evaluate, high-dimensional, and analytically intractable. To address these challenges, surrogate models are employed as efficient approximations of the true objective function. These models, such as \acfp{gp}, \acfp{dnn}, or \acfp{rf}, act as computationally inexpensive proxies that capture the underlying structure of the objective function using a limited number of evaluations. By iteratively refining the surrogate model with newly acquired data, the optimization process can efficiently explore and exploit the search space. Surrogate models not only reduce the number of expensive function evaluations required but also provide probabilistic estimates of uncertainty, enabling the use of acquisition functions to guide the search toward promising regions. This approach is foundational in frameworks such as Bayesian optimization, where the balance between exploration and exploitation is critical.
+
+
+
+\subsubsection{Deep Neural Network and Neural Tangent Kernel}
+\label{background:ntk}
+
+% \subsection{Physics-Informed Neural Networks}
+\subsection{Utility-Based Acquisition Functions}
+\label{section:acquisition_functions}
+
+In Bayesian optimization, the objective is to efficiently locate the global optimum of an expensive-to-evaluate function, a task particularly challenging in scenarios where gradient information is unavailable or unreliable \citep{mockus1978application,jones1998efficient}. Traditional optimization methods, often reliant on such gradient information, fall short in these contexts, necessitating alternative strategies. Bayesian optimization addresses this problem by employing a probabilistic surrogate model, often a Gaussian Process (GP) \citep{rasmussen2006gaussian}, to approximate the objective function. This surrogate model provides not only predictions of the objective function's values at unobserved points but also measures of uncertainty associated with these predictions. The selection of the next evaluation point is critical to the success of this methodology and is guided by \textit{acquisition functions}. These functions quantify the utility or desirability of evaluating a given point based on the model’s predictions and uncertainty, effectively navigating the trade-off between \textit{exploration} of less-sampled regions and \textit{exploitation} of regions that have yielded promising results [Citation1].  The choice of acquisition function plays a pivotal role in the optimization process, determining the efficiency and effectiveness of convergence to the global optimum [Citation2, Citation3]. The following subsections will detail several widely used utility-based acquisition functions, emphasizing their mathematical formulations, the underlying intuitions, and their relative strengths and weaknesses.
+\subsubsection{Probability of Improvement}
+\label{section:pi}
+
+The \ac{PI} acquisition function, introduced by \citet{kushner1964new}, is a straightforward yet effective strategy for guiding Bayesian optimization, with the specific purpose of improving upon the current best-observed value. Unlike \ac{ucb} and \ac{ts}, \ac{PI} does not explicitly incorporate the uncertainty of the prediction directly into its selection criteria; instead, it focuses only on the probability of improvement over the current best observation. The simplicity and computational efficiency of \ac{PI} have made it a popular technique for many \ac{bo} problems, especially when computational resources are limited, or quick convergence is preferred.
+
+Given the best-observed objective function value \(f(\mathbf{x}^+)\) up to the current iteration, and the predictive mean \(\mu(\mathbf{x})\) and standard deviation \(\sigma(\mathbf{x})\) of a point \(\mathbf{x}\), the \ac{PI} function is defined as:
+\begin{equation}
+\alpha_{\text{PI}}(\mathbf{x}) = P(f(\mathbf{x}) > f(\mathbf{x}^+) + \xi) = \Phi\left( \frac{\mu(\mathbf{x}) - f(\mathbf{x}^+) - \xi}{\sigma(\mathbf{x})} \right)
+\label{eq:pi_formula}
+\end{equation}
+where:
+\begin{itemize}
+    \item \(f(\mathbf{x}^+)\) is the best function value observed so far in the optimization process;
+    \item \(\mu(\mathbf{x})\) is the predicted mean of the objective function at the point \(\mathbf{x}\);
+    \item \(\sigma(\mathbf{x})\) is the predicted standard deviation (or uncertainty) of the objective function at the point \(\mathbf{x}\);
+    \item \(\Phi(\cdot)\) is the \ac{cdf} of the standard Normal distribution, which is used since it is assumed that the objective function \(f(\mathbf{x})\) is distributed as a Gaussian;
+    \item \(\xi \geq 0\) is an optional hyperparameter that allows a trade-off between exploration and exploitation.
+\end{itemize}
+
+Equation \eqref{eq:pi_formula} mathematically expresses the probability that the true objective function value at a location \(\mathbf{x}\), denoted as \(f(\mathbf{x})\), will be greater than the current best value seen so far, \(f(\mathbf{x}^+)\), with an optional margin \(\xi\) to encourage exploration. This probability is computed under the assumption that \(f(\mathbf{x})\) follows a Gaussian distribution with the predicted mean \(\mu(\mathbf{x})\) and standard deviation \(\sigma(\mathbf{x})\), as modeled by the surrogate function (e.g., \ac{gp}). The term \(\frac{\mu(\mathbf{x}) - f(\mathbf{x}^+) - \xi}{\sigma(\mathbf{x})}\) represents the normalized distance from the predicted mean to the current best value, adjusted by the exploration parameter \(\xi\) and the uncertainty \(\sigma(\mathbf{x})\).
+
+The \ac{PI} function prioritizes points that are likely to lead to an improvement over the current best-observed value. This intuition makes it useful for situations when the optimization goal is primarily about exploiting promising regions of the search space. However, this behavior contrasts with acquisition functions such as Expected Improvement (\ac{ei}), which incorporate both the magnitude and probability of improvement, or Upper Confidence Bound (\ac{ucb}), which balances exploration and exploitation more explicitly.
+
+While \ac{PI} is straightforward to understand and implement due to its simple formulation, it has limitations. A key benefit of PI is its computational efficiency, requiring only basic calculations to determine the next evaluation point. Additionally, it typically performs well in scenarios where the objective function is unimodal or when exploitation is prioritized. However, \ac{PI}'s greedy nature can result in overly local search behavior. By focusing exclusively on high-probability regions, it may neglect areas with higher uncertainty, leading to poor exploration. This can cause \ac{PI} to converge prematurely to local optima, particularly in multi-modal or high-dimensional optimization problems where global exploration is crucial.
+
+To mitigate this issue, the exploration parameter \(\xi\) can be introduced, increasing the focus on regions with higher uncertainty. Larger values of \(\xi\) encourage exploration, but tuning this parameter is non-trivial and problem-specific. 
+
+\subsubsection{Expected Improvement}
+\label{section:ei}
+
+\acf{ei} is an acquisition function that extends the concept of \ac{PI} by quantifying the expected magnitude of improvement, rather than simply the probability of improvement \citep{mockus1978application, jones1998efficient}. 
+
+The \ac{ei} is defined as the expected value of the maximum between zero and the difference of the current point and the best-observed objective function value. Formally:
+\begin{equation}
+\alpha_{\text{EI}}(\mathbf{x}) = \mathbb{E} [\max(0, f(\mathbf{x}^+) - f(\mathbf{x}))].
+\label{eq:ei_definition}
+\end{equation}
+Assuming that the values of the objective function \(f(\mathbf{x})\) at a location \(\mathbf{x}\) are normally distributed with mean \(\mu(\mathbf{x})\) and standard deviation \(\sigma(\mathbf{x})\), the expected improvement in equation \eqref{eq:ei_definition} can be rewritten as:
+\begin{equation}
+    \alpha_{\text{EI}}(\mathbf{x}) = \sigma(\mathbf{x}) [ z \Phi(z) + \phi(z) ],
+    \label{eq:ei_formula}
+\end{equation}
+where: \(z =  \frac{f(\mathbf{x}^+) - \mu(\mathbf{x})}{\sigma(\mathbf{x})}\); \(f(\mathbf{x}^+)\) is the best function value observed so far in the optimization process; \(\mu(\mathbf{x})\) is the predicted mean of the objective function at point \(\mathbf{x}\); \(\sigma(\mathbf{x})\) is the predicted standard deviation (or uncertainty) of the objective function at point \(\mathbf{x}\); \(\Phi(\cdot)\) is the \ac{cdf} of the standard normal distribution; and \(\phi(\cdot)\) is the \ac{pdf} of the standard Normal distribution. The next evaluation point is then selected by maximizing the \ac{ei} function:
+
+\[
+x_t = \argmax_{\mathbf{x} \in \mathcal{D}}  \alpha_{\text{EI}}(\mathbf{x})
+\]
+
+The formulation in equation \eqref{eq:ei_formula} allows computation of the \ac{ei} by combining the mean and standard deviation predicted by a \ac{gp}. Intuitively, it represents a trade-off between the standard deviation \(\sigma(\mathbf{x})\), which tends to promote exploration, and the \(z\) term which tends to promote exploitation of promising areas. This makes it a more comprehensive approach compared to other methods such as \ac{PI}, which focuses mainly on the probability of improvement, rather than its magnitude as well.
+
+The \ac{ei} function is designed to provide a more balanced approach than the \ac{PI} acquisition function, considering both the probability and magnitude of potential improvements. The EI values are higher for locations with high predicted mean values and/or high standard deviation, since the expected improvement is a combination of the probability of improvement and the size of the improvement itself. The EI selects the point that, on average, is expected to provide the greatest improvement in the objective function relative to the best-observed value. This balanced approach allows navigating the search space in a more effective way \citep{shahriari2015taking}.
+
+\ac{ei} is well regarded for providing a more robust balance between exploration and exploitation compared to \ac{PI}, which often results in a more efficient optimization process and faster convergence to optimal solutions \citep{frazier2018tutorial}. It has shown good empirical performance across a range of different optimization problems and has been adopted as the main acquisition function in many different Bayesian Optimization libraries. However, similar to \ac{PI}, \ac{ei} might not be suitable when specific high levels of accurate and precise exploration or exploitation are needed, since it still might make greedy choices and get trapped in local optima. Furthermore, its performance can also be affected by the accuracy of the Gaussian Process prediction, as its formulation depends on the model prediction for a Gaussian distribution.
+
+\subsubsection{Upper Confidence Bound}
+\label{section:ucb}
+
+The \acf{ucb} acquisition function is a widely adopted strategy in Bayesian optimization, particularly when a balance between exploration and exploitation is crucial \citep{auer2002finite, srinivas2009gaussian}. \ac{ucb} operates on the principle of selecting the point with the highest upper confidence bound on its predicted value, effectively encouraging both the evaluation of points with high predicted objective values and those with high uncertainty, thus enabling a comprehensive coverage of the search space. This balance is achieved by incorporating both the predictive mean and the uncertainty (typically standard deviation) associated with that prediction into a single criterion. The \ac{ucb} strategy is appealing due to its relatively simple implementation and strong theoretical underpinnings. \ac{ucb} is a variant of the so-called "optimism in the face of uncertainty" principle, a well-established technique in the reinforcement learning field.
+
+In the context of \ac{bo}, at the optimization iteration $t$, given a set of observations $\mathcal{D}_t$ and a probabilistic predictive model, such as a \ac{gp}, which provides a mean prediction \(\mu_t(\mathbf{x})\) and a standard deviation \(\sigma_t(\mathbf{x})\) at a new point \(\mathbf{x}\), the \ac{ucb} function is defined as:
+\begin{equation}
+\alpha_{\text{UCB}}(\mathbf{x}) = \mu(\mathbf{x}) + \sqrt{\beta_t} \sigma(\mathbf{x}),
+\label{eq:ucb_formula}
+\end{equation}
+where: \(\mu_t(\mathbf{x})\) represents the predicted mean of the objective function at point \(\mathbf{x}\), obtained from the predictive model; \(\sigma(\mathbf{x})\) denotes the predicted standard deviation (or uncertainty) of the objective function at point \(\mathbf{x}\), also derived from the predictive model; and \(\beta_t\) is a hyperparameter, often referred to as the exploration-exploitation trade-off parameter, that controls the relative importance of exploration and exploitation. A higher \(\beta_t\) encourages greater exploration, prioritizing the evaluation of points with high uncertainty, which typically correspond to less sampled regions.
+
+\ac{ucb} is relatively straightforward to implement and computationally efficient, requiring only simple arithmetic operations given the predictive mean and standard deviation. It has been shown to perform well in practice across a range of optimization problems, particularly in the early stages of optimization, because of its tendency to explore unknown regions efficiently. It is also accompanied by strong theoretical guarantees for convergence under certain conditions, which provides a formal justification for its effectiveness and is also a factor in its popularity among practitioners.
+
+Following \citep{srinivas2009gaussian}, assuming the chosen
+kernel has the smooth property for some constants $a, b, L > 0$:
+\[
+\mathbb{P} \left\{ \sup_{\mathbf{x} \in \mathcal{X}} \left| \frac{\partial f}{\partial x_i} \right| > L \right\} \leq a e^{-(L/b)^2}, \quad i=1 \ldots d, 
+\]
+then by choosing
+\[
+\beta_t = 2 \log \left( \frac{t^2 \pi^2}{3\delta} \right) + 2d \log \left( t^2 dbr \sqrt{\log \left( \frac{4da}{\delta} \right) } \right),
+\]
+where $d$ is the number of dimension, GP-\ac{ucb} algorithm is proved to achieve sublinear regret bound with probability $1 - \delta$. However, in practice, the performance of \ac{ucb} is inherently sensitive to the hyperparameter \(\beta_t\), which typically needs to be chosen by the user based on some empirical considerations and may require tuning and experimentation for each specific problem. The selection of \(\beta_t\) is not obvious and depends largely on the characteristics of the objective function. 
+The simple linear combination structure used by \ac{ucb} might struggle to effectively navigate complex and highly non-linear objective function landscapes, potentially leading to suboptimal results in high-dimensional search spaces or with highly multimodal objective functions.
+
+\subsubsection{Thompson Sampling}
+\label{section:thompson_sampling}
+
+\acf{ts}, in contrast to \ac{ucb}, is a probabilistic acquisition function that bases its decisions on samples drawn from the posterior distribution over the objective function \citep{thompson1933likelihood, russo2018tutorial}. This stochastic decision-making process provides a natural mechanism for both exploration and exploitation, in a different manner compared to the \ac{ucb} acquisition function. \ac{ts} has proven to be a powerful approach, and it is now widely adopted in reinforcement learning, Bayesian optimization, and many other fields, where it has been shown to perform very well in different settings \citep{agrawal2017thompson, chowdhury2017kernelized}.
+
+Rather than optimizing an explicit acquisition function based on a balance of mean and uncertainty like \ac{ucb}, \ac{ts} utilizes a posterior sampling approach. 
+
+\acf{ts} does not have an explicit analytical formula for the acquisition function itself. Instead, it relies on the following iterative process, which is grounded in sampling the posterior function:
+\begin{enumerate}
+    \item \textit{Posterior Sampling}: At each step $t$,  sample a function $\Hat{f}_t$ from the posterior distribution given the observed data, i.e., sample $\Hat{f}_t \sim P(f \mid \mathcal{D}_t)$. In the case of a \ac{gp} as the predictive model, this involves sampling a mean function from the posterior with the covariance also defined by the posterior. This is achieved by sampling from a multivariate Gaussian distribution. For a \ac{gp}, the posterior distribution of the objective function $f(x)$ at a new point $x$ is given by the formula in Section \ref{section:gaussian_process}. Then \ac{ts} with \ac{gp} has a general form: $\Hat{f}_t (\cdot) \sim \mathcal{GP}(\mu_t(\cdot), \nu^2 \sigma_t(\cdot))$. Here, $\nu$ us the exploration parameter and can be time-dependent. 
+    
+    \item \textit{Minimization}: Find the next location, $\mathbf{x}_{\text{new}}$, by minimizing the value of the sampled function $\Hat{f}(\mathbf{x})$, i.e., find the $\mathbf{x}$ such that $\mathbf{x}_{\text{new}} = \arg \min_\mathbf{x} \Hat{f}_t(\mathbf{x})$.
+\end{enumerate}
+This process is repeated at each step to select the next evaluation point, thus making \ac{ts} an iterative and adaptive procedure, rather than a method where one can easily calculate and evaluate an acquisition function. The power of \ac{ts} lies in this step-by-step process, which balances both the exploitation and exploration capabilities.
+
+\ac{ts}’s inherent stochastic nature is key to its success in exploration and exploitation. Locations with higher uncertainty are more likely to be sampled due to the increased variance of the posterior distribution in those regions, which inherently introduces exploration. However, locations where the best values have been observed so far are also more likely to be sampled, leading to focused optimization. In a very natural way, \ac{ts} balances the need to explore new, unexplored regions and the need to exploit the information about previously seen promising ones. This behavior is what makes it a good candidate for Bayesian optimization, as well as many other settings.
+
+However, the performance of \ac{ts} depends heavily on the quality of the posterior approximation and the sampling method used. For \acp{gp}, the posterior is typically a multivariate Gaussian distribution, and sampling involves drawing from this distribution at each step. In practice, the computational overhead associated with repeatedly sampling from the posterior can be higher compared to methods that rely on closed-form acquisition functions such as \ac{ucb}. For large-scale problems, this could lead to scalability issues, as sampling from the posterior involves evaluating the covariance matrix, which can become computationally expensive in high-dimensional spaces. 
+
+The use of sampling-based methods such as \ac{ts} also introduces the possibility of overfitting, especially when the model is highly flexible or the amount of observed data is small. If the posterior distribution becomes overly confident in its predictions due to a limited number of samples, the algorithm may prematurely focus on regions that do not lead to further improvements. This can be mitigated through techniques like regularization or the use of more robust probabilistic models.
+
+In certain cases, especially when the posterior distribution is complex, methods such as Markov Chain Monte Carlo (MCMC) are used to sample from the posterior more efficiently. While MCMC can offer more accurate posterior samples, it can also introduce additional computational complexity. The trade-off between accuracy and computational cost is an important consideration when implementing \acf{ts}.
+
+The absence of a direct exploration-exploitation parameter, like \(\sqrt{\beta_t}\) in \ac{ucb}, allows \acf{ts} to adapt more fluidly to the problem at hand. However, its success depends on the accuracy of the posterior approximation, and its performance may degrade if the model fails to capture the true structure of the objective function. Thus, while \acf{ts} can achieve robust performance, its implementation and tuning require careful consideration of the underlying model and the sampling methods used.
+
+\subsection{Information-Theoretic Acquisition Functions}
+\label{section:information_theoretic_acquisition_functions}
+
+Information-theoretic acquisition functions offer a different perspective on the exploration-exploitation trade-off in Bayesian optimization. Instead of directly maximizing a utility function based on predicted means and uncertainties, they aim to maximize the information gained about the objective function, specifically the location of its global optimum. By focusing on information gain, these functions can be particularly effective in scenarios where the primary goal is to minimize the uncertainty associated with the location of the optimal solution. This approach often results in more directed exploration in specific regions. The following subsections detail several widely used information-theoretic acquisition functions, discussing their mathematical formulations, intuitive motivations, and practical implications.
+
+\subsubsection{Entropy Search}
+\label{section:entropy_search}
+
+\acf{es} proposed by \citet{hennig2012entropy} is an information-theoretic acquisition function designed to identify the next evaluation point in \ac{bo} by maximizing the expected reduction in entropy of the posterior distribution over the location of the global optimum. Unlike other methods that emphasize the function's value directly, \ac{es} concentrates on reducing the uncertainty regarding the location of the optimum, making it particularly useful in multi-modal or highly complex optimization landscapes.
+
+Given a posterior distribution over the objective function $f$ and its corresponding location of the optimum $\mathbf{x}^*$, \ac{es} aims to maximize the expected information gain about $\mathbf{x}^*$ obtained by observing the function value at a new point $\mathbf{x}$. This process naturally links the concepts of uncertainty reduction and optimization, as reducing uncertainty about $\mathbf{x}^*$ guides the optimization process more effectively.
+
+As presented in Section \ref{section:entropy}, the entropy of a random variable quantifies the uncertainty associated with its probability distribution. Therefore, selecting the point with maximum information about $\mathbf{x}^*$ is equivalent to selecting the point that reduces the uncertainty about its location. Mathematically, the acquisition function for \ac{es} can be expressed as:
+\begin{equation}
+    \alpha_{\text{ES}}(\mathbf{x}) = \mathbb{E}_{f(\mathbf{x})|\mathcal{D}} \left[H(p(\mathbf{x}^*|\mathcal{D})) - H(p(\mathbf{x}^*|\mathcal{D} \cup (\mathbf{x}, f(\mathbf{x}))))\right],
+\end{equation}
+where $H(\cdot)$ represents the entropy of a probability distribution, $p(\mathbf{x}^*|\mathcal{D})$ is the posterior distribution over the location of the global optimum $\mathbf{x}^*$ given the observed data $\mathcal{D}$, and $p(\mathbf{x}^*|\mathcal{D} \cup (\mathbf{x}, f(\mathbf{x})))$ is the updated posterior distribution after evaluating the objective function at $\mathbf{x}$. The expectation $\mathbb{E}_{f(\mathbf{x})|\mathcal{D}}$ is taken with respect to the predictive distribution of the function value at $\mathbf{x}$, conditioned on the observed data $\mathcal{D}$.
+
+The term $H(p(\mathbf{x}^*|\mathcal{D}))$ quantifies the posterior entropy of the optimum location before observing the new data point $\mathbf{x}$, while $H(p(\mathbf{x}^*|\mathcal{D} \cup (\mathbf{x}, f(\mathbf{x}))))$ represents the posterior entropy after the observation. The acquisition function seeks to maximize the reduction in entropy, prioritizing the evaluation of points that contribute the most to reducing uncertainty about $\mathbf{x}^*$.
+
+This information-theoretic perspective naturally emphasizes exploration in regions where the model is uncertain while also focusing on exploitation near promising candidates for the global optimum. As a result, \ac{es} excels in scenarios where a balance between exploration and exploitation is crucial. For instance, in multi-modal problems where local optima might mislead the optimization process, \ac{es} ensures that the search considers broader regions of the parameter space.
+
+However, while the theoretical formulation of \ac{es} is elegant and well-suited to complex optimization problems, it is computationally intensive. The evaluation of the entropy terms and the expectation over the posterior distributions often requires solving high-dimensional integrals, which can be challenging and time-consuming. Approximations and sampling methods are typically employed to make the computations tractable, but these can introduce additional complexity and computational overhead. Consequently, while \ac{es} offers significant advantages in terms of guiding the search effectively, its application is often limited to problems with manageable computational demands or where its potential benefits justify the additional cost.
+
+\subsubsection{Predictive Entropy Search}
+\acf{pes} of \citet{hernandez2014predictive} is an advanced information-theoretic acquisition function that builds upon the principles of \ac{es}. While \ac{es} focuses on reducing the entropy of the posterior distribution over the location of the global optimum, \ac{pes} offers a computationally efficient reformulation by directly evaluating the expected reduction in entropy of the predictive distribution over the function values.
+
+The fundamental idea behind \ac{pes} is to quantify the expected information gain about the location of the global optimum $\mathbf{x}^*$ when observing the objective function at a new point $\mathbf{x}$. However, instead of working with the posterior distribution over $\mathbf{x}^*$, \ac{pes} reformulates the acquisition function by focusing on the entropy of the predictive distribution of the function values. This reformulation simplifies the computation while preserving the core objective of reducing uncertainty about $\mathbf{x}^*$. The acquisition function for \ac{pes} is defined as:
+\begin{equation}
+    \alpha_{\text{PES}}(\mathbf{x}) = H(p(f(\mathbf{x})|\mathcal{D})) - \mathbb{E}_{\mathbf{x}^*|\mathcal{D}} \left[ H(p(f(\mathbf{x})|\mathcal{D}, \mathbf{x}^*)) \right],
+\end{equation}
+where:
+\begin{itemize}
+    \item $H(\cdot)$ denotes the entropy of a probability distribution.
+    \item $p(f(\mathbf{x})|\mathcal{D})$ is the predictive distribution over the function value at $\mathbf{x}$ given the observed data $\mathcal{D}$.
+    \item $p(f(\mathbf{x})|\mathcal{D}, \mathbf{x}^*)$ is the predictive distribution over the function value at $\mathbf{x}$, conditioned on the data $\mathcal{D}$ and the location of the optimum $\mathbf{x}^*$.
+    \item $\mathbb{E}_{\mathbf{x}^*|\mathcal{D}}$ represents the expectation over the posterior distribution of the global optimum location $\mathbf{x}^*$ given the observed data $\mathcal{D}$.
+\end{itemize}
+
+The first term, $H(p(f(\mathbf{x})|\mathcal{D}))$, represents the entropy of the predictive distribution over the function value at $\mathbf{x}$ before incorporating any new information about the global optimum. The second term, $\mathbb{E}_{\mathbf{x}^*|\mathcal{D}} \left[ H(p(f(\mathbf{x})|\mathcal{D}, \mathbf{x}^*)) \right]$, represents the expected entropy of the predictive distribution after accounting for the global optimum's posterior distribution. By maximizing the difference between these terms, \ac{pes} selects the evaluation point $\mathbf{x}$ that provides the most expected information about the global optimum.
+
+The reformulation introduced by \ac{pes} offers two significant advantages over traditional \ac{es}. First, the entropy terms in \ac{pes} are evaluated directly on the predictive distributions of function values rather than the posterior over $\mathbf{x}^*$, which can simplify computation. Second, the sampling-based approach to evaluate $\mathbb{E}_{\mathbf{x}^*|\mathcal{D}}$ enables \ac{pes} to scale better to higher-dimensional problems and more complex posterior distributions, where exact computation of the entropy terms in \ac{es} becomes intractable.
+
+While \ac{pes} shares many strengths with \ac{es}, such as its ability to balance exploration and exploitation effectively and its suitability for multi-modal optimization problems, it also addresses some of the computational challenges inherent in \ac{es}. However, \ac{pes} still requires accurate sampling from the posterior over $\mathbf{x}^*$ and evaluations of the predictive distributions, which can introduce computational overhead and implementation complexity.
+
+\subsubsection{Max-value Entropy Search}
+\label{section:max_value_entropy_search}
+
+\acf{mes} \citep{wang2017max} is another information-theoretic acquisition function designed to efficiently guide the search for the global optimum of a black-box function. Unlike methods such as \ac{es} and \ac{pes}, which focus on the location of the optimum or the predictive entropy of function values, \ac{mes} directly considers the uncertainty about the maximum function value itself. This focus provides a computationally efficient and intuitive way to prioritize evaluations.
+
+The central idea behind \ac{mes} is to quantify the expected reduction in entropy of the maximum value of the objective function, $y^*$, after observing a new function evaluation. Here, $y^*$ represents the maximum value that the objective function can achieve over the entire search space. By reducing uncertainty about $y^*$, \ac{mes} implicitly narrows the search toward regions likely to contain the global optimum.
+
+The acquisition function for \ac{mes} is defined as:
+\begin{equation}
+    \alpha_{\text{MES}}(\mathbf{x}) = H(p(y^*|\mathcal{D})) - \mathbb{E}_{f(\mathbf{x})|\mathcal{D}} \left[ H(p(y^*|\mathcal{D} \cup \{(\mathbf{x}, f(\mathbf{x}))\})) \right],
+\end{equation}
+where:
+\begin{itemize}
+    \item $H(\cdot)$ denotes the entropy of a probability distribution.
+    \item $p(y^*|\mathcal{D})$ is the current posterior distribution over the maximum value $y^*$, given the observed data $\mathcal{D}$.
+    \item $p(y^*|\mathcal{D} \cup \{(\mathbf{x}, f(\mathbf{x}))\})$ is the updated posterior distribution over $y^*$ after observing the function value $f(\mathbf{x})$ at $\mathbf{x}$.
+    \item $\mathbb{E}_{f(\mathbf{x})|\mathcal{D}}$ represents the expectation over the predictive distribution of $f(\mathbf{x})$ conditioned on the observed data $\mathcal{D}$.
+\end{itemize}
+
+The first term, $H(p(y^*|\mathcal{D}))$, captures the current uncertainty about the maximum value $y^*$ across the search space, while the second term, $\mathbb{E}_{f(\mathbf{x})|\mathcal{D}} \left[ H(p(y^*|\mathcal{D} \cup \{(\mathbf{x}, f(\mathbf{x}))\})) \right]$, represents the expected uncertainty after evaluating the function at $\mathbf{x}$. By maximizing the reduction in uncertainty about $y^*$, \ac{mes} selects evaluation points that are most informative about the maximum value.
+
+The computational efficiency of \ac{mes} stems from its use of $y^*$ as a one-dimensional summary of the optimization problem. Unlike \ac{es}, which requires sampling the posterior over the entire location of the optimum, \ac{mes} simplifies the entropy computations by working directly with the scalar value $y^*$. Sampling-based approximations, such as Monte Carlo integration, are used to estimate the entropies, making \ac{mes} practical even in higher-dimensional spaces.
+
+\ac{mes} is particularly effective in balancing exploration and exploitation. Points with high predictive uncertainty in regions where the function could exceed the current estimate of $y^*$ are naturally prioritized, encouraging exploration of unexplored areas. Simultaneously, regions close to known high values are also favored, supporting exploitation of promising areas.
+
+While \ac{mes} addresses many computational challenges associated with other information-theoretic methods, it still requires accurate sampling from the posterior distribution of $y^*$ and the predictive distribution of $f(\mathbf{x})$. These requirements can introduce computational overhead, especially in high-dimensional or complex posterior landscapes. However, its focused nature and simplicity often make \ac{mes} more practical and scalable compared to methods like \ac{es}.
+\subsubsection{Knowledge Gradient}
+\label{section:knowledge_gradient}
+
+The \acf{kg} acquisition function in \citet{frazier2008knowledge, wu2016parallel} provides a principled way to select evaluation points by directly optimizing the improvement in the expected value of the solution to the optimization problem. Unlike entropy-based approaches such as \ac{es} or \ac{mes}, which focus on reducing uncertainty about the global optimum or maximum value, \ac{kg} measures the value of information gained from a single evaluation in terms of its impact on the expected objective value.
+
+The key idea behind \ac{kg} is to evaluate the utility of an experiment by estimating how much it improves the decision-making process. Specifically, \ac{kg} selects the point $\mathbf{x}$ that maximizes the expected increase in the maximum posterior mean value of the objective function after observing the outcome of evaluating $f(\mathbf{x})$. 
+
+Formally, the \ac{kg} acquisition function is defined as:
+\begin{equation}
+    \alpha_{\text{KG}}(\mathbf{x}) = \mathbb{E}_{f(\mathbf{x})|\mathcal{D}} \left[ \min_{\mathbf{x}' \in \mathcal{X}} \mu_{n+1}(\mathbf{x}') \right] - \min_{\mathbf{x}' \in \mathcal{X}} \mu_n(\mathbf{x}'),
+\end{equation}
+where:
+\begin{itemize}
+    \item $\mu_n(\mathbf{x}')$ is the posterior mean of the objective function at $\mathbf{x}'$ given the current data $\mathcal{D}$.
+    \item $\mu_{n+1}(\mathbf{x}')$ is the updated posterior mean after observing the value of $f(\mathbf{x})$ at $\mathbf{x}$.
+    \item $\mathbb{E}_{f(\mathbf{x})|\mathcal{D}}$ denotes the expectation over the predictive distribution of $f(\mathbf{x})$ given the observed data $\mathcal{D}$.
+\end{itemize}
+
+The first term, $\mathbb{E}_{f(\mathbf{x})|\mathcal{D}} \left[ \min_{\mathbf{x}' \in \mathcal{X}} \mu_{n+1}(\mathbf{x}') \right]$, represents the expected maximum posterior mean after evaluating $f(\mathbf{x})$. The second term, $\min_{\mathbf{x}' \in \mathcal{X}} \mu_n(\mathbf{x}')$, is the current minimum posterior mean. The \ac{kg} acquisition function seeks to maximize the difference between these two quantities, guiding evaluations to points that are expected to improve the decision about the best location.
+
+The \ac{kg} approach has several appealing properties. By directly focusing on the impact of new information on decision-making, \ac{kg} inherently balances exploration and exploitation. Points in regions with high uncertainty are likely to lead to significant updates in the posterior mean, encouraging exploration. Meanwhile, points near current estimates of the maximum mean are prioritized for exploitation.
+
+\ac{kg} is particularly effective in problems where evaluations are expensive, and it is crucial to optimize every experiment to maximize learning. Its ability to quantify the value of information gained from a single evaluation makes it a strong candidate for sequential optimization settings. However, implementing \ac{kg} can be computationally demanding. The expectation over the predictive distribution and the maximization over the posterior mean both require accurate approximation techniques, such as Monte Carlo integration or surrogate modeling with Gaussian processes. In high-dimensional or highly multimodal problems, the computational cost can increase significantly, requiring careful optimization strategies.
+
+\subsection{Bandit-based Optimization}
+\subsubsection{Multi-armed Bandits}
+\subsubsection{Contextual Bandits}
+\subsubsection{Linear Bandits}
+\subsubsection{Non-Linear Bandits}
+\subsection{Performance Metrics in Black-box Optimization}
+\label{background:performance_metrics}
+Evaluating the performance of a \acf{bo} algorithm involves quantifying its efficiency in identifying the optimal solution of the objective function \( f \). Two commonly used performance metrics in the literature are \emph{simple regret} and \emph{cumulative regret}, which capture different aspects of the optimization process.
+
+\subsubsection{Simple Regret}
+The \emph{simple regret} measures the difference between the best function value obtained after \( t \) evaluations and the true global maximum. Formally, it is defined as:
+\[
+r_t = f(\mathbf{x}^*) - f(\mathbf{x}_t^*),
+\]
+where:
+\begin{itemize}
+    \item \( f(\mathbf{x}^*) = \max_{\mathbf{x} \in \mathcal{D}} f(\mathbf{x}) \) is the global maximum of the objective function \( f \),
+    \item \( \mathbf{x}_t^* = \arg \max_{i=1,\dots,t} f(\mathbf{x}_i) \) is the best input queried among the \( t \) evaluations.
+\end{itemize}
+
+Simple regret evaluates the quality of the best solution found so far without considering the total cost incurred during the optimization process. This metric is particularly relevant for applications where the goal is to identify a high-quality solution at the end of the optimization rather than during the intermediate steps.
+
+\subsubsection{Cumulative Regret}
+
+The \emph{cumulative regret} quantifies the total loss incurred due to querying suboptimal points during the optimization process with optimization budget $T$. It is defined as:
+\[
+R_T = \sum_{t=1}^T \left( f(\mathbf{x}^*) - f(\mathbf{x}_t) \right),
+\]
+where \( \mathbf{x}_t \) denotes the point queried at the \( t \)-th step. 
+
+Cumulative regret provides a measure of how efficiently the algorithm balances exploration and exploitation over \( t \) iterations. A lower cumulative regret indicates that the algorithm has made better use of its queries to approach the global optimum efficiently.
+
+\subsubsection{Comparison and Relevance}
+
+Simple regret and cumulative regret capture different trade-offs in BO. Simple regret focuses solely on the quality of the final solution and is particularly suited for offline optimization problems, where the cost of intermediate evaluations is less critical. In contrast, cumulative regret is more relevant in settings where every evaluation incurs a cost, such as online optimization, and emphasizes the efficiency of the entire optimization process.
+
+Both metrics are essential for evaluating the performance of BO algorithms, offering complementary insights into their behavior and effectiveness across various applications.
+
+\section{Black-box Optimization with Unknown Black-box Constraints}
+\label{section:bo_unknown_constraints}
+
+\section{Black-box Optimization with Physical Information}
+\label{section:bo_physics}
+
+\section{Further Research in Black-box Optimisation}
+\label{section:bo_further_research}
+
+

@@ -1,0 +1,1926 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.18)  23 DEC 2024 21:32
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**"c:/Users/phant/Desktop/Documents/Dat's Ph.D. Thesis/Thesis/main.tex"
+(c:/Users/phant/Desktop/Documents/Dat's Ph.D. Thesis/Thesis/main.tex
+LaTeX2e <2024-06-01> patch level 1
+L3 programming layer <2024-05-27>
+(MastersDoctoralThesis.cls
+Document Class: MastersDoctoralThesis 2016/11/22 v1.5 LaTeXTemplates.com
+(C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count194
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/xparse\xparse.sty (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\expl3.sty
+Package: expl3 2024-05-27 L3 programming layer (loader) 
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count195
+\l__pdf_internal_box=\box52
+))
+Package: xparse 2024-05-08 L3 Experimental document command parser
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/base\book.cls
+Document Class: book 2024/02/08 v1.4n Standard LaTeX document class
+(C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/base\bk11.clo
+File: bk11.clo 2024/02/08 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count196
+\c@chapter=\count197
+\c@section=\count198
+\c@subsection=\count199
+\c@subsubsection=\count266
+\c@paragraph=\count267
+\c@subparagraph=\count268
+\c@figure=\count269
+\c@table=\count270
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen141
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
+Package: babel 2024/06/02 v24.6 The Babel package
+\babel@savecnt=\count271
+\U@D=\dimen142
+\l@unhyphenated=\language79
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
+\bbl@readstream=\read2
+\bbl@dirlevel=\count272
+
+*************************************
+* Local config file bblopts.cfg used
+*
+(C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg
+File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of babel
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/babel-english\english.ldf
+Language: english 2017/06/06 v3.3r English support from the babel system
+Package babel Info: Hyphen rules for 'canadian' set to \l@english
+(babel)             (\language0). Reported on input line 102.
+Package babel Info: Hyphen rules for 'australian' set to \l@ukenglish
+(babel)             (\language73). Reported on input line 105.
+Package babel Info: Hyphen rules for 'newzealand' set to \l@ukenglish
+(babel)             (\language73). Reported on input line 108.
+)) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/en\babel-english.tex
+Package babel Info: Importing font and identification data for english
+(babel)             from babel-en.ini. Reported on input line 11.
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrbase.sty
+Package: scrbase 2024/10/24 v3.43 KOMA-Script package (KOMA-Script-independent basics and keyval usage)
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlfile.sty
+Package: scrlfile 2024/10/24 v3.43 KOMA-Script package (file load hooks)
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlfile-hook.sty
+Package: scrlfile-hook 2024/10/24 v3.43 KOMA-Script package (using LaTeX hooks)
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlogo.sty
+Package: scrlogo 2024/10/24 v3.43 KOMA-Script package (logo)
+))) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+)
+Applying: [2021/05/01] Usage of raw or classic option list on input line 254.
+Already applied: [0000/00/00] Usage of raw or classic option list on input line 370.
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/scrhack\scrhack.sty
+Package: scrhack 2024-09-04 v3.42 scrhack emulation package
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
+Package: setspace 2022/12/04 v6.7b set line spacing
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/setspaceenhanced\setspaceenhanced.sty
+Package: setspaceenhanced 2024-11-12 v1.04 improved setspace package
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/tools\longtable.sty
+Package: longtable 2024-04-26 v4.20 Multi-page Table package (DPC)
+\LTleft=\skip51
+\LTright=\skip52
+\LTpre=\skip53
+\LTpost=\skip54
+\LTchunksize=\count273
+\LTcapwidth=\dimen143
+\LT@head=\box53
+\LT@firsthead=\box54
+\LT@foot=\box55
+\LT@lastfoot=\box56
+\LT@gbox=\box57
+\LT@cols=\count274
+\LT@rows=\count275
+\c@LT@tables=\count276
+\c@LT@chunks=\count277
+\LT@p@ftn=\toks18
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/siunitx\siunitx.sty
+Package: siunitx 2024-11-15 v3.3.23 A comprehensive (SI) units package
+\l__siunitx_number_uncert_offset_int=\count278
+\l__siunitx_number_exponent_fixed_int=\count279
+\l__siunitx_number_min_decimal_int=\count280
+\l__siunitx_number_min_integer_int=\count281
+\l__siunitx_number_round_precision_int=\count282
+\l__siunitx_number_lower_threshold_int=\count283
+\l__siunitx_number_upper_threshold_int=\count284
+\l__siunitx_number_group_first_int=\count285
+\l__siunitx_number_group_size_int=\count286
+\l__siunitx_number_group_minimum_int=\count287
+\l__siunitx_angle_tmp_dim=\dimen144
+\l__siunitx_angle_marker_box=\box58
+\l__siunitx_angle_unit_box=\box59
+\l__siunitx_compound_count_int=\count288
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/translations\translations.sty
+Package: translations 2022/02/05 v1.12 internationalization of LaTeX2e packages (CN)
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks19
+\ex@=\dimen145
+))
+\l__siunitx_table_tmp_box=\box60
+\l__siunitx_table_tmp_dim=\dimen146
+\l__siunitx_table_column_width_dim=\dimen147
+\l__siunitx_table_integer_box=\box61
+\l__siunitx_table_decimal_box=\box62
+\l__siunitx_table_uncert_box=\box63
+\l__siunitx_table_before_box=\box64
+\l__siunitx_table_after_box=\box65
+\l__siunitx_table_before_dim=\dimen148
+\l__siunitx_table_carry_dim=\dimen149
+\l__siunitx_unit_tmp_int=\count289
+\l__siunitx_unit_position_int=\count290
+\l__siunitx_unit_total_int=\count291
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+Package: array 2024/05/23 v2.6c Tabular extension package (FMi)
+\col@sep=\dimen150
+\ar@mcellbox=\box66
+\extrarowheight=\dimen151
+\NC@list=\toks20
+\extratabsurround=\skip55
+\backup@length=\skip56
+\ar@cellbox=\box67
+)) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2024/05/23 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 106.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen152
+\Gin@req@width=\dimen153
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen154
+\lightrulewidth=\dimen155
+\cmidrulewidth=\dimen156
+\belowrulesep=\dimen157
+\belowbottomsep=\dimen158
+\aboverulesep=\dimen159
+\abovetopsep=\dimen160
+\cmidrulesep=\dimen161
+\cmidrulekern=\dimen162
+\defaultaddspace=\dimen163
+\@cmidla=\count292
+\@cmidlb=\count293
+\@aboverulesep=\dimen164
+\@belowrulesep=\dimen165
+\@thisruleclass=\count294
+\@lastruleclass=\count295
+\@thisrulewidth=\dimen166
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen167
+\captionmargin=\dimen168
+\caption@leftmargin=\dimen169
+\caption@rightmargin=\dimen170
+\caption@width=\dimen171
+\caption@indent=\dimen172
+\caption@parindent=\dimen173
+\caption@hangindent=\dimen174
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count296
+\c@continuedfloat=\count297
+Package caption Info: longtable package is loaded.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/caption\ltcaption.sty
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
+)) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+Package: xcolor 2023/11/15 v3.01 LaTeX color extensions (UK)
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1350.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1354.
+Package xcolor Info: Model `RGB' extended on input line 1366.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1368.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1371.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1372.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1373.
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+)
+\Gm@cnth=\count298
+\Gm@cntv=\count299
+\c@Gm@tempcnt=\count300
+\Gm@bindingoffset=\dimen175
+\Gm@wd@mp=\dimen176
+\Gm@odd@mp=\dimen177
+\Gm@even@mp=\dimen178
+\Gm@layoutwidth=\dimen179
+\Gm@layoutheight=\dimen180
+\Gm@layouthoffset=\dimen181
+\Gm@layoutvoffset=\dimen182
+\Gm@dimlist=\toks21
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg)) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlayer-scrpage.sty
+Package: scrlayer-scrpage 2024/10/24 v3.43 KOMA-Script package (end user interface for scrlayer)
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlayer.sty
+Package: scrlayer 2024/10/24 v3.43 KOMA-Script package (defining layers and page styles)
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrkbase.sty
+Package: scrkbase 2024/10/24 v3.43 KOMA-Script package (KOMA-Script-dependent basics and keyval usage)
+)
+\footheight=\skip57
+Package scrlayer Info: patching LaTeX kernel macro \pagestyle on input line 2182.
+)
+Package scrbase Info: Unknown processing state.
+(scrbase)             Processing option `markcase=used'
+(scrbase)             of member `.scrlayer-scrpage.sty' of family
+(scrbase)             `KOMA' doesn't set
+(scrbase)             a valid state. This will be interpreted
+(scrbase)             as \FamilyKeyStateProcessed on input line 649.
+)) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
+Package: inputenc 2024/02/08 v1.3d Input encoding file
+\inpenc@prehook=\toks22
+\inpenc@posthook=\toks23
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\mathpazo.sty
+Package: mathpazo 2020/03/25 PSNFSS-v9.3 Palatino w/ Pazo Math (D.Puga, WaS) 
+\symupright=\mathgroup4
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.sty
+Package: biblatex 2024/03/21 v3.20 programmable bibliographies (PK/MW)
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+)) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/logreq\logreq.sty
+Package: logreq 2010/08/04 v1.0 xml request logger
+\lrq@indent=\count301
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/logreq\logreq.def
+File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+)) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
+Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+\c@tabx@nest=\count302
+\c@listtotal=\count303
+\c@listcount=\count304
+\c@liststart=\count305
+\c@liststop=\count306
+\c@citecount=\count307
+\c@citetotal=\count308
+\c@multicitecount=\count309
+\c@multicitetotal=\count310
+\c@instcount=\count311
+\c@maxnames=\count312
+\c@minnames=\count313
+\c@maxitems=\count314
+\c@minitems=\count315
+\c@citecounter=\count316
+\c@maxcitecounter=\count317
+\c@savedcitecounter=\count318
+\c@uniquelist=\count319
+\c@uniquename=\count320
+\c@refsection=\count321
+\c@refsegment=\count322
+\c@maxextratitle=\count323
+\c@maxextratitleyear=\count324
+\c@maxextraname=\count325
+\c@maxextradate=\count326
+\c@maxextraalpha=\count327
+\c@abbrvpenalty=\count328
+\c@highnamepenalty=\count329
+\c@lownamepenalty=\count330
+\c@maxparens=\count331
+\c@parenlevel=\count332
+\blx@tempcnta=\count333
+\blx@tempcntb=\count334
+\blx@tempcntc=\count335
+\c@blx@maxsection=\count336
+\blx@maxsegment@0=\count337
+\blx@notetype=\count338
+\blx@parenlevel@text=\count339
+\blx@parenlevel@foot=\count340
+\blx@sectionciteorder@0=\count341
+\blx@sectionciteorderinternal@0=\count342
+\blx@entrysetcounter=\count343
+\blx@biblioinstance=\count344
+\labelnumberwidth=\skip58
+\labelalphawidth=\skip59
+\biblabelsep=\skip60
+\bibitemsep=\skip61
+\bibnamesep=\skip62
+\bibinitsep=\skip63
+\bibparsep=\skip64
+\bibhang=\skip65
+\blx@bcfin=\read3
+\blx@bcfout=\write3
+\blx@langwohyphens=\language80
+\c@mincomprange=\count345
+\c@maxcomprange=\count346
+\c@mincompwidth=\count347
+Package biblatex Info: Trying to load biblatex default data model...
+Package biblatex Info: ... file 'blx-dm.def' found.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-dm.def
+File: blx-dm.def 2024/03/21 v3.20 biblatex datamodel (PK/MW)
+)
+Package biblatex Info: Trying to load biblatex style data model...
+Package biblatex Info: ... file 'authoryear.dbx' not found.
+Package biblatex Info: Trying to load biblatex custom data model...
+Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
+\c@afterword=\count348
+\c@savedafterword=\count349
+\c@annotator=\count350
+\c@savedannotator=\count351
+\c@author=\count352
+\c@savedauthor=\count353
+\c@bookauthor=\count354
+\c@savedbookauthor=\count355
+\c@commentator=\count356
+\c@savedcommentator=\count357
+\c@editor=\count358
+\c@savededitor=\count359
+\c@editora=\count360
+\c@savededitora=\count361
+\c@editorb=\count362
+\c@savededitorb=\count363
+\c@editorc=\count364
+\c@savededitorc=\count365
+\c@foreword=\count366
+\c@savedforeword=\count367
+\c@holder=\count368
+\c@savedholder=\count369
+\c@introduction=\count370
+\c@savedintroduction=\count371
+\c@namea=\count372
+\c@savednamea=\count373
+\c@nameb=\count374
+\c@savednameb=\count375
+\c@namec=\count376
+\c@savednamec=\count377
+\c@translator=\count378
+\c@savedtranslator=\count379
+\c@shortauthor=\count380
+\c@savedshortauthor=\count381
+\c@shorteditor=\count382
+\c@savedshorteditor=\count383
+\c@labelname=\count384
+\c@savedlabelname=\count385
+\c@institution=\count386
+\c@savedinstitution=\count387
+\c@lista=\count388
+\c@savedlista=\count389
+\c@listb=\count390
+\c@savedlistb=\count391
+\c@listc=\count392
+\c@savedlistc=\count393
+\c@listd=\count394
+\c@savedlistd=\count395
+\c@liste=\count396
+\c@savedliste=\count397
+\c@listf=\count398
+\c@savedlistf=\count399
+\c@location=\count400
+\c@savedlocation=\count401
+\c@organization=\count402
+\c@savedorganization=\count403
+\c@origlocation=\count404
+\c@savedoriglocation=\count405
+\c@origpublisher=\count406
+\c@savedorigpublisher=\count407
+\c@publisher=\count408
+\c@savedpublisher=\count409
+\c@language=\count410
+\c@savedlanguage=\count411
+\c@origlanguage=\count412
+\c@savedoriglanguage=\count413
+\c@pageref=\count414
+\c@savedpageref=\count415
+\shorthandwidth=\skip66
+\shortjournalwidth=\skip67
+\shortserieswidth=\skip68
+\shorttitlewidth=\skip69
+\shortauthorwidth=\skip70
+\shorteditorwidth=\skip71
+\locallabelnumberwidth=\skip72
+\locallabelalphawidth=\skip73
+\localshorthandwidth=\skip74
+\localshortjournalwidth=\skip75
+\localshortserieswidth=\skip76
+\localshorttitlewidth=\skip77
+\localshortauthorwidth=\skip78
+\localshorteditorwidth=\skip79
+Package biblatex Info: Trying to load compatibility code...
+Package biblatex Info: ... file 'blx-compat.def' found.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-compat.def
+File: blx-compat.def 2024/03/21 v3.20 biblatex compatibility (PK/MW)
+)
+Package biblatex Info: Trying to load BibTeX backend compatibility...
+Package biblatex Info: ... file 'blx-bibtex.def' found.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-bibtex.def
+File: blx-bibtex.def 2024/03/21 v3.20 biblatex compatibility (PK/MW)
+
+
+Package biblatex Warning: Using fall-back bibtex backend:
+(biblatex)                functionality may be reduced/unavailable.
+
+)
+Package biblatex Info: Trying to load generic definitions...
+Package biblatex Info: ... file 'biblatex.def' found.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.def
+File: biblatex.def 2024/03/21 v3.20 biblatex compatibility (PK/MW)
+\c@textcitecount=\count416
+\c@textcitetotal=\count417
+\c@textcitemaxnames=\count418
+\c@biburlbigbreakpenalty=\count419
+\c@biburlbreakpenalty=\count420
+\c@biburlnumpenalty=\count421
+\c@biburlucpenalty=\count422
+\c@biburllcpenalty=\count423
+\biburlbigskip=\muskip18
+\biburlnumskip=\muskip19
+\biburlucskip=\muskip20
+\biburllcskip=\muskip21
+\c@smartand=\count424
+)
+Package biblatex Info: Trying to load natbib compatibility...
+Package biblatex Info: ... file 'blx-natbib.def' found.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-natbib.def
+File: blx-natbib.def 2024/03/21 v3.20 biblatex compatibility (PK/MW)
+Package biblatex Info: Delimiter 'nameyeardelim' in context '' already defined, overwriting.
+)
+Package biblatex Info: Trying to load bibliography style 'authoryear'...
+Package biblatex Info: ... file 'authoryear.bbx' found.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/bbx\authoryear.bbx
+File: authoryear.bbx 2024/03/21 v3.20 biblatex bibliography style (PK/MW)
+Package biblatex Info: Trying to load bibliography style 'standard'...
+Package biblatex Info: ... file 'standard.bbx' found.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/bbx\standard.bbx
+File: standard.bbx 2024/03/21 v3.20 biblatex bibliography style (PK/MW)
+\c@bbx:relatedcount=\count425
+\c@bbx:relatedtotal=\count426
+))
+Package biblatex Info: Trying to load citation style 'authoryear'...
+Package biblatex Info: ... file 'authoryear.cbx' found.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/cbx\authoryear.cbx
+File: authoryear.cbx 2024/03/21 v3.20 biblatex citation style (PK/MW)
+Package biblatex Info: Redefining '\cite'.
+Package biblatex Info: Redefining '\parencite'.
+Package biblatex Info: Redefining '\footcite'.
+Package biblatex Info: Redefining '\footcitetext'.
+Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\textcite'.
+Package biblatex Info: Redefining '\textcites'.
+)
+Package biblatex Info: Trying to load configuration file...
+Package biblatex Info: ... file 'biblatex.cfg' found.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.cfg
+File: biblatex.cfg 
+)
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Document encoding is UTF8 ....
+Package biblatex Info: ... and expl3
+(biblatex)             2024-05-27 L3 programming layer (loader) 
+(biblatex)             is new enough (at least 2020/04/06),
+(biblatex)             setting 'casechanger=expl3'.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-case-expl3.sty
+Package: blx-case-expl3 2024/03/21 v3.20 expl3 case changing code for biblatex
+)) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/csquotes\csquotes.sty
+Package: csquotes 2024-04-04 v5.2o context-sensitive quotations (JAW)
+\csq@reset=\count427
+\csq@gtype=\count428
+\csq@glevel=\count429
+\csq@qlevel=\count430
+\csq@maxlvl=\count431
+\csq@tshold=\count432
+\csq@ltx@everypar=\toks24
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/csquotes\csquotes.def
+File: csquotes.def 2024-04-04 v5.2o csquotes generic definitions (JAW)
+)
+Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
+Package csquotes Info: ... configuration file loaded successfully.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/csquotes\csquotes.cfg
+File: csquotes.cfg 
+)
+Package csquotes Info: Enabling multilingual quotes.
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/acronym\acronym.sty
+Package: acronym 2024/03/30 v1.49 Support for acronyms (Tobias Oetiker)
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/bigfoot\suffix.sty
+Package: suffix 2006/07/15 1.5a Variant command support
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/xstring\xstring.sty (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/xstring\xstring.tex
+\xs_counta=\count433
+\xs_countb=\count434
+)
+Package: xstring 2023/08/22 v1.86 String manipulations (CT)
+)
+\AC@clearlist=\toks25
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/tools\multicol.sty
+Package: multicol 2024/05/23 v1.9h multicolumn formatting (FMi)
+\c@tracingmulticols=\count435
+\mult@box=\box68
+\multicol@leftmargin=\dimen183
+\c@unbalance=\count436
+\c@collectmore=\count437
+\doublecol@number=\count438
+\multicoltolerance=\count439
+\multicolpretolerance=\count440
+\full@width=\dimen184
+\page@free=\dimen185
+\premulticols=\dimen186
+\postmulticols=\dimen187
+\multicolsep=\skip80
+\multicolbaselineskip=\skip81
+\partial@page=\box69
+\last@line=\box70
+\mc@boxedresult=\box71
+\maxbalancingoverflow=\dimen188
+\mult@rightbox=\box72
+\mult@grightbox=\box73
+\mult@firstbox=\box74
+\mult@gfirstbox=\box75
+\@tempa=\box76
+\@tempa=\box77
+\@tempa=\box78
+\@tempa=\box79
+\@tempa=\box80
+\@tempa=\box81
+\@tempa=\box82
+\@tempa=\box83
+\@tempa=\box84
+\@tempa=\box85
+\@tempa=\box86
+\@tempa=\box87
+\@tempa=\box88
+\@tempa=\box89
+\@tempa=\box90
+\@tempa=\box91
+\@tempa=\box92
+\@tempa=\box93
+\@tempa=\box94
+\@tempa=\box95
+\@tempa=\box96
+\@tempa=\box97
+\@tempa=\box98
+\@tempa=\box99
+\@tempa=\box100
+\@tempa=\box101
+\@tempa=\box102
+\@tempa=\box103
+\@tempa=\box104
+\@tempa=\box105
+\@tempa=\box106
+\@tempa=\box107
+\@tempa=\box108
+\@tempa=\box109
+\@tempa=\box110
+\@tempa=\box111
+\c@minrows=\count441
+\c@columnbadness=\count442
+\c@finalcolumnbadness=\count443
+\last@try=\dimen189
+\multicolovershoot=\dimen190
+\multicolundershoot=\dimen191
+\mult@nat@firstbox=\box112
+\colbreak@box=\box113
+\mc@col@check@num=\count444
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
+Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
+\multirow@colwidth=\skip82
+\multirow@cntb=\count445
+\multirow@dima=\skip83
+\bigstrutjot=\dimen192
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/algorithms\algorithm.sty
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating environment
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count446
+\float@exts=\toks26
+\float@box=\box114
+\@float@everytoks=\toks27
+\@floatcapt=\box115
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/floatbytocbasic\floatbytocbasic.sty
+Package: floatbytocbasic 2023-08-16 v1.0 improved float package using tocbasic
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\tocbasic.sty
+Package: tocbasic 2024/10/24 v3.43 KOMA-Script package (handling toc-files)
+\scr@dte@tocline@numberwidth=\skip84
+\scr@dte@tocline@numbox=\box116
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/xpatch\xpatch.sty
+Package: xpatch 2020/03/25 v0.3a Extending etoolbox patching commands
+))
+Package tocbasic Info: setting babel extension for `loa' on input line 96.
+\@float@every@algorithm=\toks28
+\c@algorithm=\count447
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/algorithmicx\algpseudocode.sty
+Package: algpseudocode 
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/algorithmicx\algorithmicx.sty
+Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
+
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+\c@ALG@line=\count448
+\c@ALG@rem=\count449
+\c@ALG@nested=\count450
+\ALG@tlm=\skip85
+\ALG@thistlm=\skip86
+\c@ALG@Lnr=\count451
+\c@ALG@blocknr=\count452
+\c@ALG@storecount=\count453
+\c@ALG@tmpcounter=\count454
+\ALG@tmplength=\skip87
+)
+Document Style - pseudocode environments for use with the `algorithmicx' style
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/physics\physics.sty
+Package: physics 
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+Package: amsmath 2024/05/23 v2.17q AMS math features
+\@mathmargin=\skip88
+
+For additional information on amsmath, use the `?' option.
+(C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen193
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count455
+LaTeX Info: Redefining \frac on input line 233.
+\uproot@=\count456
+\leftroot@=\count457
+LaTeX Info: Redefining \overline on input line 398.
+LaTeX Info: Redefining \colon on input line 409.
+\classnum@=\count458
+\DOTSCASE@=\count459
+LaTeX Info: Redefining \ldots on input line 495.
+LaTeX Info: Redefining \dots on input line 498.
+LaTeX Info: Redefining \cdots on input line 619.
+\Mathstrutbox@=\box117
+\strutbox@=\box118
+LaTeX Info: Redefining \big on input line 721.
+LaTeX Info: Redefining \Big on input line 722.
+LaTeX Info: Redefining \bigg on input line 723.
+LaTeX Info: Redefining \Bigg on input line 724.
+\big@size=\dimen194
+LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
+\macc@depth=\count460
+LaTeX Info: Redefining \bmod on input line 904.
+LaTeX Info: Redefining \pmod on input line 909.
+LaTeX Info: Redefining \smash on input line 939.
+LaTeX Info: Redefining \relbar on input line 969.
+LaTeX Info: Redefining \Relbar on input line 970.
+\c@MaxMatrixCols=\count461
+\dotsspace@=\muskip22
+\c@parentequation=\count462
+\dspbrk@lvl=\count463
+\tag@help=\toks29
+\row@=\count464
+\column@=\count465
+\maxfields@=\count466
+\andhelp@=\toks30
+\eqnshift@=\dimen195
+\alignsep@=\dimen196
+\tagshift@=\dimen197
+\tagwidth@=\dimen198
+\totwidth@=\dimen199
+\lineht@=\dimen256
+\@envbody=\toks31
+\multlinegap=\skip89
+\multlinetaggap=\skip90
+\mathdisplay@stack=\toks32
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
+)) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/amscls\amsthm.sty
+Package: amsthm 2020/05/29 v2.20.6
+\thm@style=\toks33
+\thm@bodyfont=\toks34
+\thm@headfont=\toks35
+\thm@notefont=\toks36
+\thm@headpunct=\toks37
+\thm@preskip=\skip91
+\thm@postskip=\skip92
+\thm@headsep=\skip93
+\dth@everypar=\toks38
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup5
+\symAMSb=\mathgroup6
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/mathtools\mathtools.sty
+Package: mathtools 2024/10/04 v1.31 mathematical typesetting tools
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
+Package: calc 2023/07/08 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count467
+\calc@Bcount=\count468
+\calc@Adimen=\dimen257
+\calc@Bdimen=\dimen258
+\calc@Askip=\skip94
+\calc@Bskip=\skip95
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count469
+\calc@Cskip=\skip96
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/mathtools\mhsetup.sty
+Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
+)
+\g_MT_multlinerow_int=\count470
+\l_MT_multwidth_dim=\dimen259
+\origjot=\skip97
+\l_MT_shortvdotswithinadjustabove_dim=\dimen260
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen261
+\l_MT_above_intertext_sep=\dimen262
+\l_MT_below_intertext_sep=\dimen263
+\l_MT_above_shortintertext_sep=\dimen264
+\l_MT_below_shortintertext_sep=\dimen265
+\xmathstrut@box=\box119
+\xmathstrut@dim=\dimen266
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thmtools.sty
+Package: thmtools 2023/05/04 v0.76
+\thmt@toks=\toks39
+\c@thmt@dummyctr=\count471
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thm-patch.sty
+Package: thm-patch 2023/05/04 v0.76
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\parseargs.sty
+Package: parseargs 2023/05/04 v0.76
+\@parsespec=\toks40
+)) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thm-kv.sty
+Package: thm-kv 2023/05/04 v0.76
+Package thm-kv Info: Theorem names will be uppercased on input line 42.
+Package thm-kv Info: kvsetkeys patch (v1.16 or later) on input line 158.
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thm-autoref.sty
+Package: thm-autoref 2023/05/04 v0.76
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\aliasctr.sty
+Package: aliasctr 2023/05/04 v0.76
+)) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thm-listof.sty
+Package: thm-listof 2023/05/04 v0.76
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thm-restate.sty
+Package: thm-restate 2023/05/04 v0.76
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thm-amsthm.sty
+Package: thm-amsthm 2023/05/04 v0.76
+\thmt@style@headstyle=\toks41
+)) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcaption.sty
+Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
+Package caption Info: New subtype `subfigure' on input line 238.
+\c@subfigure=\count472
+Package caption Info: New subtype `subtable' on input line 238.
+\c@subtable=\count473
+)
+\c@theorem=\count474
+\c@sublemma=\count475
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
+Package: hyperref 2024-05-23 v7.01i Hypertext links for LaTeX
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
+Package: nameref 2023-11-26 v2.56 Cross-referencing by name of section
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count476
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
+)
+\@linkdim=\dimen267
+\Hy@linkcounter=\count477
+\Hy@pagecounter=\count478
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
+File: pd1enc.def 2024-05-23 v7.01i Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count479
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
+File: puenc.def 2024-05-23 v7.01i Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Hyper figures OFF on input line 4157.
+Package hyperref Info: Link nesting OFF on input line 4162.
+Package hyperref Info: Hyper index ON on input line 4165.
+Package hyperref Info: Plain pages OFF on input line 4172.
+Package hyperref Info: Backreferencing OFF on input line 4177.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4424.
+\c@Hy@tempcnt=\count480
+LaTeX Info: Redefining \url on input line 4763.
+\XeTeXLinkMargin=\dimen268
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
+))
+\Fld@menulength=\count481
+\Field@Width=\dimen269
+\Fld@charsize=\dimen270
+Package hyperref Info: Hyper figures OFF on input line 6042.
+Package hyperref Info: Link nesting OFF on input line 6047.
+Package hyperref Info: Hyper index ON on input line 6050.
+Package hyperref Info: backreferencing OFF on input line 6057.
+Package hyperref Info: Link coloring OFF on input line 6062.
+Package hyperref Info: Link coloring with OCG OFF on input line 6067.
+Package hyperref Info: PDF/A mode OFF on input line 6072.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/base\atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count482
+\c@Item=\count483
+\c@Hfootnote=\count484
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
+File: hpdftex.def 2024-05-23 v7.01i Hyperref driver for pdfTeX
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/base\atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
+with kernel methods
+)
+\Fld@listcount=\count485
+\c@bookmark@seq@number=\count486
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.sty
+Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
+)
+\Hy@SectionHShift=\skip98
+)
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 130.
+Package hyperref Info: Option `hypertexnames' set `false' on input line 130.
+Package hyperref Info: Option `colorlinks' set `true' on input line 130.
+Package hyperref Info: Option `unicode' set `true' on input line 130.
+Package hyperref Info: Option `breaklinks' set `true' on input line 130.
+Package csquotes Info: Checking for multilingual support...
+Package csquotes Info: ... found 'babel' package.
+LaTeX Font Info:    Trying to load font information for T1+ppl on input line 130.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1ppl.fd
+File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
+) (main.aux (Utils/abbreviations.aux) (Chapters/abstract.aux) (Chapters/introduction.aux) (Chapters/background.aux) (Chapters/neural-bo.aux) (Chapters/neural-cbo.aux) (Chapters/pinn-bo.aux) (Chapters/conclusion.aux) (Appendices/neural-bo_appendix.aux) (Appendices/neural-cbo_appendix.aux) (Appendices/pinn-bo_appendix.aux))
+\openout1 = `main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+
+
+Package siunitx Warning: Detected the "physics" package:
+(siunitx)                omitting definition of \qty.
+(siunitx)                
+(siunitx)                If you want to use \qty with the siunitx definition,
+(siunitx)                add 
+(siunitx)                
+(siunitx)                    \AtBeginDocument{\RenewCommandCopy\qty\SI}
+(siunitx)                
+(siunitx)                to your preamble.
+
+(C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/translations/dicts\translations-basic-dictionary-english.trsl
+File: translations-basic-dictionary-english.trsl (english translation file `translations-basic-dictionary')
+)
+Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 130.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count487
+\scratchdimen=\dimen271
+\scratchbox=\box120
+\nofMPsegments=\count488
+\nofMParguments=\count489
+\everyMPshowfont=\toks42
+\MPscratchCnt=\count490
+\MPscratchDim=\dimen272
+\MPnumerator=\count491
+\makeMPintoPDFobject=\count492
+\everyMPtoPDFconversion=\toks43
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
+Package caption Info: End \AtBeginDocument code.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* bindingoffset: 14.22636pt
+* modes: includehead includefoot 
+* h-part:(L,W,R)=(71.13188pt, 404.02908pt, 108.12054pt)
+* v-part:(T,H,B)=(42.67912pt, 759.6886pt, 42.67912pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=404.02908pt
+* \textheight=693.49821pt
+* \oddsidemargin=13.08826pt
+* \evensidemargin=-1.1381pt
+* \topmargin=-29.59087pt
+* \headheight=18.85364pt
+* \headsep=19.8738pt
+* \topskip=11.0pt
+* \footskip=27.46295pt
+* \marginparwidth=62.0pt
+* \marginparsep=7.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+Package scrbase Info: activating english \abbrevname on input line 130.
+Package scrbase Info: activating english \byname on input line 130.
+Package scrbase Info: activating english \acknowledgementname on input line 130.
+Package scrbase Info: activating english \authorshipname on input line 130.
+Package scrbase Info: activating english \constantsname on input line 130.
+Package scrbase Info: activating english \symbolsname on input line 130.
+Package biblatex Info: Trying to load language 'english'...
+Package biblatex Info: ... file 'english.lbx' found.
+(C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/lbx\english.lbx
+File: english.lbx 2024/03/21 v3.20 biblatex localization (PK/MW)
+)
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'utf8'.
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Data encoding 'utf8' specified.
+(biblatex)             No need to reencode data.
+\openout3 = `main-blx.bib'.
+
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file 'main.bbl' found.
+ (main.bbl)
+Package biblatex Info: Reference section=0 on input line 130.
+Package biblatex Info: Reference segment=0 on input line 130.
+Package hyperref Info: Link coloring ON on input line 130.
+ (main.out) (main.out)
+\@outlinefile=\write4
+\openout4 = `main.out'.
+
+
+
+[1
+
+
+
+{C:/Users/phant/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]
+--------------------
+ Declaration of Authorship
+--------------------
+LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 189.
+(C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ppl.fd
+File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 194--195
+
+ []
+
+
+
+LaTeX Font Info:    Trying to load font information for OT1+ppl on input line 204.
+(C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ppl.fd
+File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
+)
+LaTeX Font Info:    Trying to load font information for OML+zplm on input line 204.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omlzplm.fd
+File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
+)
+LaTeX Font Info:    Trying to load font information for OMS+zplm on input line 204.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omszplm.fd
+File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
+)
+LaTeX Font Info:    Trying to load font information for OMX+zplm on input line 204.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omxzplm.fd
+File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
+)
+LaTeX Font Info:    Trying to load font information for OT1+zplm on input line 204.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1zplm.fd
+File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
+)
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 11.40997pt on input line 204.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 204.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 6.25204pt on input line 204.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 11.40997pt on input line 204.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 204.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 6.25204pt on input line 204.
+ [1
+
+]
+
+[2
+
+]
+--------------------
+ Acknowledgements
+--------------------
+
+
+[3
+
+] (main.toc
+Package acronym Info: Label `acro:rkhs' newly defined as it shall be overridden
+although it is yet undefined on input line 24.
+
+
+[4
+
+]
+Package acronym Info: Label `acro:dnn' newly defined as it shall be overridden
+although it is yet undefined on input line 79.
+
+
+[5])
+\tf@toc=\write5
+\openout5 = `main.toc'.
+
+
+
+[6] (main.lof
+Overfull \hbox (4.6748pt too wide) in paragraph at lines 9--9
+ [][] [][][]\T1/ppl/m/n/10.95 Optimization re-sults for con-trol pa-ram-e-ters of 14D robot push-ing prob- 
+ []
+
+
+Overfull \hbox (7.99391pt too wide) in paragraph at lines 12--12
+ [][] [][][]\T1/ppl/b/n/10.95 Detection Rates \T1/ppl/m/n/10.95 cor-re-spond-ing to the num-ber of sam-ples on the MNIST 
+ []
+
+
+
+[7
+
+])
+\tf@lof=\write6
+\openout6 = `main.lof'.
+
+
+
+[8] (main.lot
+Overfull \hbox (10.7855pt too wide) in paragraph at lines 6--6
+ [][] [][][]\T1/ppl/m/n/10.95 One-sided t-tests were em-ployed to as-sess whether the base-line achieves 
+ []
+
+
+Overfull \hbox (5.2444pt too wide) in paragraph at lines 9--9
+ [][] [][][]\T1/ppl/m/n/10.95 One-sided $\OML/zplm/m/it/10.95 t$\T1/ppl/m/n/10.95 -tests to eval-u-ate whether the base-line out-per-forms Neural- 
+ []
+
+)
+\tf@lot=\write7
+\openout7 = `main.lot'.
+
+
+
+[9
+
+]
+\openout2 = `Utils/abbreviations.aux'.
+
+ (Utils/abbreviations.tex
+Underfull \hbox (badness 10000) in paragraph at lines 36--37
+[]\T1/ppl/m/n/10.95 Reproducing Ker-nel Hilbert
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--39
+[]\T1/ppl/m/n/10.95 Physics-Informed Neu-ral Net-
+ []
+
+)
+
+[10
+
+
+]
+
+[11
+
+
+
+]
+--------------------
+ Dedicatory
+--------------------
+
+
+[12
+
+]
+\openout2 = `Chapters/abstract.aux'.
+
+ (Chapters/abstract.tex
+Package acronym Info: Label `acro:bo' newly defined as it shall be overridden
+although it is yet undefined on input line 7.
+Package acronym Info: Label `acro:gp' newly defined as it shall be overridden
+although it is yet undefined on input line 7.
+Package acronym Info: Label `acro:dnn' overridden on input line 11.
+Package acronym Info: Label `acro:ts' newly defined as it shall be overridden
+although it is yet undefined on input line 11.
+Package acronym Info: Label `acro:ntk' newly defined as it shall be overridden
+although it is yet undefined on input line 11.
+Package acronym Info: Label `acro:lcb' newly defined as it shall be overridden
+although it is yet undefined on input line 13.
+Package acronym Info: Label `acro:ei' newly defined as it shall be overridden
+although it is yet undefined on input line 13.
+
+
+[1
+
+
+
+]
+Package acronym Info: Label `acro:pde' newly defined as it shall be overridden
+although it is yet undefined on input line 15.
+Package acronym Info: Label `acro:pinn' newly defined as it shall be overridden
+although it is yet undefined on input line 15.
+)
+
+[2]
+\openout2 = `Chapters/introduction.aux'.
+
+ (Chapters/introduction.tex
+Chapter 1.
+LaTeX Font Info:    Trying to load font information for U+fplmbb on input line 18.
+(C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ufplmbb.fd
+File: ufplmbb.fd 2003/10/30 Fontinst v1.914 font definitions for U/fplmbb.
+)
+
+[3
+
+
+
+
+]
+Package acronym Info: Label `acro:ucb' newly defined as it shall be overridden
+although it is yet undefined on input line 24.
+Package acronym Info: Label `acro:rf' newly defined as it shall be overridden
+although it is yet undefined on input line 28.
+Package acronym Info: Label `acro:bnn' newly defined as it shall be overridden
+although it is yet undefined on input line 28.
+Package acronym Info: Label `acro:deepgp' newly defined as it shall be overridden
+although it is yet undefined on input line 28.
+
+
+[4]
+
+[5]
+
+[6]
+Package acronym Info: Label `acro:es' newly defined as it shall be overridden
+although it is yet undefined on input line 60.
+Package acronym Info: Label `acro:pes' newly defined as it shall be overridden
+although it is yet undefined on input line 60.
+Package acronym Info: Label `acro:mes' newly defined as it shall be overridden
+although it is yet undefined on input line 60.
+
+
+[7])
+
+[8]
+\openout2 = `Chapters/background.aux'.
+
+ (Chapters/background.tex
+Chapter 2.
+
+
+[9
+
+
+
+
+]
+
+[10]
+
+[11]
+
+[12]
+Package acronym Info: Label `acro:mig' newly defined as it shall be overridden
+although it is yet undefined on input line 126.
+
+
+[13]
+
+[14]
+Underfull \hbox (badness 2932) in paragraph at lines 198--199
+[]\T1/ppl/m/n/10.95 s[] pro-vide a rig-or-ous frame-work for deal-ing with func-tions in high-
+ []
+
+
+
+[15]
+Package hyperref Info: bookmark level for unknown theorem defaults to 0 on input line 221.
+
+
+[16]
+
+[17]
+
+[18]
+Package acronym Info: Label `acro:PI' newly defined as it shall be overridden
+although it is yet undefined on input line 343.
+
+
+[19]
+Package acronym Info: Label `acro:cdf' newly defined as it shall be overridden
+although it is yet undefined on input line 355.
+
+
+[20]
+Package acronym Info: Label `acro:pdf' newly defined as it shall be overridden
+although it is yet undefined on input line 382.
+
+
+[21]
+
+[22]
+
+[23]
+
+[24]
+
+[25]
+
+[26]
+Underfull \hbox (badness 10000) in paragraph at lines 509--510
+[]\T1/ppl/m/n/10.95 The first term, $\OML/zplm/m/it/10.95 H\OT1/zplm/m/n/10.95 (\OML/zplm/m/it/10.95 p\OT1/zplm/m/n/10.95 (\OML/zplm/m/it/10.95 y[]\OMS/zplm/m/n/10.95 jD\OT1/zplm/m/n/10.95 ))$\T1/ppl/m/n/10.95 , cap-tures the cur-rent un-cer-tainty about
+ []
+
+
+Underfull \hbox (badness 4279) in paragraph at lines 509--510
+\T1/ppl/m/n/10.95 the max-i-mum value $\OML/zplm/m/it/10.95 y[]$ \T1/ppl/m/n/10.95 across the search space, while the sec-ond term,
+ []
+
+
+Underfull \hbox (badness 7238) in paragraph at lines 509--510
+\U/fplmbb/m/n/10.95 E[] []$\T1/ppl/m/n/10.95 , rep-re-sents the ex-pected un-cer-tainty af-ter
+ []
+
+
+Underfull \hbox (badness 1137) in paragraph at lines 511--512
+[]\T1/ppl/m/n/10.95 The com-pu-ta-tional ef-fi-ciency of [][] stems from its use of $\OML/zplm/m/it/10.95 y[]$ \T1/ppl/m/n/10.95 as a one-
+ []
+
+Package acronym Info: Label `acro:kg' newly defined as it shall be overridden
+although it is yet undefined on input line 519.
+
+
+[27]
+
+[28])
+
+[29]
+\openout2 = `Chapters/neural-bo.aux'.
+
+ (Chapters/neural-bo.tex
+Chapter 3.
+
+
+[30
+
+
+
+
+]
+Package acronym Info: Label `acro:relu' newly defined as it shall be overridden
+although it is yet undefined on input line 27.
+
+
+
+Package scrlayer-scrpage Warning: \headheight to low.
+(scrlayer-scrpage)                At least 27.2pt needed,
+(scrlayer-scrpage)                but only 18.85364pt found.
+(scrlayer-scrpage)                I'll enlarge \headheight, for further
+(scrlayer-scrpage)                processing, but you should do this yourself,
+(scrlayer-scrpage)                e.g., setting geometry's option
+(scrlayer-scrpage)                `head=27.2pt'.
+(scrlayer-scrpage)                I'll also decrease \topmargin on input line 36.
+
+
+Overfull \vbox (8.34636pt too high) has occurred while \output is active []
+
+ [31]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `htbp') on input line 47.
+
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 48.
+
+
+[32]
+Package hyperref Info: bookmark level for unknown definition defaults to 0 on input line 92.
+Package hyperref Info: bookmark level for unknown assumption defaults to 0 on input line 111.
+
+
+[33]
+Package hyperref Info: bookmark level for unknown remark defaults to 0 on input line 142.
+
+
+[34]
+
+[35]
+
+[36]
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 9.37807pt on input line 217.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 7.29405pt on input line 217.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 5.21004pt on input line 217.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 9.37807pt on input line 217.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 7.29405pt on input line 217.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 5.21004pt on input line 217.
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 217.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
+File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+)
+
+[37]
+<Figures/Neural-BO/Neural-BO_synthetic_function.pdf, id=1183, 1147.5492pt x 952.2313pt>
+File: Figures/Neural-BO/Neural-BO_synthetic_function.pdf Graphic file (type pdf)
+<use Figures/Neural-BO/Neural-BO_synthetic_function.pdf>
+Package pdftex.def Info: Figures/Neural-BO/Neural-BO_synthetic_function.pdf  used on input line 233.
+(pdftex.def)             Requested size: 404.02908pt x 335.26201pt.
+
+
+[38 <./Figures/Neural-BO/Neural-BO_synthetic_function.pdf>]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 250.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 287.
+
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 10.42007pt on input line 306.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 7.91925pt on input line 306.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 10.42007pt on input line 306.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 7.91925pt on input line 306.
+
+
+[39]
+<Figures/Neural-BO/Neural-BO_pprldmany_02D_noiselessall.pdf, id=1342, 462.52798pt x 346.89601pt>
+File: Figures/Neural-BO/Neural-BO_pprldmany_02D_noiselessall.pdf Graphic file (type pdf)
+<use Figures/Neural-BO/Neural-BO_pprldmany_02D_noiselessall.pdf>
+Package pdftex.def Info: Figures/Neural-BO/Neural-BO_pprldmany_02D_noiselessall.pdf  used on input line 316.
+(pdftex.def)             Requested size: 202.01454pt x 151.51254pt.
+<Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf, id=1343, 462.52798pt x 346.89601pt>
+File: Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf Graphic file (type pdf)
+<use Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf>
+Package pdftex.def Info: Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf  used on input line 322.
+(pdftex.def)             Requested size: 202.01454pt x 151.51254pt.
+<Figures/Neural-BO/Neural-BO_pprldmany_05D_noiselessall.pdf, id=1344, 462.52798pt x 346.89601pt>
+File: Figures/Neural-BO/Neural-BO_pprldmany_05D_noiselessall.pdf Graphic file (type pdf)
+<use Figures/Neural-BO/Neural-BO_pprldmany_05D_noiselessall.pdf>
+Package pdftex.def Info: Figures/Neural-BO/Neural-BO_pprldmany_05D_noiselessall.pdf  used on input line 328.
+(pdftex.def)             Requested size: 202.01454pt x 151.51254pt.
+<Figures/Neural-BO/Neural-BO_pprldmany_10D_noiselessall.pdf, id=1345, 462.52798pt x 346.89601pt>
+File: Figures/Neural-BO/Neural-BO_pprldmany_10D_noiselessall.pdf Graphic file (type pdf)
+<use Figures/Neural-BO/Neural-BO_pprldmany_10D_noiselessall.pdf>
+Package pdftex.def Info: Figures/Neural-BO/Neural-BO_pprldmany_10D_noiselessall.pdf  used on input line 334.
+(pdftex.def)             Requested size: 202.01454pt x 151.51254pt.
+
+
+[40]
+<Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf, id=1352, 455.48354pt x 304.45345pt>
+File: Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf Graphic file (type pdf)
+<use Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf>
+Package pdftex.def Info: Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf  used on input line 350.
+(pdftex.def)             Requested size: 404.02908pt x 270.0661pt.
+
+
+[41 <./Figures/Neural-BO/Neural-BO_pprldmany_02D_noiselessall.pdf> <./Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf
+
+pdfTeX warning: pdflatex (file ./Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./Figures/Neural-BO/Neural-BO_pprldmany_05D_noiselessall.pdf
+
+pdfTeX warning: pdflatex (file ./Figures/Neural-BO/Neural-BO_pprldmany_05D_noiselessall.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./Figures/Neural-BO/Neural-BO_pprldmany_10D_noiselessall.pdf
+
+pdfTeX warning: pdflatex (file ./Figures/Neural-BO/Neural-BO_pprldmany_10D_noiselessall.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+
+[42 <./Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf>]
+<Figures/Neural-BO/Neural-BO_AmazonReview_dim_500_round_300.pdf, id=1678, 455.48354pt x 295.53073pt>
+File: Figures/Neural-BO/Neural-BO_AmazonReview_dim_500_round_300.pdf Graphic file (type pdf)
+<use Figures/Neural-BO/Neural-BO_AmazonReview_dim_500_round_300.pdf>
+Package pdftex.def Info: Figures/Neural-BO/Neural-BO_AmazonReview_dim_500_round_300.pdf  used on input line 364.
+(pdftex.def)             Requested size: 404.02908pt x 262.15118pt.
+
+
+[43 <./Figures/Neural-BO/Neural-BO_AmazonReview_dim_500_round_300.pdf>]
+<Figures/Neural-BO/Neural-BO_Robot_dim_14_round_6000.pdf, id=1749, 455.38632pt x 295.53073pt>
+File: Figures/Neural-BO/Neural-BO_Robot_dim_14_round_6000.pdf Graphic file (type pdf)
+<use Figures/Neural-BO/Neural-BO_Robot_dim_14_round_6000.pdf>
+Package pdftex.def Info: Figures/Neural-BO/Neural-BO_Robot_dim_14_round_6000.pdf  used on input line 376.
+(pdftex.def)             Requested size: 404.02908pt x 262.2053pt.
+)
+
+[44 <./Figures/Neural-BO/Neural-BO_Robot_dim_14_round_6000.pdf>]
+
+[45]
+\openout2 = `Chapters/neural-cbo.aux'.
+
+ (Chapters/neural-cbo.tex
+Chapter 4.
+
+
+[46
+
+
+
+
+]
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 12.50409pt on input line 23.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 12.50409pt on input line 23.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 23.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 23.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 23.
+
+
+
+[47]
+
+[48]
+Package hyperref Info: bookmark level for unknown condition defaults to 0 on input line 107.
+Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input line 129.
+
+
+[49]
+Package hyperref Info: bookmark level for unknown corollary defaults to 0 on input line 140.
+
+Underfull \hbox (badness 7540) in paragraph at lines 150--151
+[]\T1/ppl/m/n/10.95 Our al-go-rithm starts by ini-tial-iz-ing the neu-ral net-works $\OML/zplm/m/it/10.95 v\OT1/zplm/m/n/10.95 (\OT1/zplm/b/n/10.95 x\OT1/ppl/m/n/10.95 ; []\OT1/zplm/m/n/10.95 )$ \T1/ppl/m/n/10.95 and
+ []
+
+
+
+[50]
+
+[51]
+Underfull \hbox (badness 10000) in paragraph at lines 252--252
+\T1/ppl/m/it/10.95 where $\OMS/zplm/m/n/10.95 E\OT1/zplm/m/n/10.95 (\OML/zplm/m/it/10.95 m\OT1/zplm/m/n/10.95 ) = \OMS/zplm/m/n/10.95 O\OT1/zplm/m/n/10.95 (\OML/zplm/m/it/10.95 C[]L[]m[]\OT1/zplm/m/n/10.95 )$\T1/ppl/m/it/10.95 . Es-pe-cially, by choos-ing $\OML/zplm/m/it/10.95 m \OT1/zplm/m/n/10.95 =
+ []
+
+
+Underfull \hbox (badness 3514) in paragraph at lines 252--252
+\OT1/zplm/m/n/10.95 
+(\OML/zplm/m/it/10.95 d[] [][][]\OT1/zplm/m/n/10.95 ))$\T1/ppl/m/it/10.95 , the Cu-mu-la-tive Re-gret and Cu-mu-la-tive Vi-o-la-tion en-joy
+ []
+
+
+
+[52]
+
+[53]
+<Figures/Neural-CBO/Branin-Simionescu-GasTransmission-Ackley-Hartmann-SpeedReducer.pdf, id=1962, 872.13953pt x 649.30641pt>
+File: Figures/Neural-CBO/Branin-Simionescu-GasTransmission-Ackley-Hartmann-SpeedReducer.pdf Graphic file (type pdf)
+<use Figures/Neural-CBO/Branin-Simionescu-GasTransmission-Ackley-Hartmann-SpeedReducer.pdf>
+Package pdftex.def Info: Figures/Neural-CBO/Branin-Simionescu-GasTransmission-Ackley-Hartmann-SpeedReducer.pdf  used on input line 321.
+(pdftex.def)             Requested size: 404.02908pt x 300.79489pt.
+
+Underfull \hbox (badness 1448) in paragraph at lines 323--323
+ []\T1/ppl/m/sc/10 Figure 4.1: |\T1/ppl/m/n/10 The plots show (Log10 of) the Best Pos-i-tive Re- 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+
+[54]
+
+[55 <./Figures/Neural-CBO/Branin-Simionescu-GasTransmission-Ackley-Hartmann-SpeedReducer.pdf>]
+<Figures/Neural-CBO/sensitive_sample_detection_rate.pdf, id=2106, 443.05148pt x 335.44322pt>
+File: Figures/Neural-CBO/sensitive_sample_detection_rate.pdf Graphic file (type pdf)
+<use Figures/Neural-CBO/sensitive_sample_detection_rate.pdf>
+Package pdftex.def Info: Figures/Neural-CBO/sensitive_sample_detection_rate.pdf  used on input line 386.
+(pdftex.def)             Requested size: 404.02908pt x 305.90897pt.
+
+
+[56 <./Figures/Neural-CBO/sensitive_sample_detection_rate.pdf>])
+
+[57]
+\openout2 = `Chapters/pinn-bo.aux'.
+
+ (Chapters/pinn-bo.tex
+Chapter 5.
+
+
+[58
+
+
+
+
+]
+Underfull \hbox (badness 2269) in paragraph at lines 21--22
+\T1/ppl/m/n/10.95 re-gret, where $\OML/zplm/m/it/10.95 T$ \T1/ppl/m/n/10.95 is the num-ber of black-box func-tion eval-u-a-tions and
+ []
+
+
+
+[59]
+
+[60]
+Underfull \hbox (badness 1231) in paragraph at lines 64--64
+[]\T1/ppl/b/n/10.95 Algorithm 4 \T1/ppl/m/n/10.95 Physics-informed Neu-ral Net-work based Black-box op-ti-miza-tion
+ []
+
+
+
+[61]
+
+[62]
+
+[63]
+Underfull \hbox (badness 2103) in paragraph at lines 205--205
+[][]\T1/ppl/m/it/10.95 Lemma \T1/ppl/m/n/10.95 5.3.8\T1/ppl/m/it/10.95 . []As-sume that $[][] \OMS/zplm/m/n/10.95 ^^T \OML/zplm/m/it/10.95 L$\T1/ppl/m/it/10.95 , where $\OML/zplm/m/it/10.95 !\OT1/zplm/m/n/10.95 (\OMS/zplm/m/n/10.95 ^^A\OT1/zplm/m/n/10.95 ) = \OMS/zplm/m/n/10.95 r[]N\OT1/zplm/m/n/10.95 [\OML/zplm/m/it/10.95 h\OT1/zplm/m/n/10.95 ](\OMS/zplm/m/n/10.95 ^^A\OT1/ppl/m/n/10.95 ; [][]\OT1/zplm/m/n/10.95 )$ \T1/ppl/m/it/10.95 and
+ []
+
+
+
+[64]
+
+[65]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 253.
+
+<Figures/PINN-BO/pinn-bo_synthetic.pdf, id=2305, 856.73248pt x 230.78722pt>
+File: Figures/PINN-BO/pinn-bo_synthetic.pdf Graphic file (type pdf)
+<use Figures/PINN-BO/pinn-bo_synthetic.pdf>
+Package pdftex.def Info: Figures/PINN-BO/pinn-bo_synthetic.pdf  used on input line 255.
+(pdftex.def)             Requested size: 404.02908pt x 108.83624pt.
+
+
+[66]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 260.
+
+<Figures/PINN-BO/pinn-bo_additional_synthetic.pdf, id=2313, 573.61678pt x 308.83882pt>
+File: Figures/PINN-BO/pinn-bo_additional_synthetic.pdf Graphic file (type pdf)
+<use Figures/PINN-BO/pinn-bo_additional_synthetic.pdf>
+Package pdftex.def Info: Figures/PINN-BO/pinn-bo_additional_synthetic.pdf  used on input line 262.
+(pdftex.def)             Requested size: 404.02908pt x 217.53818pt.
+
+
+[67 <./Figures/PINN-BO/pinn-bo_synthetic.pdf> <./Figures/PINN-BO/pinn-bo_additional_synthetic.pdf>]
+<Figures/PINN-BO/heat_py_pde_1000_test_1.pdf, id=2449, 394.21475pt x 315.83257pt>
+File: Figures/PINN-BO/heat_py_pde_1000_test_1.pdf Graphic file (type pdf)
+<use Figures/PINN-BO/heat_py_pde_1000_test_1.pdf>
+Package pdftex.def Info: Figures/PINN-BO/heat_py_pde_1000_test_1.pdf  used on input line 306.
+(pdftex.def)             Requested size: 197.97646pt x 158.61467pt.
+
+Underfull \hbox (badness 6559) in paragraph at lines 307--307
+ []\T1/ppl/m/sc/9 (a) |\T1/ppl/m/n/9 So-lu-tion of Tem-per-a-ture Equa-tion with 
+ []
+
+<Figures/PINN-BO/heat_py_pde_1000_test_2.pdf, id=2450, 394.21475pt x 315.83257pt>
+File: Figures/PINN-BO/heat_py_pde_1000_test_2.pdf Graphic file (type pdf)
+<use Figures/PINN-BO/heat_py_pde_1000_test_2.pdf>
+Package pdftex.def Info: Figures/PINN-BO/heat_py_pde_1000_test_2.pdf  used on input line 313.
+(pdftex.def)             Requested size: 197.97646pt x 158.61467pt.
+<Figures/PINN-BO/heat_py_pde_1000_test_3.pdf, id=2451, 394.21475pt x 315.83257pt>
+File: Figures/PINN-BO/heat_py_pde_1000_test_3.pdf Graphic file (type pdf)
+<use Figures/PINN-BO/heat_py_pde_1000_test_3.pdf>
+Package pdftex.def Info: Figures/PINN-BO/heat_py_pde_1000_test_3.pdf  used on input line 320.
+(pdftex.def)             Requested size: 202.01454pt x 161.84836pt.
+<Figures/PINN-BO/Heat_dim_2_bc1.pdf, id=2456, 461.18674pt x 334.37985pt>
+File: Figures/PINN-BO/Heat_dim_2_bc1.pdf Graphic file (type pdf)
+<use Figures/PINN-BO/Heat_dim_2_bc1.pdf>
+Package pdftex.def Info: Figures/PINN-BO/Heat_dim_2_bc1.pdf  used on input line 333.
+(pdftex.def)             Requested size: 197.97646pt x 143.54071pt.
+<Figures/PINN-BO/Heat_dim_2_bc2.pdf, id=2457, 460.71497pt x 334.37985pt>
+File: Figures/PINN-BO/Heat_dim_2_bc2.pdf Graphic file (type pdf)
+<use Figures/PINN-BO/Heat_dim_2_bc2.pdf>
+Package pdftex.def Info: Figures/PINN-BO/Heat_dim_2_bc2.pdf  used on input line 340.
+(pdftex.def)             Requested size: 197.97646pt x 143.68867pt.
+<Figures/PINN-BO/Heat_dim_2_bc3.pdf, id=2458, 460.71497pt x 334.37985pt>
+File: Figures/PINN-BO/Heat_dim_2_bc3.pdf Graphic file (type pdf)
+<use Figures/PINN-BO/Heat_dim_2_bc3.pdf>
+Package pdftex.def Info: Figures/PINN-BO/Heat_dim_2_bc3.pdf  used on input line 347.
+(pdftex.def)             Requested size: 202.01454pt x 146.61736pt.
+
+
+[68]
+
+[69 <./Figures/PINN-BO/heat_py_pde_1000_test_1.pdf> <./Figures/PINN-BO/heat_py_pde_1000_test_2.pdf> <./Figures/PINN-BO/heat_py_pde_1000_test_3.pdf>]
+
+[70 <./Figures/PINN-BO/Heat_dim_2_bc1.pdf> <./Figures/PINN-BO/Heat_dim_2_bc2.pdf> <./Figures/PINN-BO/Heat_dim_2_bc3.pdf>]
+<Figures/PINN-BO/beam.pdf, id=2676, 502.85051pt x 404.59846pt>
+File: Figures/PINN-BO/beam.pdf Graphic file (type pdf)
+<use Figures/PINN-BO/beam.pdf>
+Package pdftex.def Info: Figures/PINN-BO/beam.pdf  used on input line 376.
+(pdftex.def)             Requested size: 177.77377pt x 143.03769pt.
+
+Underfull \hbox (badness 5667) in paragraph at lines 377--377
+ []\T1/ppl/m/sc/9 (a) |\T1/ppl/m/n/9 Dis-place-ment of non-uniform Eu-ler 
+ []
+
+<Figures/PINN-BO/BeamDeflection_dim_1.pdf, id=2677, 460.71497pt x 334.37985pt>
+File: Figures/PINN-BO/BeamDeflection_dim_1.pdf Graphic file (type pdf)
+<use Figures/PINN-BO/BeamDeflection_dim_1.pdf>
+Package pdftex.def Info: Figures/PINN-BO/BeamDeflection_dim_1.pdf  used on input line 383.
+(pdftex.def)             Requested size: 197.97646pt x 143.68867pt.
+)
+
+[71 <./Figures/PINN-BO/beam.pdf> <./Figures/PINN-BO/BeamDeflection_dim_1.pdf>]
+\openout2 = `Chapters/conclusion.aux'.
+
+ (Chapters/conclusion.tex
+Chapter 6.
+
+
+[72
+
+
+
+
+
+])
+
+[73]
+\openout2 = `Appendices/neural-bo_appendix.aux'.
+
+ (Appendices/neural-bo_appendix.tex
+Appendix A.
+
+Underfull \hbox (badness 1242) in paragraph at lines 53--54
+[][]\T1/ppl/m/it/10.95 Lemma \T1/ppl/m/n/10.95 A.1.3\T1/ppl/m/it/10.95 . []For any $\OML/zplm/m/it/10.95 t \OMS/zplm/m/n/10.95 2 \OT1/zplm/m/n/10.95 [\OML/zplm/m/it/10.95 T\OT1/zplm/m/n/10.95 ]$\T1/ppl/m/it/10.95 , and any fi-nite sub-set $\OMS/zplm/m/n/10.95 D[] ^^Z  D$\T1/ppl/m/it/10.95 , pick $\OML/zplm/m/it/10.95 c[] \OT1/zplm/m/n/10.95 =
+ []
+
+Package hyperref Info: bookmark level for unknown sublemma defaults to 0 on input line 60.
+
+
+[74
+
+
+
+
+]
+
+[75]
+Underfull \hbox (badness 2495) in paragraph at lines 139--140
+[][]\T1/ppl/m/it/10.95 Lemma \T1/ppl/m/n/10.95 A.1.5.3\T1/ppl/m/it/10.95 . []\T1/ppl/m/n/10.95 Let $\OML/zplm/m/it/10.95  \OMS/zplm/m/n/10.95 2 \OT1/zplm/m/n/10.95 (\OT1/ppl/m/n/10.95 0, 1\OT1/zplm/m/n/10.95 )$\T1/ppl/m/n/10.95 . If the net-work width $\OML/zplm/m/it/10.95 m$ \T1/ppl/m/n/10.95 sat-is-fies $\OML/zplm/m/it/10.95 m \OMS/zplm/m/n/10.95 ^^U
+ []
+
+
+
+[76]
+
+[77]
+
+[78]
+
+[79]
+
+[80]
+
+[81]
+
+[82]
+
+[83]
+
+[84])
+
+[85]
+\openout2 = `Appendices/neural-cbo_appendix.aux'.
+
+ (Appendices/neural-cbo_appendix.tex
+Appendix B.
+
+Overfull \hbox (34.9161pt too wide) detected at line 33
+[]
+ []
+
+
+
+[86
+
+
+
+
+]
+Overfull \hbox (22.70116pt too wide) detected at line 71
+[]
+ []
+
+
+
+[87]
+Underfull \hbox (badness 10000) in paragraph at lines 93--93
+\T1/ppl/m/it/10.95 where $\OMS/zplm/m/n/10.95 E\OT1/zplm/m/n/10.95 (\OML/zplm/m/it/10.95 m\OT1/zplm/m/n/10.95 ) = \OMS/zplm/m/n/10.95 O\OT1/zplm/m/n/10.95 (\OML/zplm/m/it/10.95 C[]L[]m[]\OT1/zplm/m/n/10.95 )$\T1/ppl/m/it/10.95 . Es-pe-cially, by choos-ing $\OML/zplm/m/it/10.95 m \OT1/zplm/m/n/10.95 =
+ []
+
+
+Underfull \hbox (badness 3514) in paragraph at lines 93--93
+\OT1/zplm/m/n/10.95 
+(\OML/zplm/m/it/10.95 d[] [][][]\OT1/zplm/m/n/10.95 ))$\T1/ppl/m/it/10.95 , the Cu-mu-la-tive Re-gret and Cu-mu-la-tive Vi-o-la-tion en-joy
+ []
+
+
+Overfull \hbox (25.31866pt too wide) detected at line 128
+[]
+ []
+
+
+
+[88]
+
+[89]
+Underfull \hbox (badness 5345) in paragraph at lines 184--185
+[]\T1/ppl/m/n/10.95 Due to Lemma [][]B.1.3[][], with prob-a-bil-ity at least $\OT1/ppl/m/n/10.95 1 \OMS/zplm/m/n/10.95 ^^@
+ []
+
+
+
+[90]
+
+[91]
+Overfull \hbox (31.50449pt too wide) detected at line 298
+[]
+ []
+
+
+
+[92]
+Overfull \hbox (60.86755pt too wide) detected at line 356
+[]
+ []
+
+
+
+[93]
+
+[94])
+
+[95]
+\openout2 = `Appendices/pinn-bo_appendix.aux'.
+
+ (Appendices/pinn-bo_appendix.tex
+Appendix C.
+
+
+[96
+
+
+
+
+]
+
+[97]
+Package hyperref Info: bookmark level for unknown subcorollary defaults to 0 on input line 188.
+
+
+[98]
+
+[99]
+
+[100]
+
+[101]
+
+[102]
+
+[103]
+
+[104]
+
+[105]
+
+[106])
+
+[107]
+Underfull \hbox (badness 5147) in paragraph at lines 330--330
+[][]\T1/ppl/m/n/10.95 Du, Si-mon S et al. (2018). ^^P  Gra-di-ent De-scent Prov-ably Op-ti-mizes Over-
+ []
+
+
+
+[108
+
+
+
+]
+
+[109]
+Underfull \hbox (badness 1688) in paragraph at lines 330--330
+[][]\T1/ppl/m/n/10.95 Raissi, Maziar, Paris Perdikaris, and George E Kar-ni-adakis (2019). ^^P  Physics-
+ []
+
+
+
+[110]
+
+[111]
+
+[112] (main.aux (Utils/abbreviations.aux) (Chapters/abstract.aux) (Chapters/introduction.aux) (Chapters/background.aux) (Chapters/neural-bo.aux) (Chapters/neural-cbo.aux) (Chapters/pinn-bo.aux) (Chapters/conclusion.aux) (Appendices/neural-bo_appendix.aux) (Appendices/neural-cbo_appendix.aux) (Appendices/pinn-bo_appendix.aux))
+ ***********
+LaTeX2e <2024-06-01> patch level 1
+L3 programming layer <2020/03/25>
+ ***********
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: EE5FEEE5F5595AB2163366BB68DD4D41;23525.
+Package logreq Info: Writing requests to 'main.run.xml'.
+\openout1 = `main.run.xml'.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 35966 strings out of 473920
+ 774551 string characters out of 5726973
+ 1976908 words of memory out of 5000000
+ 57570 multiletter control sequences out of 15000+600000
+ 666520 words of font info for 266 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 96i,25n,94p,3361b,2833s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\phant\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1095.pk> <C:\Users\phant\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0900.pk><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmb.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmbb.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmbi.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmr.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmri.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplbi8a.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on main.pdf (125 pages, 4161294 bytes).
+PDF statistics:
+ 3659 PDF objects out of 4296 (max. 8388607)
+ 650 named destinations out of 1000 (max. 500000)
+ 1021 words of extra memory for PDF output out of 10000 (max. 10000000)
+

@@ -1,0 +1,416 @@
+\chapter{Supplementary Material of Chapter \ref{chap:neural-cbo}} 
+\label{section:neural-cbo_supp}
+
+\section{Proof of Theoretical Analysis in Chapter \ref{chap:neural-bo}}
+\label{section:neural-cbo_appendix}
+
+In this section, we will provide the proof of Lemma \ref{lemma:neural-cbo_confidence_bound} and Theorem \ref{theorem:main}. Before going to the proof, we briefly remind existing terms and introduce new notations for convenience.
+Remind that $\mathbf{g}_{a}(\mathbf{x}; \mathbf{W}) = \nabla_{\mathbf{W}}a(\mathbf{x}; \mathbf{W})$. Therefore, $\mathbf{g}_{a}(\mathbf{x}; \mathbf{W}_0)$ and $\mathbf{g}_{a}(\mathbf{x}; \mathbf{W}_t)$ will be the gradients of the neural network $a(\mathbf{x}; \mathbf{W})$ (using to model a \textit{arbitrary} function $f_a$, defined in Eqn. \ref{eqn:fcn}) at initialization and at iteration $t$, respectively.  Further, let us define terms as follows:
+
+\begin{equation}
+\label{def:neural_cbo_linear_kernelized_terms}
+\begin{split}
+\mathbf{G}_{a,t-1} & = [\mathbf{g}_{a}(\mathbf{x}_1; \mathbf{W}_0),\dots, \mathbf{g}_{a}(\mathbf{x}_{t-1}; \mathbf{W}_0)] 
+\\
+\Bar{\mathbf{G}}_{a,t-1} & = [\mathbf{g}_{a}(\mathbf{x}_1; \mathbf{W}_{t-1}),\dots, \mathbf{g}_{a}(\mathbf{x}_{t-1}; \mathbf{W}_{t-1})] 
+\\
+\mathbf{U}_{a,t-1} &=  \mathbf{I} + \mathbf{G}_{a,t-1} \mathbf{G}_{a,t-1}^\top 
+\\
+\mathbf{F}_{a,t-1} &= [f_a(\mathbf{x}_1), \dots, f_a(\mathbf{x}_{t-1})]
+\end{split}
+\end{equation}
+Further, it can be verify that $\mathbf{H}_0 = \mathbf{G}_{a,t-1} ^\top\mathbf{G}_{a,t-1}$, where $\mathbf{H}_0$ is the NTK matrix at initialization defined in Definition \ref{def:neural-cbo_ntk}.  Now we are ready to bound Lemma \ref{lemma:neural-cbo_confidence_bound}.
+
+\subsection{Proof of Lemma \ref{lemma:neural-cbo_confidence_bound}}
+\ConfidenceBound*
+
+\begin{proof}
+To prove Lemma \ref{lemma:neural-cbo_confidence_bound}, we analyse the left-hand side as follow:
+\begin{align*}
+    & \lvert f_a(\mathbf{x}) - a(\mathbf{x}; \mathbf{W}_{t-1}) \rvert 
+    \\
+    & \le \underbrace{\lvert f_a(\mathbf{x}) - \langle \mathbf{g}_a(\mathbf{x}_{t};\mathbf{W}_{0}),\mathbf{U}_{a,t-1}^{-1}\mathbf{G}_{a,t-1}\mathbf{y}_{a,t-1} \rangle  \rvert}_{T_1} + \underbrace{\lvert a(\mathbf{x}; \mathbf{W}_{t-1}) - \langle \mathbf{g}_a(\mathbf{x}_{t};\mathbf{W}_{0}),\mathbf{U}_{a,t-1}^{-1}\mathbf{G}_{a,t-1}\mathbf{y}_{a,t-1} \rangle  \rvert}_{T_2}
+\end{align*}
+Here, $T_1$ represents the difference between the actual function value and the theoretical optimal solution for a linearized network. Meanwhile, $T_2$ refers to the gap between the neural network's output $a(\mathbf{x}; \boldsymbol{W}_{t-1})$ at iteration $t-1$ and the theoretical optimal solution for the same linearized network.
+\paragraph{Bound term $T_1$}:
+
+First of all, following Assumption \ref{assumption:rkhs} in the main paper, we assume that $f_a$ is in RKHS $\mathcal{H}_{k_a}$ with NTK kernel $k_a$, and $\mathbf{g}_a(\mathbf{x}; \mathbf{W}_0)$  can be considered as finite approximation of $\varphi(\cdot)$, the feature map of the NTK from $\mathbb{R}^d \rightarrow \mathcal{H}_{k_a}$. From Lemma \ref{lemma:RKHS_expression} , there exists $f_a^* \in \mathbb{R}^p$ such that $f_a(\mathbf{x}) = \langle \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0), f_a^* \rangle = \mathbf{g_a}(\mathbf{x}; \mathbf{W}_0)^\top f_a^*$. 
+Then the term $T_1$ can be bounded as:
+\begin{align*}
+\label{ieqn:neural_cbo_confidence_interval}
+         T_1 &= \left \lvert f(\mathbf{x}) - \langle \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0); \mathbf{U}^{-1}_{a,t-1} \mathbf{G}_{a,t-1} \mathbf{y}_{a,t-1} \rangle   \right \rvert  
+         \\
+         & = \left\lvert f(\mathbf{x}) - \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0)^\top  \mathbf{U}^{-1}_{a,t-1} \mathbf{G}_{a,t-1} \mathbf{y}_{a,t-1} \right\rvert 
+         \\
+        & \leq \left\lvert f(\mathbf{x}) - \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0)^\top  \mathbf{U}^{-1}_{a,t-1}
+        \mathbf{G}_{a,t-1}\mathbf{f}_{a, t-1} \right\rvert + 
+        \left\lvert \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0)^\top \mathbf{U}^{-1}_{a,t-1}
+        \mathbf{G}_{a,t-1} \boldsymbol{\epsilon}_{a, t-1} \right\rvert
+        \\
+        & = \left\lvert \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0)^\top f_a^* - \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0)^\top  \mathbf{U}^{-1}_{a,t-1} 
+        \mathbf{G}_{a,t-1}
+        \mathbf{G}_{a,t-1}^\top f_a^* \rangle \right\rvert + 
+        \left\rvert  \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0)^\top \mathbf{U}^{-1}_{a,t-1} \mathbf{G}_{a,t-1} \boldsymbol{\epsilon}_{a, t-1}  \right\rvert
+        \\
+        & = \left\lvert \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0)^\top \left( \mathbf{I} -  \mathbf{U}^{-1}_{a,t-1}  \mathbf{G}_{a,t-1} \mathbf{G}_{a,t-1}^\top  \right) f_a^*  \right \vert + 
+        \left\lvert  \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0)^\top \mathbf{U}^{-1}_{a,t-1} \mathbf{G}_{a,t-1} \boldsymbol{\epsilon}_{a, t-1}  \right\rvert 
+        \\
+        & = \left\lvert \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0)^\top \left( \mathbf{I} -  \mathbf{U}^{-1}_{a,t-1} \left( \mathbf{U}_{t-1} - \mathbf{I} \right)  \right) f_a^*  \right \vert +
+        \left \lvert  \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0)^\top \mathbf{U}^{-1}_{a,t-1} \mathbf{G}_{a,t-1} \boldsymbol{\epsilon}_{a, t-1}  \right \rvert 
+        \\
+        & = \left\lvert  \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0)^\top \mathbf{U}^{-1}_{a,t-1} \mathbf{w}  \right\rvert  + \left\lvert \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0)^\top \mathbf{U}^{-1}_{a,t-1} \mathbf{G}_{a,t-1} \boldsymbol{\epsilon}_{a, t-1}   \right\rvert 
+        \\
+        & \leq \norm{f_a^*}_{k_a}  \norm{   \mathbf{U}^{-1}_{a,t-1} \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0)}_{k_a} + \left\lvert \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0)^\top \mathbf{U}^{-1}_{a,t-1} \mathbf{G}_{a,t-1} \boldsymbol{\epsilon}_{a, t-1}   \right\rvert \\
+        & \leq  \norm{f_a^*}_{k_a}  \sqrt { \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0)^\top \mathbf{U}^{-1}_{a,t-1} \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0)}  + \left\lvert \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0)^\top \mathbf{U}^{-1}_{a,t-1} \mathbf{G}_{a,t-1} \boldsymbol{\epsilon}_{a, t-1}   \right\rvert 
+        \\
+        & \leq \sqrt{2}B_a \sigma_{a,t}(\mathbf{x}) + \sigma_{a,t}(\mathbf{x}) R \sqrt{\log \det (\mathbf{I} + \mathbf{H}_0) + 2 \log(1/\delta)} 
+        \\
+        & \le \sqrt{2}B_a \sigma_{a,t}(\mathbf{x}) +  R \sqrt{\gamma_{a,t} + 2 + 2 \log(1/\delta)} \sigma_{a,t}(\mathbf{x}) 
+        \\
+        & = \left(\sqrt{2}B_a + R_a \sqrt{\gamma_{a,t} + 2 + 2 \log(1/\delta)}\right)\sigma_{a,t}(\mathbf{x})
+\end{align*}
+where the first inequality uses triangle inequality and the fact that $\mathbf{y}_{a,t-1}= \mathbf{f}_{a, t-1} + \boldsymbol{\epsilon}_{a, t-1}$. The second inequality is from the reproducing property of function relying on RKHS, and the fourth equality is from the verification noted in Eqn.  \ref{def:linear_kernelized_terms}. The last inequality directly uses the results from Lemma \ref{lemma:noise_affeted_bound} and Lemma  \ref{lemma:log_det_Kt_bound}.
+
+\paragraph{Bound term $T_2$}
+To bound term $T_2$, we again divide $T2$ into two terms:
+\begin{align*}
+    T_2 &=\lvert a(\mathbf{x}; \mathbf{W}_{t-1}) - \langle \mathbf{g}_a(\mathbf{x}_{t};\mathbf{W}_{0}),\mathbf{U}_{a,t-1}^{-1}\mathbf{G}_{a,t-1}\mathbf{y}_{a,t-1} \rangle  \rvert 
+    \\
+    &= \underbrace{\lvert a(\mathbf{x}; \mathbf{W}_{t-1}) - \langle \mathbf{g}_a(\mathbf{x};\mathbf{W}_0), \mathbf{W}_{t-1} - \mathbf{W}_0 \rangle \rvert}_{T_2^\prime} \\
+    & \;\; + \underbrace{\lvert \langle \mathbf{g}_a(\mathbf{x};\mathbf{W}_0), \mathbf{W}_{t-1} - \mathbf{W}_0 \rangle  - \langle \mathbf{g}_a(\mathbf{x}_{t};\mathbf{W}_{0}),\mathbf{U}_{a,t-1}^{-1}\mathbf{G}_{a,t-1}\mathbf{y}_{a,t-1} \rangle   \rvert}_{T_2^{\prime \prime}}
+    \\
+    & \le C^{2L} L^{3/2} m^{11/36}/ (T+1) + C_1^{2L} L^{1/2} m^{-1/36} 
+\end{align*}
+Here, $T_2^{\prime}$ is the difference between the network output and its linear approximation, while $T_2^{\prime \prime}$ indicates the gap between the network's linear approximation and the theoretical optimal solution for a linearized network. The first inequality uses lemma \ref{lemma:neural_cbo_network_output_vs_lin_approx} and Lemma \ref{lemma:neural_cbo_lin_approx_vs_theoretical_regression_sol}. Combining the bound of term $T_1$ and $T_2$, then given any $\delta \in (0,1)$,  with probability at least $1 - \delta \exp (\Omega(C^{-L} m^{1/36}))$, we have:
+\begin{align*}
+     \lvert f_a(\mathbf{x}) - a(\mathbf{x}; \mathbf{W}_{t-1}) \rvert \le  \left(\sqrt{2}B + R \sqrt{\gamma_{t,a} + 2 + 2 \log(1/\delta)}\right)\sigma_{a, t-1}(\mathbf{x}) + \frac{\mathcal{E}(m)}{T+1}, 
+\end{align*}
+where $\mathcal{E}(m) = \mathcal{O}(C^{2L} L^{3/2} m^{11/36})$.
+\end{proof}
+
+\subsection{Proof of Theorem \ref{theorem:main}}
+
+\TheoremMain*
+
+\begin{proof}
+
+We gradually provide the upper bound of the cumulative regret $R_T$ and cumulative violation of each constraints $V_{c_i,T}$ as: 
+\paragraph{Bound Cumulative Regret $R_{T}$:}
+We utilize some results from \citep{tran2022regret} to bound our cumulative regret:
+\begin{lemma}[Lemma 10, \citep{tran2022regret}]
+    \label{lemma:neural_cbo_objective_rt}
+    There exist constant $C > 0$ such that
+    \begin{align*}
+        r_t \le r_t^+ \le \left(C + \sqrt{2}\pi(B + \sqrt{2}) \right)\left(\text{Im}_t (\mathbf{x})+ \beta_{f,t} \sigma_{f,t-1}(\mathbf{x}_t) \right),
+    \end{align*}
+    where $Im_t (\mathbf{x}) = \max(0, f(\mathbf{x}_t) - \mu_t^+ + \mathcal{E}(m)), $ and $\mu^+_t = \max_{\mathbf{x}_k \in \mathcal{D}_{t-1}} v(\mathbf{x}_k; \boldsymbol{\theta}_{t-1})$ is the best value of the mean objective function so far. 
+\end{lemma}
+
+\begin{lemma}[Lemma 14, \citep{tran2022regret}]
+\label{lemma:neural_cbo_improvement_f}
+    Pick $\delta \in (0, 1)$. Then with probability at least $1 - \delta$ we have that:
+    \[ \sum_{t=1}^T {Im}_t (\mathbf{x}_t) = \mathcal{O}(\beta_T \sqrt{T\gamma_T} ) + \mathcal{E}(m). \]
+\end{lemma}
+
+We obtain an upper bound for the Cumulative Regret $R_T$ as follows:
+\begin{align*}
+    R_T & \le R_T^+ = \sum_{t=1}^T r_t^+
+    \\
+    & \le \sum_{t=1}^T \left(C + \sqrt{2}\pi(B + \sqrt{2}) \right)\left(\text{Im}_t (\mathbf{x})+ \beta_{f,t} \sigma_{f,t-1}(\mathbf{x}_t) \right)
+    \\
+    & \le \sum_{t=1}^T \left(C + \sqrt{2}\pi(B + \sqrt{2}) \right) \text{Im}_t (\mathbf{x}) +  \sum_{t=1}^T  \left(C + \sqrt{2}\pi(B + \sqrt{2}) \right) \beta_{f,t} \sigma_{f,t-1}(\mathbf{x}_t) 
+    \\
+    & \le \left(C + \sqrt{2}\pi(B + \sqrt{2}) \right) \sum_{t=1}^T \text{Im}_t (\mathbf{x}) +  \left(C + \sqrt{2}\pi(B + \sqrt{2}) \right) \beta_{f,T} \sum_{t=1}^T \sigma_{f,t-1}(\mathbf{x})
+    \\
+    & \le \left(C + \sqrt{2}\pi(B + \sqrt{2}) \right) \sum_{t=1}^T \text{Im}_t (\mathbf{x}) +  \left(C + \sqrt{2}\pi(B + \sqrt{2}) \right) \beta_{f,T} \max \left(\sum_{t=1}^T \sigma_{f,t-1}(\mathbf{x}), B \right) 
+    \\
+    & \le 2 \beta_{f,T} \sqrt{\frac{B T}{\log(B+1)} (2\gamma_{f,T}+1)} + 2 \mathcal{E}(m)
+\end{align*}
+The first inequality is from Lemma \ref{lemma:neural_cbo_objective_rt} and the last inequality is due to Lemma \ref{lemma:neural_cbo_improvement_f} and Lemma \ref{lemma:neural_cbo_min_sigma}. 
+\paragraph{Bound Cumulative Violation $V_{c_i, T}$:}
+\begin{align*}
+V_{c_i, T}  & = \sum_{t=1}^T [c_i(\mathbf{x}_t)]^+ \\
+& = \sum_{t=1}^T[c_i(\mathbf{x}_t) - \text{LCB}_{c_i,t}(\mathbf{x}, \boldsymbol{\omega}_{c_i,t}) + \text{LCB}_{c_i,t}(\mathbf{x}, \boldsymbol{\omega}_{c_i,t})]^+
+\\
+& \le \sum_{t=1}^T[c_i(\mathbf{x}_t) - \text{LCB}_{c_i,t}(\mathbf{x}, \boldsymbol{\omega}_{c_i,t})]^+  + \sum_{t=1}^T [\text{LCB}_{c_i,t}(\mathbf{x}, \boldsymbol{\omega}_{c_i,t})]^+ 
+\\
+& = \sum_{t=1}^T[c_i(\mathbf{x}_t) - \text{LCB}_{c_i,t}(\mathbf{x}, \boldsymbol{\omega}_{c_i,t})]^+
+\\
+& \le \sum_{t=1}^T[\text{UCB}_{c_i,t}(\mathbf{x}, \boldsymbol{\omega}_{c_i,t}) - \text{LCB}_{c_i,t}(\mathbf{x}, \boldsymbol{\omega}_{c_i,t})]^+
+\\
+& \le 2 \beta_{c_i,t} \sum_{t=1}^T \sigma_{c_i,t}(\mathbf{x})  + \frac{2 \mathcal{E}(m)}{T+1} 
+\\ 
+& \le 2 \beta_{c_i,T} \max\left (\sum_{t=1}^T \left(\sigma_{c_i,t}(\mathbf{x}), S_i \right)  + \frac{2 \mathcal{E}(m)}{T+1}  \right)
+\\
+& \le 2 \left(S_i + R_a \sqrt{\gamma_{a,T} + 2 + 2 \log(1/\delta)} \right) \sqrt{\frac{ S_i T}{\log(S_i+1)} (2\gamma_{c_i,T}+1)} + 2 \mathcal{E}(m)
+\end{align*}
+\end{proof}
+
+The first inequality follows by the fact that $[a+b]^+ \le [a]^+ + [b]^+, \forall a,b \in \mathbb{R}$. The second equality is from the feasibility condition in Alg \ref{alg:neural_cbo}. The second inequality is from Corollary  \ref{corrolary:f_in_lcb_ucb} and the last inequality is from Lemma \ref{lemma:neural-cbo_confidence_bound}. 
+
+
+
+\subsection{Technical Lemmas}
+The following lemma gives the concentration of NTK at the initialization of the neural network introduced in Eqn. \ref{eqn:fcn}.
+\begin{lemma}[Theorem 1, \citep{xu2024overparametrized}]
+\label{lemma:neural_cbo_H_to_Phi}
+Under Gaussian initialization, for $m \ge Cd^2 \exp(L^2)$ for some constant $C$, there exist constants $C_1, C_2$ and $C_3$ such that, with probability at least $1 - \exp (-C_1 m^{1/3})$,
+\[
+\norm{\mathbf{H}^{(l)}_0 - \boldsymbol{\Phi}^{(l)}}_\infty \le C_2 \left(\frac{C_3^L}{m^{1/6}} + \sqrt{\frac{dL\log m}{m}}\right), \forall 1\le l \le L,
+\]
+where $\boldsymbol{\Phi}^{(l)}$ is a deterministic kernel matrix. For more details about the recursive definition of $\boldsymbol{\Phi}^{(l)}$, see Section 4.1 of \citet{xu2024overparametrized}.
+\end{lemma}
+The next lemma shows the bound of difference between the gradient of neural network $a(\mathbf{x}; \mathbf{W})$ at step $t$ and initialization.
+\begin{lemma}[Proposition 9, \citep{xu2024overparametrized}] Consider the neural network introduced in Eqn. \ref{eqn:fcn} and assume that the condition \ref{condition:network_width} holds. With probability $1 - \exp (\Omega(C^{-L} m^{1/36}))$, for any sample path $\{ \mathbf{x}_s, y_s\}_{s=0}^{T-1}$, all $t\le T$, we have
+\begin{align*}
+\begin{split}
+    \sup_\mathbf{x} \norm{\mathbf{g}_{a} (\mathbf{x}, \mathbf{W}_t) - \mathbf{g}_{a}(\mathbf{x}; \mathbf{W}_0)}_2 & \le C_1^{2L} L^{1/2}m^{-1/36}
+    \\
+    \norm{\mathbf{g}_{a}(\mathbf{x}; \mathbf{W}_0)}_2 &\le C_2^L L^{1/2}  ,
+\end{split}    
+\end{align*}
+for some constants $C_1$ and $C_2$. 
+\end{lemma}
+The next lemma shows the reproducing property of function $f_a$ being assumed to belong to RKHS induced by NTK kernel $k_a$ of the neural network $a(\mathbf{x}; \mathbf{W})$ introduced in Eqn. \ref{eqn:fcn}.
+\begin{lemma}
+    \label{lemma:neural_cbo_RKHS_expression}
+    Let $f_a$ be a member of $\mathcal{H}_{k_a}$ with bounded RKHS norm $\norm{f_a}_{\mathcal{H}_{k_a}} \le B_a$. Assume that the network width of the model used to estimate function $f_a (\cdot)$ satisfies the Condition \ref{condition:network_width}, 
+    then $\forall \mathbf{x} \in D$, there exists $f_a^* \in \mathbb{R}^p$, where $p=md+m^2(L-2)+m$ such that:
+    \[
+    f_a(\mathbf{x}) = \langle \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0), f_a^* \rangle = \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0)^\top f_a^*
+    \]
+
+\begin{proof}[Proof of Lemma \ref{lemma:RKHS_expression}]
+    Due to Lemma \ref{lemma:neural_cbo_H_to_Phi}, with probability at least $1 - \exp (-C_1 m^{1/3} \log L)$, we have:
+    \[
+    \norm{\mathbf{H}_0 - \boldsymbol{\Phi}}_\infty \le C_2 L \left(\frac{C_3^L}{m^{1/6}} + \sqrt{\frac{dL\log m}{m}}\right).
+    \] 
+    It is noted that following our definition,  $\mathbf{H}_0 = \mathbf{G}_{a,t} ^\top \mathbf{G}_{a,t}$. That leads to:
+    \begin{align*}
+        \frac{1}{\sqrt{m}}\norm{\mathbf{G}_{a,t} ^\top \mathbf{G}_{a,t} - \boldsymbol{\Phi}}_F & \le \frac{t}{\sqrt{m}} \norm{\mathbf{G}_{a,t-1} ^\top \mathbf{G}_{a,t-1} - \boldsymbol{\Phi}}_\infty 
+        \\
+        & \le \frac{t}{C_2 \sqrt{m} L} \left(\frac{C_3^L}{m^{1/6}} + \sqrt{\frac{dL\log m}{m}}\right)  \le \lambda_0,
+    \end{align*}
+    Where $\lambda_0$ is a constant which is independent of $m$. The second inequality is from the choice of $m$ in Condition \ref{condition:network_width}. 
+    Then, we have:
+    \begin{align*}
+        \frac{1}{\sqrt{m}}\mathbf{G}_{a,t} ^\top \mathbf{G}_{a,t} & \succcurlyeq  \frac{1}{\sqrt{m}} \left(\boldsymbol{\Phi} - 
+        \norm{\mathbf{G}_{a,t} ^\top \mathbf{G}_{a,t} - \boldsymbol{\Phi}}_F \mathbf{I} \right)
+        \\
+        & \succcurlyeq \frac{1}{\sqrt{m}} \left(\boldsymbol{\Phi} - 
+        \lambda_0 \mathbf{I} \right) \succ 0, 
+    \end{align*}
+    suggests that $\mathbf{G}_{a,t} ^\top \mathbf{G}_{a,t}$ is positive definite.  Thus, suppose the singular value decomposition of $\mathbf{F}_{a,t-1}$ is $\mathbf{G}_{a,t} = \mathbf{P}_{a,t} \mathbf{A}_{a,t} \mathbf{Q}_{a,t}^\top$, then by choosing $f_a^* = \mathbf{P}_{a,t} \mathbf{A}_{a,t} \mathbf{Q}_{a,t}^\top \mathbf{F}_{a,t}$, we have
+    \[
+    \mathbf{G}_{a,t-1}^\top f_a^* =  \mathbf{Q}_{a,t} \mathbf{A}_{a,t} \mathbf{P}_{a,t}^\top \mathbf{P}_{a,t} \mathbf{A}_{a,t} \mathbf{Q}_{a,t}^\top \mathbf{F}_{a,t}  = \mathbf{F}_{a,t}, 
+    \]
+    which indicates that for any $\mathbf{x}$, $\langle g(\mathbf{x}; \mathbf{W}_0), f_a^*\rangle = f_a(\mathbf{x})$.
+\end{proof}
+\end{lemma}
+Let $\mathbf{z}_t^{(l)} (\mathbf{x})$ measure the sensitivity of the output from the $l$-th hidden layer and defined as:
+\begin{align*}
+    \begin{split}
+        [\mathbf{z}_t^{(l)}(\mathbf{x})]^\top &= \left [ \frac{\partial a(\mathbf{x}; \mathbf{W}_t)}{\partial \mathbf{h}_t^{(l)}(\mathbf{x})}\right]^\top \\
+        &= \mathbf{q}^\top \frac{1}{\sqrt{m}} \mathbf{D}_t^{(L)}(\mathbf{x}) \mathbf{W}_t^{(L)} \dots \frac{1}{\sqrt{m}} \mathbf{D}_t^{(l+1)}(\mathbf{x}) \mathbf{W}_t^{(l+1)}, 
+    \end{split} 
+\end{align*}
+Then the following lemma provides the bound of the difference between $\mathbf{z}_t^{(l)}(\mathbf{x})$ and $\mathbf{z}_0^{(l)}(\mathbf{x})$:
+\begin{lemma}[Lemma 12, \citep{xu2024overparametrized}]
+\label{lemma:neural_cbo_nn_sensitivity_bound}
+Consider the neural network introduced in Eqn. \ref{eqn:fcn} and assume that the condition \ref{condition:network_width} holds. With probability $1 - \exp (\Omega( C_1^{-L+l} m^{1/36}))$, for layer $l$ and any sample path $\{ \mathbf{x}_s, y_s\}_{s=0}^{T-1}$, with all $t\le T$, we have:
+\begin{align*}
+    \sup_\mathbf{x} \norm{\mathbf{z}_t^{(l)}(\mathbf{x}) - \mathbf{z}_0^{(l)}(\mathbf{x})}_2 & \le \mathcal{O}(C_1^{2L-l} m^{17/36}) 
+    \\
+    \sup_\mathbf{x} \norm{\mathbf{z}_0^{(l)}(\mathbf{x})}_2 &  \le C_2^{L-l} \sqrt{m}
+    \\
+    \sup_\mathbf{x} \norm{\mathbf{z}_t^{(l)}(\mathbf{x})}_2 &  \le C_3^{2L-l-1} \sqrt{m}
+    \\
+\end{align*}
+for some absolute constant $C_1, C_2, C_3$.
+\end{lemma}
+
+
+
+The following lemma provides the bound on the difference between neural network weights and output at initialization and at step $t$:
+
+\begin{lemma}[Lemma 10, \citep{xu2024overparametrized}]
+\label{lemma:neural_cbo_weights_and_output_bounds}
+Consider the neural network introduced in Eqn. \ref{eqn:fcn} and assume that the condition \ref{condition:network_width} holds. Setting the step size at training step $t$ as $\alpha_t \le \frac{\nu}{(T+1)^2}$, then with probability $1 - \exp (\Omega( C^{-L} m^{1/36}))$, for any sample path $\{ \mathbf{x}_s, y_s\}_{s=0}^{T-1}$, all $t\le T$, we have:
+\begin{align*}
+    \norm{\mathbf{W}_t^{(l)} - \mathbf{W}_0^{(l)}}_2 & \le \frac{m^{1/3}L^{1/2}}{T+1} \\
+    \norm{\mathbf{W}_0^{(l)}}_2, \norm{\mathbf{W}_t^{(l)}}_2 & \le \mathcal{O}(\sqrt{m})
+    \\
+    \sup_\mathbf{x} \norm{\mathbf{h}_t^{(l)}(\mathbf{x}) - \mathbf{h}_0^{(l)}(\mathbf{x})}_2 & \le \frac{C_3^l}{m^{1/6}}, 
+\end{align*}
+for some absolute constant $C_3$.
+\end{lemma}
+
+
+The following lemmas provide bound on the technical terms used in Lemma \ref{lemma:neural-cbo_confidence_bound}.
+
+\begin{lemma} Let $a(\mathbf{x}; \mathbf{W})$ is the neural network defined in Eqn. \ref{eqn:fcn}. Then, with probability $1 - \exp (\Omega(C^{-L} m^{1/36}))$, we have: 
+\label{lemma:neural_cbo_network_output_vs_lin_approx}
+    \begin{align*}
+        \lvert a(\mathbf{x}, \mathbf{W}_{t-1}) - a(\mathbf{x}, \mathbf{W}_{0}) - \langle \mathbf{g}_{a}(\mathbf{x}, \mathbf{W}_0), \mathbf{W}_{t-1} - \mathbf{W}_0 \rangle \rvert \le \mathcal{O}(C^{2L} L^{3/2} m^{11/36})
+    \end{align*}
+\end{lemma}
+
+\begin{proof}[Proof of Lemma \ref{lemma:neural_cbo_network_output_vs_lin_approx}]
+
+
+Remind that 
+\begin{equation*}
+    \mathbf{h}^{(l)}(\mathbf{x}) = \frac{1}{\sqrt{m}} \mathbf{D}^{(l)}(\mathbf{x}) \mathbf{W}^{(l)} \dots \frac{1}{\sqrt{m}} \mathbf{D}^{(1)}(\mathbf{x}) \mathbf{W}^{(1)} \mathbf{x},
+\end{equation*}
+Then, by direct calculation, we have
+\begin{align*}
+ \frac{\partial a(\mathbf{x}; \mathbf{W}_0)}{\partial \mathbf{W}^{(l)}}  &= \frac{\mathbf{q}^\top}{\sqrt{m}} \mathbf{D}_0^{(L)}(\mathbf{x}) \mathbf{W}_0^{(L)} \dots \frac{1}{\sqrt{m}} \mathbf{D}_0^{(l)}(\mathbf{x}) \left[\mathbf{h}_0^{(l-1)}(\mathbf{x}) \right] ^\top
+ \\
+ &= \frac{1}{\sqrt{m}} [\mathbf{z}_0^{(l)}(\mathbf{x})]^\top \mathbf{D}_0^{(l)}(\mathbf{x})\left[\mathbf{h}_0^{(l-1)}(\mathbf{x}) \right] ^\top,
+\end{align*}
+and 
+\begin{align*}
+    \mathbf{g}_{a}(\mathbf{x}; \mathbf{W}_0) &= \left [ \frac{\partial a(\mathbf{x}; \mathbf{W}_0)}{\partial \mathbf{W}^{(1)}}, \frac{\partial a(\mathbf{x}; \mathbf{W}_0)}{\partial \mathbf{W}^{(2)}}, \dots, \frac{\partial a(\mathbf{x}; \mathbf{W}_0)}{\partial \mathbf{W}^{(L)}} \right]
+\end{align*}
+We also rewrite $a(\mathbf{x}; \mathbf{W}_{t-1})$ and $a(\mathbf{x}; \mathbf{W}_{0})$  as:
+\begin{align*}
+    a(\mathbf{x}; \mathbf{W}_{t-1}) &= \frac{\mathbf{q}^\top}{\sqrt{m}} \mathbf{D}_{t-1}^{(L)}(\mathbf{x}) \mathbf{W}_{t-1}^{(L)} \dots \frac{1}{\sqrt{m}} \mathbf{D}_{t-1}^{(1)}(\mathbf{x}) \mathbf{W}_{t-1}^{(1)} (\mathbf{x}) 
+    \\
+    & = \frac{1}{\sqrt{m}} \mathbf{z}_{t-1}^{(l)} (\mathbf{x}) \mathbf{D}_{t-1}^{(l)} (\mathbf{x}) \mathbf{W}_{t-1}  \mathbf{h}_{t-1}^{(l-1)} (\mathbf{x}),
+    \\
+    a(\mathbf{x}; \mathbf{W}_{0}) &= \frac{\mathbf{q}^\top}{\sqrt{m}} \mathbf{D}_{0}^{(L)}(\mathbf{x}) \mathbf{W}_{0}^{(L)} \dots \frac{1}{\sqrt{m}} \mathbf{D}_{0}^{(1)}(\mathbf{x}) \mathbf{W}_{0}^{(1)} (\mathbf{x})
+    \\
+    & = \frac{1}{\sqrt{m}} \mathbf{z}_{0}^{(l)} (\mathbf{x}) \mathbf{D}_{0}^{(l)} (\mathbf{x}) \mathbf{W}_{0}^{(l)}  \mathbf{h}_{0}^{(l-1)} (\mathbf{x})
+    % \\
+    % & = \frac{1}{L} \sum_{l=1}^L \mathbf{z}_{t-1}^{(l-1)} \mathbf{h}_{t-1}^{(l-1)}(\mathbf{x}) 
+    % \\
+    % & = \frac{1}{L} \sum_{l=1}^L \mathbf{z}_{t-1}^{(l-1)} \left[ \mathbf{h}_{t-1}^{(l-1)}(\mathbf{x})  - \mathbf{h}_{0}^{(l-1)}(\mathbf{x}) \right]  + \frac{1}{L} \sum_{l=1}^L \frac{1}{\sqrt{m}}\mathbf{z}_{t-1}^{(l)} \mathbf{D}_{t-1}^{(l)}(\mathbf{x}) \mathbf{W}_{t-1}^{(l)}(\mathbf{x}) \left[ \mathbf{h}_{0}^{(l-1)}(\mathbf{x}) \right]
+\end{align*} 
+
+Using the technique in the proof of Lemma 8.2 in \citep{allen2019convergence},  there exist diagonal matrices $\widehat{\mathbf{D}}^{(l)} (\mathbf{x}) = \mathbf{D}_{t-1}^{(l)}(\mathbf{x}) - \mathbf{D}_{0}^{(l)}(\mathbf{x})   \in \mathbb{R}^{m \times m}, \forall 1\le l \le L$ with entries in
+$[-1,1]$ such that:
+\begin{align*}
+    &  a(\mathbf{x}, \mathbf{W}_{t-1}) - a(\mathbf{x}, \mathbf{W}_{0}) 
+    \\
+    & = \frac{1}{\sqrt{m}} \sum_{l=1}^L \left [ \prod_{r = l+1}^L \left(\widehat{\mathbf{D}}^{(r)} (\mathbf{x}) + \mathbf{D}_{t-1}^{(r)} (\mathbf{x}) \right) \mathbf{W}_{t-1}^{(r)} \right] \left (\widehat{\mathbf{D}}^{(l)} (\mathbf{x}) + \mathbf{D}_{t-1}^{(l)} (\mathbf{x}) \right) (\mathbf{W}_{t-1}^{(l)} - \mathbf{W}_{0}^{(l)}) \mathbf{h}_{0}^{(l-1)} (\mathbf{x})
+    \\
+    & = \frac{1}{\sqrt{m}} \sum_{l=1}^L  \widehat{\mathbf{z}}_{t-1}^{(l)} \left (\widehat{\mathbf{D}}^{(l)} (\mathbf{x}) + \mathbf{D}_{t-1}^{(l)} (\mathbf{x}) \right) \left( \mathbf{W}_{t-1}^{(l)} - \mathbf{W}_{0}^{(l)} \right) \mathbf{h}_{0}^{(l-1)} (\mathbf{x})
+\end{align*}
+Furthermore, we have 
+\begin{align*}
+    \langle \mathbf{g}_{a}(\mathbf{x}, \mathbf{W}_0), \mathbf{W}_{t-1} - \mathbf{W}_0 \rangle &= \frac{1}{\sqrt{m}}\sum_{l=1}^L  \mathbf{z}_0^{(l)}(\mathbf{x}) \mathbf{D}_0^{(l)}(\mathbf{x}) \left(\mathbf{W}_{t-1}^{(l)} -  \mathbf{W}_0^{(l)}\right) \mathbf{h}_0^{(l-1)}(\mathbf{x}) 
+\end{align*}
+
+Replacing all below expressions, we get
+\begin{align*}
+    & \lvert a(\mathbf{x}, \mathbf{W}_{t-1}) -  a(\mathbf{x}, \mathbf{W}_{0}) - \langle \mathbf{g}_{a}(\mathbf{x}, \mathbf{W}_0), \mathbf{W}_{t-1} - \mathbf{W}_0 \rangle \rvert 
+    \\
+    & = \frac{1}{\sqrt{m}} \sum_{l=1}^L  \widehat{\mathbf{z}}_{t-1}^{(l)} (\mathbf{x}) \left (\widehat{\mathbf{D}}^{(l)} (\mathbf{x}) + \mathbf{D}_{t-1}^{(l)} (\mathbf{x}) \right) \left( \mathbf{W}_{t-1}^{(l)} - \mathbf{W}_{0}^{(l)} \right) \mathbf{h}_{0}^{(l-1)} (\mathbf{x})
+    \\ 
+    & - \frac{1}{\sqrt{m}}\sum_{l=1}^L  \mathbf{z}_0^{(l)}(\mathbf{x}) \mathbf{D}_0^{(l)}(\mathbf{x}) \left(\mathbf{W}_{t-1}^{(l)} -  \mathbf{W}_0^{(l)}\right) \mathbf{h}_0^{(l-1)}(\mathbf{x})
+    \\
+    & \le \frac{1}{\sqrt{m}}\sum_{l=1}^L \norm{\widehat{\mathbf{z}}_{t-1}^{(l)} - \mathbf{z}_0^{(l)}(\mathbf{x})}_2  \norm{\mathbf{W}_{t-1}^{(l)} -  \mathbf{W}_0^{(l)}}_2 \norm{\mathbf{h}_{0}^{(l-1)}}
+    \\
+    & \le L m^{-1/2} L^{1/2} m^{1/3} C^{2L} m^{17/36} / (T+1)
+    \\ 
+    & \le (C^{2L} L^{3/2} m^{11/36}) / (T+1).
+\end{align*} 
+\end{proof}
+The first inequality uses triangle inequality. The second inequality is from Lemma \ref{lemma:neural_cbo_nn_sensitivity_bound} and Lemma  \ref{lemma:neural_cbo_weights_and_output_bounds}.
+
+\begin{lemma} Let $a(\mathbf{x}; \mathbf{W})$ is the neural network defined in Eqn. \ref{eqn:fcn}. Then, with probability $1 - \exp (\Omega(C^{-L} m^{1/36}))$, we have: 
+\label{lemma:neural_cbo_lin_approx_vs_theoretical_regression_sol}
+    \begin{align*}
+    \lvert \langle \mathbf{g}_a(\mathbf{x};\mathbf{W}_0), \mathbf{W}_{t-1} - \mathbf{W}_0 - \mathbf{U}_{a,t-1}^{-1} \mathbf{G}_{a,t-1} \mathbf{y}_{t-1} \rangle \rvert \le C_1^{2L} L^{1/2} m^{-1/36}.
+    \end{align*}
+\end{lemma}
+\begin{proof}[Proof of Lemma \ref{lemma:neural_cbo_lin_approx_vs_theoretical_regression_sol}]
+Using the model update formula given in Eqn. \ref{eqn:train_NN}, we have 
+\begin{align*}
+    \mathbf{W}_{t-1} - \mathbf{W}_0 &= (\mathbf{W}_{t-1} - \mathbf{W}_{t-2}) + (\mathbf{W}_{t-2} - \mathbf{W}_{t-3})  + \dots + (\mathbf{W}_1 - \mathbf{W}_0) 
+    \\
+    &= \sum_{i=1}^{t-1}  (\mathbf{W}_{i} -  \mathbf{W}_{i-1}) 
+    \\
+    &= \sum_{i=1}^{t-1}  \alpha_i \left(y_i - a(\mathbf{x}_i, \mathbf{W}_{i-1})\right) \nabla_\mathbf{W} a(\mathbf{x}_i, \mathbf{W}_{i-1}) 
+    \\
+    & = \sum_{i=1}^{t-1}  \alpha_i \left(y_i - a(\mathbf{x}_i, \mathbf{W}_{i-1})\right) \mathbf{g}_{a, i-1} (\mathbf{x}_i, \mathbf{W}_{i-1}) 
+    \\
+    & = \alpha \mathbf{\Bar{G}}_{a, t-1} (\mathbf{y}_{t-1} - \mathbf{A}_{t-1}),
+\end{align*}
+where $\mathbf{A}_{t-1} = [a(\mathbf{x}_1, \mathbf{W}_1), \dots, a(\mathbf{x}_{t-1}, \mathbf{W}_{t-1})] \in \mathbb{R}^{t-1}$.  Then we have:
+\begin{align*}
+    & \lvert \mathbf{W}_{t-1} - \mathbf{W}_0 - \mathbf{U}_{a,t-1}^{-1}
+    \mathbf{G}_{a,t-1} \mathbf{y}_{t-1} \rvert 
+    \\
+    & = \lvert  \alpha \mathbf{\Bar{G}}_{a, t-1} (\mathbf{y}_{t-1} - \mathbf{A}_{t-1}) - \mathbf{U}_{a,t-1}^{-1} \mathbf{G}_{a,t-1} \mathbf{y}_{t-1} \rvert 
+    \\
+    & = \lvert  \alpha (\mathbf{\Bar{G}}_{a, t-1} - \mathbf{G}_{a, t-1}) (\mathbf{y}_{t-1} - \mathbf{A}_{t-1}) + \alpha \mathbf{G}_{a, t-1} (\mathbf{y}_{t-1} - \mathbf{A}_{t-1}) - (\mathbf{I} + \mathbf{G}_{a,t-1} \mathbf{G}_{a,t-1}^\top)^{-1} \mathbf{G}_{a,t-1} \mathbf{y}_{t-1} \rvert
+    \\
+    & = \lvert  \alpha (\mathbf{\Bar{G}}_{a, t-1} - \mathbf{G}_{a, t-1}) (\mathbf{y}_{t-1} - \mathbf{A}_{t-1}) + \alpha \mathbf{G}_{a, t-1} (\mathbf{y}_{t-1} - \mathbf{A}_{t-1}) - \mathbf{G}_{a,t-1}(\mathbf{I} + \mathbf{G}_{a,t-1}^\top \mathbf{G}_{a,t-1} )^{-1} \mathbf{y}_{t-1} \rvert
+    \\
+    & \le \norm{\alpha (\mathbf{\Bar{G}}_{a, t-1} - \mathbf{G}_{a, t-1}) (\mathbf{y}_{t-1} - \mathbf{A}_{t-1})}_2 + \alpha \norm{\mathbf{G}_{a, t-1}}_2 \norm{ \mathbf{y}_{t-1} \left[\mathbf{I} - (\alpha\mathbf{I} + \alpha \mathbf{G}_{a,t-1}^\top \mathbf{G}_{a,t-1} )^{-1} \right] - \mathbf{A}_{t-1}}_2
+    \\
+    & \le \lvert \alpha \rvert \sqrt{t} \norm{(\mathbf{\Bar{G}}_{a, t-1} - \mathbf{G}_{a, t-1})}_2 + \lvert \alpha \rvert \sqrt{t} \norm{(\mathbf{G}_{a, t-1})}_2
+     \\
+    & \le C_1^{2L} L^{1/2} m^{-1/36}
+\end{align*}
+The first inequality is from the triangle inequality and the last inequality is due to the choice of $\alpha = \frac{\nu}{(T+1)^2}$, where $\nu$ is a parameter and independent of
+dimension $d$. 
+Therefore, we have:
+\begin{align*}
+    & \lvert \langle \mathbf{g}_a(\mathbf{x};\mathbf{W}_0), \mathbf{W}_{t-1} - \mathbf{W}_0 - \mathbf{U}_{a,t-1}^{-1} \mathbf{\Bar{G}}_{a,t-1} \mathbf{y}_{t-1} \rangle \rvert 
+    \\
+    & \le \norm{\mathbf{g}_a(\mathbf{x};\mathbf{W}_0)}_2 \norm{\mathbf{W}_{t-1} - \mathbf{W}_0 - \mathbf{U}_{a,t-1}^{-1} \mathbf{\Bar{G}}_{a,t-1} \mathbf{y}_{t-1}}_2 
+    \\
+    & \le C_1^{2L} L^{1/2} m^{-1/36} 
+\end{align*}
+\end{proof}
+
+
+
+
+
+
+
+
+\begin{lemma}[Theorem 1, \citet{chowdhury2017kernelized}]
+\label{lemma:neural_cbo_noise_affeted_bound}
+
+Let $\{\boldsymbol{\epsilon}_{a, t}\}_{t=1}^\infty$ be a real-valued stochastic process such that for some $R \geq 0$ and for all $t \geq 1$, $\boldsymbol{\epsilon}_{a, t}$ is $\mathcal{F}_{a, t-1}$-measurable and $R$-sub-Gaussian
+conditioned on $\mathcal{F}_{a, t-1}$. Recall $\mathbf{H}_{0}$ defined in Eqn.  \ref{def:linear_kernelized_terms}. For a given
+$\eta > 0$, with probability $1 - \delta$, the following holds for all $t$:
+\[
+\boldsymbol{\epsilon}_{a, t}^\top ((\mathbf{H}_0 + \eta\mathbf{I})^{-1}+\mathbf{I})^{-1} \boldsymbol{\epsilon}_{a, t}
+\leq R_a^2 \log \det ((1+\eta)\mathbf{I} + \mathbf{H}_0) + 2R_a^2 \log(1/\delta).
+\]
+\end{lemma}
+
+\begin{lemma}
+\label{lemma:neural_cbo_log_det_Kt_bound}
+Let $\delta \in (0,1)$. If the network width $m$ satisfies  Condition \ref{condition:network_width}, then with probability at least $1-\delta$, the following holds for every $t \in [T]$:
+\[ \log \det (\mathbf{I} + \mathbf{H}_0) \le 2\gamma_{a,t} + 1,\]
+where $\gamma_{a,t}$ is the maximum information gain associated with the NTK kernel $k_a$.
+\end{lemma}
+\begin{proof}[Proof of Lemma \ref{lemma:log_det_Kt_bound}]
+
+From the definition of $\mathbf{H}_0$ and Lemma B.7 \cite{zhou2020neural}, we have that
+\begin{equation*}
+\begin{split}
+    \log \det(\mathbf{I}+ \mathbf{H}_{0})
+    & = \log\det \left(\mathbf{I}+\sum_{i=1}^{T}\mathbf{g}({\mathbf{x}_t};\boldsymbol{\theta}_0)\mathbf{g}({\mathbf{x}_t};\boldsymbol{\theta}_0)^\top \right) \\
+    & = \log \det(\mathbf{I}+ \mathbf{H}_0 + (\boldsymbol{\Phi} - \mathbf{H}_0))\\
+    & \leq \log \det (\mathbf{I}+\mathbf{H}_0)  + \langle (\mathbf{I}+\mathbf{H}_0)^{-1}, (\boldsymbol{\Phi} - \mathbf{H}_0) \rangle \\
+    & \leq \log \det (\mathbf{I}+\mathbf{H}_0)  + \norm{(\mathbf{I}+\mathbf{H}_0)^{-1}}_F \norm{ (\boldsymbol{\Phi} - \mathbf{H}_0)}_F \\
+    & \leq 2 \gamma_{a,t} + 1, 
+\end{split}
+\end{equation*}
+where the first equality is from the definition of $\mathbf{K}_t$ in Definition \ref{def:linear_kernelized_terms}, the first inequality is from the convexity of $\log \det(\cdot)$ function, and the second inequality is from the fact that $\langle \mathbf{A}, \mathbf{B} \rangle \le \norm{\mathbf{A}}_F \norm{\mathbf{B}}_F$. The third inequality is from the choice of $m$ in Condition \ref{condition:network_width}, combined with Lemma \ref{lemma:neural_cbo_H_to_Phi} and Lemma 3 in \cite{chowdhury2017kernelized}.
+\end{proof}
+
+\begin{lemma}[Lemma 8, \citet{phan2023neuralbo}]
+\label{lemma:neural_cbo_min_sigma}
+Suppose the width of the neural network m satisfies Condition \ref{condition:network_width}. Then 
+\begin{equation*}
+    \sum_{i=1}^T \min(\sigma_t(\mathbf{x}_t),B) \leq \sqrt{\frac{ BT}{\log(B+1)} (2\gamma_T+1)}.
+\end{equation*}
+\end{lemma}
