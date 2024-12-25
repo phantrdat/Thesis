@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.18)  23 DEC 2024 21:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.18)  26 DEC 2024 02:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1090,7 +1090,7 @@ although it is yet undefined on input line 24.
 
 ]
 Package acronym Info: Label `acro:dnn' newly defined as it shall be overridden
-although it is yet undefined on input line 79.
+although it is yet undefined on input line 96.
 
 
 [5])
@@ -1330,17 +1330,54 @@ although it is yet undefined on input line 519.
 
 
 [27]
+Package acronym Info: Label `acro:mab' newly defined as it shall be overridden
+although it is yet undefined on input line 542.
 
-[28])
+
+[28]
+Underfull \hbox (badness 7344) in paragraph at lines 577--578
+ []\T1/ppl/b/n/10.95 Upper Con-fi-dence Bound Al-go-rithm[] \T1/ppl/m/n/10.95 The [][] al-go-rithm ad-dresses the
+ []
+
+
 
 [29]
+
+[30]
+
+[31]
+
+[32]
+Underfull \hbox (badness 1210) in paragraph at lines 700--701
+[]\T1/ppl/m/n/10.95 Incorporating un-cer-tainty in the neu-ral net-work out-puts, and then
+ []
+
+
+Underfull \hbox (badness 5667) in paragraph at lines 700--701
+\T1/ppl/m/n/10.95 us-ing UCB or Thomp-son sam-pling strate-gies to bal-ance ex-plo-
+ []
+
+
+Underfull \hbox (badness 1275) in paragraph at lines 714--715
+[]\T1/ppl/b/n/10.95 Hyperparameter Tun-ing\T1/ppl/m/n/10.95 : Re-quire care-ful tun-ing of hy-per-pa-ram-e-ters to
+ []
+
+
+
+[33]
+
+[34]
+
+[35])
+
+[36]
 \openout2 = `Chapters/neural-bo.aux'.
 
  (Chapters/neural-bo.tex
 Chapter 3.
 
 
-[30
+[37
 
 
 
@@ -1363,7 +1400,7 @@ Package scrlayer-scrpage Warning: \headheight to low.
 
 Overfull \vbox (8.34636pt too high) has occurred while \output is active []
 
- [31]
+ [38]
 
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `htbp') on input line 47.
@@ -1371,20 +1408,20 @@ LaTeX Warning: No positions in optional float specifier.
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 48.
 
 
-[32]
+[39]
 Package hyperref Info: bookmark level for unknown definition defaults to 0 on input line 92.
 Package hyperref Info: bookmark level for unknown assumption defaults to 0 on input line 111.
 
 
-[33]
+[40]
 Package hyperref Info: bookmark level for unknown remark defaults to 0 on input line 142.
 
 
-[34]
+[41]
 
-[35]
+[42]
 
-[36]
+[43]
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
 (Font)              scaled to size 9.37807pt on input line 217.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
@@ -1402,15 +1439,15 @@ LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 21
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 
-[37]
-<Figures/Neural-BO/Neural-BO_synthetic_function.pdf, id=1183, 1147.5492pt x 952.2313pt>
+[44]
+<Figures/Neural-BO/Neural-BO_synthetic_function.pdf, id=1292, 1147.5492pt x 952.2313pt>
 File: Figures/Neural-BO/Neural-BO_synthetic_function.pdf Graphic file (type pdf)
 <use Figures/Neural-BO/Neural-BO_synthetic_function.pdf>
 Package pdftex.def Info: Figures/Neural-BO/Neural-BO_synthetic_function.pdf  used on input line 233.
 (pdftex.def)             Requested size: 404.02908pt x 335.26201pt.
 
 
-[38 <./Figures/Neural-BO/Neural-BO_synthetic_function.pdf>]
+[45 <./Figures/Neural-BO/Neural-BO_synthetic_function.pdf>]
 
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 250.
@@ -1429,38 +1466,38 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 7.91925pt on input line 306.
 
 
-[39]
-<Figures/Neural-BO/Neural-BO_pprldmany_02D_noiselessall.pdf, id=1342, 462.52798pt x 346.89601pt>
+[46]
+<Figures/Neural-BO/Neural-BO_pprldmany_02D_noiselessall.pdf, id=1451, 462.52798pt x 346.89601pt>
 File: Figures/Neural-BO/Neural-BO_pprldmany_02D_noiselessall.pdf Graphic file (type pdf)
 <use Figures/Neural-BO/Neural-BO_pprldmany_02D_noiselessall.pdf>
 Package pdftex.def Info: Figures/Neural-BO/Neural-BO_pprldmany_02D_noiselessall.pdf  used on input line 316.
 (pdftex.def)             Requested size: 202.01454pt x 151.51254pt.
-<Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf, id=1343, 462.52798pt x 346.89601pt>
+<Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf, id=1452, 462.52798pt x 346.89601pt>
 File: Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf Graphic file (type pdf)
 <use Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf>
 Package pdftex.def Info: Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf  used on input line 322.
 (pdftex.def)             Requested size: 202.01454pt x 151.51254pt.
-<Figures/Neural-BO/Neural-BO_pprldmany_05D_noiselessall.pdf, id=1344, 462.52798pt x 346.89601pt>
+<Figures/Neural-BO/Neural-BO_pprldmany_05D_noiselessall.pdf, id=1453, 462.52798pt x 346.89601pt>
 File: Figures/Neural-BO/Neural-BO_pprldmany_05D_noiselessall.pdf Graphic file (type pdf)
 <use Figures/Neural-BO/Neural-BO_pprldmany_05D_noiselessall.pdf>
 Package pdftex.def Info: Figures/Neural-BO/Neural-BO_pprldmany_05D_noiselessall.pdf  used on input line 328.
 (pdftex.def)             Requested size: 202.01454pt x 151.51254pt.
-<Figures/Neural-BO/Neural-BO_pprldmany_10D_noiselessall.pdf, id=1345, 462.52798pt x 346.89601pt>
+<Figures/Neural-BO/Neural-BO_pprldmany_10D_noiselessall.pdf, id=1454, 462.52798pt x 346.89601pt>
 File: Figures/Neural-BO/Neural-BO_pprldmany_10D_noiselessall.pdf Graphic file (type pdf)
 <use Figures/Neural-BO/Neural-BO_pprldmany_10D_noiselessall.pdf>
 Package pdftex.def Info: Figures/Neural-BO/Neural-BO_pprldmany_10D_noiselessall.pdf  used on input line 334.
 (pdftex.def)             Requested size: 202.01454pt x 151.51254pt.
 
 
-[40]
-<Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf, id=1352, 455.48354pt x 304.45345pt>
+[47]
+<Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf, id=1461, 455.48354pt x 304.45345pt>
 File: Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf Graphic file (type pdf)
 <use Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf>
 Package pdftex.def Info: Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf  used on input line 350.
 (pdftex.def)             Requested size: 404.02908pt x 270.0661pt.
 
 
-[41 <./Figures/Neural-BO/Neural-BO_pprldmany_02D_noiselessall.pdf> <./Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf
+[48 <./Figures/Neural-BO/Neural-BO_pprldmany_02D_noiselessall.pdf> <./Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf
 
 pdfTeX warning: pdflatex (file ./Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 > <./Figures/Neural-BO/Neural-BO_pprldmany_05D_noiselessall.pdf
@@ -1471,32 +1508,32 @@ pdfTeX warning: pdflatex (file ./Figures/Neural-BO/Neural-BO_pprldmany_05D_noise
 pdfTeX warning: pdflatex (file ./Figures/Neural-BO/Neural-BO_pprldmany_10D_noiselessall.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 >]
 
-[42 <./Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf>]
-<Figures/Neural-BO/Neural-BO_AmazonReview_dim_500_round_300.pdf, id=1678, 455.48354pt x 295.53073pt>
+[49 <./Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf>]
+<Figures/Neural-BO/Neural-BO_AmazonReview_dim_500_round_300.pdf, id=1787, 455.48354pt x 295.53073pt>
 File: Figures/Neural-BO/Neural-BO_AmazonReview_dim_500_round_300.pdf Graphic file (type pdf)
 <use Figures/Neural-BO/Neural-BO_AmazonReview_dim_500_round_300.pdf>
 Package pdftex.def Info: Figures/Neural-BO/Neural-BO_AmazonReview_dim_500_round_300.pdf  used on input line 364.
 (pdftex.def)             Requested size: 404.02908pt x 262.15118pt.
 
 
-[43 <./Figures/Neural-BO/Neural-BO_AmazonReview_dim_500_round_300.pdf>]
-<Figures/Neural-BO/Neural-BO_Robot_dim_14_round_6000.pdf, id=1749, 455.38632pt x 295.53073pt>
+[50 <./Figures/Neural-BO/Neural-BO_AmazonReview_dim_500_round_300.pdf>]
+<Figures/Neural-BO/Neural-BO_Robot_dim_14_round_6000.pdf, id=1858, 455.38632pt x 295.53073pt>
 File: Figures/Neural-BO/Neural-BO_Robot_dim_14_round_6000.pdf Graphic file (type pdf)
 <use Figures/Neural-BO/Neural-BO_Robot_dim_14_round_6000.pdf>
 Package pdftex.def Info: Figures/Neural-BO/Neural-BO_Robot_dim_14_round_6000.pdf  used on input line 376.
 (pdftex.def)             Requested size: 404.02908pt x 262.2053pt.
 )
 
-[44 <./Figures/Neural-BO/Neural-BO_Robot_dim_14_round_6000.pdf>]
+[51 <./Figures/Neural-BO/Neural-BO_Robot_dim_14_round_6000.pdf>]
 
-[45]
+[52]
 \openout2 = `Chapters/neural-cbo.aux'.
 
  (Chapters/neural-cbo.tex
 Chapter 4.
 
 
-[46
+[53
 
 
 
@@ -1521,14 +1558,14 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 
 
-[47]
+[54]
 
-[48]
+[55]
 Package hyperref Info: bookmark level for unknown condition defaults to 0 on input line 107.
 Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input line 129.
 
 
-[49]
+[56]
 Package hyperref Info: bookmark level for unknown corollary defaults to 0 on input line 140.
 
 Underfull \hbox (badness 7540) in paragraph at lines 150--151
@@ -1537,9 +1574,9 @@ Underfull \hbox (badness 7540) in paragraph at lines 150--151
 
 
 
-[50]
+[57]
 
-[51]
+[58]
 Underfull \hbox (badness 10000) in paragraph at lines 252--252
 \T1/ppl/m/it/10.95 where $\OMS/zplm/m/n/10.95 E\OT1/zplm/m/n/10.95 (\OML/zplm/m/it/10.95 m\OT1/zplm/m/n/10.95 ) = \OMS/zplm/m/n/10.95 O\OT1/zplm/m/n/10.95 (\OML/zplm/m/it/10.95 C[]L[]m[]\OT1/zplm/m/n/10.95 )$\T1/ppl/m/it/10.95 . Es-pe-cially, by choos-ing $\OML/zplm/m/it/10.95 m \OT1/zplm/m/n/10.95 =
  []
@@ -1552,10 +1589,10 @@ Underfull \hbox (badness 3514) in paragraph at lines 252--252
 
 
 
-[52]
+[59]
 
-[53]
-<Figures/Neural-CBO/Branin-Simionescu-GasTransmission-Ackley-Hartmann-SpeedReducer.pdf, id=1962, 872.13953pt x 649.30641pt>
+[60]
+<Figures/Neural-CBO/Branin-Simionescu-GasTransmission-Ackley-Hartmann-SpeedReducer.pdf, id=2062, 872.13953pt x 649.30641pt>
 File: Figures/Neural-CBO/Branin-Simionescu-GasTransmission-Ackley-Hartmann-SpeedReducer.pdf Graphic file (type pdf)
 <use Figures/Neural-CBO/Branin-Simionescu-GasTransmission-Ackley-Hartmann-SpeedReducer.pdf>
 Package pdftex.def Info: Figures/Neural-CBO/Branin-Simionescu-GasTransmission-Ackley-Hartmann-SpeedReducer.pdf  used on input line 321.
@@ -1570,26 +1607,26 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 
-[54]
+[61]
 
-[55 <./Figures/Neural-CBO/Branin-Simionescu-GasTransmission-Ackley-Hartmann-SpeedReducer.pdf>]
-<Figures/Neural-CBO/sensitive_sample_detection_rate.pdf, id=2106, 443.05148pt x 335.44322pt>
+[62 <./Figures/Neural-CBO/Branin-Simionescu-GasTransmission-Ackley-Hartmann-SpeedReducer.pdf>]
+<Figures/Neural-CBO/sensitive_sample_detection_rate.pdf, id=2205, 443.05148pt x 335.44322pt>
 File: Figures/Neural-CBO/sensitive_sample_detection_rate.pdf Graphic file (type pdf)
 <use Figures/Neural-CBO/sensitive_sample_detection_rate.pdf>
 Package pdftex.def Info: Figures/Neural-CBO/sensitive_sample_detection_rate.pdf  used on input line 386.
 (pdftex.def)             Requested size: 404.02908pt x 305.90897pt.
 
 
-[56 <./Figures/Neural-CBO/sensitive_sample_detection_rate.pdf>])
+[63 <./Figures/Neural-CBO/sensitive_sample_detection_rate.pdf>])
 
-[57]
+[64]
 \openout2 = `Chapters/pinn-bo.aux'.
 
  (Chapters/pinn-bo.tex
 Chapter 5.
 
 
-[58
+[65
 
 
 
@@ -1601,54 +1638,54 @@ Underfull \hbox (badness 2269) in paragraph at lines 21--22
 
 
 
-[59]
+[66]
 
-[60]
+[67]
 Underfull \hbox (badness 1231) in paragraph at lines 64--64
 []\T1/ppl/b/n/10.95 Algorithm 4 \T1/ppl/m/n/10.95 Physics-informed Neu-ral Net-work based Black-box op-ti-miza-tion
  []
 
 
 
-[61]
+[68]
 
-[62]
+[69]
 
-[63]
+[70]
 Underfull \hbox (badness 2103) in paragraph at lines 205--205
 [][]\T1/ppl/m/it/10.95 Lemma \T1/ppl/m/n/10.95 5.3.8\T1/ppl/m/it/10.95 . []As-sume that $[][] \OMS/zplm/m/n/10.95 ^^T \OML/zplm/m/it/10.95 L$\T1/ppl/m/it/10.95 , where $\OML/zplm/m/it/10.95 !\OT1/zplm/m/n/10.95 (\OMS/zplm/m/n/10.95 ^^A\OT1/zplm/m/n/10.95 ) = \OMS/zplm/m/n/10.95 r[]N\OT1/zplm/m/n/10.95 [\OML/zplm/m/it/10.95 h\OT1/zplm/m/n/10.95 ](\OMS/zplm/m/n/10.95 ^^A\OT1/ppl/m/n/10.95 ; [][]\OT1/zplm/m/n/10.95 )$ \T1/ppl/m/it/10.95 and
  []
 
 
 
-[64]
+[71]
 
-[65]
+[72]
 
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 253.
 
-<Figures/PINN-BO/pinn-bo_synthetic.pdf, id=2305, 856.73248pt x 230.78722pt>
+<Figures/PINN-BO/pinn-bo_synthetic.pdf, id=2405, 856.73248pt x 230.78722pt>
 File: Figures/PINN-BO/pinn-bo_synthetic.pdf Graphic file (type pdf)
 <use Figures/PINN-BO/pinn-bo_synthetic.pdf>
 Package pdftex.def Info: Figures/PINN-BO/pinn-bo_synthetic.pdf  used on input line 255.
 (pdftex.def)             Requested size: 404.02908pt x 108.83624pt.
 
 
-[66]
+[73]
 
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 260.
 
-<Figures/PINN-BO/pinn-bo_additional_synthetic.pdf, id=2313, 573.61678pt x 308.83882pt>
+<Figures/PINN-BO/pinn-bo_additional_synthetic.pdf, id=2412, 573.61678pt x 308.83882pt>
 File: Figures/PINN-BO/pinn-bo_additional_synthetic.pdf Graphic file (type pdf)
 <use Figures/PINN-BO/pinn-bo_additional_synthetic.pdf>
 Package pdftex.def Info: Figures/PINN-BO/pinn-bo_additional_synthetic.pdf  used on input line 262.
 (pdftex.def)             Requested size: 404.02908pt x 217.53818pt.
 
 
-[67 <./Figures/PINN-BO/pinn-bo_synthetic.pdf> <./Figures/PINN-BO/pinn-bo_additional_synthetic.pdf>]
-<Figures/PINN-BO/heat_py_pde_1000_test_1.pdf, id=2449, 394.21475pt x 315.83257pt>
+[74 <./Figures/PINN-BO/pinn-bo_synthetic.pdf> <./Figures/PINN-BO/pinn-bo_additional_synthetic.pdf>]
+<Figures/PINN-BO/heat_py_pde_1000_test_1.pdf, id=2548, 394.21475pt x 315.83257pt>
 File: Figures/PINN-BO/heat_py_pde_1000_test_1.pdf Graphic file (type pdf)
 <use Figures/PINN-BO/heat_py_pde_1000_test_1.pdf>
 Package pdftex.def Info: Figures/PINN-BO/heat_py_pde_1000_test_1.pdf  used on input line 306.
@@ -1658,39 +1695,39 @@ Underfull \hbox (badness 6559) in paragraph at lines 307--307
  []\T1/ppl/m/sc/9 (a) |\T1/ppl/m/n/9 So-lu-tion of Tem-per-a-ture Equa-tion with 
  []
 
-<Figures/PINN-BO/heat_py_pde_1000_test_2.pdf, id=2450, 394.21475pt x 315.83257pt>
+<Figures/PINN-BO/heat_py_pde_1000_test_2.pdf, id=2549, 394.21475pt x 315.83257pt>
 File: Figures/PINN-BO/heat_py_pde_1000_test_2.pdf Graphic file (type pdf)
 <use Figures/PINN-BO/heat_py_pde_1000_test_2.pdf>
 Package pdftex.def Info: Figures/PINN-BO/heat_py_pde_1000_test_2.pdf  used on input line 313.
 (pdftex.def)             Requested size: 197.97646pt x 158.61467pt.
-<Figures/PINN-BO/heat_py_pde_1000_test_3.pdf, id=2451, 394.21475pt x 315.83257pt>
+<Figures/PINN-BO/heat_py_pde_1000_test_3.pdf, id=2550, 394.21475pt x 315.83257pt>
 File: Figures/PINN-BO/heat_py_pde_1000_test_3.pdf Graphic file (type pdf)
 <use Figures/PINN-BO/heat_py_pde_1000_test_3.pdf>
 Package pdftex.def Info: Figures/PINN-BO/heat_py_pde_1000_test_3.pdf  used on input line 320.
 (pdftex.def)             Requested size: 202.01454pt x 161.84836pt.
-<Figures/PINN-BO/Heat_dim_2_bc1.pdf, id=2456, 461.18674pt x 334.37985pt>
+<Figures/PINN-BO/Heat_dim_2_bc1.pdf, id=2555, 461.18674pt x 334.37985pt>
 File: Figures/PINN-BO/Heat_dim_2_bc1.pdf Graphic file (type pdf)
 <use Figures/PINN-BO/Heat_dim_2_bc1.pdf>
 Package pdftex.def Info: Figures/PINN-BO/Heat_dim_2_bc1.pdf  used on input line 333.
 (pdftex.def)             Requested size: 197.97646pt x 143.54071pt.
-<Figures/PINN-BO/Heat_dim_2_bc2.pdf, id=2457, 460.71497pt x 334.37985pt>
+<Figures/PINN-BO/Heat_dim_2_bc2.pdf, id=2556, 460.71497pt x 334.37985pt>
 File: Figures/PINN-BO/Heat_dim_2_bc2.pdf Graphic file (type pdf)
 <use Figures/PINN-BO/Heat_dim_2_bc2.pdf>
 Package pdftex.def Info: Figures/PINN-BO/Heat_dim_2_bc2.pdf  used on input line 340.
 (pdftex.def)             Requested size: 197.97646pt x 143.68867pt.
-<Figures/PINN-BO/Heat_dim_2_bc3.pdf, id=2458, 460.71497pt x 334.37985pt>
+<Figures/PINN-BO/Heat_dim_2_bc3.pdf, id=2557, 460.71497pt x 334.37985pt>
 File: Figures/PINN-BO/Heat_dim_2_bc3.pdf Graphic file (type pdf)
 <use Figures/PINN-BO/Heat_dim_2_bc3.pdf>
 Package pdftex.def Info: Figures/PINN-BO/Heat_dim_2_bc3.pdf  used on input line 347.
 (pdftex.def)             Requested size: 202.01454pt x 146.61736pt.
 
 
-[68]
+[75]
 
-[69 <./Figures/PINN-BO/heat_py_pde_1000_test_1.pdf> <./Figures/PINN-BO/heat_py_pde_1000_test_2.pdf> <./Figures/PINN-BO/heat_py_pde_1000_test_3.pdf>]
+[76 <./Figures/PINN-BO/heat_py_pde_1000_test_1.pdf> <./Figures/PINN-BO/heat_py_pde_1000_test_2.pdf> <./Figures/PINN-BO/heat_py_pde_1000_test_3.pdf>]
 
-[70 <./Figures/PINN-BO/Heat_dim_2_bc1.pdf> <./Figures/PINN-BO/Heat_dim_2_bc2.pdf> <./Figures/PINN-BO/Heat_dim_2_bc3.pdf>]
-<Figures/PINN-BO/beam.pdf, id=2676, 502.85051pt x 404.59846pt>
+[77 <./Figures/PINN-BO/Heat_dim_2_bc1.pdf> <./Figures/PINN-BO/Heat_dim_2_bc2.pdf> <./Figures/PINN-BO/Heat_dim_2_bc3.pdf>]
+<Figures/PINN-BO/beam.pdf, id=2775, 502.85051pt x 404.59846pt>
 File: Figures/PINN-BO/beam.pdf Graphic file (type pdf)
 <use Figures/PINN-BO/beam.pdf>
 Package pdftex.def Info: Figures/PINN-BO/beam.pdf  used on input line 376.
@@ -1700,21 +1737,21 @@ Underfull \hbox (badness 5667) in paragraph at lines 377--377
  []\T1/ppl/m/sc/9 (a) |\T1/ppl/m/n/9 Dis-place-ment of non-uniform Eu-ler 
  []
 
-<Figures/PINN-BO/BeamDeflection_dim_1.pdf, id=2677, 460.71497pt x 334.37985pt>
+<Figures/PINN-BO/BeamDeflection_dim_1.pdf, id=2776, 460.71497pt x 334.37985pt>
 File: Figures/PINN-BO/BeamDeflection_dim_1.pdf Graphic file (type pdf)
 <use Figures/PINN-BO/BeamDeflection_dim_1.pdf>
 Package pdftex.def Info: Figures/PINN-BO/BeamDeflection_dim_1.pdf  used on input line 383.
 (pdftex.def)             Requested size: 197.97646pt x 143.68867pt.
 )
 
-[71 <./Figures/PINN-BO/beam.pdf> <./Figures/PINN-BO/BeamDeflection_dim_1.pdf>]
+[78 <./Figures/PINN-BO/beam.pdf> <./Figures/PINN-BO/BeamDeflection_dim_1.pdf>]
 \openout2 = `Chapters/conclusion.aux'.
 
  (Chapters/conclusion.tex
 Chapter 6.
 
 
-[72
+[79
 
 
 
@@ -1722,7 +1759,7 @@ Chapter 6.
 
 ])
 
-[73]
+[80]
 \openout2 = `Appendices/neural-bo_appendix.aux'.
 
  (Appendices/neural-bo_appendix.tex
@@ -1735,39 +1772,39 @@ Underfull \hbox (badness 1242) in paragraph at lines 53--54
 Package hyperref Info: bookmark level for unknown sublemma defaults to 0 on input line 60.
 
 
-[74
+[81
 
 
 
 
 ]
 
-[75]
+[82]
 Underfull \hbox (badness 2495) in paragraph at lines 139--140
 [][]\T1/ppl/m/it/10.95 Lemma \T1/ppl/m/n/10.95 A.1.5.3\T1/ppl/m/it/10.95 . []\T1/ppl/m/n/10.95 Let $\OML/zplm/m/it/10.95  \OMS/zplm/m/n/10.95 2 \OT1/zplm/m/n/10.95 (\OT1/ppl/m/n/10.95 0, 1\OT1/zplm/m/n/10.95 )$\T1/ppl/m/n/10.95 . If the net-work width $\OML/zplm/m/it/10.95 m$ \T1/ppl/m/n/10.95 sat-is-fies $\OML/zplm/m/it/10.95 m \OMS/zplm/m/n/10.95 ^^U
  []
 
 
 
-[76]
-
-[77]
-
-[78]
-
-[79]
-
-[80]
-
-[81]
-
-[82]
-
 [83]
 
-[84])
+[84]
 
 [85]
+
+[86]
+
+[87]
+
+[88]
+
+[89]
+
+[90]
+
+[91])
+
+[92]
 \openout2 = `Appendices/neural-cbo_appendix.aux'.
 
  (Appendices/neural-cbo_appendix.tex
@@ -1779,7 +1816,7 @@ Overfull \hbox (34.9161pt too wide) detected at line 33
 
 
 
-[86
+[93
 
 
 
@@ -1791,7 +1828,7 @@ Overfull \hbox (22.70116pt too wide) detected at line 71
 
 
 
-[87]
+[94]
 Underfull \hbox (badness 10000) in paragraph at lines 93--93
 \T1/ppl/m/it/10.95 where $\OMS/zplm/m/n/10.95 E\OT1/zplm/m/n/10.95 (\OML/zplm/m/it/10.95 m\OT1/zplm/m/n/10.95 ) = \OMS/zplm/m/n/10.95 O\OT1/zplm/m/n/10.95 (\OML/zplm/m/it/10.95 C[]L[]m[]\OT1/zplm/m/n/10.95 )$\T1/ppl/m/it/10.95 . Es-pe-cially, by choos-ing $\OML/zplm/m/it/10.95 m \OT1/zplm/m/n/10.95 =
  []
@@ -1809,118 +1846,118 @@ Overfull \hbox (25.31866pt too wide) detected at line 128
 
 
 
-[88]
+[95]
 
-[89]
+[96]
 Underfull \hbox (badness 5345) in paragraph at lines 184--185
 []\T1/ppl/m/n/10.95 Due to Lemma [][]B.1.3[][], with prob-a-bil-ity at least $\OT1/ppl/m/n/10.95 1 \OMS/zplm/m/n/10.95 ^^@
  []
 
 
 
-[90]
+[97]
 
-[91]
+[98]
 Overfull \hbox (31.50449pt too wide) detected at line 298
 []
  []
 
 
 
-[92]
+[99]
 Overfull \hbox (60.86755pt too wide) detected at line 356
 []
  []
 
 
 
-[93]
+[100]
 
-[94])
+[101])
 
-[95]
+[102]
 \openout2 = `Appendices/pinn-bo_appendix.aux'.
 
  (Appendices/pinn-bo_appendix.tex
 Appendix C.
 
 
-[96
+[103
 
 
 
 
 ]
 
-[97]
+[104]
 Package hyperref Info: bookmark level for unknown subcorollary defaults to 0 on input line 188.
 
 
-[98]
-
-[99]
-
-[100]
-
-[101]
-
-[102]
-
-[103]
-
-[104]
-
 [105]
 
-[106])
+[106]
 
 [107]
+
+[108]
+
+[109]
+
+[110]
+
+[111]
+
+[112]
+
+[113])
+
+[114]
 Underfull \hbox (badness 5147) in paragraph at lines 330--330
 [][]\T1/ppl/m/n/10.95 Du, Si-mon S et al. (2018). ^^P  Gra-di-ent De-scent Prov-ably Op-ti-mizes Over-
  []
 
 
 
-[108
+[115
 
 
 
 ]
 
-[109]
+[116]
 Underfull \hbox (badness 1688) in paragraph at lines 330--330
 [][]\T1/ppl/m/n/10.95 Raissi, Maziar, Paris Perdikaris, and George E Kar-ni-adakis (2019). ^^P  Physics-
  []
 
 
 
-[110]
+[117]
 
-[111]
+[118]
 
-[112] (main.aux (Utils/abbreviations.aux) (Chapters/abstract.aux) (Chapters/introduction.aux) (Chapters/background.aux) (Chapters/neural-bo.aux) (Chapters/neural-cbo.aux) (Chapters/pinn-bo.aux) (Chapters/conclusion.aux) (Appendices/neural-bo_appendix.aux) (Appendices/neural-cbo_appendix.aux) (Appendices/pinn-bo_appendix.aux))
+[119] (main.aux (Utils/abbreviations.aux) (Chapters/abstract.aux) (Chapters/introduction.aux) (Chapters/background.aux) (Chapters/neural-bo.aux) (Chapters/neural-cbo.aux) (Chapters/pinn-bo.aux) (Chapters/conclusion.aux) (Appendices/neural-bo_appendix.aux) (Appendices/neural-cbo_appendix.aux) (Appendices/pinn-bo_appendix.aux))
  ***********
 LaTeX2e <2024-06-01> patch level 1
 L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: EE5FEEE5F5595AB2163366BB68DD4D41;23525.
+(rerunfilecheck)             Checksum: 2F74EDB1FFDA1E4ADE4DB536DE20FBB1;23707.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 35966 strings out of 473920
- 774551 string characters out of 5726973
+ 36076 strings out of 473920
+ 776777 string characters out of 5726973
  1976908 words of memory out of 5000000
- 57570 multiletter control sequences out of 15000+600000
+ 57630 multiletter control sequences out of 15000+600000
  666520 words of font info for 266 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  96i,25n,94p,3361b,2833s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\phant\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1095.pk> <C:\Users\phant\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0900.pk><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmb.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmbb.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmbi.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmr.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmri.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplbi8a.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (125 pages, 4161294 bytes).
+Output written on main.pdf (132 pages, 4194445 bytes).
 PDF statistics:
- 3659 PDF objects out of 4296 (max. 8388607)
- 650 named destinations out of 1000 (max. 500000)
- 1021 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3767 PDF objects out of 4296 (max. 8388607)
+ 700 named destinations out of 1000 (max. 500000)
+ 1029 words of extra memory for PDF output out of 10000 (max. 10000000)
 

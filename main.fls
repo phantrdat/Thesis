@@ -533,12 +533,6 @@ INPUT C:\Users\phant\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr10.tfm
 INPUT C:\Users\phant\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\palatino\pplr7t.vf
 INPUT C:\Users\phant\AppData\Local\Programs\MiKTeX\fonts\vf\public\mathpazo\zplmr7y.vf
 INPUT C:\Users\phant\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy10.tfm
-INPUT .\Chapters\neural-bo.tex
-INPUT .\Chapters\neural-bo.tex
-OUTPUT Chapters\neural-bo.aux
-INPUT .\Chapters\neural-bo.tex
-INPUT .\Chapters\neural-bo.tex
-INPUT Chapters\neural-bo.tex
 INPUT C:\Users\phant\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\palatino\pplb7t.tfm
 INPUT C:\Users\phant\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\palatino\pplb7t.tfm
 INPUT C:\Users\phant\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\palatino\pplb7t.tfm
@@ -552,6 +546,12 @@ INPUT C:\Users\phant\AppData\Local\Programs\MiKTeX\fonts\vf\public\mathpazo\zplm
 INPUT C:\Users\phant\AppData\Local\Programs\MiKTeX\fonts\tfm\public\mathpazo\fplmbi.tfm
 INPUT C:\Users\phant\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmib10.tfm
 INPUT C:\Users\phant\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\palatino\pplbi8r.tfm
+INPUT .\Chapters\neural-bo.tex
+INPUT .\Chapters\neural-bo.tex
+OUTPUT Chapters\neural-bo.aux
+INPUT .\Chapters\neural-bo.tex
+INPUT .\Chapters\neural-bo.tex
+INPUT Chapters\neural-bo.tex
 INPUT C:\Users\phant\AppData\Local\Programs\MiKTeX\fonts\vf\public\mathpazo\zplmb7m.vf
 INPUT C:\Users\phant\AppData\Local\Programs\MiKTeX\fonts\tfm\public\mathpazo\fplmbi.tfm
 INPUT C:\Users\phant\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmib10.tfm

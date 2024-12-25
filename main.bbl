@@ -17,6 +17,40 @@
 \endgroup
 
 \datalist[entry]{nyt/global//global/global/global}
+  \entry{agrawal2012analysis}{inproceedings}{}{}
+    \name{author}{2}{}{%
+      {{hash=AS}{%
+         family={Agrawal},
+         familyi={A\bibinitperiod},
+         given={Shipra},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=GN}{%
+         family={Goyal},
+         familyi={G\bibinitperiod},
+         given={Navin},
+         giveni={N\bibinitperiod},
+      }}%
+    }
+    \list{organization}{2}{%
+      {JMLR Workshop}%
+      {Conference Proceedings}%
+    }
+    \strng{namehash}{ASGN1}
+    \strng{fullhash}{ASGN1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2012}
+    \field{labeldatesource}{}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \field{booktitle}{Conference on learning theory}
+    \field{pages}{39\bibrangedash 1}
+    \field{title}{Analysis of thompson sampling for the multi-armed bandit
+  problem}
+    \field{year}{2012}
+  \endentry
+
   \entry{agrawal2017thompson}{inproceedings}{}{}
     \name{author}{4}{}{%
       {{hash=AS}{%
@@ -329,6 +363,44 @@
     \field{volume}{112}
     \field{journaltitle}{Machine Learning}
     \field{year}{2023}
+  \endentry
+
+  \entry{bubeck2012regret}{article}{}{}
+    \true{moreauthor}
+    \true{morelabelname}
+    \name{author}{2}{}{%
+      {{hash=BS}{%
+         family={Bubeck},
+         familyi={B\bibinitperiod},
+         given={S{\'e}bastien},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=CBN}{%
+         family={Cesa-Bianchi},
+         familyi={C\bibinithyphendelim B\bibinitperiod},
+         given={Nicolo},
+         giveni={N\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Now Publishers, Inc.}%
+    }
+    \strng{namehash}{BSCBN+1}
+    \strng{fullhash}{BSCBN+1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2012}
+    \field{labeldatesource}{}
+    \field{sortinit}{B}
+    \field{sortinithash}{B}
+    \field{number}{1}
+    \field{pages}{1\bibrangedash 122}
+    \field{title}{Regret analysis of stochastic and nonstochastic multi-armed
+  bandit problems}
+    \field{volume}{5}
+    \field{journaltitle}{Foundations and Trends{\textregistered} in Machine
+  Learning}
+    \field{year}{2012}
   \endentry
 
   \entry{cai2020heat}{inproceedings}{}{}
@@ -1576,6 +1648,36 @@
     \field{year}{1964}
   \endentry
 
+  \entry{lattimore2020bandit}{book}{}{}
+    \name{author}{2}{}{%
+      {{hash=LT}{%
+         family={Lattimore},
+         familyi={L\bibinitperiod},
+         given={Tor},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=SC}{%
+         family={Szepesv{\'a}ri},
+         familyi={S\bibinitperiod},
+         given={Csaba},
+         giveni={C\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Cambridge University Press}%
+    }
+    \strng{namehash}{LTSC1}
+    \strng{fullhash}{LTSC1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2020}
+    \field{labeldatesource}{}
+    \field{sortinit}{L}
+    \field{sortinithash}{L}
+    \field{title}{Bandit algorithms}
+    \field{year}{2020}
+  \endentry
+
   \entry{lecun-mnisthandwrittendigit-2010}{article}{}{}
     \name{author}{2}{}{%
       {{hash=LY}{%
@@ -1704,6 +1806,49 @@
     \field{volume}{7}
     \field{journaltitle}{Scientific reports}
     \field{year}{2017}
+  \endentry
+
+  \entry{li2010contextual}{inproceedings}{}{}
+    \name{author}{4}{}{%
+      {{hash=LL}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Lihong},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=CW}{%
+         family={Chu},
+         familyi={C\bibinitperiod},
+         given={Wei},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=LJ}{%
+         family={Langford},
+         familyi={L\bibinitperiod},
+         given={John},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=SRE}{%
+         family={Schapire},
+         familyi={S\bibinitperiod},
+         given={Robert\bibnamedelima E},
+         giveni={R\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LL+1}
+    \strng{fullhash}{LLCWLJSRE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2010}
+    \field{labeldatesource}{}
+    \field{sortinit}{L}
+    \field{sortinithash}{L}
+    \field{booktitle}{Proceedings of the 19th international conference on World
+  wide web}
+    \field{pages}{661\bibrangedash 670}
+    \field{title}{A contextual-bandit approach to personalized news article
+  recommendation}
+    \field{year}{2010}
   \endentry
 
   \entry{lu2022no}{article}{}{}
@@ -2148,6 +2293,62 @@
     \field{title}{Gaussian processes for machine learning}
     \field{volume}{1}
     \field{year}{2006}
+  \endentry
+
+  \entry{riquelme2018deep}{inproceedings}{}{}
+    \name{author}{3}{}{%
+      {{hash=RC}{%
+         family={Riquelme},
+         familyi={R\bibinitperiod},
+         given={Carlos},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=TG}{%
+         family={Tucker},
+         familyi={T\bibinitperiod},
+         given={George},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={Snoek},
+         familyi={S\bibinitperiod},
+         given={Jasper},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{RCTGSJ1}
+    \strng{fullhash}{RCTGSJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2018}
+    \field{labeldatesource}{}
+    \field{sortinit}{R}
+    \field{sortinithash}{R}
+    \field{booktitle}{International Conference on Learning Representations}
+    \field{title}{Deep Bayesian Bandits Showdown: An Empirical Comparison of
+  Bayesian Deep Networks for Thompson Sampling}
+    \field{year}{2018}
+  \endentry
+
+  \entry{robbins1952some}{article}{}{}
+    \name{author}{1}{}{%
+      {{hash=RH}{%
+         family={Robbins},
+         familyi={R\bibinitperiod},
+         given={Herbert},
+         giveni={H\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{RH1}
+    \strng{fullhash}{RH1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{1952}
+    \field{labeldatesource}{}
+    \field{sortinit}{R}
+    \field{sortinithash}{R}
+    \field{title}{Some aspects of the sequential design of experiments}
+    \field{year}{1952}
   \endentry
 
   \entry{russo2018tutorial}{article}{}{}

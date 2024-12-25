@@ -518,30 +518,202 @@ While \ac{mes} addresses many computational challenges associated with other inf
 
 The \acf{kg} acquisition function in \citet{frazier2008knowledge, wu2016parallel} provides a principled way to select evaluation points by directly optimizing the improvement in the expected value of the solution to the optimization problem. Unlike entropy-based approaches such as \ac{es} or \ac{mes}, which focus on reducing uncertainty about the global optimum or maximum value, \ac{kg} measures the value of information gained from a single evaluation in terms of its impact on the expected objective value.
 
-The key idea behind \ac{kg} is to evaluate the utility of an experiment by estimating how much it improves the decision-making process. Specifically, \ac{kg} selects the point $\mathbf{x}$ that maximizes the expected increase in the maximum posterior mean value of the objective function after observing the outcome of evaluating $f(\mathbf{x})$. 
-
-Formally, the \ac{kg} acquisition function is defined as:
+The key idea behind \ac{kg} is to evaluate the utility of an experiment by estimating how much it improves the decision-making process. Specifically, \ac{kg} selects the point $\mathbf{x}$ that maximizes the expected increase in the maximum posterior mean value of the objective function after observing the outcome of evaluating $f(\mathbf{x})$. Formally, the \ac{kg} acquisition function is defined as:
 \begin{equation}
-    \alpha_{\text{KG}}(\mathbf{x}) = \mathbb{E}_{f(\mathbf{x})|\mathcal{D}} \left[ \min_{\mathbf{x}' \in \mathcal{X}} \mu_{n+1}(\mathbf{x}') \right] - \min_{\mathbf{x}' \in \mathcal{X}} \mu_n(\mathbf{x}'),
+    \alpha_{\text{KG}}(\mathbf{x}) = \mathbb{E}_{f(\mathbf{x})|\mathcal{D}} \left[ \min_{\mathbf{x}' \in \mathcal{X}} \mu_{t+1}(\mathbf{x}') \right] - \min_{\mathbf{x}' \in \mathcal{X}} \mu_t(\mathbf{x}'),
 \end{equation}
 where:
 \begin{itemize}
-    \item $\mu_n(\mathbf{x}')$ is the posterior mean of the objective function at $\mathbf{x}'$ given the current data $\mathcal{D}$.
-    \item $\mu_{n+1}(\mathbf{x}')$ is the updated posterior mean after observing the value of $f(\mathbf{x})$ at $\mathbf{x}$.
+    \item $\mu_t(\mathbf{x}')$ is the posterior mean of the objective function at $\mathbf{x}'$ given the current data $\mathcal{D}$.
+    \item $\mu_{t+1}(\mathbf{x}')$ is the updated posterior mean after observing the value of $f(\mathbf{x})$ at $\mathbf{x}$.
     \item $\mathbb{E}_{f(\mathbf{x})|\mathcal{D}}$ denotes the expectation over the predictive distribution of $f(\mathbf{x})$ given the observed data $\mathcal{D}$.
 \end{itemize}
 
-The first term, $\mathbb{E}_{f(\mathbf{x})|\mathcal{D}} \left[ \min_{\mathbf{x}' \in \mathcal{X}} \mu_{n+1}(\mathbf{x}') \right]$, represents the expected maximum posterior mean after evaluating $f(\mathbf{x})$. The second term, $\min_{\mathbf{x}' \in \mathcal{X}} \mu_n(\mathbf{x}')$, is the current minimum posterior mean. The \ac{kg} acquisition function seeks to maximize the difference between these two quantities, guiding evaluations to points that are expected to improve the decision about the best location.
+The first term, $\mathbb{E}_{f(\mathbf{x})|\mathcal{D}} \left[ \min_{\mathbf{x}' \in \mathcal{X}} \mu_{t+1}(\mathbf{x}') \right]$, represents the expected maximum posterior mean after evaluating $f(\mathbf{x})$. The second term, $\min_{\mathbf{x}' \in \mathcal{X}} \mu_t(\mathbf{x}')$, is the current minimum posterior mean. The \ac{kg} acquisition function seeks to maximize the difference between these two quantities, guiding evaluations to points that are expected to improve the decision about the best location.
 
 The \ac{kg} approach has several appealing properties. By directly focusing on the impact of new information on decision-making, \ac{kg} inherently balances exploration and exploitation. Points in regions with high uncertainty are likely to lead to significant updates in the posterior mean, encouraging exploration. Meanwhile, points near current estimates of the maximum mean are prioritized for exploitation.
 
 \ac{kg} is particularly effective in problems where evaluations are expensive, and it is crucial to optimize every experiment to maximize learning. Its ability to quantify the value of information gained from a single evaluation makes it a strong candidate for sequential optimization settings. However, implementing \ac{kg} can be computationally demanding. The expectation over the predictive distribution and the maximization over the posterior mean both require accurate approximation techniques, such as Monte Carlo integration or surrogate modeling with Gaussian processes. In high-dimensional or highly multimodal problems, the computational cost can increase significantly, requiring careful optimization strategies.
 
 \subsection{Bandit-based Optimization}
+Bandit-based optimization is a foundational framework in sequential decision-making and optimization under uncertainty. The central objective is to maximize cumulative rewards over time while balancing exploration (gathering information about suboptimal choices) and exploitation (leveraging known high-reward choices). This paradigm is often used in various applications such as recommendation systems, clinical trials, and Bayesian optimization \citep{lattimore2020bandit, bubeck2012regret}.
+
 \subsubsection{Multi-armed Bandits}
+The \ac{mab} problem is a classic formulation in the bandit optimization framework. It derives its name from a metaphorical scenario involving a gambler faced with a row of slot machines (or "one-armed bandits"), each with an unknown probability distribution of payouts. The gambler must decide which machines to play, in what order, and how many times, to maximize their total reward over a sequence of trials \citep{robbins1952some}. Formally, the \ac{mab} problem can be described as follows:
+\begin{itemize}
+    \item There are $K$ arms (options), indexed by $i \in \{1, 2, \ldots, K\}$.
+    \item Each arm $i$ is associated with a reward distribution $P_i$, with an unknown mean reward $\mu_i = \mathbb{E}[r_i]$, where $r_i$ is the reward obtained from pulling arm $i$.
+    \item At each time step $t \in \{1, 2, \ldots, T\}$, the player selects an arm $a_t \in \{1, 2, \ldots, K\}$ and observes a stochastic reward $r_{a_t} \sim P_{a_t}$.
+    \item The goal is to maximize the cumulative reward over $T$ rounds:
+    \begin{equation}
+        R_T = \sum_{t=1}^T r_{a_t}.
+    \end{equation}
+\end{itemize}
+
+The core challenge lies in the trade-off between \textit{exploration} - pulling less-sampled arms to estimate their reward distributions and \textit{exploitation} - pulling arms with known high rewards to accumulate gains. This trade-off is typically quantified using the concept of \textbf{regret}, which quantifies the cumulative loss incurred by not always selecting the optimal arm.
+
+\paragraph{Regret Minimization}
+Regret measures the difference between the cumulative reward of an optimal strategy and the actual cumulative reward obtained by a given algorithm. Formally, the \textit{cumulative regret} $R(T)$ is defined as:
+\begin{equation}
+    R(T) = T \mu^* - \mathbb{E}\left[\sum_{t=1}^T r_{a_t}\right],
+\end{equation}
+where $\mu^* = \max_{i \in \{1, \ldots, K\}} \mu_i$ is the mean reward of the optimal arm. The objective of any bandit algorithm is to minimize $R(T)$ as $T$ grows large.
+
+\subsubsection{Algorithms for MAB}
+Several algorithms have been developed to solve the MAB problem effectively. Key strategies include:
+
+\paragraph{$\epsilon$-Greedy Algorithm}
+The $\epsilon$-greedy algorithm balances exploration and exploitation by selecting the arm with the highest estimated mean reward with probability $1 - \epsilon$, and exploring a random arm with probability $\epsilon$. Formally, at each time step $t$, the algorithm selects:
+\begin{equation}
+    a_t =
+    \begin{cases}
+        \arg \max_i \hat{\mu}_i & \text{with probability } 1 - \epsilon, \\
+        \text{randomly select from } \{1, \ldots, K\} & \text{with probability } \epsilon,
+    \end{cases}
+\end{equation}
+where $\hat{\mu}_i$ is the estimated mean reward of arm $i$ based on past observations.
+
+\paragraph{Upper Confidence Bound Algorithm}
+The \ac{ucb} algorithm addresses the exploration-exploitation trade-off by assigning a confidence interval to each arm’s estimated mean reward and selecting the arm with the highest upper confidence bound. At each step $t$, the arm $a_t$ is chosen as:
+\begin{equation}
+    a_t = \arg \max_i \left( \hat{\mu}_i + \sqrt{\frac{2 \ln t}{n_i}} \right),
+\end{equation}
+where $n_i$ is the number of times arm $i$ has been pulled, and $\ln t$ encourages exploration by weighting uncertainty higher in earlier stages. The UCB algorithm is particularly effective due to its logarithmic regret bounds \citep{auer2002finite}.
+
+\paragraph{Thompson Sampling (TS)}
+\acf{ts} is a Bayesian approach to \ac{mab} problems, where posterior distributions over the mean rewards of each arm are maintained and updated based on observed rewards. At each time step, an arm is sampled from its posterior distribution and played. Formally, the algorithm selects:
+\begin{equation}
+    a_t = \arg \max_i \mu_i^{(t)},
+\end{equation}
+where $\mu_i^{(t)}$ is a sample from the posterior distribution of arm $i$. \ac{ts} has been shown to achieve asymptotically optimal regret in many settings \citep{agrawal2012analysis}.
+
 \subsubsection{Contextual Bandits}
+Contextual bandits extend the multi-armed bandit framework by introducing a context $\mathbf{c}_t \in \mathcal{C}$ at each round $t$. This context provides additional information to inform the decision-making process, allowing for more tailored arm selections. The challenge lies in effectively modeling the relationship between context and reward, as well as balancing exploration and exploitation in this extended setting. At each step, the algorithm observes a context vector $\mathbf{x}_t$ before selecting an arm. The objective is to learn a mapping from contexts to arm selection policies that maximize cumulative rewards. This framework has found widespread applications in areas such as personalized recommendations and adaptive experimentation \citep{li2010contextual}. In contrast to traditional multi-armed bandits, contextual bandits incorporate context, making them a key tool in reinforcement learning.
+ 
+Formally, contextual bandit problems involve a sequential decision-making process where, at each time step $t$, an agent observes a \textit{context} $\mathbf{x}_t \in \mathcal{X}$, selects an \textit{action} $a_t \in \mathcal{A}$, and receives a \textit{reward} $r_t$. Unlike standard \ac{mab} problems, contextual bandits leverage the context $\mathbf{x}_t$ to inform the action selection process. The objective is to maximize the cumulative reward over a sequence of interactions. This involves a trade-off between exploring different actions to learn their potential rewards and exploiting actions that are known to produce good rewards given the current context.
+
+
+\paragraph{Role of Context.} 
+In contextual bandits, the context $\mathbf{c}_t$ acts as side information that is observed before selecting an arm. It allows the decision-making process to tailor its choices based on specific situations. However, this context introduces challenges such as:
+\begin{itemize}
+    \item Modeling the reward function $r(\mathbf{c}_t, a)$, which maps context-arm pairs to rewards.
+    \item Managing the complexity of high-dimensional contexts while ensuring computational tractability.
+\end{itemize}
+
+\paragraph{Exploration in Context-Space.}
+Unlike classical multi-armed bandits, where exploration focuses solely on the arms, contextual bandits require exploration across both arms and the context space. This dual exploration-exploitation trade-off leads to questions such as:
+\begin{itemize}
+    \item Should rare or less-sampled contexts be prioritized during exploration?
+    \item How can the algorithm balance exploring unseen arms versus unseen contexts?
+\end{itemize}
+
+\paragraph{Modeling the Reward Function.} 
+The success of contextual bandit algorithms heavily depends on the choice of the model used to estimate the expected reward $\mathbb{E}[r_t \mid \mathbf{c}_t, a]$:
+\begin{itemize}
+    \item Linear models offer simplicity and computational efficiency but are limited in capturing non-linear relationships.
+    \item Non-linear models, such as neural networks, provide flexibility but come at the cost of increased computational overhead and the need for larger datasets to generalize effectively.
+\end{itemize}
+
+\paragraph{Regret Bounds and Guarantees.} 
+Theoretical guarantees for contextual bandits typically rely on assumptions about the reward function. For instance:
+\begin{itemize}
+    \item When the reward function is linear, algorithms like LinUCB \citep{li2010contextual} achieve optimal regret bounds of $\mathcal{O}(\sqrt{T})$.
+    \item For non-linear functions, more general algorithms like Thompson Sampling \citep{russo2018tutorial} or neural network-based approaches \citep{riquelme2018deep} are used, but their guarantees often depend on specific problem settings.
+\end{itemize}
+
+To address these challenges, various algorithms have been proposed using both linear and non-linear models to estimate rewards. In the next subsections, we will delve into some of these algorithms.
+
 \subsubsection{Linear Bandits}
+Linear models assume that the expected reward for a given context and action can be represented as a linear combination of some features. Specifically, we assume there exists an unknown parameter vector $\boldsymbol{\theta}$ such that the expected reward can be approximated by the inner product of this vector with a context-action feature vector:
+\begin{equation}
+    \mathbb{E}[r_t | \mathbf{x}_t, a_t] = \boldsymbol{\theta}^T \phi(\mathbf{x}_t, a_t)
+\end{equation}
+where $\phi(\mathbf{x}_t, a_t)$ is the feature mapping of context $\mathbf{x}_t$ and action $a_t$ into a feature vector.
+
+\paragraph{Key Algorithms}
+\begin{itemize}
+    \item \textbf{Linear Upper Confidence Bound (LinUCB)}: LinUCB operates by maintaining an estimate of the parameter vector $\boldsymbol{\theta}$, and using confidence bounds to balance exploration and exploitation. It calculates an upper confidence bound on the expected reward using a known hyper parameter $\alpha$ to balance exploration/exploitation trade-off. At each time step, the action that maximizes the upper confidence bound is selected. The algorithm works as follows:
+    \begin{enumerate}
+        \item Initialize $\mathbf{A}_0 = \mathbf{I}$ (identity matrix), $\mathbf{b}_0 = \mathbf{0}$, $\hat{\boldsymbol{\theta}}_0 = \mathbf{0}$.
+        \item At each time step $t$:
+          \begin{enumerate}
+              \item Observe context $\mathbf{x}_t$.
+              \item For each action $a \in \mathcal{A}$, compute:
+              \begin{align*}
+                \hat{r}_t(a) &= \hat{\boldsymbol{\theta}}_{t-1}^T \phi(\mathbf{x}_t, a) + \alpha \sqrt{ \phi(\mathbf{x}_t, a)^T \mathbf{A}_{t-1}^{-1} \phi(\mathbf{x}_t, a)}
+              \end{align*}
+              \item Select action $a_t = \text{argmax}_{a \in \mathcal{A}} \hat{r}_t(a)$.
+              \item Observe reward $r_t$.
+              \item Update:
+              \begin{align*}
+                  \mathbf{A}_t &= \mathbf{A}_{t-1} + \phi(\mathbf{x}_t, a_t) \phi(\mathbf{x}_t, a_t)^T \\
+                  \mathbf{b}_t &= \mathbf{b}_{t-1} + r_t \phi(\mathbf{x}_t, a_t) \\
+                  \hat{\boldsymbol{\theta}}_t &= \mathbf{A}_t^{-1} \mathbf{b}_t
+              \end{align*}
+          \end{enumerate}
+    \end{enumerate}
+    \item \textbf{Thompson Sampling for Linear Models}: Thompson Sampling for linear bandits also attempts to learn the weight vector $\boldsymbol{\theta}$ by maintaining a posterior distribution over these weights. At each step, the agent samples a weight vector from the posterior, and uses this weight vector to select the action that maximizes the reward. The algorithm works as follows:
+    \begin{enumerate}
+    \item Initialize the posterior using a prior distribution for $\boldsymbol{\theta}$ and a covariance matrix. Usually a gaussian distribution is used for the prior.
+    \item At each time step $t$:
+      \begin{enumerate}
+        \item Observe context $\mathbf{x}_t$.
+        \item Sample parameter $\hat{\boldsymbol{\theta}}_t$ from posterior distribution.
+        \item Select action $a_t = \text{argmax}_{a \in \mathcal{A}} \hat{\boldsymbol{\theta}}_t^T \phi(\mathbf{x}_t, a)$.
+        \item Observe reward $r_t$.
+        \item Update the posterior distribution based on observation.
+      \end{enumerate}
+    \end{enumerate}
+\end{itemize}
+
+\paragraph{Advantages of Linear Models}
+Linear models offer several advantages:
+\begin{itemize}
+    \item \textbf{Computational Efficiency}: They are often faster to compute and require fewer resources to implement.
+    \item \textbf{Simplicity}: Linear models are easier to understand and implement.
+    \item \textbf{Theoretical Guarantees}: There is often established theory providing performance bounds.
+\end{itemize}
+
+\paragraph{Limitations of Linear Models}
+Despite their advantages, linear models have limitations:
+\begin{itemize}
+    \item \textbf{Inability to Capture Complex Non-Linearities}: They may perform poorly if the underlying relationship between the context, action, and reward is non-linear.
+    \item \textbf{Reliance on Feature Mapping}: The quality of the features in $\phi(\mathbf{x}_t,a_t)$ is crucial for performance.
+\end{itemize}
+
+\paragraph{Practical Considerations}
+Proper feature engineering and careful tuning of hyperparameters are essential to achieving good performance with linear bandit algorithms.
+
 \subsubsection{Non-Linear Bandits}
+
+\paragraph{Introduction to Non-Linear Models}
+Non-linear models extend the capabilities of contextual bandits to handle situations where the reward function cannot be adequately approximated using linear models. These models allow for more complex relationships between contexts, actions, and rewards.
+
+\paragraph{Key Algorithms}
+\begin{itemize}
+    \item \textbf{Kernelized Bandits (KernelUCB, KernelTS)}:
+    Kernel methods are an alternative to feature-mapping based approaches. They map the data into a higher-dimensional space using a kernel function $k(x_i,x_j)$. Kernelized bandits operate by maintaining estimates of the reward function in the kernel space. KernelUCB and KernelTS are extensions of LinUCB and Thompson Sampling for linear models, which utilize the kernel trick to implicitly perform the computation of the features in the high-dimensional feature space.
+
+    \item \textbf{Neural Network Based Bandits}: Neural networks can be used to model non-linear reward functions. A neural network can be trained to approximate the reward given a specific context and action. These models can be incorporated in bandit algorithms using strategies like:
+        \begin{itemize}
+            \item Using $\epsilon$-greedy strategy using neural network to predict best action.
+            \item Incorporating uncertainty in the neural network outputs, and then using UCB or Thompson sampling strategies to balance exploration/exploitation.
+        \end{itemize}
+\end{itemize}
+
+\paragraph{Advantages of Non-Linear Models}
+\begin{itemize}
+    \item \textbf{Flexibility}: They can capture more complex non-linear relationships, potentially leading to improved performance when a linear assumption is inappropriate.
+    \item \textbf{Improved Performance}: Non-linear models often achieve superior results in scenarios where complex relationships exist between the context, action, and the reward.
+\end{itemize}
+
+\paragraph{Limitations of Non-Linear Models}
+\begin{itemize}
+    \item \textbf{Computational Costs}: Non-linear models are generally more computationally intensive and can be slower to train and apply, specially compared to linear methods.
+    \item \textbf{Need for more data}: Require more data for training to avoid overfitting.
+    \item \textbf{Hyperparameter Tuning}: Require careful tuning of hyperparameters to achieve optimal performance.
+\end{itemize}
+
 \subsection{Performance Metrics in Black-box Optimization}
 \label{background:performance_metrics}
 Evaluating the performance of a \acf{bo} algorithm involves quantifying its efficiency in identifying the optimal solution of the objective function \( f \). Two commonly used performance metrics in the literature are \emph{simple regret} and \emph{cumulative regret}, which capture different aspects of the optimization process.
@@ -577,7 +749,15 @@ Both metrics are essential for evaluating the performance of BO algorithms, offe
 
 \section{Black-box Optimization with Unknown Black-box Constraints}
 \label{section:bo_unknown_constraints}
+As real-world problems often involve constraints that are also black-box in nature, Constrained Black-box Optimization (CBO) has become a vital extension of BO. CBO methods adjust the acquisition function to account for these constraints, seeking feasible solutions that satisfy the conditions while optimizing the objective function. A prominent method in CBO is the Expected Improvement with Constraints (cEI), first introduced by \citep{schonlau1998global} and later extended by \citep{gardner2014bayesian} and \citep{gelbart2014bayesian}. cEI integrates feasibility into the acquisition function, directing the optimization process toward regions where feasible solutions are likely. \citet{letham2019constrained} further improved cEI by using a quasi-Monte Carlo approximation to better manage observation noise, enhancing its effectiveness in noisy environments.
 
+EI-based methods for constrained optimization face several challenges. When no feasible point exists, the EI cannot be computed, leading to modifications that focus solely on finding feasible regions, ignoring the objective function. Additionally, numerical challenges further limit some methods like EVR and IECI to small-dimensional problems. To address this, alternative methods have been proposed. For example, Predictive Entropy Search with Constraints (PESC,  \citealp{hernandez2015predictive}) offers a heuristic approach that selects feasible candidates directly from the search space, reducing uncertainty more effectively. However, the computational challenges associated with quadrature calculations during sampling have limited its practical applicability. Recently, \citet{takeno2022sequential} proposed a Min-Value Entropy Search method that simplifies the sampling process, making it more tractable.
+
+Numerical optimization has also been taken into consideration as an effective tool for solving the unknown constraint problem. The idea is to reformulate constraints into simpler unconstrained problems solved through alternating iterations. The Augmented Lagrangian method is mostly used in this category. For example, \citet{gramacy2016modeling} with Augmented Lagrangian Bayesian Optimization (ALBO) and its improvement Slack-AL \citep{picheny2016bayesian} use Augmented Lagrangian Function (ALF) to formulate unconstrained surrogate problems and then solve them using EI as an acquisition function. Recently, ADMMBO \citep{ariafar2019admmbo} first applied the ADMM technique to transform the constrained problem into an equivalent unconstrained optimization, then solved an augmented Lagrangian relaxation. However, this method requires the introduction of additional variables, leading to increased computational costs.
+
+Recent research has explored penalty functions and primal-dual methods to handle constraint violations during optimization. For example, \citet{lu2022no} introduced a penalty-function approach that adds a penalty term for constraint violations to the objective function, transforming the constrained problem into an unconstrained one. Similarly, \citep{zhou2022kernelized} proposed a primal-dual approach that balances the trade-off between optimizing the objective and minimizing constraint violations. While these methods are promising, their effectiveness is sensitive to the choice of parameters set, often requiring considerable effort in parameter tuning during implementation.
+
+Alongside empirical advancements, recent theoretical works have started to address the absence of formal guarantees in Constrained Black-box Optimization (CBO). For example, \citet{lu2022no} introduced a penalty-based regret bound that combines the regret from the objective function with penalties for constraint violations. \citet{xu2023constrained} expanded this analysis by separately evaluating cumulative regret and constraint violations. In contrast, \citet{nguyen2023optimistic} provided a theoretical performance guarantee for CBO under unknown constraints in a \textit{decoupled} setting, where cumulative regret is calculated as the sum of both objective function regret and constraint violations.
 \section{Black-box Optimization with Physical Information}
 \label{section:bo_physics}
 
