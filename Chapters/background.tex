@@ -272,10 +272,404 @@ The \ac{rkhs} norm $\norm{f}_{\mathcal{H}}$ provides a measure of the smoothness
 \end{itemize}
 
 
+
+
+
 \section{Introduction to Optimization}
 \label{section:optimization_introduction}
+
+Optimization is a fundamental mathematical process focused on identifying the best possible solution from a range of options for a given problem. It is a core technique used in diverse fields, including engineering, economics, machine learning, and operations research. To address this broad spectrum of problems, a consistent way to represent them is necessary. Optimization problems are typically expressed using an objective function \( f \colon \mathbb{R}^d \rightarrow \mathbb{R} \), which transforms an input vector \( \mathbf{x} \) into a scalar output \( y \). The goal is to determine the input \( \mathbf{x}^* \) that results in the optimal output. Although some problems involve minimizing \( f \), this can be equivalently framed as maximizing \( -f \), allowing a uniform representation of all optimization problems as:
+\[
+\mathbf{x}^* = \arg \min_{\mathbf{x} \in \mathcal{X}} f(\mathbf{x}),
+\]
+where \( \mathcal{X} \) represents the set of feasible inputs. In certain cases, \( f \) might have a well-defined mathematical form, enabling direct algebraic solution. However, in practical, real-world scenarios, the function is often too complex. In such cases, the function's value must be estimated by evaluating it at various inputs. The key challenge is how to effectively select which inputs to evaluate. Randomly selecting, although straightforward, does not guarantee convergence to an optimal solution within a finite number of evaluations. Therefore, specialized algorithms are required to guide the selection of inputs, ensuring both efficient and effective optimization.
+
+
 \subsection{Gradient-Based Optimization}
+\label{subsection:gradient_based_optimization}
+
+\noindent Gradient-based methods use the gradient (the vector of first-order partial derivatives) of the objective function to iteratively find optimal solutions. The gradient at any point indicates the direction of the steepest ascent of the objective function, so the negative gradient is used for minimization.
+
+The core idea behind gradient-based optimization is to update the decision variable $\mathbf{w}$ iteratively using the following update rule:
+
+\begin{equation}
+\mathbf{w}_{k+1} = \mathbf{w}_k + \alpha_k d_k,
+\label{eq:general_update}
+\end{equation}
+where:
+\begin{itemize}
+    \item $\mathbf{x}_k$ is the decision variable at iteration $k$.
+    \item $\mathbf{x}_{k+1}$ is the updated decision variable for the next iteration.
+    \item $\alpha_k$ is the learning rate or step size, a positive scalar.
+    \item $d_k$ is the direction vector which can be specific for each optimization algorithm.
+\end{itemize}
+
+\noindent 
+We will now provide a detailed examination of the mathematical foundations of various gradient-based optimization methods, where the objective function is denoted as $f(\mathbf{x})$.
+
+\subsubsection{Gradient Descent}
+\label{subsubsection:gradient_descent}
+
+\noindent In its simplest form, \ac{gd} updates the solution by moving in the direction of the negative gradient. The negative gradient points towards the direction of the steepest descent on the error surface. This update pushes the solution in the direction that decreases the objective function the most.
+
+\begin{equation}
+d_k = -\nabla f(\mathbf{x}_k)
+\end{equation}
+
+\noindent The update rule of Eqn. \ref{eq:general_update} thus becomes:
+
+\begin{equation}
+\mathbf{x}_{k+1} = \mathbf{x}_k - \alpha_k \nabla f(\mathbf{x}_k),
+\label{eq:gd_update}
+\end{equation}
+where $\nabla f(\mathbf{x}_k) = \left(\frac{\partial f}{\partial \mathbf{x}_1}, \frac{\partial f}{\partial \mathbf{x}_2}, \dots, \frac{\partial f}{\partial \mathbf{x}_d} \right)$ is the gradient vector of $f$ at $x_k$.
+
+
+
+
+\subsubsection{Momentum}
+\label{subsubsection:momentum}
+Building on the foundational principles of gradient-based optimization, we turn our attention to momentum-based variants of \ac{gd}. These methods aim to improve the convergence rate and stability of the optimization process by incorporating a momentum term.
+Momentum introduces a velocity term that accumulates gradients, which helps to smooth the optimization trajectory and escape shallow local minima.
+
+The update rule involves an intermediate variable called velocity $\mathbf{v}_k$.
+\begin{equation}
+   \mathbf{v}_k = \beta \mathbf{v}_{k-1} - \alpha_k \nabla f(\mathbf{x}_k),
+   \label{eq:momentum_v}
+\end{equation}
+where $\beta$ is the momentum parameter, typically a scalar in the range \( [0, 1) \), controlling the influence of past gradients.Then the update of $\mathbf{x}_k$ becomes:
+
+\begin{equation}
+\mathbf{x}_{k+1} = \mathbf{x}_k + \mathbf{v}_k
+\label{eq:momentum_update}
+\end{equation}
+The momentum term $\beta v_{k-1}$ effectively remembers previous gradients, adding them to the current gradient, which acts as a smoothing filter. This helps the solution continue in a similar direction even if it encounters small hills or valleys on the error surface. Momentum-based methods, such as classical Momentum and \ac{nag}, are widely used for their ability to overcome challenges like slow convergence on flat surfaces and oscillations in steep directions. These methods are particularly beneficial for optimizing non-convex functions, where standard \ac{gd} often struggles.
+
+\subsubsection{Adaptive Learning Rate Algorithms}
+\label{subsubsection:adaptive_learning_rates}
+In addition to momentum-based methods, adaptive learning rate algorithms have emerged as powerful tools in optimization. These algorithms adjust the learning rate dynamically during the optimization process, allowing for more efficient convergence. By adapting the step size based on the magnitude of gradients or past updates, they aim to overcome challenges such as vanishing or exploding gradients and improve performance across diverse problem settings.
+
+\paragraph{Adagrad}
+One of the simplest forms of adaptive learning rate algorithms is Adagrad, which modifies the learning rate for each parameter based on the accumulated squared gradients:
+
+\[
+\mathbf{x}_{k+1} = \mathbf{x}_k - \frac{\alpha}{\sqrt{G_k + \epsilon}} \odot \nabla f(\mathbf{x}_k),
+\]
+where:
+\begin{itemize}
+    \item \( G_k = \sum_{i=1}^k \nabla f(\mathbf{x}_i) \odot \nabla f(\mathbf{x}_i) \) is the element-wise sum of squared gradients up to iteration \( k \),
+    \item \( \epsilon \) is a small positive constant to avoid division by zero,
+    \item \( \odot \) denotes element-wise multiplication,
+    \item \( \alpha \) is the initial learning rate.
+\end{itemize}
+
+\paragraph{Adam}
+\label{paragraph:adam}
+Another popular algorithm, \ac{adam} (Adaptive Moment Estimation), introduced by \citet{kingma2014adam}, builds upon Adagrad to address its limitations, particularly its tendency to excessively decay the learning rate in the presence of accumulated gradients. \ac{adam} combines momentum with adaptive learning rates and maintains both a first-moment estimate (momentum) and a second-moment estimate (variance) for more robust optimization. This dual approach helps stabilize parameter updates and adaptively scales learning rates for each parameter:
+
+\begin{align}
+\mathbf{m}_k &= \beta_1 \mathbf{m}_{k-1} + (1 - \beta_1) \nabla f(\mathbf{x}_k), \\  
+\mathbf{v}_k &= \beta_2 \mathbf{v}_{k-1} + (1 - \beta_2) (\nabla f(\mathbf{x}_k))^2,
+\end{align}
+
+\noindent where $\mathbf{m}_k$ is the estimate for the first-order moment (mean of the gradients), and $\mathbf{v}_k$ is the estimate for the second-order moment (uncentered variance of the gradients). The hyperparameters $\beta_1 \in [0, 1)$ and $\beta_2 \in [0, 1)$ control the exponential decay rates of the moving averages for the first and second moments, respectively. Common default values are $\beta_1 = 0.9$ and $\beta_2 = 0.999$, as recommended in the original paper. 
+
+To address bias introduced by initializing $\mathbf{m}_k$ and $\mathbf{v}_k$ to zero at the beginning of training, corrected estimates are computed as:
+
+\begin{align}
+    \hat{\mathbf{m}}_k &= \frac{\mathbf{m}_k}{1-\beta_1^k}, \\  
+    \hat{\mathbf{v}}_k &= \frac{\mathbf{v}_k}{1-\beta_2^k},
+\end{align}
+
+\noindent These bias-corrected estimates ensure that $\hat{\mathbf{m}}_k$ and $\hat{\mathbf{v}}_k$ are unbiased, particularly during the initial steps when $k$ is small. The final parameter update step is given by:
+
+\begin{equation}
+\mathbf{x}_{k+1} = \mathbf{x}_k - \alpha \frac{\hat{\mathbf{m}}_k}{\sqrt{\hat{\mathbf{v}}_k} + \epsilon},
+\end{equation}
+
+\noindent where $\alpha$ is the learning rate, typically set to a small value (e.g., $0.001$ in many applications), and $\epsilon$ is a small constant added to prevent division by zero. A typical value for $\epsilon$ is $10^{-8}$. The inclusion of $\epsilon$ improves numerical stability, particularly in cases where $\hat{\mathbf{v}}_k$ approaches zero.
+
+\paragraph{RMSProp}
+\label{paragraph:rmsprop}
+\ac{rmsprop}, proposed by \citet{tieleman2012lecture}, is another popular optimization algorithm designed to overcome the drawbacks of Adagrad in non-convex optimization problems. While Adagrad's aggressive learning rate decay can hinder optimization over time, \ac{rmsprop} mitigates this by using an exponentially decaying average of squared gradients to adapt learning rates. This mechanism ensures a more stable and efficient convergence, particularly in neural network training. The update rule for \ac{rmsprop} is given by:
+
+\begin{align}
+\mathbf{v}_k &= \beta \mathbf{v}_{k-1} + (1 - \beta) (\nabla f(\mathbf{x}_k))^2, \\
+\mathbf{x}_{k+1} &= \mathbf{x}_k - \alpha \frac{\nabla f(\mathbf{x}_k)}{\sqrt{\mathbf{v}_k} + \epsilon},
+\end{align}
+
+\noindent where $\mathbf{v}_k$ represents the moving average of the squared gradients, and $\beta \in [0, 1)$ is a hyperparameter controlling the decay rate of this average, typically set to $0.9$. The term $\epsilon$ is a small positive constant, commonly $10^{-8}$, added for numerical stability to avoid division by zero. The adaptive scaling of gradients via $\sqrt{\mathbf{v}_k}$ allows \ac{rmsprop} to handle large gradients effectively while maintaining a consistent learning rate for smaller gradients. This balance makes \ac{rmsprop} particularly well-suited for deep learning applications involving non-stationary loss functions.
+
+
+\subsubsection{Conjugate Gradient}
+\label{subsubsection:conjugate_gradient}
+
+The \ac{cg} method is a powerful optimization algorithm primarily used for solving large-scale, unconstrained quadratic minimization problems, particularly when the Hessian matrix is too large to store explicitly. Introduced by \citet{hestenes1952methods}, \ac{cg} iteratively updates the solution by combining gradient descent with a conjugacy condition, ensuring that successive search directions are mutually conjugate with respect to the quadratic form. This approach enables faster convergence compared to standard gradient descent. At each iteration, the solution is updated as:
+
+\begin{align}
+\mathbf{x}_{k+1} &= \mathbf{x}_k + \alpha_k \mathbf{p}_k, \\
+\mathbf{p}_{k+1} &= -\nabla f(\mathbf{x}_{k+1}) + \beta_k \mathbf{p}_k,
+\end{align}
+where $\mathbf{p}_k$ is the search direction, $\alpha_k$ is the step size determined by line search, and $\beta_k$ is the conjugate gradient coefficient. The value of $\beta_k$ can be computed using various formulas, including Fletcher-Reeves and Polak-Ribiere. The Fletcher-Reeves formula defines $\beta_k$ as:
+
+\begin{equation}
+\beta_k^{\text{FR}} = \frac{\|\nabla f(\mathbf{x}_{k+1})\|^2}{\|\nabla f(\mathbf{x}_k)\|^2},
+\end{equation}
+
+\noindent while the Polak-Ribiere formula introduces a more flexible approach:
+
+\begin{equation}
+\beta_k^{\text{PR}} = \frac{\nabla f(\mathbf{x}_{k+1})^\top (\nabla f(\mathbf{x}_{k+1}) - \nabla f(\mathbf{x}_k)}{\|\nabla f(\mathbf{x}_k)\|^2}.
+\end{equation}
+
+\noindent The Polak-Ribiere method can handle non-quadratic objective functions more effectively and may reset $\beta_k$ to zero when its value becomes negative, reverting to steepest descent for better stability. These formulations ensure that successive directions remain conjugate, allowing \ac{cg} to converge in at most $n$ iterations for a quadratic objective with $n$ variables. The \ac{cg} method is particularly efficient for sparse systems and avoids the need to compute or store the full Hessian matrix, making it well-suited for high-dimensional problems. Extensions of \ac{cg}, such as the nonlinear Conjugate Gradient method, adapt these principles to more general optimization scenarios.
+
+\subsubsection{Newton's Method}
+\label{subsubsection:newtons_method}
+Newton's Method is a second-order optimization algorithm widely used for solving unconstrained optimization problems. It leverages both gradient and curvature information to achieve faster convergence, especially near the optimum. At each iteration, Newton's Method approximates the objective function $f(\mathbf{x})$ as a second-order Taylor expansion around the current point $\mathbf{x}_k$ and updates the parameters by solving the resulting quadratic model. The update rule is given by:
+
+\begin{equation}
+\mathbf{x}_{k+1} = \mathbf{x}_k - \mathbf{H}_k^{-1} \nabla f(\mathbf{x}_k),
+\end{equation}
+
+\noindent where $\nabla f(\mathbf{x}_k)$ is the gradient vector, and $\mathbf{H}_k$ is the Hessian matrix, representing the second-order partial derivatives of $f(\mathbf{x})$ with respect to the parameters. The inverse Hessian $\mathbf{H}_k^{-1}$ scales and modifies the gradient direction to account for the curvature of the objective function, allowing for more precise steps toward the optimum.
+
+One of the key advantages of Newton's Method is its quadratic convergence rate when the initial guess is sufficiently close to the solution. However, the method also has notable challenges. Computing and inverting the Hessian matrix can be computationally expensive for high-dimensional problems, making it less practical for large-scale optimization. To address this, approximations like the quasi-Newton methods (e.g., BFGS) are often used to estimate the inverse Hessian iteratively without explicitly forming it.
+
+Newton's Method is particularly effective for convex optimization problems where the Hessian is positive definite. In non-convex settings, the method may encounter difficulties such as saddle points or negative curvature, which can lead to divergence. To mitigate this, techniques such as adding a regularization term to the Hessian (e.g., trust-region methods) or using a modified update rule are commonly employed.
+
+
+
+% \noindent Newton's method uses the second-order derivative information (the Hessian matrix, denoted by $\mathbf{H}f(x)$) to guide the optimization. The update rule is given by:
+
+% \begin{equation}
+% x_{k+1} = x_k - \left( \mathbf{H}f(x_k) \right)^{-1} \nabla f(x_k)
+% \end{equation}
+
+% \noindent where $\left( \mathbf{H}f(x_k) \right)^{-1}$ is the inverse of the Hessian matrix evaluated at $x_k$.
+
+% \textit{Intuition:} Newton's method finds the minimum of the quadratic approximation of the function at $x_k$. By using the curvature information given by the Hessian, it can take larger steps toward the minimum compared to gradient descent.
+
+\subsubsection{Quasi-Newton Methods (BFGS, L-BFGS)}
+\label{subsubsection:quasi_newton}
+Quasi-Newton methods are iterative optimization algorithms that approximate Newton's Method while avoiding the explicit computation and inversion of the Hessian matrix, making them more computationally efficient for high-dimensional problems. Among these, the Broyden-Fletcher-Goldfarb-Shanno (BFGS) algorithm is one of the most widely used. At each iteration, the search direction $\mathbf{p}_k$ is computed as:
+
+\begin{equation}
+\mathbf{p}_k = -\mathbf{H}_k^{-1} \nabla f(\mathbf{x}_k),
+\end{equation}
+
+\noindent where $\mathbf{H}_k^{-1}$ is the approximation of the inverse Hessian matrix. The parameter update is then performed as:
+
+\begin{equation}
+\mathbf{x}_{k+1} = \mathbf{x}_k + \alpha_k \mathbf{p}_k,
+\end{equation}
+
+\noindent with $\alpha_k$ representing the step size, typically determined through a line search. In the BFGS algorithm, the approximation of the Hessian matrix $\mathbf{H}_k$ itself is updated iteratively using the formula:
+
+\begin{equation}
+\mathbf{H}_{k+1} = \mathbf{H}_k 
++ \frac{\mathbf{y}_k \mathbf{y}_k^\top}{\mathbf{y}_k^\top \mathbf{s}_k} 
+- \frac{\mathbf{H}_k \mathbf{s}_k \mathbf{s}_k^\top \mathbf{H}_k}{\mathbf{s}_k^\top \mathbf{H}_k \mathbf{s}_k},
+\end{equation}
+
+\noindent where $\mathbf{s}_k = \mathbf{x}_{k+1} - \mathbf{x}_k$ and $\mathbf{y}_k = \nabla f(\mathbf{x}_{k+1}) - \nabla f(\mathbf{x}_k)$. The first term ensures the positive definiteness of $\mathbf{H}_{k+1}$, while the second term adjusts the curvature information. To maintain computational feasibility, $\mathbf{H}_k$ is often initialized as a scaled identity matrix, $\mathbf{H}_0 = \gamma \mathbf{I}$, where $\gamma$ is a positive scalar.
+
+For large-scale problems where storing or computing $\mathbf{H}_k$ or $\mathbf{H}_k^{-1}$ explicitly is impractical, the Limited-memory BFGS (L-BFGS) algorithm is employed. Instead of maintaining the full Hessian or its inverse, L-BFGS uses a limited number of recent $\mathbf{s}_k$ and $\mathbf{y}_k$ vectors to implicitly compute the search direction $\mathbf{p}_k$. This reduces memory and computational overhead, making L-BFGS well-suited for problems with millions of variables.
+
+Quasi-Newton methods such as BFGS and L-BFGS offer superlinear convergence rates and efficiently balance the rapid convergence of Newton's Method with the simplicity of gradient descent. Their robustness and efficiency make them standard tools for large-scale optimization tasks, particularly in machine learning and numerical optimization.
+
+
+
+% \noindent The BFGS update can be summarized as:
+
+% \begin{equation}
+%     x_{k+1} = x_k - \alpha_k B_k^{-1} \nabla f(x_k)
+% \end{equation}
+
+% \noindent where $B_k$ is an approximation of the inverse Hessian matrix and $\alpha_k$ is computed by line search. $B_{k+1}$ can be computed using previous estimates using:
+
+% \begin{equation}
+%     B_{k+1} = B_k + \frac{y_ky_k^T}{y_k^Ts_k} - \frac{(B_ks_k)(B_ks_k)^T}{s_k^T B_k s_k}
+% \end{equation}
+
+% \noindent where $s_k = x_{k+1} - x_k$ and $y_k = \nabla f(x_{k+1}) - \nabla f(x_k)$
+
+% \textit{Intuition:} These methods use approximations of the inverse Hessian, which allow it to take larger steps toward the minimum compared to gradient descent but are also more computationally efficient.
+
 \subsection{Derivative-Free Optimization}
+\label{subsection:derivative_free_optimization}
+The optimization techniques discussed so far, including Gradient Descent, Newton's Method, and their variants, rely fundamentally on gradient information to navigate the search space and converge to an optimum. These methods are well-suited for problems where derivatives are readily available, accurate, and computationally inexpensive. However, many real-world optimization problems present challenges such as noisy evaluations, non-differentiable objective functions, or black-box functions where derivatives are unavailable or impractical to compute.  
+
+In such scenarios, \ac{dfo}  methods provide a viable alternative. Rather than relying on gradient information, \ac{dfo} algorithms use only function evaluations to iteratively explore the search space and identify optima. These methods are particularly effective in settings where the objective function is expensive to evaluate, non-convex, or highly constrained. The following sections introduce various \ac{dfo} techniques, focusing on their underlying principles, advantages, and applicability to modern optimization challenges.
+
+\subsubsection{Nelder-Mead Method}
+\label{subsubsection:nelder_mead}
+One of the most well-known Derivative-Free Optimization methods is the Nelder-Mead method, introduced by \citet{nelder1965simplex}. This simplex-based algorithm is designed for unconstrained optimization of nonlinear functions and operates by iteratively refining a geometric simplex, which is a set of \(n+1\) points in an \(n\)-dimensional space.
+
+At each iteration, the algorithm evaluates the objective function at the vertices of the simplex and replaces the worst-performing vertex with a better candidate point. The algorithm employs four main operations to modify the simplex: reflection, expansion, contraction, and shrinkage. These operations are defined as follows:
+
+\begin{itemize}
+    \item \textbf{Reflection}: Reflect the worst vertex \(\mathbf{x}_h\) through the centroid \(\mathbf{c}\) of the remaining vertices:
+    \begin{equation}
+    \mathbf{x}_r = \mathbf{c} + \alpha (\mathbf{c} - \mathbf{x}_h),
+    \end{equation}
+    where \(\alpha > 0\) is the reflection coefficient, typically set to 1.
+
+\item \textbf{Expansion}: If the reflected point \(\mathbf{x}_r\) is better than all other vertices, an expansion is attempted:
+\begin{equation}
+\mathbf{x}_e = \mathbf{c} + \gamma (\mathbf{x}_r - \mathbf{c}),
+\end{equation}
+where \(\gamma > 1\) is the expansion coefficient.
+
+\item \textbf{Contraction}: If the reflected point \(\mathbf{x}_r\) is not better than the current best, a contraction is performed:
+\begin{equation}
+\mathbf{x}_c = \mathbf{c} + \rho (\mathbf{x}_h - \mathbf{c}),
+\end{equation}
+where \(0 < \rho < 1\) is the contraction coefficient.
+
+\item \textbf{Shrinkage}: If no improvement is observed, the entire simplex is shrunk towards the best vertex:
+\begin{equation}
+\mathbf{x}_i = \mathbf{x}_b + \sigma (\mathbf{x}_i - \mathbf{x}_b),
+\end{equation}
+for all vertices \(i\), where \(0 < \sigma < 1\) is the shrinkage coefficient, and \(\mathbf{x}_b\) is the best vertex.
+\end{itemize}
+
+
+The Nelder-Mead method does not require gradient information and is particularly suited for problems where the objective function is noisy, discontinuous, or non-differentiable. However, the algorithm may converge to non-stationary points in certain cases, especially in high-dimensional spaces or poorly scaled functions. Despite these limitations, its simplicity and effectiveness have made it a widely used tool in derivative-free optimization.
+
+\subsubsection{Genetic Algorithm (GA)}
+\label{subsubsection:genetic_algorithm}
+
+Another prominent approach in \ac{dfo} is the \ac{ga}, inspired by the principles of natural selection and evolutionary biology. \acp{ga} are population-based meta-heuristic methods that iteratively evolve a population of candidate solutions to optimize an objective function. These algorithms are particularly effective for global optimization in complex, multimodal, or discrete search spaces.
+
+A typical \ac{ga} involves the following key steps:
+
+\begin{itemize}
+    \item \textbf{Initialization}: A population of candidate solutions, often represented as binary strings (or other encodings), is randomly generated.
+    
+    \item \textbf{Evaluation}: The objective function is evaluated for each candidate solution, assigning a fitness value that measures its quality.
+    
+    \item \textbf{Selection}: Candidate solutions are selected for reproduction based on their fitness. Common selection strategies include roulette wheel selection, tournament selection, and rank-based selection.
+    
+    \item \textbf{Crossover (Recombination)}: Pairs of selected candidates undergo crossover to produce offspring by exchanging segments of their representations. For example, in single-point crossover, a crossover point is chosen, and the segments are swapped:
+    \begin{equation}
+    \text{Offspring 1} = \text{Parent 1}_{[1:c]} + \text{Parent 2}_{[c+1:end]},
+    \end{equation}
+    \begin{equation}
+    \text{Offspring 2} = \text{Parent 2}_{[1:c]} + \text{Parent 1}_{[c+1:end]},
+    \end{equation}
+    where \(c\) is the crossover point.
+    
+    \item \textbf{Mutation}: To maintain diversity in the population and avoid premature convergence, mutation is applied to the offspring by randomly altering one or more bits or values in their representation:
+    \begin{equation}
+    \text{Mutated Offspring} = \text{Original Offspring} + \delta,
+    \end{equation}
+    where \(\delta\) represents a small random change.
+    
+    \item \textbf{Replacement}: The offspring replace some or all members of the current population, creating a new generation.
+\end{itemize}
+
+This process repeats over multiple generations, gradually improving the quality of solutions. The stopping criterion can be a fixed number of generations, a threshold for fitness improvement, or other problem-specific conditions.
+\acp{ga} are highly flexible and can be adapted to a wide range of optimization problems by tailoring the encoding scheme, fitness function, and genetic operators. While \acp{ga} do not guarantee convergence to a global optimum, their ability to explore large and complex search spaces makes them a popular choice for black-box and combinatorial optimization problems.
+
+\subsubsection{Simulated Annealing (SA)}
+\label{subsubsection:simulated_annealing}
+Another widely used Derivative-Free Optimization method is \ac{sa}, inspired by the annealing process in metallurgy, where a material is heated and then slowly cooled to reduce defects and reach a more stable state. First proposed by \citet{kirkpatrick1983optimization}, SA is a probabilistic technique for finding a global optimum in a large search space, particularly for non-convex or combinatorial optimization problems.
+
+\ac{sa} operates by iteratively exploring the solution space, accepting new solutions based on their quality and a probabilistic acceptance criterion. The main steps are as follows:
+
+\begin{itemize}
+    \item \textbf{Initialization}: Start with an initial solution \(\mathbf{x}_0\) and an initial temperature \(T_0\). Define a cooling schedule to gradually reduce the temperature.
+    
+    \item \textbf{Generate a Neighbor}: At each iteration \(k\), generate a new candidate solution \(\mathbf{x}_{k+1}\) by applying a small random perturbation to the current solution \(\mathbf{x}_k\).
+    
+    \item \textbf{Acceptance Criterion}: Evaluate the change in objective function value, \(\Delta f = f(\mathbf{x}_{k+1}) - f(\mathbf{x}_k)\). Accept the new solution with a probability:
+    \begin{equation}
+    P = 
+    \begin{cases} 
+    1 & \text{if } \Delta f < 0, \\
+    \exp\left(-\frac{\Delta f}{T_k}\right) & \text{if } \Delta f \geq 0,
+    \end{cases}
+    \end{equation}
+    where \(T_k\) is the temperature at iteration \(k\). This allows the algorithm to escape local minima by occasionally accepting worse solutions.
+    
+    \item \textbf{Update the Temperature}: Gradually decrease the temperature according to a cooling schedule, such as \(T_{k+1} = \alpha T_k\), where \(0 < \alpha < 1\) is the cooling rate.
+\end{itemize}
+
+The algorithm terminates when the temperature reaches a predefined threshold or after a fixed number of iterations. By balancing exploration and exploitation through the temperature parameter, Simulated Annealing is capable of escaping local optima and exploring the global search space effectively.
+
+Despite its simplicity, the performance of Simulated Annealing depends significantly on the cooling schedule and parameter settings. Its versatility and ability to handle complex optimization problems have made it a popular choice in fields ranging from logistics to engineering design.
+
+
+\subsubsection{Covariance Matrix Adaptation Evolution Strategy (CMA-ES)}
+\label{subsubsection:cma_es}
+
+One of the most advanced and widely used Derivative-Free Optimization methods is the \ac{cmaes}, introduced by \citet{hansen2001completely}. \ac{cmaes} is a population-based algorithm that excels in solving complex, multimodal, and high-dimensional optimization problems. It is particularly effective for continuous domains and has been successfully applied in various scientific and engineering applications.
+\ac{cmaes} operates by iteratively evolving a population of candidate solutions, using a multivariate normal distribution to sample new solutions and adaptively updating its parameters. The main components are as follows:
+
+\begin{itemize}
+    \item \textbf{Initialization}: Start with an initial mean vector \(\mathbf{m}_0\), an initial covariance matrix \(\mathbf{C}_0 = \sigma_0^2 \mathbf{I}\), and a step size \(\sigma_0\). Define the population size \(\lambda\) and the weights $w$ for weighted recombination.
+    
+    \item \textbf{Sampling}: At each iteration \(k\), generate \(\lambda\) offspring solutions by sampling from the current multivariate normal distribution:
+    \begin{equation}
+    \mathbf{x}_i^{(k)} \sim \mathcal{N}(\mathbf{m}_k, \sigma_k^2 \mathbf{C}_k), \quad i = 1, \dots, \lambda.
+    \end{equation}
+    
+    \item \textbf{Evaluation and Selection}: Evaluate the objective function for each offspring \(\mathbf{x}_i^{(k)}\) and rank them based on their fitness. Select the top \(\mu\) solutions (\(\mu < \lambda\)) for recombination.
+    
+    \item \textbf{Recombination}: Compute the new mean vector as a weighted sum of the selected solutions:
+    \begin{equation}
+    \mathbf{m}_{k+1} = \sum_{i=1}^\mu w_i \mathbf{x}_{i:\lambda}^{(k)},
+    \end{equation}
+    where \(\mathbf{x}_{i:\lambda}\) denotes the \(i\)-th best solution.
+    
+    \item \textbf{Covariance Matrix Adaptation}: The covariance matrix \(\mathbf{C}_k\) is updated to reflect the distribution of successful steps, capturing correlations among variables:
+    \begin{equation}
+    \mathbf{C}_{k+1} = (1 + c_1 \delta(h_\sigma) - c_1 - c_\mu \sum_{j=1}^\mu w_j) \mathbf{C}_k + c_1 \mathbf{p}_c \mathbf{p}_c^\top + c_\mu \sum_{i=1}^\lambda w_i^\text{o} \mathbf{y}_{i:\lambda} \mathbf{y}_{i:\lambda}^\top,
+    \end{equation}
+    where \(\mathbf{p}_c\) is the evolution path for the covariance matrix, \(\mathbf{y}_{i:\lambda} = \frac{\mathbf{x}_{i:\lambda} - \mathbf{m}_k}{\sigma_k}\), and \(c_1, c_\mu\) are adaptation parameters. The term \(\delta(h_\sigma)\) incorporates the Heaviside function:
+    \begin{equation}
+    h_\sigma = 
+    \begin{cases}
+    1, & \text{if } \frac{\|\mathbf{p}_\sigma\|}{\sqrt{1 - (1 - c_\sigma)^{2(g+1)}}} < \left(1.4 + \frac{2}{n+1}\right) \mathbb{E}\|\mathcal{N}(\mathbf{0}, \mathbf{I})\|, \\
+    0, & \text{otherwise}.
+    \end{cases}
+    \end{equation}
+    This condition prevents a too fast increase of axes of \(\mathbf{C}_k\) when the step size is initially set too small or the objective function changes over time. The weights \(w_i^\text{o}\) are calculated as:  
+    \begin{equation}
+    w_i^\text{o} = w_i \times 
+    \begin{cases} 
+    1, & \text{if } w_i \geq 0, \\ 
+    \frac{n}{\|\mathbf{C}^{-\frac{1}{2}} \mathbf{y}_{i:\lambda}\|^2}, & \text{otherwise}.
+    \end{cases}
+    \end{equation}
+    Here, \(n\) is the problem dimension, and \(\mathbf{C}^{-\frac{1}{2}}\) is the inverse square root of the covariance matrix. This adjustment ensures that the covariance matrix adaptation is robust and efficient, even in challenging optimization landscapes.
+
+    
+    \item \textbf{Evolution Paths}: CMA-ES uses evolution paths to track the progress of the search and guide the adaptation of the covariance matrix and step size:
+    \begin{itemize}
+        \item The evolution path for the covariance matrix, \(\mathbf{p}_c\), accumulates successive step directions:
+        \begin{equation}
+        \mathbf{p}_c = (1 - c_c) \mathbf{p}_c + \sqrt{c_c (2 - c_c) \mu_\text{eff}} \frac{\mathbf{m}_{k+1} - \mathbf{m}_k}{\sigma_k},
+        \end{equation}
+        where \(c_c\) is the learning rate, and \(\mu_\text{eff}\) is the effective number of selected solutions.
+        
+        \item The evolution path for step size, \(\mathbf{p}_\sigma\), adapts the step size dynamically based on the normalized step directions:
+        \begin{equation}
+        \mathbf{p}_\sigma = (1 - c_\sigma) \mathbf{p}_\sigma + \sqrt{c_\sigma (2 - c_\sigma) \mu_\text{eff}} \mathbf{C}_k^{-\frac{1}{2}} \frac{\mathbf{m}_{k+1} - \mathbf{m}_k}{\sigma_k},
+        \end{equation}
+        where \(c_\sigma\) is the learning rate for step size adaptation.
+    \end{itemize}
+    
+    \item \textbf{Step Size Adaptation}: Adjust the step size \(\sigma_k\) using the evolution path \(\mathbf{p}_\sigma\):
+    \begin{equation}
+    \sigma_{k+1} = \sigma_k \exp\left(\frac{c_\sigma}{d_\sigma} \left(\frac{\|\mathbf{p}_\sigma\|}{\mathbb{E}[\|\mathcal{N}(0, \mathbf{I})\|]} - 1\right)\right),
+    \end{equation}
+    where \(d_\sigma\) is a damping factor.
+\end{itemize}
+
+\ac{cmaes} balances exploration and exploitation through the adaptive covariance matrix and step size, making it highly robust and effective in diverse optimization tasks. While computationally intensive due to the covariance matrix updates, its ability to navigate complex landscapes and adapt to problem structure has made \ac{cmaes} a benchmark algorithm in the field of black-box optimization.
+
 
 \section{Black-box Optimization}
 \label{section:black_box_optimization}
@@ -588,51 +982,53 @@ where $n_i$ is the number of times arm $i$ has been pulled, and $\ln t$ encourag
 where $\mu_i^{(t)}$ is a sample from the posterior distribution of arm $i$. \ac{ts} has been shown to achieve asymptotically optimal regret in many settings \citep{agrawal2012analysis}.
 
 \subsubsection{Contextual Bandits}
-Contextual bandits extend the multi-armed bandit framework by introducing a context $\mathbf{c}_t \in \mathcal{C}$ at each round $t$. This context provides additional information to inform the decision-making process, allowing for more tailored arm selections. The challenge lies in effectively modeling the relationship between context and reward, as well as balancing exploration and exploitation in this extended setting. At each step, the algorithm observes a context vector $\mathbf{x}_t$ before selecting an arm. The objective is to learn a mapping from contexts to arm selection policies that maximize cumulative rewards. This framework has found widespread applications in areas such as personalized recommendations and adaptive experimentation \citep{li2010contextual}. In contrast to traditional multi-armed bandits, contextual bandits incorporate context, making them a key tool in reinforcement learning.
+Contextual bandits extend the multi-armed bandit framework by introducing a context $\mathbf{c}_t \in \mathcal{C}$ at each round $t$. This context provides additional information to inform the decision-making process, allowing for more tailored arm selections. The challenge lies in effectively modeling the relationship between context and reward, as well as balancing exploration and exploitation in this extended setting. At each step, the algorithm observes a context vector $\mathbf{x}_t$ before selecting an arm. The objective is to learn a mapping from contexts to arm selection policies that maximize cumulative rewards. This framework has found widespread applications in areas such as personalized recommendations and adaptive experimentation \citep{li2010contextual}. In contrast to traditional multi-armed bandits, contextual bandits incorporate context. This integration allows for more adaptive and precise policy learning, which is crucial in dynamic and personalized environments.
  
-Formally, contextual bandit problems involve a sequential decision-making process where, at each time step $t$, an agent observes a \textit{context} $\mathbf{x}_t \in \mathcal{X}$, selects an \textit{action} $a_t \in \mathcal{A}$, and receives a \textit{reward} $r_t$. Unlike standard \ac{mab} problems, contextual bandits leverage the context $\mathbf{x}_t$ to inform the action selection process. The objective is to maximize the cumulative reward over a sequence of interactions. This involves a trade-off between exploring different actions to learn their potential rewards and exploiting actions that are known to produce good rewards given the current context.
+Formally, contextual bandit problems involve a sequential decision-making process where, at each time step $t$, an agent observes a \textit{context} $\mathbf{x}_t \in \mathcal{X}$, selects an \textit{action} $a_t \in \mathcal{A}$, and receives a \textit{reward} $r_t$. Unlike standard \ac{mab} problems, contextual bandits leverage the context $\mathbf{x}_t$ to inform the action selection process.  The objective is to maximize the cumulative reward over a sequence of interactions.  Having established the problem setting of contextual bandits, we now present the general step of a standard Contextual Bandit Algorithm.
 
+\paragraph{Steps in a Contextual Bandit Algorithm.}
+A standard contextual bandit algorithm typically proceeds as follows:
+\begin{enumerate}
+    \item \textbf{Observe context:} A new data point arrives, described by a context $\mathbf{c}_t$ (e.g., a user with specific attributes such as device type and location).
+    \item \textbf{Select action:} Based on the observed context and the exploration strategy (e.g., $\epsilon$-greedy or Thompson Sampling), the algorithm selects an action $a_t$ (e.g., a recommendation or treatment).
+    \item \textbf{Receive reward:} After the action is performed, the algorithm observes the outcome $r_t$ (e.g., a user's response or purchase behavior).
+    \item \textbf{Update model:} The model is updated using the new context-action-reward tuple. To reduce noise, updates are often performed in batches rather than after every single sample.
+    \item \textbf{Repeat:} This process continues over multiple rounds to optimize the cumulative reward.
+\end{enumerate}
 
-\paragraph{Role of Context.} 
-In contextual bandits, the context $\mathbf{c}_t$ acts as side information that is observed before selecting an arm. It allows the decision-making process to tailor its choices based on specific situations. However, this context introduces challenges such as:
-\begin{itemize}
-    \item Modeling the reward function $r(\mathbf{c}_t, a)$, which maps context-arm pairs to rewards.
-    \item Managing the complexity of high-dimensional contexts while ensuring computational tractability.
-\end{itemize}
-
-\paragraph{Exploration in Context-Space.}
-Unlike classical multi-armed bandits, where exploration focuses solely on the arms, contextual bandits require exploration across both arms and the context space. This dual exploration-exploitation trade-off leads to questions such as:
+In contextual bandits, the context $\mathbf{c}_t$ acts as side information that is observed before selecting an arm. This involves a trade-off between exploring different actions to learn their potential rewards and exploiting actions that are known to produce good rewards given the current context. However, unlike classical multi-armed bandits, where exploration focuses solely on the arms, contextual bandits require exploration across both arms and the context space. This dual exploration-exploitation trade-off leads to questions such as:
 \begin{itemize}
     \item Should rare or less-sampled contexts be prioritized during exploration?
     \item How can the algorithm balance exploring unseen arms versus unseen contexts?
 \end{itemize}
+Furthermore, the success of contextual bandit algorithms heavily depends on the choice of the model used to estimate the expected reward. Hence, it introduces challenges such as modeling the reward function $r(\mathbf{c}_t, a)$, which maps context-arm pairs to rewards or managing the complexity of high-dimensional contexts while ensuring computational tractability. To address these challenges, it is crucial to select robust methods for modeling the reward function. A well-suited model not only needs to capture the underlying patterns and dependencies accurately but also maintain a balance between computational efficiency and predictive performance.
 
 \paragraph{Modeling the Reward Function.} 
-The success of contextual bandit algorithms heavily depends on the choice of the model used to estimate the expected reward $\mathbb{E}[r_t \mid \mathbf{c}_t, a]$:
+$\mathbb{E}[r_t \mid \mathbf{c}_t, a]$:
 \begin{itemize}
     \item Linear models offer simplicity and computational efficiency but are limited in capturing non-linear relationships.
     \item Non-linear models, such as neural networks, provide flexibility but come at the cost of increased computational overhead and the need for larger datasets to generalize effectively.
 \end{itemize}
 
-\paragraph{Regret Bounds and Guarantees.} 
-Theoretical guarantees for contextual bandits typically rely on assumptions about the reward function. For instance:
-\begin{itemize}
-    \item When the reward function is linear, algorithms like LinUCB \citep{li2010contextual} achieve optimal regret bounds of $\mathcal{O}(\sqrt{T})$.
-    \item For non-linear functions, more general algorithms like Thompson Sampling \citep{russo2018tutorial} or neural network-based approaches \citep{riquelme2018deep} are used, but their guarantees often depend on specific problem settings.
-\end{itemize}
 
-To address these challenges, various algorithms have been proposed using both linear and non-linear models to estimate rewards. In the next subsections, we will delve into some of these algorithms.
+To address these challenges, various algorithms have been proposed using both linear and non-linear models to estimate rewards. In the next subsections, we will explore some of these algorithms.
+
+% \paragraph{Regret Bounds and Guarantees.} 
+% Theoretical guarantees for contextual bandits typically rely on assumptions about the reward function. For instance:
+% \begin{itemize}
+%     \item When the reward function is linear, algorithms like LinUCB \citep{li2010contextual} achieve optimal regret bounds of $\mathcal{O}(\sqrt{T})$.
+%     \item For non-linear functions, more general algorithms like Thompson Sampling \citep{russo2018tutorial} or neural network-based approaches \citep{riquelme2018deep} are used, but their guarantees often depend on specific problem settings.
+% \end{itemize}
 
 \subsubsection{Linear Bandits}
 Linear models assume that the expected reward for a given context and action can be represented as a linear combination of some features. Specifically, we assume there exists an unknown parameter vector $\boldsymbol{\theta}$ such that the expected reward can be approximated by the inner product of this vector with a context-action feature vector:
 \begin{equation}
-    \mathbb{E}[r_t | \mathbf{x}_t, a_t] = \boldsymbol{\theta}^T \phi(\mathbf{x}_t, a_t)
+    \mathbb{E}[r_t | \mathbf{c}_t, a_t] = \boldsymbol{\theta}^T \phi(\mathbf{c}_t, a_t)
 \end{equation}
-where $\phi(\mathbf{x}_t, a_t)$ is the feature mapping of context $\mathbf{x}_t$ and action $a_t$ into a feature vector.
+where $\phi(\mathbf{c}_t, a_t)$ is the feature mapping of context $\mathbf{c}_t$ and action $a_t$ into a feature vector.
 
-\paragraph{Key Algorithms}
-\begin{itemize}
-    \item \textbf{Linear Upper Confidence Bound (LinUCB)}: LinUCB operates by maintaining an estimate of the parameter vector $\boldsymbol{\theta}$, and using confidence bounds to balance exploration and exploitation. It calculates an upper confidence bound on the expected reward using a known hyper parameter $\alpha$ to balance exploration/exploitation trade-off. At each time step, the action that maximizes the upper confidence bound is selected. The algorithm works as follows:
+\paragraph{Linear Upper Confidence Bound (LinUCB) Algorithm}
+LinUCB operates by maintaining an estimate of the parameter vector $\boldsymbol{\theta}$, and using confidence bounds to balance exploration and exploitation. It calculates an upper confidence bound on the expected reward using a known hyper-parameter $\alpha$ to balance exploration/exploitation trade-off. At each time step, the action that maximizes the upper confidence bound is selected. The algorithm works as follows:
     \begin{enumerate}
         \item Initialize $\mathbf{A}_0 = \mathbf{I}$ (identity matrix), $\mathbf{b}_0 = \mathbf{0}$, $\hat{\boldsymbol{\theta}}_0 = \mathbf{0}$.
         \item At each time step $t$:
@@ -652,7 +1048,7 @@ where $\phi(\mathbf{x}_t, a_t)$ is the feature mapping of context $\mathbf{x}_t$
               \end{align*}
           \end{enumerate}
     \end{enumerate}
-    \item \textbf{Thompson Sampling for Linear Models}: Thompson Sampling for linear bandits also attempts to learn the weight vector $\boldsymbol{\theta}$ by maintaining a posterior distribution over these weights. At each step, the agent samples a weight vector from the posterior, and uses this weight vector to select the action that maximizes the reward. The algorithm works as follows:
+\paragraph{Thompson Sampling for Linear Models}: \acf{ts} for linear bandits also attempts to learn the weight vector $\boldsymbol{\theta}$ by maintaining a posterior distribution over these weights. At each step, the agent samples a weight vector from the posterior, and uses this weight vector to select the action that maximizes the reward. The algorithm works as follows:
     \begin{enumerate}
     \item Initialize the posterior using a prior distribution for $\boldsymbol{\theta}$ and a covariance matrix. Usually a gaussian distribution is used for the prior.
     \item At each time step $t$:
@@ -664,27 +1060,50 @@ where $\phi(\mathbf{x}_t, a_t)$ is the feature mapping of context $\mathbf{x}_t$
         \item Update the posterior distribution based on observation.
       \end{enumerate}
     \end{enumerate}
-\end{itemize}
 
-\paragraph{Advantages of Linear Models}
-Linear models offer several advantages:
-\begin{itemize}
-    \item \textbf{Computational Efficiency}: They are often faster to compute and require fewer resources to implement.
-    \item \textbf{Simplicity}: Linear models are easier to understand and implement.
-    \item \textbf{Theoretical Guarantees}: There is often established theory providing performance bounds.
-\end{itemize}
+Linear models offer several advantages, making them a popular choice in contextual bandit algorithms. They are computationally efficient, requiring fewer resources and enabling faster computations, which is particularly valuable in large-scale applications. Their simplicity makes them easier to understand and implement, reducing the complexity of algorithm design. Additionally, linear models often come with well-established theoretical guarantees, providing performance bounds that enhance their reliability. However, these models also have notable limitations. They struggle to capture complex non-linear relationships, which can result in poor performance when the underlying connection between context, action, and reward deviates from linearity. Furthermore, their effectiveness heavily depends on the quality of feature mappings, as the performance hinges on well-designed features in $\phi(\mathbf{x}_t, a_t)$. To mitigate these limitations, proper feature engineering and careful tuning of hyperparameters are critical to achieving good performance with linear bandit algorithms.
+To address the limitations of linear models in capturing complex relationships, non-linear models offer a more flexible and expressive alternative. 
 
-\paragraph{Limitations of Linear Models}
-Despite their advantages, linear models have limitations:
-\begin{itemize}
-    \item \textbf{Inability to Capture Complex Non-Linearities}: They may perform poorly if the underlying relationship between the context, action, and reward is non-linear.
-    \item \textbf{Reliance on Feature Mapping}: The quality of the features in $\phi(\mathbf{x}_t,a_t)$ is crucial for performance.
-\end{itemize}
-
-\paragraph{Practical Considerations}
-Proper feature engineering and careful tuning of hyperparameters are essential to achieving good performance with linear bandit algorithms.
 
 \subsubsection{Non-Linear Bandits}
+Non-linear models relax the linearity assumption and allow the expected reward for a given context and action to be represented by more complex, non-linear functions. These models aim to capture intricate relationships between the context, action, and reward, which are often observed in real-world scenarios. Formally, we assume the expected reward can be expressed as:
+\begin{equation}
+    \mathbb{E}[r_t | \mathbf{c}_t, a_t] = f(\mathbf{x}_t, \boldsymbol{theta_t}),
+\end{equation}
+where $f$ is a non-linear function, such as a neural network, and $\mathbf{x}_t  = \phi(\mathbf{c}_t, a_t)$ is the feature mapping of the context $\mathbf{c}_t$ and action $a_t$.
+
+\paragraph{Neural Upper Confidence Bound (NeuralUCB) Algorithm}
+NeuralUCB extends the idea of LinUCB by using a neural network to model the reward function. Instead of maintaining a linear estimate of $\boldsymbol{\theta}$, the algorithm trains a neural network to approximate the reward function, while maintaining an exploration bonus based on the model’s uncertainty. The steps are as follows:
+\begin{enumerate}
+    \item Initialize the neural network $f_\theta$ with random weights and set the exploration parameter $\alpha$.
+    \item At each time step $t$:
+    \begin{enumerate}
+        \item Observe context $\mathbf{x}_t$.
+        \item For each action $a \in \mathcal{A}$, compute:
+        \begin{align*}
+            \hat{r}_t(a) &= f_\theta(\phi(\mathbf{x}_t, a)) + \alpha \sqrt{u_t(\phi(\mathbf{x}_t, a))},
+        \end{align*}
+        where $u_t$ is an uncertainty estimate (e.g., derived from a Bayesian approximation or ensemble models).
+        \item Select action $a_t = \text{argmax}_{a \in \mathcal{A}} \hat{r}_t(a)$.
+        \item Observe reward $r_t$ and update the neural network parameters $\theta$ to minimize the prediction error.
+    \end{enumerate}
+\end{enumerate}
+
+\paragraph{Thompson Sampling for Non-Linear Models}
+Thompson Sampling can also be extended to non-linear models by maintaining a distribution over the parameters of the non-linear model (e.g., neural network weights). At each time step, the algorithm samples a model from the posterior distribution, selects the action that maximizes the reward based on the sampled model, and updates the posterior using the observed data. The steps are as follows:
+\begin{enumerate}
+    \item Initialize a prior distribution over the parameters of the non-linear model (e.g., a Bayesian neural network or ensemble).
+    \item At each time step $t$:
+    \begin{enumerate}
+        \item Observe context $\mathbf{x}_t$.
+        \item Sample model parameters $\hat{\theta}_t$ from the posterior distribution.
+        \item Select action $a_t = \text{argmax}_{a \in \mathcal{A}} f_{\hat{\theta}_t}(\phi(\mathbf{x}_t, a))$.
+        \item Observe reward $r_t$ and update the posterior distribution.
+    \end{enumerate}
+\end{enumerate}
+
+Non-linear models address the limitations of linear models by providing the flexibility to capture complex and non-linear relationships in the data. This makes them particularly effective in scenarios with intricate dependencies between context, action, and reward. However, this flexibility comes with trade-offs. Non-linear models often require significantly more computational resources and larger datasets to achieve reliable generalization. Moreover, they are more prone to overfitting and require careful regularization and hyperparameter tuning. Despite these challenges, advances in neural network architectures and training techniques have made non-linear models increasingly viable for bandit problems, enabling their application to more complex and high-dimensional contexts.
+
 
 \paragraph{Introduction to Non-Linear Models}
 Non-linear models extend the capabilities of contextual bandits to handle situations where the reward function cannot be adequately approximated using linear models. These models allow for more complex relationships between contexts, actions, and rewards.
@@ -760,6 +1179,18 @@ Recent research has explored penalty functions and primal-dual methods to handle
 Alongside empirical advancements, recent theoretical works have started to address the absence of formal guarantees in Constrained Black-box Optimization (CBO). For example, \citet{lu2022no} introduced a penalty-based regret bound that combines the regret from the objective function with penalties for constraint violations. \citet{xu2023constrained} expanded this analysis by separately evaluating cumulative regret and constraint violations. In contrast, \citet{nguyen2023optimistic} provided a theoretical performance guarantee for CBO under unknown constraints in a \textit{decoupled} setting, where cumulative regret is calculated as the sum of both objective function regret and constraint violations.
 \section{Black-box Optimization with Physical Information}
 \label{section:bo_physics}
+
+In the realm of objective functions encountered in scientific and engineering domains, many are governed by \acfp{pde}. These equations encapsulate the fundamental laws of physics that describe how systems evolve over time and space. For example, the heat equations describe the distribution of heat in a given space over time, the Navier-Stokes equations describe how the velocity, pressure, and density of a fluid change over time and space. They take into account factors such as the viscosity (resistance to flow) of the fluid and external forces acting upon it. Furthermore, physical laws being implied in \ac{pde} can also be found in structural analysis or electromagnetics, to name a few. Notably, recent efforts have been made to integrate PDE knowledge into objective function models. \citet{raissi2017machine}introduced a new method using Gaussian Processes Regression (GPR) with a unique four-block covariance kernel, enabling the utilization of observations from both the objective function and the \acp{pde}. Another approach, as described in \cite{jidling2017linearly}, proposes a specialized covariance kernel to constrain \acfp{gp} using differential equations. Unlike the method in \cite{raissi2017machine}, this approach enforces the constraint globally instead of relying on specific data points. This not only provides a stronger constraint but also eliminates the computational burden associated with the four-block covariance matrix. For more details, see \cite{swiler2020survey}. Recently, \cite{chen2021solving} proposed a numerical algorithm to approximate the solution of a given non-linear \ac{pde} as a Maximum a Posteriori (MAP) estimator of a \ac{gp} conditioned on a finite set of data points from the \ac{pde}. Remarkably, their approach offers guaranteed convergence for a broad and inclusive class of \acp{pde}. Despite the promising potential of \acp{gp} in solving \acp{pde}, \acp{gp} have a limitation as their computational scalability is a critical problem. The kernel matrix inversion when updating the posterior of a \ac{gp} exhibits cubic complexity in the number of data points.      
+
+
+Recently, the Physics-Informed Neural Network (PINN) was introduced \cite{raissi2019physics,yang2021b}, which offers a viable approach for tackling general PDEs. Unlike GP, PINN leverages the expressive power of neural networks to approximate complex, nonlinear relationships within the data. This inherent flexibility enables PINN to handle a broader range of PDEs including nonlinear PDEs, making them well-suited for diverse scientific and engineering applications. Further, there is research providing a deeper insight into the theoretical aspect of incorporating the PDEs using PINN \cite{schiassi2021extreme,wangL2}, and analyzing the connection between GP and PINN models to learn the underlying functions that satisfy PDE equations \cite{wang2022and}. 
+
+As the PDEs hold promise as a valuable source of information, they could greatly improve the modeling of the black-box function and thus help towards sample-efficient optimization, reducing the number of function evaluations. It is worth noting that there has been relatively little exploration of how PDEs can be leveraged in the context of black-box optimization settings, where the objective function is treated as an unknown and potentially noisy function. 
+In this paper, we consider a global optimization problem setting where the objective function $f \colon \mathcal{D} \rightarrow \mathbb{R}$ is associated with a PDE:   
+\begin{equation*}
+        \underset{\mathbf{x} \in \mathcal{D}}{\min} f(\mathbf{x}) \text{ s.t. }  \mathcal{N}[f](\mathbf{x}) = g(\mathbf{x}),
+\end{equation*} 
+where $\mathcal{D} \subset \mathbb{R}^d$ is a $d$-dimensional bounded domain and $\mathcal{N}[f]$ denotes a differential operator of the function $f$ with respect to the input $\mathbf{x}$. The function $f$ is an expensive, black-box function, and its evaluations are obtainable only through noisy measurements in the form of $y = f(\mathbf{x}) + \epsilon$, where $\epsilon$ represents sub-Gaussian noise, as elaborated later in Section \ref{section:theoretical_analysis}. Additionally, the function $g(\mathbf{x})$ is a cheap-to-evaluate function, which may also involve noise, with respect to the PDE-constraint. For example, consider the damped harmonic oscillator from classical physics as a real-world example where $f(x)$ is the displacement of the oscillator as a black-box function of time $x$, and measuring the displacement of a damped harmonic oscillator accurately can be expensive due to several factors, e.g., instrumentation cost, environmental factors, and calibration requirements. This displacement is governed by the PDE: $m \frac{d^2f}{dx^2} + c \frac{df}{dx} + kf = 0$, where $\mathcal{N}[f](x) = m \frac{d^2f}{dx^2} + c \frac{df}{dx} + kf$, $g(x)=0$, and $m, c, k$ are mass, damping and spring values, respectively. Furthermore, it is assumed that the boundary conditions of the PDEs are either unknown or inaccessible. These assumptions widely hold in many problem settings. As an example, \cite{cai2020heat} examines a two-dimensional heat transfer problem with forced heat convection around a circular cylinder. The heat measurement entails high costs due to the material, size, and shape of the system. The problem has known incompressible Navier-Stokes and heat transfer equations. However, the thermal boundary conditions are difficult to ascertain precisely because of the complex and large instruments. The unavailability of these boundary conditions prevents the straightforward solution of the underlying function $f$ using traditional numerical techniques. 
 
 \section{Further Research in Black-box Optimisation}
 \label{section:bo_further_research}
