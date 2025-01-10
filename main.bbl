@@ -632,6 +632,155 @@
     \field{year}{2018}
   \endentry
 
+  \entry{duan2020ngboost}{inproceedings}{}{}
+    \name{author}{7}{}{%
+      {{hash=DT}{%
+         family={Duan},
+         familyi={D\bibinitperiod},
+         given={Tony},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=AA}{%
+         family={Anand},
+         familyi={A\bibinitperiod},
+         given={Avati},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=DDY}{%
+         family={Ding},
+         familyi={D\bibinitperiod},
+         given={Daisy\bibnamedelima Yi},
+         giveni={D\bibinitperiod\bibinitdelim Y\bibinitperiod},
+      }}%
+      {{hash=TKK}{%
+         family={Thai},
+         familyi={T\bibinitperiod},
+         given={Khanh\bibnamedelima K},
+         giveni={K\bibinitperiod\bibinitdelim K\bibinitperiod},
+      }}%
+      {{hash=BS}{%
+         family={Basu},
+         familyi={B\bibinitperiod},
+         given={Sanjay},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=NA}{%
+         family={Ng},
+         familyi={N\bibinitperiod},
+         given={Andrew},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=SA}{%
+         family={Schuler},
+         familyi={S\bibinitperiod},
+         given={Alejandro},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {PMLR}%
+    }
+    \strng{namehash}{DT+1}
+    \strng{fullhash}{DTAADDYTKKBSNASA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2020}
+    \field{labeldatesource}{}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{booktitle}{International conference on machine learning}
+    \field{pages}{2690\bibrangedash 2700}
+    \field{title}{Ngboost: Natural gradient boosting for probabilistic
+  prediction}
+    \field{year}{2020}
+  \endentry
+
+  \entry{feurer2019hyperparameter}{article}{}{}
+    \name{author}{2}{}{%
+      {{hash=FM}{%
+         family={Feurer},
+         familyi={F\bibinitperiod},
+         given={Matthias},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=HF}{%
+         family={Hutter},
+         familyi={H\bibinitperiod},
+         given={Frank},
+         giveni={F\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer International Publishing}%
+    }
+    \strng{namehash}{FMHF1}
+    \strng{fullhash}{FMHF1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2019}
+    \field{labeldatesource}{}
+    \field{sortinit}{F}
+    \field{sortinithash}{F}
+    \field{pages}{3\bibrangedash 33}
+    \field{title}{Hyperparameter optimization}
+    \field{journaltitle}{Automated machine learning: Methods, systems,
+  challenges}
+    \field{year}{2019}
+  \endentry
+
+  \entry{feurer2015efficient}{article}{}{}
+    \name{author}{6}{}{%
+      {{hash=FM}{%
+         family={Feurer},
+         familyi={F\bibinitperiod},
+         given={Matthias},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=KA}{%
+         family={Klein},
+         familyi={K\bibinitperiod},
+         given={Aaron},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=EK}{%
+         family={Eggensperger},
+         familyi={E\bibinitperiod},
+         given={Katharina},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={Springenberg},
+         familyi={S\bibinitperiod},
+         given={Jost},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=BM}{%
+         family={Blum},
+         familyi={B\bibinitperiod},
+         given={Manuel},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=HF}{%
+         family={Hutter},
+         familyi={H\bibinitperiod},
+         given={Frank},
+         giveni={F\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{FM+1}
+    \strng{fullhash}{FMKAEKSJBMHF1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2015}
+    \field{labeldatesource}{}
+    \field{sortinit}{F}
+    \field{sortinithash}{F}
+    \field{title}{Efficient and robust automated machine learning}
+    \field{volume}{28}
+    \field{journaltitle}{Advances in neural information processing systems}
+    \field{year}{2015}
+  \endentry
+
   \entry{frazier2018tutorial}{article}{}{}
     \name{author}{1}{}{%
       {{hash=FPI}{%
@@ -1297,6 +1446,43 @@
     \field{year}{2013}
   \endentry
 
+  \entry{hutter2013evaluation}{inproceedings}{}{}
+    \name{author}{3}{}{%
+      {{hash=HF}{%
+         family={Hutter},
+         familyi={H\bibinitperiod},
+         given={Frank},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=HH}{%
+         family={Hoos},
+         familyi={H\bibinitperiod},
+         given={Holger},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=LBK}{%
+         family={Leyton-Brown},
+         familyi={L\bibinithyphendelim B\bibinitperiod},
+         given={Kevin},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HFHHLBK1}
+    \strng{fullhash}{HFHHLBK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2013}
+    \field{labeldatesource}{}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{booktitle}{Proceedings of the 15th annual conference companion on
+  Genetic and evolutionary computation}
+    \field{pages}{1209\bibrangedash 1216}
+    \field{title}{An evaluation of sequential model-based optimization for
+  expensive blackbox functions}
+    \field{year}{2013}
+  \endentry
+
   \entry{hutter2011sequential}{inproceedings}{}{}
     \name{author}{3}{}{%
       {{hash=HF}{%
@@ -1592,6 +1778,40 @@
     \field{year}{2018}
   \endentry
 
+  \entry{kim2022uncertainty}{inproceedings}{}{}
+    \name{author}{2}{}{%
+      {{hash=KJ}{%
+         family={Kim},
+         familyi={K\bibinitperiod},
+         given={Jungtaek},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=CS}{%
+         family={Choi},
+         familyi={C\bibinitperiod},
+         given={Seungjin},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {PMLR}%
+    }
+    \strng{namehash}{KJCS1}
+    \strng{fullhash}{KJCS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2022}
+    \field{labeldatesource}{}
+    \field{sortinit}{K}
+    \field{sortinithash}{K}
+    \field{booktitle}{International Conference on Artificial Intelligence and
+  Statistics}
+    \field{pages}{4359\bibrangedash 4375}
+    \field{title}{On uncertainty estimation by tree-based surrogate models in
+  sequential model-based optimization}
+    \field{year}{2022}
+  \endentry
+
   \entry{kingma2014adam}{article}{}{}
     \name{author}{2}{}{%
       {{hash=KDP}{%
@@ -1785,6 +2005,41 @@
     \field{year}{1964}
   \endentry
 
+  \entry{lakshminarayanan2014mondrian}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=LB}{%
+         family={Lakshminarayanan},
+         familyi={L\bibinitperiod},
+         given={Balaji},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=RDM}{%
+         family={Roy},
+         familyi={R\bibinitperiod},
+         given={Daniel\bibnamedelima M},
+         giveni={D\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=TYW}{%
+         family={Teh},
+         familyi={T\bibinitperiod},
+         given={Yee\bibnamedelima Whye},
+         giveni={Y\bibinitperiod\bibinitdelim W\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LBRDMTYW1}
+    \strng{fullhash}{LBRDMTYW1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2014}
+    \field{labeldatesource}{}
+    \field{sortinit}{L}
+    \field{sortinithash}{L}
+    \field{title}{Mondrian forests: Efficient online random forests}
+    \field{volume}{27}
+    \field{journaltitle}{Advances in neural information processing systems}
+    \field{year}{2014}
+  \endentry
+
   \entry{lattimore2020bandit}{book}{}{}
     \name{author}{2}{}{%
       {{hash=LT}{%
@@ -1847,6 +2102,115 @@
     \field{year}{2010}
   \endentry
 
+  \entry{lecun2002efficient}{incollection}{}{}
+    \name{author}{4}{}{%
+      {{hash=LY}{%
+         family={LeCun},
+         familyi={L\bibinitperiod},
+         given={Yann},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=BL}{%
+         family={Bottou},
+         familyi={B\bibinitperiod},
+         given={L{\'e}on},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=OGB}{%
+         family={Orr},
+         familyi={O\bibinitperiod},
+         given={Genevieve\bibnamedelima B},
+         giveni={G\bibinitperiod\bibinitdelim B\bibinitperiod},
+      }}%
+      {{hash=MKR}{%
+         family={M{\"u}ller},
+         familyi={M\bibinitperiod},
+         given={Klaus-Robert},
+         giveni={K\bibinithyphendelim R\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{LY+1}
+    \strng{fullhash}{LYBLOGBMKR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2002}
+    \field{labeldatesource}{}
+    \field{sortinit}{L}
+    \field{sortinithash}{L}
+    \field{booktitle}{Neural networks: Tricks of the trade}
+    \field{pages}{9\bibrangedash 50}
+    \field{title}{Efficient backprop}
+    \field{year}{2002}
+  \endentry
+
+  \entry{lei2021bayesian}{article}{}{}
+    \name{author}{7}{}{%
+      {{hash=LB}{%
+         family={Lei},
+         familyi={L\bibinitperiod},
+         given={Bowen},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=KTQ}{%
+         family={Kirk},
+         familyi={K\bibinitperiod},
+         given={Tanner\bibnamedelima Quinn},
+         giveni={T\bibinitperiod\bibinitdelim Q\bibinitperiod},
+      }}%
+      {{hash=BA}{%
+         family={Bhattacharya},
+         familyi={B\bibinitperiod},
+         given={Anirban},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=PD}{%
+         family={Pati},
+         familyi={P\bibinitperiod},
+         given={Debdeep},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=QX}{%
+         family={Qian},
+         familyi={Q\bibinitperiod},
+         given={Xiaoning},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=AR}{%
+         family={Arroyave},
+         familyi={A\bibinitperiod},
+         given={Raymundo},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=MBK}{%
+         family={Mallick},
+         familyi={M\bibinitperiod},
+         given={Bani\bibnamedelima K},
+         giveni={B\bibinitperiod\bibinitdelim K\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Nature Publishing Group UK London}%
+    }
+    \strng{namehash}{LB+1}
+    \strng{fullhash}{LBKTQBAPDQXARMBK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2021}
+    \field{labeldatesource}{}
+    \field{sortinit}{L}
+    \field{sortinithash}{L}
+    \field{number}{1}
+    \field{pages}{194}
+    \field{title}{Bayesian optimization with adaptive surrogate models for
+  automated experimental design}
+    \field{volume}{7}
+    \field{journaltitle}{Npj Computational Materials}
+    \field{year}{2021}
+  \endentry
+
   \entry{letham2019constrained}{article}{}{}
     \name{author}{4}{}{%
       {{hash=LB}{%
@@ -1874,7 +2238,7 @@
          giveni={E\bibinitperiod},
       }}%
     }
-    \strng{namehash}{LB+1}
+    \strng{namehash}{LB+2}
     \strng{fullhash}{LBKBOGBE1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
@@ -1986,6 +2350,127 @@
     \field{title}{A contextual-bandit approach to personalized news article
   recommendation}
     \field{year}{2010}
+  \endentry
+
+  \entry{lim2021extrapolative}{article}{}{}
+    \name{author}{4}{}{%
+      {{hash=LYF}{%
+         family={Lim},
+         familyi={L\bibinitperiod},
+         given={Yee-Fun},
+         giveni={Y\bibinithyphendelim F\bibinitperiod},
+      }}%
+      {{hash=NCK}{%
+         family={Ng},
+         familyi={N\bibinitperiod},
+         given={Chee\bibnamedelima Koon},
+         giveni={C\bibinitperiod\bibinitdelim K\bibinitperiod},
+      }}%
+      {{hash=VU}{%
+         family={Vaitesswar},
+         familyi={V\bibinitperiod},
+         given={US},
+         giveni={U\bibinitperiod},
+      }}%
+      {{hash=HK}{%
+         family={Hippalgaonkar},
+         familyi={H\bibinitperiod},
+         given={Kedar},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Wiley Online Library}%
+    }
+    \strng{namehash}{LYF+1}
+    \strng{fullhash}{LYFNCKVUHK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2021}
+    \field{labeldatesource}{}
+    \field{sortinit}{L}
+    \field{sortinithash}{L}
+    \field{number}{11}
+    \field{pages}{2100101}
+    \field{title}{Extrapolative Bayesian optimization with Gaussian process and
+  neural network ensemble surrogate models}
+    \field{volume}{3}
+    \field{journaltitle}{Advanced Intelligent Systems}
+    \field{year}{2021}
+  \endentry
+
+  \entry{lindauer2022smac3}{article}{}{}
+    \name{author}{9}{}{%
+      {{hash=LM}{%
+         family={Lindauer},
+         familyi={L\bibinitperiod},
+         given={Marius},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=EK}{%
+         family={Eggensperger},
+         familyi={E\bibinitperiod},
+         given={Katharina},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=FM}{%
+         family={Feurer},
+         familyi={F\bibinitperiod},
+         given={Matthias},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=BA}{%
+         family={Biedenkapp},
+         familyi={B\bibinitperiod},
+         given={Andr{\'e}},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=DD}{%
+         family={Deng},
+         familyi={D\bibinitperiod},
+         given={Difan},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=BC}{%
+         family={Benjamins},
+         familyi={B\bibinitperiod},
+         given={Carolin},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=RT}{%
+         family={Ruhkopf},
+         familyi={R\bibinitperiod},
+         given={Tim},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=SR}{%
+         family={Sass},
+         familyi={S\bibinitperiod},
+         given={Ren{\'e}},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=HF}{%
+         family={Hutter},
+         familyi={H\bibinitperiod},
+         given={Frank},
+         giveni={F\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LM+1}
+    \strng{fullhash}{LMEKFMBADDBCRTSRHF1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2022}
+    \field{labeldatesource}{}
+    \field{sortinit}{L}
+    \field{sortinithash}{L}
+    \field{number}{54}
+    \field{pages}{1\bibrangedash 9}
+    \field{title}{SMAC3: A versatile Bayesian optimization package for
+  hyperparameter optimization}
+    \field{volume}{23}
+    \field{journaltitle}{Journal of Machine Learning Research}
+    \field{year}{2022}
   \endentry
 
   \entry{lu2022no}{article}{}{}
@@ -2141,6 +2626,73 @@
   Representations}
     \field{title}{Optimistic Bayesian Optimization with Unknown Constraints}
     \field{year}{2023}
+  \endentry
+
+  \entry{nickson2014automated}{article}{}{}
+    \name{author}{4}{}{%
+      {{hash=NT}{%
+         family={Nickson},
+         familyi={N\bibinitperiod},
+         given={Thomas},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=OMA}{%
+         family={Osborne},
+         familyi={O\bibinitperiod},
+         given={Michael\bibnamedelima A},
+         giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+      {{hash=RS}{%
+         family={Reece},
+         familyi={R\bibinitperiod},
+         given={Steven},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=RSJ}{%
+         family={Roberts},
+         familyi={R\bibinitperiod},
+         given={Stephen\bibnamedelima J},
+         giveni={S\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{NT+1}
+    \strng{fullhash}{NTOMARSRSJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2014}
+    \field{labeldatesource}{}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{title}{Automated machine learning on big data using stochastic
+  algorithm tuning}
+    \field{journaltitle}{arXiv preprint arXiv:1407.7969}
+    \field{year}{2014}
+  \endentry
+
+  \entry{nielsen2016tree}{thesis}{}{}
+    \name{author}{1}{}{%
+      {{hash=ND}{%
+         family={Nielsen},
+         familyi={N\bibinitperiod},
+         given={Didrik},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ND1}
+    \strng{fullhash}{ND1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2016}
+    \field{labeldatesource}{}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{title}{Tree boosting with xgboost-why does xgboost win every machine
+  learning competition?}
+    \list{institution}{1}{%
+      {NTNU}%
+    }
+    \field{type}{mathesis}
+    \field{year}{2016}
   \endentry
 
   \entry{nour2020novel}{article}{}{}
@@ -2640,6 +3192,46 @@
     \field{year}{1998}
   \endentry
 
+  \entry{scillitoe2021uncertainty}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=SA}{%
+         family={Scillitoe},
+         familyi={S\bibinitperiod},
+         given={Ashley},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=SP}{%
+         family={Seshadri},
+         familyi={S\bibinitperiod},
+         given={Pranay},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=GM}{%
+         family={Girolami},
+         familyi={G\bibinitperiod},
+         given={Mark},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier}%
+    }
+    \strng{namehash}{SASPGM1}
+    \strng{fullhash}{SASPGM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2021}
+    \field{labeldatesource}{}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{pages}{110116}
+    \field{title}{Uncertainty quantification for data-driven turbulence
+  modelling with Mondrian forests}
+    \field{volume}{430}
+    \field{journaltitle}{Journal of Computational Physics}
+    \field{year}{2021}
+  \endentry
+
   \entry{shahriari2015taking}{article}{}{}
     \name{author}{5}{}{%
       {{hash=SB}{%
@@ -3082,6 +3674,64 @@
     \field{title}{Sequential and parallel constrained max-value entropy search
   via information lower bound}
     \field{year}{2022}
+  \endentry
+
+  \entry{thebelt2021entmoot}{article}{}{}
+    \name{author}{6}{}{%
+      {{hash=TA}{%
+         family={Thebelt},
+         familyi={T\bibinitperiod},
+         given={Alexander},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=KJ}{%
+         family={Kronqvist},
+         familyi={K\bibinitperiod},
+         given={Jan},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=MM}{%
+         family={Mistry},
+         familyi={M\bibinitperiod},
+         given={Miten},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=LRM}{%
+         family={Lee},
+         familyi={L\bibinitperiod},
+         given={Robert\bibnamedelima M},
+         giveni={R\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=SMN}{%
+         family={Sudermann-Merx},
+         familyi={S\bibinithyphendelim M\bibinitperiod},
+         given={Nathan},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=MR}{%
+         family={Misener},
+         familyi={M\bibinitperiod},
+         given={Ruth},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier}%
+    }
+    \strng{namehash}{TA+1}
+    \strng{fullhash}{TAKJMMLRMSMNMR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2021}
+    \field{labeldatesource}{}
+    \field{sortinit}{T}
+    \field{sortinithash}{T}
+    \field{pages}{107343}
+    \field{title}{ENTMOOT: A framework for optimization over ensemble tree
+  models}
+    \field{volume}{151}
+    \field{journaltitle}{Computers \& Chemical Engineering}
+    \field{year}{2021}
   \endentry
 
   \entry{thompson1933likelihood}{article}{}{}

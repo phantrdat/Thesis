@@ -1,24 +1,26 @@
-\chapter{Black-box Optimization with Unknown Black-box Constraints via Overparametrized Deep Neural Networks} % Main chapter title
+\chapter{Black-box Optimization with Unknown Black-box Constraints via Overparameterized Deep Neural Networks} % Main chapter title
 
 \label{chap:neural-cbo} % For referencing the chapter elsewhere, use \ref{chap:background}
 
-Black-box Optimization with \textit{unknown constraints} (CBO) methods modify the acquisition function to account for constraints, ensuring feasible solutions that satisfy these conditions while optimizing the objective function. Among these methods, Expected Improvement with Constraints (cEI), first introduced by \citet{schonlau1998global} and later extended by \citet{gardner2014bayesian} and \citet{gelbart2014bayesian}, has been particularly influential. By incorporating feasibility into the acquisition process, cEI directs the optimization toward regions likely to contain feasible solutions. Recent advancements, such as the quasi-Monte Carlo approximation by \citet{letham2019constrained}, have further enhanced cEI's robustness in noisy environments.
+\acl{bo} with \textit{unknown constraints} (CBO) adjusts the acquisition function to find solutions that satisfy constraints while optimizing the objective function. A well-known method, Expected Improvement with Constraints (cEI), incorporates feasibility into the optimization process, focusing on regions likely to contain feasible solutions.
 
-Despite the effectiveness of EI-based methods, they encounter challenges in specific scenarios, such as when no feasible points are available or in high-dimensional search spaces. These limitations have driven the development of alternative approaches like Predictive Entropy Search with Constraints (PESC), introduced by \citet{hernandez2015predictive}, which focuses on uncertainty reduction within feasible regions. However, computational complexities associated with quadrature sampling have restricted its practical applicability. Recent innovations, such as the Min-Value Entropy Search method proposed by \citet{takeno2022sequential}, have simplified sampling procedures, offering a more tractable solution.
+Alternative approaches, such as Predictive Entropy Search with Constraints (PESC) \citep{hernandez2015predictive}, Min-Value Entropy Search \citep{takeno2022sequential}, Augmented Lagrangian Bayesian Optimization (ALBO) \citep{gramacy2016modeling}, and Bayesian Optimization with Unknown Constraints using the Alternating Direction Method of Multipliers (ADMMBO) \citep{ariafar2019admmbo}, use various techniques, from information-theoretic methods to numerical optimization strategies, as discussed in Section \ref{section:bo_unknown_constraints}. However, these methods rely on \acp{gp} as surrogate models, which suffer from poor computational scalability. The cubic complexity of kernel matrix inversion becomes impractical as the number of constraints increases.
 
-Numerical optimization has also emerged as a promising tool for addressing black-box constraints by reformulating constrained problems into simpler unconstrained ones. Techniques like Augmented Lagrangian Bayesian Optimization (ALBO) by \citet{gramacy2016modeling} and its variant Slack-AL by \citet{picheny2016bayesian} use Augmented Lagrangian Functions (ALF) to iteratively solve reformulated surrogate problems. Recently, \citet{ariafar2019admmbo} introduced ADMMBO, which applies the Alternating Direction Method of Multipliers (ADMM) technique to transform constrained problems into equivalent unconstrained optimization problems. While effective, these methods often require additional variables, increasing computational costs and limiting scalability.
+In contrast, \acp{dnn} provide a scalable alternative. They perform exceptionally well in feature extraction and maintain linear complexity as the dataset size grows. While \acp{dnn} have been successful in unconstrained black-box optimization \citep{snoek2015scalable} and contextual bandits in discrete search spaces \citep{zhou2020neural,zhang2021neural}, their application to constrained black-box optimization with theoretical guarantees remains largely unexplored. This gap motivates the development of neural network-based methods for CBO.
 
-To further enhance CBO, penalty functions and primal-dual methods have been employed to handle constraint violations during optimization. For instance, \citet{lu2022no} proposed a penalty-function approach that adds a penalty term to the objective function for violations, converting the constrained problem into an unconstrained one. Similarly, \citet{zhou2022kernelized} introduced a primal-dual approach that balances optimizing the objective with minimizing violations. However, these methods often rely on careful parameter tuning, making their implementation more challenging.
+In Chapter \ref{chap:neural-cbo}, we inherited a similar motivation as in Chapter \ref{chap:neural-bo} to apply for \ac{bo} with unknown, expensive constraints setting. We provided Neural-CBO, a method to alternate canonical \ac{gp} by \ac{dnn} as the surrogate model in \ac{bo} in CBO. \textbf{The contributions of this chapter} are highlighted as follows:
 
-In parallel with empirical advancements, theoretical research has begun addressing the lack of formal guarantees in CBO. For example, \citet{lu2022no} proposed a penalty-based regret bound that combines regret from the objective function and penalties for constraint violations. \citet{xu2023constrained} further expanded this analysis by separately evaluating cumulative regret and constraint violations. In contrast, \citet{nguyen2023optimistic} provided theoretical performance guarantees for CBO under unknown constraints in a decoupled setting, where cumulative regret is defined as the sum of both objective regret and constraint violations.
+\begin{itemize}
+    \item We propose a \ac{dnn}-based black-box optimization algorithm with unknown constraints (Neural-CBO), where both the objective function and constraints are modeled using deep neural networks. We use \ac{ei} as the acquisition function to find the next samples in a feasible region which is determined using \acf{lcb} satisfaction conditions to all constraints. Using \ac{lcb}-based conditions ensure that the feasible regions of these constraints are covered by the regions suggested by these conditions (with our problem setting), while leaving spaces for constraint explorations, particularly when feasible regions are much smaller than the search space.
+ 
 
-While Gaussian Processes (GPs) have been a traditional selection for modeling in CBO, their poor computational scalability remains a significant limitation. The cubic complexity of kernel matrix inversion grows prohibitive with increasing constraints. In contrast, Deep Neural Networks (DNNs) offer a scalable alternative, excelling in feature extraction and maintaining linear complexity with dataset size. Although DNNs have seen success in unconstrained black-box optimization \citep{snoek2015scalable}, contextual bandits in discrete search spaces \citep{zhou2020neural,zhang2021neural}, and constrained optimization with Augmented Lagrangian methods \citep{ariafar2019admmbo}, applying DNNs to constrained black-box optimization with theoretical guarantees remains an open problem. This gap motivates the exploration of neural network-based approaches for CBO.
-
-In Chapter \ref{chap:neural-bo}, we inherited a similar motivation as in Chapter \ref{chap:neural-bo} to apply for \ac{bo} with unknown, expensive constraints setting. We provided Neural-CBO, a method to alternate canonical \ac{gp} by \ac{dnn} as the surrogate model in \ac{bo} in CBO. 
+    \item We provide a theoretical analysis of our proposed Neural-CBO algorithm based on recent advances in \ac{ntk} theory. Under certain regularity assumptions, we show that cumulative regret as well as cumulative constraint violation has an upper bound of the form $\mathcal{O}(\gamma_T\sqrt{T})$, where $\gamma_T$ is the maximum information gain. This result is comparable to previous \ac{gp}-based methods. It is worth noting that, our \ac{dnn} models only required the network width as $m=\Omega(T)$  for the convergence. 
+    \item We conduct benchmarking experiments on synthetic and real-world tasks to prove our algorithm's effectiveness empirically. The numerical results indicate that our algorithm achieves competitive performance with well-known approaches.
+    \end{itemize}
     
 \section{Proposed Neural-CBO Method}
 \label{section:neural-cbo}
-Here, we will introduce the general \acp{dnn} architect used to model objective function and the constraints, followed by basis theory accompanying with these networks. Then, the Neural-CBO algorithm is introduced. 
+Here, we will introduce the general \acp{dnn} architect used to model objective function and the constraints, followed by basis theory accompanying by these networks. Then, the Neural-CBO algorithm is introduced. 
 
 \subsection{The \acl{dnn} for an Arbitrary Function $f_a$}
 \label{section:arbitrary_nn}
@@ -52,16 +54,15 @@ The neural network is trained by running the stochastic gradient descent on the 
 where $\alpha_t$ is the step size, and $\{\mathbf{x}_t, y_t\}$ is the observation at the $t$-th optimization iteration. 
 
 
-
-
 % $\phi\colon \mathbb{R} \rightarrow \mathbb{R}$ is the ReLU activation function, and the weights $\mathbf{W}_1 \in \mathbb{R}^{m \times d}$, $\mathbf{W}_i \in \mathbb{R}^{m \times m}$ for $2 \leq i \leq L-1$, and $\mathbf{W}_L \in \mathbb{R}^{1 \times m}$ are the neural network parameters $\mathbf{W} \in \mathbb{R}^p$, with $p = md + m^2(L-2) + m$. The input dimension is $d$, where $\mathbf{x} \in \mathcal{D} \subset \mathbb{R}^d$, and the weights are initialized from a standard normal distribution $\mathcal{N}(0,1)$.
 
 To estimate the uncertainty of the function $f_a$ modeled by $a(\mathbf{x}; \mathbf{W})$, we adopt the variance formula from recent advances in neural contextual bandits research ~\citep{zhou2020neural, kassraie2022neural}:
 \begin{equation}
-\label{eqn:ntk_std}
+    \label{Eqn:neural_cbo_variance_formula}
     \sigma_{a,t}(\mathbf{x}) = \sqrt{\mathbf{g}_{a}(\mathbf{x}; \mathbf{W}_0)^\top \mathbf{U}_{a, t-1}^{-1} \mathbf{g}_{a}(\mathbf{x}; \mathbf{W}_0)},
 \end{equation}
 where
+
 \begin{equation}
 \label{eqn:ntk_cov}
 \begin{aligned}
@@ -70,7 +71,7 @@ where
 \end{aligned}
 \end{equation}
 
-We again inherit the concept of \acf{ntk} introduced in Section \ref{background:ntk} for our theretical analysis. We briefly remind this concept through the following definition: 
+We again inherit the concept of \acf{ntk} introduced in Section \ref{section:NTK} for our theoretical analysis. We briefly remind this concept through the following definition: 
 \begin{definition}
     \label{def:neural-cbo_ntk}
     Given the $L$-layer neural network $a(\mathbf{x}; \mathbf{W})$ with input $\mathbf{x}$ and parameter $\mathbf{W}$ as defined in Eqn. \ref{eqn:fcn}, a \ac{ntk} matrix $\mathbf{H}_t$ for a sequence of weights {$\mathbf{W}_t$} can be defined as:
@@ -113,7 +114,7 @@ for some absolute constant $C$. Besides, the step size $\alpha_t \le \frac{\nu}{
 \end{condition}
 
 
-Before going to our main algorithm, we provide the confidence bound, the fundamental component in almost all BO algorithms to guide algorithm design and ensure theoretical guarantee. The lemma demonstrates that by following the network width condition stated in Condition \ref{condition:network_width},  the prediction of the trained neural network $a(\cdot;\mathbf{W}_{t-1}$) is concentrated around the actual value of the function $f_a(\cdot)$. 
+Before going to our \textbf{main algorithm}, we provide the confidence bound, the fundamental component in almost all \ac{bo} algorithms to guide algorithm design and ensure theoretical guarantee. The lemma demonstrates that by following the network width condition stated in Condition \ref{condition:network_width},  the prediction of the trained neural network $a(\cdot;\mathbf{W}_{t-1})$ is concentrated at the actual value of the function $f_a(\cdot)$. 
 \begin{restatable}{lemma}{ConfidenceBound}
 
 \label{lemma:neural-cbo_confidence_bound}
@@ -135,7 +136,7 @@ To facilitate the following algorithm design and discussion, we introduce the \a
 \\
 \text{UCB}_{a,t}(\mathbf{x}, \mathbf{W}_{t}) &= a(\mathbf{x}, \mathbf{W}_{t}) + \beta_{a,t} \sigma_{a,t} (\mathbf{x}) + \frac{\mathcal{E}(m)}{T+1},  
 \end{align*}
-where $\sigma_{a,t}(\mathbf{x})$ is calculated using the formulate given in Eqn. \ref{eqn:ntk_std}. Then, with high probability,  $f_a$ is bounded by $\text{LCB}_{a,t}(\mathbf{x}, \mathbf{W}_{t})$ and $\text{UCB}_{a,t}(\mathbf{x}, \mathbf{W}_{t})$ as in the following corollary:
+where $\sigma_{a,t}(\mathbf{x})$ is calculated using the formulate given in Eqn. \ref{Eqn:neural_cbo_variance_formula}. Then, with high probability,  $f_a$ is bounded by $\text{LCB}_{a,t}(\mathbf{x}, \mathbf{W}_{t})$ and $\text{UCB}_{a,t}(\mathbf{x}, \mathbf{W}_{t})$ as in the following corollary:
 \begin{corollary}
 \label{corrolary:f_in_lcb_ucb}
 Let Assumptions \ref{assumption:rkhs}, \ref{assumption:subgaussian_noise} and Condition \ref{condition:network_width} hold. Then with probability at least $1 - \delta \exp (\Omega(C^{-L} m^{1/36}))$, the following holds for all $\mathbf{x} \in \mathcal{D}$
@@ -147,7 +148,7 @@ and $1 \le t \le T$:
 \subsection{Neural-CBO Algorithm}
 In the remaining parts of this chapter, we refer to $v(\mathbf{x}; \boldsymbol{\theta})$ and $\{u_{c_i}(\mathbf{x}; \boldsymbol{\omega}_{c_i})\}_{i=1}^K$ as the neural network models for the unknown objective function $f$ and constraints $\{c_i\}_{i=1}^K$, respectively. 
 
-Our algorithm starts by initializing the neural networks $v(\mathbf{x}; \boldsymbol{\theta})$ and $\{u_{c_i}(\mathbf{x}; \boldsymbol{\omega}_{c_i})\}_{i=1}^K$ using the initialization scheme described in Section \ref{section:arbitrary_nn}. We use the EI acquisition function to identify the next samples within the feasible region, determined by applying LCB-based conditions to all constraints. These conditions ensure that constraints are satisfied, while EI maintains a balance between exploration and exploitation, particularly when the feasible region is much smaller than the overall search space  (Line~\ref{alg:line_lcb_ei} of Alg \ref{alg:PINN-BO}). At each optimization iteration $t$, the next evaluation point $\mathbf{x}_t$ is determined by maximizing the acquisition function $\textsc{EI}_{f,t}(\mathbf{x})$ subject to the lower confidence bound constraints for all unknown black-box constraints $\{c_i(\mathbf{x})\}_{i=1}^K$:
+Our algorithm starts by initializing the neural networks $v(\mathbf{x}; \boldsymbol{\theta})$ and $\{u_{c_i}(\mathbf{x}; \boldsymbol{\omega}_{c_i})\}_{i=1}^K$ using the initialization scheme described in Section \ref{section:arbitrary_nn}. We use the \ac{ei} acquisition function to identify the next samples within the feasible region, determined by applying \ac{lcb}-based conditions to all constraints. These conditions ensure that the feasible regions of these constraints are covered by the regions suggested by these conditions while leaving room for constraint exploration, particularly when the feasible region is much smaller than the overall search space  (Line~\ref{alg:line_lcb_ei} of Alg. \ref{alg:PINN-BO}). At each optimization iteration $t$, the next evaluation point $\mathbf{x}_t$ is determined by maximizing the acquisition function $\textsc{EI}_{f,t}(\mathbf{x})$ subject to the lower confidence bound constraints for all unknown black-box constraints $\{c_i(\mathbf{x})\}_{i=1}^K$:
 \[
 \text{LCB}_{c_i,t}(\mathbf{x}, \boldsymbol{\omega}_{c_i,t}) \le 0, \forall i \in [K].
 \]
@@ -175,8 +176,9 @@ $
 
 Then, we updated the dataset $\mathcal{D}_t = \mathcal{D}_{t-1} \cup \{\mathbf{x}_t, y_t, z_{c_1,t}, \dots, z_{{c_K}, t}\}$. The parameters $\boldsymbol{\theta}$ (for the objective function) and $\{ \boldsymbol{\omega}_{c_i} \}_{i=1}^K$ (for the constraints) are then updated separately by minimizing the $L_2$ loss on the new observation using stochastic gradient descent (SGD) described in Eqn. \ref{eqn:train_NN}.
 
+
 \begin{algorithm}[!ht]
-\caption{}
+\caption{Neural Network based Black-box Optimization with unknown constraints (Neural-CBO)}
 \label{alg:neural_cbo}
 \textbf{Input}: The input space $\mathcal D$, the optimization budget $T$, the number of constraints $N$
 \begin{algorithmic}[1]
@@ -197,14 +199,20 @@ Then, we updated the dataset $\mathcal{D}_t = \mathcal{D}_{t-1} \cup \{\mathbf{x
  Update the neural network parameters $\boldsymbol{\theta}_0, \{ \boldsymbol{\omega}_{c_i,0} \}_{i=1}^K$ using Eqn \ref{eqn:train_NN}.
 }
 \State \parbox[t]{\dimexpr\linewidth-\algorithmicindent}{%
- Update $\mathbf{U}_{f,t}$ and $\mathbf{U}_{c_i,t}, \forall i \in [1 \cdots K]$ separately using Eqn. \ref{eqn:ntk_cov}.
+ Update $\mathbf{U}_{f,t}$ and $\mathbf{U}_{c_i,t}, \forall i \in [1 \dots K]$ separately using Eqn. \ref{eqn:ntk_cov}.
 }
 \EndFor
-
 
 \end{algorithmic}
 \end{algorithm}
 
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=\textwidth]{Figures/Neural-CBO/1d_toy.pdf}
+    \caption{Minimization result with 1-D objective function $f(x) = \sin(x) + \sin(\frac{10x}{3})$ under the constraint $c(x) = (x-7)^2 -1 \le 0$}
+    \label{fig:neural_cbo_toy_sample}
+\end{figure}
+In Figure \ref{fig:neural_cbo_toy_sample}, minimization result with 1-D objective function $f(x) = \sin(x) + \sin(\frac{10x}{3})$ under the constraint $c(x) = (x-7)^2 -1 \le 0$ is given to illustrate how variance formula in Eqn. \ref{Eqn:neural_cbo_variance_formula} and Alg. \ref{alg:neural_cbo} work. As shown in this figure, the variance formula performs well with relatively small values in feasible regions and larger values in infeasible regions. These results also demonstrate that the constraint model effectively guides our algorithm toward the feasible region, ensuring subsequent selection points remain within feasible regions and gradually approach the true minimum. 
 
 
 
@@ -213,11 +221,11 @@ To evaluate the performance of black-box optimization methods, much of the prior
 \[
 R_T = \sum_{t=1}^T r_t,  
 \] 
-where $r_t = f(\mathbf{x}_t) - f(\mathbf{x^*})$  represents the instantaneous regret, quantifying the difference between the value of the unknown function $f$ at the optimal point, $\mathbf{x}^* = \arg\max_{\mathbf{x} \in \mathcal{D}} f(\mathbf{x})$, and the value of the function at point $\mathbf{x}_t$, which is selected by the algorithm at iteration $t$. However, since $f(\mathbf{x^*})$ represents the optimal value under constraints, the algorithm may sometimes sample infeasible points with lower objective values than $f(\mathbf{x^*}$). To account for this, following \citet{xu2023constrained, nguyen2023optimistic}, we inherited the \textit{positive regret} definition as
+where $r_t = f(\mathbf{x}_t) - f(\mathbf{x^*})$  represents the instantaneous regret, quantifying the difference between the value of the unknown function $f$ at the optimal point, $\mathbf{x}^* = \arg\max_{\mathbf{x} \in \mathcal{D}} f(\mathbf{x})$, and the value of the function at point $\mathbf{x}_t$, which is selected by the algorithm at iteration $t$. However, since $f(\mathbf{x^*})$ represents the optimal value under constraints, the algorithm may sometimes sample infeasible points with lower objective values than $f(\mathbf{x^*})$. To account for this, following \citet{xu2023constrained, nguyen2023optimistic}, we inherited the \textit{positive regret} definition as
 $r_t^+ = [f(\mathbf{x}_t) - f(\mathbf{x^*})]^+,$
 where $[\cdot]^+ \coloneqq \max\{0, \cdot\}$. Additionally, to measure constraint satisfaction, constraint \textit{violation} is defined as $
 v_{c_i,t} = [c_i(\mathbf{x}_t)]^+$. 
-Then, we introduce the \textit{cumulative positive regret} for the objective function, $R_T^+$, and the \textit{cumulative violation} for each constraint, $V_{c_i, T}$. These metrics measure the additional cost incurred due to sub-optimal decisions and violations of the constraints over time by running the algorithm.  
+Then, we introduce the \textit{cumulative positive regret} for the objective function, $R_T^+$, and the \textit{cumulative violation} for each constraint, $V_{c_i, T}$. These metrics measure the additional cost incurred due to suboptimal decisions and violations of the constraints over time by running the algorithm.  
 \begin{definition} [Cumulative Positive Regret and Cumulative Violation]
     \begin{align*}
         R_T^+ &=\sum_{t=1}^T [f(\mathbf{x}_t) - f(\mathbf{x^*})]^+,
@@ -253,31 +261,26 @@ where $\mathcal{E}(m) = \mathcal{O}(C^{2L} L^{3/2} m^{11/36})$. Especially, by c
 \begin{remark}
 Unlike previous works \citep{zhou2020neural, zhang2021neural} that require a neural network width of \( m = \Omega(T^6) \) for convergence when modeling the objective function, our analysis builds on recent analyses from \citet{xu2024overparametrized}, which show that only a linear condition of \( m = \Omega(T) \) is needed. Furthermore, while \citet{xu2024overparametrized} focus on the input domain \( \mathbb{S}^{d-1} \), we can adapt to inputs \( \mathbf{x} \in \mathbb{R}^d \) with \( 0 < n_l < \|\mathbf{x}\| < n_b \) (where \( n_l \) and \( n_b \) are positive constants) without changing the order of \( T \) in the width condition for \( m \). Similar arguments are noted in \citep{du2018gradient, cao2020generalization}.
 \end{remark}
+
 \section{Experiments}
 \label{section:neural-cbo_exp}
-In this section, we outline and discuss our experimental results. We apply our method to synthetic, real-world functions. 
+In this section, we outline and discuss our experimental results. We apply our method to synthetic, real-world functions. Our implementations of both problems are available at: \url{https://github.com/phantrdat/neural-cbo}.
 \subsection{Experimental Setup}
 \label{section:neural-cbo_baselines}
-For all experiments, we compared our algorithm with well-known Constrained EI (cEI), the extension of EI into constrained BO from \citet{gardner2014bayesian}. Besides, we also compare our algorithm with recent state-of-the-art algorithms in unknown constrained BO, including ADMMBO \citep{ariafar2019admmbo}, UCB-C \citep{nguyen2023optimistic} and ConfigOpt \citep{xu2023constrained}. For our proposed Neural-CBO algorithm, we employ fully connected deep neural networks as the surrogate models for both objective function and constraints. Implementation details of our Neural-CBO algorithm as well as baselines are as follows:
+For all experiments, we compared our algorithm with well-known Constrained \ac{ei} (cEI), the extension of \ac{ei} into constrained \ac{bo} from \citet{gardner2014bayesian}. Besides, we also compare our algorithm with recent state-of-the-art algorithms in unknown constrained \ac{bo}, including ADMMBO \citep{ariafar2019admmbo}, UCB-C \citep{nguyen2023optimistic} and ConfigOpt \citep{xu2023constrained}. For our proposed Neural-CBO algorithm, we employ fully connected deep neural networks as the surrogate models for both objective function and constraints. Implementation details of our Neural-CBO algorithm as well as baselines are as follows:
 \begin{itemize}
     \item  \textbf{Constrained EI} (cEI) \citep{gardner2014bayesian} integrates feasibility into the acquisition function by multiplying the probability of feasibility into EI value at every point in the search space.
     \item \textbf{ConfigOpt} \citep{xu2023constrained}: Optimize LCB-based acquisition function for the objective, which satisfies LCB-based conditions for constraints. For cEI and ConfigOpt, we used the public implementation provided at GitHub repository: \url{https://github.com/PREDICT-EPFL/ConfigOPT}.
-    \item \textbf{ADMMBO} \citep{ariafar2019admmbo}: Reformulates the constrained optimization problem into an unconstrained one using the Alternating Direction Method
-    of Multipliers (ADMM) framework. As the official implementation of ADMMBO is written in Matlab and available at \url{https://github.com/SetarehAr/ADMMBO}, we use our own Python implementation based on the official implementation.  
+    \item \textbf{ADMMBO} \citep{ariafar2019admmbo}: Reformulates the constrained optimization problem into an unconstrained one using the Alternating Direction Method of Multipliers (ADMM) framework. As the official implementation of ADMMBO is written in Matlab and available at \url{https://github.com/SetarehAr/ADMMBO}, we use our own Python implementation based on the official implementation.  
     \item \textbf{UCB-C} \citep{nguyen2023optimistic}: 
     Similar to ConfigOpt, but using a UCB-based acquisition function for the objective, we utilized the implementation obtained directly from the authors.
 \end{itemize}
 \paragraph{Neural-CBO implementation details:}
 As described in Section \ref{section:neural-cbo}, the network's weights are initialized with independent samples drawn from a normal distribution $\mathcal{N} (0, 1)$. We also initialize fixed outer weight $\mathbf{q}$ to be a symmetric Bernoulli random variable with equal probability to be $-1$ or $1$. To train the surrogate neural network models, we use a Gradient Descent optimizer described in the main paper with a learning rate $\alpha = 0.001$. The network width depends on the tasks and is set to be $m = T$, where $T$ is the number of optimization iterations. We choose the network depth $L=2$ to reduce computational costs. 
 
-
-% 
-
-  
-
 \subsection{Synthetic Benchmark Functions}
 \label{section:neural-cbo_synthetic}
- We conducted optimization experiments on four synthetic objective functions: Branin, Ackley, Simionescu and Hartmann. The input dimension of each objective function and the corresponding number of constraints are summarized in Table \ref{table:synthetic_info}. Due to space limitations, we present the expression of each function and its constraints in the Supplementary material. 
+We conducted optimization experiments on four synthetic objective functions: Branin, Ackley, Simionescu and Hartmann. The input dimension of each objective function and the corresponding number of constraints are summarized in Table \ref{table:synthetic_info}. Due to space limitations, we present the expression of each function and its constraints in the Supplementary material. 
   \begin{table}[h]
   \centering
  \caption{The input dimension and number of constraints for each synthetic objective function.}
@@ -295,7 +298,7 @@ The noise in function evaluations follows a normal distribution with zero mean, 
 
 To ensure statistical significance, we performed one-sided $t$-tests to assess whether a baseline outperforms Neural-CBO in terms of the best positive regret plus violation. The null hypothesis is $H_0: \mu_\text{baseline} \leq \mu_{\text{Neural-CBO}}$, and the alternative hypothesis is $H_a: \mu_\text{baseline} > \mu_{\text{Neural-CBO}}$, where $\mu_\text{baseline}$ and $\mu_{\text{Neural-CBO}}$ represent the means of the (Log10 of) Best Positive Regret plus Violation values of the baseline and our proposed Neural-CBO, respectively. Note that lower values indicate better performance. We present the statistical test results for four synthetic benchmark functions and two real-world tasks (described in Section \ref{section:neural-cbo_gas} and \ref{section:neural-cbo_speed}) in Table \ref{table:t-test}. Each cell in the table shows the $p$-value from the $t$-test as the first value. To account for multiple comparisons, the Benjamini-Hochberg correction was applied, with the corrected value provided as the second value. A result is labeled as ``T'' if the null hypothesis is rejected, meaning that Neural-CBO is statistically better to the compared baselines. Conversely, a result is labeled ``F'' if we cannot reject the null hypothesis, meaning that the baselines and the Neural-CBO are comparable.
 \begin{table}[ht]
-\caption{One-sided $t$-tests to evaluate whether the baseline outperforms Neural-CBO in terms of best positive regret plus violation.}
+\caption{One-sided $t$-tests to evaluate whether the baseline outperforms Neural-CBO in terms of the best positive regret plus violation.}
   \vspace{0.15in}
 \resizebox{\linewidth}{!}{
 \begin{tabular}{|l|c|c|c|c|}
@@ -325,7 +328,7 @@ To ensure statistical significance, we performed one-sided $t$-tests to assess w
     \label{fig:neural-cbo_synthetic}
 \end{figure}
 
-We analyze three real-world constrained black-box optimization tasks: gas transmission compressor and speed reducer designs from \citet{kumar2020test}, and a third inspired by \citet{he2018verideep}. Details of each task will follow in the upcoming sections.  
+We analyse three real-world constrained black-box optimization tasks: gas transmission compressor and speed reducer designs from \citet{kumar2020test}, and a third inspired by \citet{he2018verideep}. Details of each task will follow in the upcoming sections.  
 \subsection{Gas Transmission Compressor Design}
 \label{section:neural-cbo_gas}
      The main objective is to minimize operational costs or energy consumption. This requires identifying the optimal configuration of the compressor by optimizing four design variables. The problem involves $d = 4$ input dimensions and includes $K = 1$ constraint. The mathematics formula for this problem is:
@@ -396,7 +399,7 @@ We build on the sensitive sample generation example described in Section \ref{se
 \end{align*}
 where $\norm{\cdot}_F$ denotes the Frobenius norm, $realistic(\cdot)$ is the human-based scoring function and $h$ is a pre-defined threshold. A detection is \emph{successful} if at least one of the $N_S$ sensitive samples shows a different top-1 prediction between the tampered and original models.  
 
-We employed the same experimental setup outlined in Section \ref{section:neural-bo_sensitive_samples}, using a pre-trained MNIST hand-written digit classification model and compared our method's performance against several baselines based on average detection rates for sensitive samples. The model was tampered with by adding noise to its weights 1,000 times, producing 1,000 distinct versions. While the original model had a top-1 accuracy of 93\%, this dropped to $87.73\% \pm 0.08\%$ after tampering. To reduce computational costs, we downscaled the images from $28 \times 28$ to $7 \times 7$, optimized in this 49-dimensional space, and then restored them to the original resolution to generate sensitive samples. Feasible samples were chosen based on their realistic scores. Figure \ref{fig:sensitive_sample} shows the detection rates of (feasible) sensitive samples generated by our method compared to four baselines, demonstrating that our samples achieved higher detection rates. As expected, the detection rate improves with more samples and our method is consistently competitive.
+We employed the same experimental setup outlined in Section \ref{section:neural-bo_sensitive_samples}, using a pre-trained MNIST handwritten digit classification model and compared our method's performance against several baselines based on average detection rates for sensitive samples. The model was tampered with by adding noise to its weights 1,000 times, producing 1,000 distinct versions. While the original model had a top-1 accuracy of 93\%, this dropped to $87.73\% \pm 0.08\%$ after tampering. To reduce computational costs, we downscaled the images from $28 \times 28$ to $7 \times 7$, optimized in this 49-dimensional space, and then restored them to the original resolution to generate sensitive samples. Feasible samples were chosen based on their realistic scores. Figure \ref{fig:sensitive_sample} shows the detection rates of (feasible) sensitive samples generated by our method compared to four baselines, demonstrating that our samples achieved higher detection rates. As expected, the detection rate improves with more samples and our method is consistently competitive.
 
 
 

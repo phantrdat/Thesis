@@ -1,167 +1,168 @@
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{Declaration of Authorship}{i}{section*.1}%
-\contentsline {chapter}{Acknowledgements}{iii}{section*.2}%
-\contentsline {chapter}{Abbreviations}{xi}{chapter*.5}%
-\contentsline {chapter}{Abstract}{1}{chapter*.9}%
-\contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.10}%
-\contentsline {section}{\numberline {1.1}Aims and Approaches}{6}{section.11}%
-\contentsline {section}{\numberline {1.2}Significant Contributions}{6}{section.15}%
-\contentsline {section}{\numberline {1.3}Structure of this Thesis}{7}{section.16}%
-\contentsline {chapter}{\numberline {2}Background}{9}{chapter.17}%
-\contentsline {section}{\numberline {2.1}Essential Mathematics Backgrounds}{9}{section.18}%
-\contentsline {subsection}{\numberline {2.1.1}Gaussian and Sub-Gaussian Random Variables}{9}{subsection.19}%
-\contentsline {subsubsection}{\numberline {2.1.1.1}Gaussian Random Variables}{9}{subsubsection.20}%
-\contentsline {subsubsection}{\numberline {2.1.1.2}Sub-Gaussian Random Variables}{10}{subsubsection.21}%
-\contentsline {subsection}{\numberline {2.1.2}Gaussian Process}{11}{subsection.22}%
-\contentsline {subsection}{\numberline {2.1.3}Kernels}{12}{subsection.24}%
-\contentsline {paragraph}{Linear Kernel:}{12}{section*.25}%
-\contentsline {paragraph}{Squared Exponential (RBF) Kernel}{12}{section*.26}%
-\contentsline {paragraph}{Mat\'ern Kernel}{13}{section*.27}%
-\contentsline {subsection}{\numberline {2.1.4}Maximum Information Gain}{13}{subsection.28}%
-\contentsline {subsubsection}{\numberline {2.1.4.1}Entropy}{13}{subsubsection.29}%
-\contentsline {subsubsection}{\numberline {2.1.4.2}Mutual Information}{14}{subsubsection.30}%
-\contentsline {subsubsection}{\numberline {2.1.4.3}Maximum Information Gain in GP regression}{14}{subsubsection.31}%
-\contentsline {subsection}{\numberline {2.1.5}\acf {rkhs}}{15}{subsection.32}%
-\contentsline {subsubsection}{\numberline {2.1.5.1}Hilbert Spaces and Inner Products}{16}{subsubsection.33}%
-\contentsline {subsubsection}{\numberline {2.1.5.2}Kernel Functions and Positive Definiteness}{16}{subsubsection.34}%
-\contentsline {subsubsection}{\numberline {2.1.5.3}Constructing RKHS: The Moore-Aronszajn Theorem}{16}{subsubsection.35}%
-\contentsline {subsubsection}{\numberline {2.1.5.4}Inner Product and Norm in RKHS}{16}{subsubsection.40}%
-\contentsline {subsubsection}{\numberline {2.1.5.5}Reproducing Property and Point-wise Evaluation}{17}{subsubsection.41}%
-\contentsline {subsubsection}{\numberline {2.1.5.6}Representer Theorem}{17}{subsubsection.42}%
-\contentsline {subsubsection}{\numberline {2.1.5.7}Regularization and Smoothness in RKHS}{17}{subsubsection.43}%
-\contentsline {subsubsection}{\numberline {2.1.5.8}Examples of Kernels and Corresponding RKHS}{17}{subsubsection.44}%
-\contentsline {section}{\numberline {2.2}Introduction to Optimization}{17}{section.45}%
-\contentsline {subsection}{\numberline {2.2.1}Gradient-Based Optimization}{18}{subsection.46}%
-\contentsline {subsubsection}{\numberline {2.2.1.1}Gradient Descent}{18}{subsubsection.48}%
-\contentsline {subsubsection}{\numberline {2.2.1.2}Momentum}{19}{subsubsection.51}%
-\contentsline {subsubsection}{\numberline {2.2.1.3}Adaptive Learning Rate Algorithms}{19}{subsubsection.54}%
-\contentsline {paragraph}{Adagrad}{19}{section*.55}%
-\contentsline {paragraph}{Adam}{20}{section*.56}%
-\contentsline {paragraph}{RMSProp}{20}{section*.62}%
-\contentsline {subsubsection}{\numberline {2.2.1.4}Conjugate Gradient}{21}{subsubsection.65}%
-\contentsline {subsubsection}{\numberline {2.2.1.5}Newton's Method}{21}{subsubsection.70}%
-\contentsline {subsubsection}{\numberline {2.2.1.6}Quasi-Newton Methods (BFGS, L-BFGS)}{22}{subsubsection.72}%
-\contentsline {subsection}{\numberline {2.2.2}Derivative-Free Optimization}{23}{subsection.76}%
-\contentsline {subsubsection}{\numberline {2.2.2.1}Nelder-Mead Method}{23}{subsubsection.77}%
-\contentsline {subsubsection}{\numberline {2.2.2.2}Genetic Algorithm (GA)}{24}{subsubsection.82}%
-\contentsline {subsubsection}{\numberline {2.2.2.3}Simulated Annealing (SA)}{25}{subsubsection.86}%
-\contentsline {subsubsection}{\numberline {2.2.2.4}Covariance Matrix Adaptation Evolution Strategy (CMA-ES)}{25}{subsubsection.88}%
-\contentsline {section}{\numberline {2.3}Black-box Optimization}{27}{section.97}%
-\contentsline {subsection}{\numberline {2.3.1}Introduction to Black-box Optimization}{27}{subsection.98}%
-\contentsline {paragraph}{Problem Definition}{27}{section*.99}%
-\contentsline {subsection}{\numberline {2.3.2}Surrogates Models}{28}{subsection.100}%
-\contentsline {subsubsection}{\numberline {2.3.2.1}Deep Neural Network and Neural Tangent Kernel}{28}{subsubsection.101}%
-\contentsline {subsection}{\numberline {2.3.3}Utility-Based Acquisition Functions}{28}{subsection.102}%
-\contentsline {subsubsection}{\numberline {2.3.3.1}Probability of Improvement}{29}{subsubsection.103}%
-\contentsline {subsubsection}{\numberline {2.3.3.2}Expected Improvement}{30}{subsubsection.105}%
-\contentsline {subsubsection}{\numberline {2.3.3.3}Upper Confidence Bound}{31}{subsubsection.108}%
-\contentsline {subsubsection}{\numberline {2.3.3.4}Thompson Sampling}{32}{subsubsection.110}%
-\contentsline {subsection}{\numberline {2.3.4}Information-Theoretic Acquisition Functions}{34}{subsection.113}%
-\contentsline {subsubsection}{\numberline {2.3.4.1}Entropy Search}{34}{subsubsection.114}%
-\contentsline {subsubsection}{\numberline {2.3.4.2}Predictive Entropy Search}{35}{subsubsection.116}%
-\contentsline {subsubsection}{\numberline {2.3.4.3}Max-value Entropy Search}{36}{subsubsection.118}%
-\contentsline {subsubsection}{\numberline {2.3.4.4}Knowledge Gradient}{37}{subsubsection.120}%
-\contentsline {subsection}{\numberline {2.3.5}Bandit-based Optimization}{38}{subsection.122}%
-\contentsline {subsubsection}{\numberline {2.3.5.1}Multi-armed Bandits}{38}{subsubsection.123}%
-\contentsline {paragraph}{Regret Minimization}{38}{section*.125}%
-\contentsline {subsubsection}{\numberline {2.3.5.2}Algorithms for MAB}{38}{subsubsection.127}%
-\contentsline {paragraph}{$\epsilon $-Greedy Algorithm}{39}{section*.128}%
-\contentsline {paragraph}{Upper Confidence Bound Algorithm}{39}{section*.130}%
-\contentsline {paragraph}{Thompson Sampling (TS)}{39}{section*.132}%
-\contentsline {subsubsection}{\numberline {2.3.5.3}Contextual Bandits}{39}{subsubsection.134}%
-\contentsline {paragraph}{Steps in a Contextual Bandit Algorithm.}{40}{section*.135}%
-\contentsline {paragraph}{Modeling the Reward Function.}{40}{section*.141}%
-\contentsline {subsubsection}{\numberline {2.3.5.4}Linear Bandits}{41}{subsubsection.142}%
-\contentsline {paragraph}{Linear Upper Confidence Bound (LinUCB) Algorithm}{41}{section*.144}%
-\contentsline {paragraph}{Thompson Sampling for Linear Models}{41}{section*.152}%
-\contentsline {subsubsection}{\numberline {2.3.5.5}Non-Linear Bandits}{42}{subsubsection.160}%
-\contentsline {paragraph}{Neural Upper Confidence Bound (NeuralUCB) Algorithm}{42}{section*.162}%
-\contentsline {paragraph}{Thompson Sampling for Non-Linear Models}{43}{section*.169}%
-\contentsline {paragraph}{Introduction to Non-Linear Models}{43}{section*.176}%
-\contentsline {paragraph}{Key Algorithms}{43}{section*.177}%
-\contentsline {paragraph}{Advantages of Non-Linear Models}{44}{section*.178}%
-\contentsline {paragraph}{Limitations of Non-Linear Models}{44}{section*.179}%
-\contentsline {subsection}{\numberline {2.3.6}Performance Metrics in Black-box Optimization}{44}{subsection.180}%
-\contentsline {subsubsection}{\numberline {2.3.6.1}Simple Regret}{44}{subsubsection.181}%
-\contentsline {subsubsection}{\numberline {2.3.6.2}Cumulative Regret}{44}{subsubsection.182}%
-\contentsline {subsubsection}{\numberline {2.3.6.3}Comparison and Relevance}{45}{subsubsection.183}%
-\contentsline {section}{\numberline {2.4}Black-box Optimization with Unknown Black-box Constraints}{45}{section.184}%
-\contentsline {section}{\numberline {2.5}Black-box Optimization with Physical Information}{46}{section.185}%
-\contentsline {section}{\numberline {2.6}Further Research in Black-box Optimisation}{47}{section.186}%
-\contentsline {chapter}{\numberline {3}Neural-BO: A Black-box Optimization Algorithm using Deep Neural Networks}{48}{chapter.187}%
-\contentsline {section}{\numberline {3.1}Problem Setting}{49}{section.188}%
-\contentsline {section}{\numberline {3.2}Proposed Neural-BO Method}{49}{section.189}%
-\contentsline {paragraph}{Discussion}{50}{section*.190}%
-\contentsline {section}{\numberline {3.3}Theoretical Analysis}{51}{section.193}%
-\contentsline {section}{\numberline {3.4}Proof of the Main Theorem}{52}{section.206}%
-\contentsline {section}{\numberline {3.5}Experiments}{55}{section.208}%
-\contentsline {subsection}{\numberline {3.5.1}Experimental Setup}{55}{subsection.209}%
-\contentsline {subsection}{\numberline {3.5.2}Synthetic Benchmarks}{56}{subsection.214}%
-\contentsline {subsection}{\numberline {3.5.3}Real-world Applications}{60}{subsection.220}%
-\contentsline {subsubsection}{\numberline {3.5.3.1}Designing Sensitive Samples for Detection of Model Tampering}{60}{subsubsection.221}%
-\contentsline {subsubsection}{\numberline {3.5.3.2}Unknown target document retrieval}{61}{subsubsection.223}%
-\contentsline {subsubsection}{\numberline {3.5.3.3}Optimizing control parameters for robot pushing}{62}{subsubsection.226}%
-\contentsline {section}{\numberline {3.6}Conclusion}{63}{section.228}%
-\contentsline {chapter}{\numberline {4}Black-box Optimization with Unknown Black-box Constraints via Overparametrized Deep Neural Networks}{64}{chapter.229}%
-\contentsline {section}{\numberline {4.1}Proposed Neural-CBO Method}{65}{section.230}%
-\contentsline {subsection}{\numberline {4.1.1}The \acl {dnn} for an Arbitrary Function $f_a$}{65}{subsection.231}%
-\contentsline {subsection}{\numberline {4.1.2}Neural-CBO Algorithm}{68}{subsection.249}%
-\contentsline {section}{\numberline {4.2}Theoretical Analysis}{69}{section.251}%
-\contentsline {subsection}{\numberline {4.2.1}Detailed Assumptions for Objective Function and Constraints}{69}{subsection.254}%
-\contentsline {section}{\numberline {4.3}Experiments}{70}{section.259}%
-\contentsline {subsection}{\numberline {4.3.1}Experimental Setup}{70}{subsection.260}%
-\contentsline {paragraph}{Neural-CBO implementation details:}{71}{section*.261}%
-\contentsline {subsection}{\numberline {4.3.2}Synthetic Benchmark Functions}{71}{subsection.262}%
-\contentsline {subsection}{\numberline {4.3.3}Gas Transmission Compressor Design}{72}{subsection.266}%
-\contentsline {subsection}{\numberline {4.3.4}Speed Reducer Design}{72}{subsection.267}%
-\contentsline {subsection}{\numberline {4.3.5}Designing Sensitive Samples for Detection of Model Tampering}{74}{subsection.268}%
-\contentsline {section}{\numberline {4.4}Conclusion}{75}{section.270}%
-\contentsline {chapter}{\numberline {5}PINN-BO: A Black-Box Optimization Algorithm Using Physics-Informed Neural Networks}{76}{chapter.271}%
-\contentsline {section}{\numberline {5.1}Problem Setting}{77}{section.272}%
-\contentsline {section}{\numberline {5.2}Proposed PINN-BO Method}{78}{section.275}%
-\contentsline {section}{\numberline {5.3}Theoretical Analysis}{80}{section.278}%
-\contentsline {paragraph}{Proof sketch for Lemma \ref {lemma:pinn-bo_confidence_bound}}{82}{section*.296}%
-\contentsline {section}{\numberline {5.4}Experiments}{83}{section.303}%
-\contentsline {subsection}{\numberline {5.4.1}Experimental Setup}{83}{subsection.304}%
-\contentsline {subsection}{\numberline {5.4.2}Synthetic Benchmark Functions}{84}{subsection.305}%
-\contentsline {subsection}{\numberline {5.4.3}Real-world Applications}{85}{subsection.308}%
-\contentsline {subsubsection}{\numberline {5.4.3.1}Optimizing Steady-State Temperature}{85}{subsubsection.309}%
-\contentsline {paragraph}{Heat Equation with Boundary Conditions 1}{86}{section*.310}%
-\contentsline {paragraph}{Heat Equation with Boundary Conditions 2}{86}{section*.311}%
-\contentsline {paragraph}{Heat Equation with Boundary Conditions 3}{86}{section*.312}%
-\contentsline {subsubsection}{\numberline {5.4.3.2}Optimizing Beam Displacement}{87}{subsubsection.315}%
-\contentsline {chapter}{\numberline {6}Conclusion}{90}{chapter.317}%
-\contentsline {section}{\numberline {6.1}Contributions}{90}{section.318}%
-\contentsline {section}{\numberline {6.2}Future Directions}{91}{section.319}%
-\contentsline {chapter}{\numberline {A}Supplementary Material of Chapter \ref {chap:neural-bo}}{92}{appendix.320}%
-\contentsline {section}{\numberline {A.1}Proof of Theoretical Analysis in Chapter \ref {chap:neural-bo}}{92}{section.321}%
-\contentsline {section}{\numberline {A.2}Proof of Auxiliary Lemmas}{99}{section.356}%
-\contentsline {subsection}{\numberline {A.2.1}Proof of Lemma \ref {lemma:NN_vs_linear}}{99}{subsection.357}%
-\contentsline {subsection}{\numberline {A.2.2}Proof of Lemma \ref {lemma:noise_affeted_bound}}{101}{subsection.365}%
-\contentsline {subsection}{\numberline {A.2.3}Proof of Lemma \ref {lemma:log_det_Kt_bound}}{103}{subsection.368}%
-\contentsline {subsection}{\numberline {A.2.4}Proof of Lemma \ref {lemma:min_B_vs_cov_norm}}{103}{subsection.369}%
-\contentsline {chapter}{\numberline {B}Supplementary Material of Chapter \ref {chap:neural-cbo}}{104}{appendix.370}%
-\contentsline {section}{\numberline {B.1}Proof of Theoretical Analysis in Chapter \ref {chap:neural-bo}}{104}{section.371}%
-\contentsline {subsection}{\numberline {B.1.1}Proof of Lemma \ref {lemma:neural-cbo_confidence_bound}}{104}{subsection.373}%
-\contentsline {paragraph}{Bound term $T_1$}{105}{section*.376}%
-\contentsline {paragraph}{Bound term $T_2$}{105}{section*.377}%
-\contentsline {subsection}{\numberline {B.1.2}Proof of Theorem \ref {theorem:main}}{106}{subsection.378}%
-\contentsline {paragraph}{Bound Cumulative Regret $R_{T}$:}{106}{section*.381}%
-\contentsline {paragraph}{Bound Cumulative Violation $V_{c_i, T}$:}{107}{section*.386}%
-\contentsline {subsection}{\numberline {B.1.3}Technical Lemmas}{108}{subsection.387}%
-\contentsline {chapter}{\numberline {C}Supplementary Material of Chapter \ref {chap:pinn-bo}}{114}{appendix.408}%
-\contentsline {section}{\numberline {C.1}Additional Experimental Results}{114}{section.409}%
-\contentsline {subsection}{\numberline {C.1.1}Synthetic Benchmark Functions}{114}{subsection.410}%
-\contentsline {paragraph}{Drop-Wave:}{114}{section*.411}%
-\contentsline {paragraph}{Styblinski-Tang:}{114}{section*.412}%
-\contentsline {paragraph}{Rastrigin:}{114}{section*.413}%
-\contentsline {paragraph}{Michalewics:}{114}{section*.414}%
-\contentsline {paragraph}{Cosine Mixture:}{115}{section*.415}%
-\contentsline {section}{\numberline {C.2}Proof of Theoretical Analysis in Chapter \ref {chap:pinn-bo}}{115}{section.416}%
-\contentsline {subsection}{\numberline {C.2.1}Proof of Lemma \ref {lemma:pinn-bo_PINN_mean_cov}}{115}{subsection.417}%
-\contentsline {paragraph}{Mean function:}{117}{section*.433}%
-\contentsline {paragraph}{Variance function:}{117}{section*.434}%
-\contentsline {subsection}{\numberline {C.2.2}Proof of Lemma \ref {lemma:interaction_information_formula}}{118}{subsection.443}%
-\contentsline {paragraph}{Denominator}{118}{section*.449}%
-\contentsline {paragraph}{Numerator}{118}{section*.451}%
-\contentsline {chapter}{Bibliography}{126}{appendix*.543}%
+\contentsline {chapter}{Acknowledgements}{}{section*.2}%
+\contentsline {chapter}{Relevant Publications}{}{section*.4}%
+\contentsline {chapter}{List of Abbreviations}{viii}{section*.12}%
+\contentsline {chapter}{Abstract}{1}{chapter*.13}%
+\contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.14}%
+\contentsline {section}{\numberline {1.1}Aims and Approaches}{6}{section.15}%
+\contentsline {section}{\numberline {1.2}Significant Contributions}{6}{section.19}%
+\contentsline {section}{\numberline {1.3}Structure of this Thesis}{7}{section.20}%
+\contentsline {chapter}{\numberline {2}Background}{9}{chapter.21}%
+\contentsline {section}{\numberline {2.1}Essential Mathematics Backgrounds}{9}{section.22}%
+\contentsline {subsection}{\numberline {2.1.1}Gaussian and Sub-Gaussian Random Variables}{9}{subsection.23}%
+\contentsline {subsubsection}{\numberline {2.1.1.1}Gaussian Random Variables}{9}{subsubsection.24}%
+\contentsline {subsubsection}{\numberline {2.1.1.2}Sub-Gaussian Random Variables}{10}{subsubsection.25}%
+\contentsline {subsection}{\numberline {2.1.2}Gaussian Process}{11}{subsection.26}%
+\contentsline {subsection}{\numberline {2.1.3}Kernels}{12}{subsection.28}%
+\contentsline {paragraph}{Linear Kernel:}{12}{section*.29}%
+\contentsline {paragraph}{Squared Exponential (RBF) Kernel}{12}{section*.30}%
+\contentsline {paragraph}{Mat\'ern Kernel}{13}{section*.31}%
+\contentsline {subsection}{\numberline {2.1.4}Maximum Information Gain}{13}{subsection.32}%
+\contentsline {subsubsection}{\numberline {2.1.4.1}Entropy}{13}{subsubsection.33}%
+\contentsline {subsubsection}{\numberline {2.1.4.2}Mutual Information}{14}{subsubsection.34}%
+\contentsline {subsubsection}{\numberline {2.1.4.3}Maximum Information Gain in GP regression}{14}{subsubsection.35}%
+\contentsline {subsection}{\numberline {2.1.5}\acf {rkhs}}{15}{subsection.36}%
+\contentsline {subsubsection}{\numberline {2.1.5.1}Hilbert Spaces and Inner Products}{16}{subsubsection.37}%
+\contentsline {subsubsection}{\numberline {2.1.5.2}Kernel Functions and Positive Definiteness}{16}{subsubsection.38}%
+\contentsline {subsubsection}{\numberline {2.1.5.3}Constructing RKHS: The Moore-Aronszajn Theorem}{16}{subsubsection.39}%
+\contentsline {subsubsection}{\numberline {2.1.5.4}Inner Product and Norm in RKHS}{16}{subsubsection.44}%
+\contentsline {subsubsection}{\numberline {2.1.5.5}Reproducing Property and Point-wise Evaluation}{17}{subsubsection.45}%
+\contentsline {subsubsection}{\numberline {2.1.5.6}Representer Theorem}{17}{subsubsection.46}%
+\contentsline {subsubsection}{\numberline {2.1.5.7}Regularization and Smoothness in RKHS}{17}{subsubsection.47}%
+\contentsline {subsubsection}{\numberline {2.1.5.8}Examples of Kernels and Corresponding RKHS}{17}{subsubsection.48}%
+\contentsline {section}{\numberline {2.2}Introduction to Optimization}{17}{section.49}%
+\contentsline {subsection}{\numberline {2.2.1}Gradient-Based Optimization}{18}{subsection.50}%
+\contentsline {subsubsection}{\numberline {2.2.1.1}Gradient Descent}{18}{subsubsection.52}%
+\contentsline {subsubsection}{\numberline {2.2.1.2}Momentum}{19}{subsubsection.55}%
+\contentsline {subsubsection}{\numberline {2.2.1.3}Adaptive Learning Rate Algorithms}{19}{subsubsection.58}%
+\contentsline {paragraph}{Adagrad}{19}{section*.59}%
+\contentsline {paragraph}{Adam}{20}{section*.60}%
+\contentsline {paragraph}{RMSProp}{20}{section*.66}%
+\contentsline {subsubsection}{\numberline {2.2.1.4}Conjugate Gradient}{21}{subsubsection.69}%
+\contentsline {subsubsection}{\numberline {2.2.1.5}Newton's Method}{21}{subsubsection.74}%
+\contentsline {subsubsection}{\numberline {2.2.1.6}Quasi-Newton Methods (BFGS, L-BFGS)}{22}{subsubsection.76}%
+\contentsline {subsection}{\numberline {2.2.2}Derivative-Free Optimization}{23}{subsection.80}%
+\contentsline {subsubsection}{\numberline {2.2.2.1}Nelder-Mead Method}{23}{subsubsection.81}%
+\contentsline {subsubsection}{\numberline {2.2.2.2}Genetic Algorithm (GA)}{24}{subsubsection.86}%
+\contentsline {subsubsection}{\numberline {2.2.2.3}Simulated Annealing (SA)}{25}{subsubsection.90}%
+\contentsline {subsubsection}{\numberline {2.2.2.4}Covariance Matrix Adaptation Evolution Strategy (CMA-ES)}{25}{subsubsection.92}%
+\contentsline {section}{\numberline {2.3}Black-box Optimization}{27}{section.101}%
+\contentsline {subsection}{\numberline {2.3.1}Introduction to Black-box Optimization}{27}{subsection.102}%
+\contentsline {paragraph}{Problem Definition}{27}{section*.103}%
+\contentsline {subsection}{\numberline {2.3.2}Surrogates Models}{28}{subsection.104}%
+\contentsline {subsubsection}{\numberline {2.3.2.1}Gaussian Processes}{28}{subsubsection.105}%
+\contentsline {subsubsection}{\numberline {2.3.2.2}Random Forest}{29}{subsubsection.106}%
+\contentsline {subsubsection}{\numberline {2.3.2.3}Deep Neural Network and Neural Tangent Kernel}{30}{subsubsection.107}%
+\contentsline {subsection}{\numberline {2.3.3}Utility-Based Acquisition Functions}{31}{subsection.108}%
+\contentsline {subsubsection}{\numberline {2.3.3.1}Probability of Improvement}{32}{subsubsection.109}%
+\contentsline {subsubsection}{\numberline {2.3.3.2}Expected Improvement}{33}{subsubsection.111}%
+\contentsline {subsubsection}{\numberline {2.3.3.3}Upper Confidence Bound}{34}{subsubsection.114}%
+\contentsline {subsubsection}{\numberline {2.3.3.4}Thompson Sampling}{35}{subsubsection.116}%
+\contentsline {subsection}{\numberline {2.3.4}Information-Theoretic Acquisition Functions}{36}{subsection.119}%
+\contentsline {subsubsection}{\numberline {2.3.4.1}Entropy Search}{37}{subsubsection.120}%
+\contentsline {subsubsection}{\numberline {2.3.4.2}Predictive Entropy Search}{38}{subsubsection.122}%
+\contentsline {subsubsection}{\numberline {2.3.4.3}Max-value Entropy Search}{39}{subsubsection.124}%
+\contentsline {subsubsection}{\numberline {2.3.4.4}Knowledge Gradient}{40}{subsubsection.126}%
+\contentsline {subsection}{\numberline {2.3.5}Bandit-based Optimization}{41}{subsection.128}%
+\contentsline {subsubsection}{\numberline {2.3.5.1}Multi-armed Bandits}{41}{subsubsection.129}%
+\contentsline {paragraph}{Regret Minimization}{41}{section*.131}%
+\contentsline {subsubsection}{\numberline {2.3.5.2}Algorithms for MAB}{41}{subsubsection.133}%
+\contentsline {paragraph}{$\epsilon $-Greedy Algorithm}{42}{section*.134}%
+\contentsline {paragraph}{Upper Confidence Bound Algorithm}{42}{section*.136}%
+\contentsline {paragraph}{Thompson Sampling (TS)}{42}{section*.138}%
+\contentsline {subsubsection}{\numberline {2.3.5.3}Contextual Bandits}{42}{subsubsection.140}%
+\contentsline {paragraph}{Steps in a Contextual Bandit Algorithm.}{43}{section*.141}%
+\contentsline {paragraph}{Modeling the Reward Function.}{43}{section*.147}%
+\contentsline {subsubsection}{\numberline {2.3.5.4}Linear Bandits}{44}{subsubsection.148}%
+\contentsline {paragraph}{Linear Upper Confidence Bound (LinUCB) Algorithm}{44}{section*.150}%
+\contentsline {paragraph}{Thompson Sampling for Linear Models}{44}{section*.158}%
+\contentsline {subsubsection}{\numberline {2.3.5.5}Non-Linear Bandits}{45}{subsubsection.166}%
+\contentsline {paragraph}{Neural Upper Confidence Bound (NeuralUCB) Algorithm}{45}{section*.168}%
+\contentsline {paragraph}{Neural Thompson Sampling (NeuralTS) Algorithm}{46}{section*.177}%
+\contentsline {subsubsection}{\numberline {2.3.5.6}The Connection Between Bandit-based Optimization and Black-box Optimization}{47}{subsubsection.186}%
+\contentsline {subsection}{\numberline {2.3.6}Performance Metrics in Black-box Optimization}{47}{subsection.187}%
+\contentsline {subsubsection}{\numberline {2.3.6.1}Simple Regret}{47}{subsubsection.188}%
+\contentsline {subsubsection}{\numberline {2.3.6.2}Cumulative Regret}{48}{subsubsection.189}%
+\contentsline {subsubsection}{\numberline {2.3.6.3}Comparison and Relevance}{48}{subsubsection.190}%
+\contentsline {section}{\numberline {2.4}Black-box Optimization with Unknown Black-box Constraints}{48}{section.191}%
+\contentsline {section}{\numberline {2.5}Black-box Optimization with Physical Information}{51}{section.193}%
+\contentsline {section}{\numberline {2.6}Further Research in Black-box Optimization}{52}{section.194}%
+\contentsline {chapter}{\numberline {3}Neural-BO: A Black-box Optimization Algorithm using Deep Neural Networks}{53}{chapter.195}%
+\contentsline {section}{\numberline {3.1}Problem Setting}{54}{section.196}%
+\contentsline {section}{\numberline {3.2}Proposed Neural-BO Method}{54}{section.197}%
+\contentsline {paragraph}{Discussion}{55}{section*.198}%
+\contentsline {section}{\numberline {3.3}Theoretical Analysis}{56}{section.201}%
+\contentsline {section}{\numberline {3.4}Proof of the Main Theorem}{57}{section.214}%
+\contentsline {section}{\numberline {3.5}Experiments}{60}{section.216}%
+\contentsline {subsection}{\numberline {3.5.1}Experimental Setup}{60}{subsection.217}%
+\contentsline {subsection}{\numberline {3.5.2}Synthetic Benchmarks}{61}{subsection.222}%
+\contentsline {subsection}{\numberline {3.5.3}Real-world Applications}{67}{subsection.229}%
+\contentsline {subsubsection}{\numberline {3.5.3.1}Designing Sensitive Samples for Detection of Model Tampering}{67}{subsubsection.230}%
+\contentsline {subsubsection}{\numberline {3.5.3.2}Unknown target document retrieval}{68}{subsubsection.232}%
+\contentsline {subsubsection}{\numberline {3.5.3.3}Optimizing control parameters for robot pushing}{69}{subsubsection.235}%
+\contentsline {section}{\numberline {3.6}Conclusion}{70}{section.237}%
+\contentsline {chapter}{\numberline {4}Black-box Optimization with Unknown Black-box Constraints via Overparameterized Deep Neural Networks}{71}{chapter.238}%
+\contentsline {section}{\numberline {4.1}Proposed Neural-CBO Method}{72}{section.239}%
+\contentsline {subsection}{\numberline {4.1.1}The \acl {dnn} for an Arbitrary Function $f_a$}{72}{subsection.240}%
+\contentsline {subsection}{\numberline {4.1.2}Neural-CBO Algorithm}{75}{subsection.258}%
+\contentsline {section}{\numberline {4.2}Theoretical Analysis}{75}{section.261}%
+\contentsline {subsection}{\numberline {4.2.1}Detailed Assumptions for Objective Function and Constraints}{76}{subsection.264}%
+\contentsline {section}{\numberline {4.3}Experiments}{78}{section.269}%
+\contentsline {subsection}{\numberline {4.3.1}Experimental Setup}{78}{subsection.270}%
+\contentsline {paragraph}{Neural-CBO implementation details:}{78}{section*.271}%
+\contentsline {subsection}{\numberline {4.3.2}Synthetic Benchmark Functions}{78}{subsection.272}%
+\contentsline {subsection}{\numberline {4.3.3}Gas Transmission Compressor Design}{80}{subsection.276}%
+\contentsline {subsection}{\numberline {4.3.4}Speed Reducer Design}{80}{subsection.277}%
+\contentsline {subsection}{\numberline {4.3.5}Designing Sensitive Samples for Detection of Model Tampering}{82}{subsection.278}%
+\contentsline {section}{\numberline {4.4}Conclusion}{83}{section.280}%
+\contentsline {chapter}{\numberline {5}PINN-BO: A Black-Box Optimization Algorithm Using Physics-Informed Neural Networks}{84}{chapter.281}%
+\contentsline {section}{\numberline {5.1}Introduction}{84}{section.282}%
+\contentsline {section}{\numberline {5.2}Problem Setting}{85}{section.283}%
+\contentsline {section}{\numberline {5.3}Proposed PINN-BO Method}{86}{section.288}%
+\contentsline {section}{\numberline {5.4}Theoretical Analysis}{88}{section.291}%
+\contentsline {paragraph}{Proof sketch for Lemma \ref {lemma:pinn-bo_confidence_bound}}{90}{section*.309}%
+\contentsline {section}{\numberline {5.5}Experiments}{91}{section.316}%
+\contentsline {subsection}{\numberline {5.5.1}Experimental Setup}{91}{subsection.317}%
+\contentsline {subsection}{\numberline {5.5.2}Synthetic Benchmark Functions}{92}{subsection.318}%
+\contentsline {subsection}{\numberline {5.5.3}Real-world Applications}{93}{subsection.320}%
+\contentsline {subsubsection}{\numberline {5.5.3.1}Optimizing Steady-State Temperature}{93}{subsubsection.321}%
+\contentsline {paragraph}{Heat Equation with Boundary Conditions 1}{94}{section*.322}%
+\contentsline {paragraph}{Heat Equation with Boundary Conditions 2}{94}{section*.323}%
+\contentsline {paragraph}{Heat Equation with Boundary Conditions 3}{94}{section*.324}%
+\contentsline {subsubsection}{\numberline {5.5.3.2}Optimizing Beam Displacement}{94}{subsubsection.327}%
+\contentsline {chapter}{\numberline {6}Conclusion}{98}{chapter.329}%
+\contentsline {section}{\numberline {6.1}Contributions}{98}{section.330}%
+\contentsline {section}{\numberline {6.2}Future Directions}{99}{section.331}%
+\contentsline {chapter}{\numberline {A}Supplementary Material of Chapter \ref {chap:neural-bo}}{100}{appendix.332}%
+\contentsline {section}{\numberline {A.1}Proof of Theoretical Analysis in Chapter \ref {chap:neural-bo}}{100}{section.333}%
+\contentsline {section}{\numberline {A.2}Proof of Auxiliary Lemmas}{107}{section.368}%
+\contentsline {subsection}{\numberline {A.2.1}Proof of Lemma \ref {lemma:NN_vs_linear}}{107}{subsection.369}%
+\contentsline {subsection}{\numberline {A.2.2}Proof of Lemma \ref {lemma:noise_affeted_bound}}{109}{subsection.377}%
+\contentsline {subsection}{\numberline {A.2.3}Proof of Lemma \ref {lemma:log_det_Kt_bound}}{111}{subsection.380}%
+\contentsline {subsection}{\numberline {A.2.4}Proof of Lemma \ref {lemma:min_B_vs_cov_norm}}{111}{subsection.381}%
+\contentsline {chapter}{\numberline {B}Supplementary Material of Chapter \ref {chap:neural-cbo}}{112}{appendix.382}%
+\contentsline {section}{\numberline {B.1}Proof of Theoretical Analysis in Chapter \ref {chap:neural-bo}}{112}{section.383}%
+\contentsline {subsection}{\numberline {B.1.1}Proof of Lemma \ref {lemma:neural-cbo_confidence_bound}}{112}{subsection.384}%
+\contentsline {paragraph}{Bound term $T_1$}{113}{section*.387}%
+\contentsline {paragraph}{Bound term $T_2$}{113}{section*.388}%
+\contentsline {subsection}{\numberline {B.1.2}Proof of Theorem \ref {theorem:main}}{114}{subsection.389}%
+\contentsline {paragraph}{Bound Cumulative Regret $R_{T}$:}{114}{section*.392}%
+\contentsline {paragraph}{Bound Cumulative Violation $V_{c_i, T}$:}{115}{section*.397}%
+\contentsline {subsection}{\numberline {B.1.3}Technical Lemmas}{116}{subsection.398}%
+\contentsline {chapter}{\numberline {C}Supplementary Material of Chapter \ref {chap:pinn-bo}}{122}{appendix.419}%
+\contentsline {section}{\numberline {C.1}Additional Experimental Details}{122}{section.420}%
+\contentsline {paragraph}{Drop-Wave:}{122}{section*.421}%
+\contentsline {paragraph}{Styblinski-Tang:}{122}{section*.422}%
+\contentsline {paragraph}{Rastrigin:}{122}{section*.423}%
+\contentsline {paragraph}{Michalewics:}{122}{section*.424}%
+\contentsline {paragraph}{Cosine Mixture:}{122}{section*.425}%
+\contentsline {section}{\numberline {C.2}Proof of Theoretical Analysis in Chapter \ref {chap:pinn-bo}}{123}{section.426}%
+\contentsline {subsection}{\numberline {C.2.1}Proof of Lemma \ref {lemma:pinn-bo_PINN_mean_cov}}{123}{subsection.427}%
+\contentsline {paragraph}{Mean function:}{124}{section*.434}%
+\contentsline {paragraph}{Variance function:}{125}{section*.435}%
+\contentsline {subsection}{\numberline {C.2.2}Proof of Lemma \ref {lemma:interaction_information_formula}}{125}{subsection.436}%
+\contentsline {paragraph}{Denominator}{126}{section*.441}%
+\contentsline {paragraph}{Numerator}{126}{section*.444}%
+\contentsline {chapter}{Bibliography}{132}{appendix*.455}%
+\contentsline {section}{\numberline {C.3}NeuralBO: A black-box optimization algorithm using deep neural networks}{138}{section.457}%
+\contentsline {section}{\numberline {C.4}PINN-BO:}{138}{section.459}%

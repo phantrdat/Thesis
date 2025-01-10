@@ -4,28 +4,30 @@
 \section{Proof of Theoretical Analysis in Chapter \ref{chap:neural-bo}}
 \label{section:neural-cbo_appendix}
 
-In this section, we will provide the proof of Lemma \ref{lemma:neural-cbo_confidence_bound} and Theorem \ref{theorem:main}. Before going to the proof, we briefly remind existing terms and introduce new notations for convenience.
-Remind that $\mathbf{g}_{a}(\mathbf{x}; \mathbf{W}) = \nabla_{\mathbf{W}}a(\mathbf{x}; \mathbf{W})$. Therefore, $\mathbf{g}_{a}(\mathbf{x}; \mathbf{W}_0)$ and $\mathbf{g}_{a}(\mathbf{x}; \mathbf{W}_t)$ will be the gradients of the neural network $a(\mathbf{x}; \mathbf{W})$ (using to model a \textit{arbitrary} function $f_a$, defined in Eqn. \ref{eqn:fcn}) at initialization and at iteration $t$, respectively.  Further, let us define terms as follows:
+In this section, we will provide the proof of Lemma \ref{lemma:neural-cbo_confidence_bound} and Theorem \ref{theorem:main}. Before going to the proof, we briefly review existing terms and introduce new notations for convenience.
+Remind that $\mathbf{g}_{a}(\mathbf{x}; \mathbf{W}) = \nabla_{\mathbf{W}}a(\mathbf{x}; \mathbf{W})$. Therefore, $\mathbf{g}_{a}(\mathbf{x}; \mathbf{W}_0)$ and $\mathbf{g}_{a}(\mathbf{x}; \mathbf{W}_t)$ will be the gradients of the neural network $a(\mathbf{x}; \mathbf{W})$ (using to model an \textit{arbitrary} function $f_a$, defined in Eqn. \ref{eqn:fcn}) at initialization and at iteration $t$, respectively.  Further, let us define terms as follows:
 
-\begin{equation}
+
+\begin{equation*}
 \label{def:neural_cbo_linear_kernelized_terms}
-\begin{split}
-\mathbf{G}_{a,t-1} & = [\mathbf{g}_{a}(\mathbf{x}_1; \mathbf{W}_0),\dots, \mathbf{g}_{a}(\mathbf{x}_{t-1}; \mathbf{W}_0)] 
+    \begin{split}   
+\mathbf{G}_{a,t-1} & = [\mathbf{g}_{a}(\mathbf{x}_1; \mathbf{W}_0),\dots, \mathbf{g}_{a}(\mathbf{x}_{t-1}; \mathbf{W}_0)]  
 \\
 \Bar{\mathbf{G}}_{a,t-1} & = [\mathbf{g}_{a}(\mathbf{x}_1; \mathbf{W}_{t-1}),\dots, \mathbf{g}_{a}(\mathbf{x}_{t-1}; \mathbf{W}_{t-1})] 
 \\
 \mathbf{U}_{a,t-1} &=  \mathbf{I} + \mathbf{G}_{a,t-1} \mathbf{G}_{a,t-1}^\top 
 \\
-\mathbf{F}_{a,t-1} &= [f_a(\mathbf{x}_1), \dots, f_a(\mathbf{x}_{t-1})]
-\end{split}
-\end{equation}
-Further, it can be verify that $\mathbf{H}_0 = \mathbf{G}_{a,t-1} ^\top\mathbf{G}_{a,t-1}$, where $\mathbf{H}_0$ is the NTK matrix at initialization defined in Definition \ref{def:neural-cbo_ntk}.  Now we are ready to bound Lemma \ref{lemma:neural-cbo_confidence_bound}.
+\mathbf{F}_{a,t-1} &= [f_a(\mathbf{x}_1), \dots, f_a(\mathbf{x}_{t-1})] 
+    \end{split}
+\end{equation*}
+
+Further, it can be verified that $\mathbf{H}_0 = \mathbf{G}_{a,t-1} ^\top\mathbf{G}_{a,t-1}$, where $\mathbf{H}_0$ is the NTK matrix at initialization defined in Definition \ref{def:neural-cbo_ntk}.  Now we are ready to bound Lemma \ref{lemma:neural-cbo_confidence_bound}.
 
 \subsection{Proof of Lemma \ref{lemma:neural-cbo_confidence_bound}}
 \ConfidenceBound*
 
 \begin{proof}
-To prove Lemma \ref{lemma:neural-cbo_confidence_bound}, we analyse the left-hand side as follow:
+To prove Lemma \ref{lemma:neural-cbo_confidence_bound}, we analyse the left-hand side as follows:
 \begin{align*}
     & \lvert f_a(\mathbf{x}) - a(\mathbf{x}; \mathbf{W}_{t-1}) \rvert 
     \\
@@ -34,7 +36,7 @@ To prove Lemma \ref{lemma:neural-cbo_confidence_bound}, we analyse the left-hand
 Here, $T_1$ represents the difference between the actual function value and the theoretical optimal solution for a linearized network. Meanwhile, $T_2$ refers to the gap between the neural network's output $a(\mathbf{x}; \boldsymbol{W}_{t-1})$ at iteration $t-1$ and the theoretical optimal solution for the same linearized network.
 \paragraph{Bound term $T_1$}:
 
-First of all, following Assumption \ref{assumption:rkhs} in the main paper, we assume that $f_a$ is in RKHS $\mathcal{H}_{k_a}$ with NTK kernel $k_a$, and $\mathbf{g}_a(\mathbf{x}; \mathbf{W}_0)$  can be considered as finite approximation of $\varphi(\cdot)$, the feature map of the NTK from $\mathbb{R}^d \rightarrow \mathcal{H}_{k_a}$. From Lemma \ref{lemma:RKHS_expression} , there exists $f_a^* \in \mathbb{R}^p$ such that $f_a(\mathbf{x}) = \langle \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0), f_a^* \rangle = \mathbf{g_a}(\mathbf{x}; \mathbf{W}_0)^\top f_a^*$. 
+First, following Assumption \ref{assumption:rkhs} in the main paper, we assume that $f_a$ is in RKHS $\mathcal{H}_{k_a}$ with NTK kernel $k_a$, and $\mathbf{g}_a(\mathbf{x}; \mathbf{W}_0)$  can be considered as finite approximation of $\varphi(\cdot)$, the feature map of the NTK from $\mathbb{R}^d \rightarrow \mathcal{H}_{k_a}$. From Lemma \ref{lemma:RKHS_expression}, there exists $f_a^* \in \mathbb{R}^p$ such that $f_a(\mathbf{x}) = \langle \mathbf{g}_a(\mathbf{x}; \mathbf{W}_0), f_a^* \rangle = \mathbf{g_a}(\mathbf{x}; \mathbf{W}_0)^\top f_a^*$. 
 Then the term $T_1$ can be bounded as:
 \begin{align*}
 \label{ieqn:neural_cbo_confidence_interval}
@@ -94,7 +96,7 @@ where $\mathcal{E}(m) = \mathcal{O}(C^{2L} L^{3/2} m^{11/36})$.
 
 \begin{proof}
 
-We gradually provide the upper bound of the cumulative regret $R_T$ and cumulative violation of each constraints $V_{c_i,T}$ as: 
+We gradually provide the upper bound of the cumulative regret $R_T$ and cumulative violation of each constraint $V_{c_i,T}$ as: 
 \paragraph{Bound Cumulative Regret $R_{T}$:}
 We utilize some results from \citep{tran2022regret} to bound our cumulative regret:
 \begin{lemma}[Lemma 10, \citep{tran2022regret}]
@@ -389,11 +391,11 @@ $\eta > 0$, with probability $1 - \delta$, the following holds for all $t$:
 \label{lemma:neural_cbo_log_det_Kt_bound}
 Let $\delta \in (0,1)$. If the network width $m$ satisfies  Condition \ref{condition:network_width}, then with probability at least $1-\delta$, the following holds for every $t \in [T]$:
 \[ \log \det (\mathbf{I} + \mathbf{H}_0) \le 2\gamma_{a,t} + 1,\]
-where $\gamma_{a,t}$ is the maximum information gain associated with the NTK kernel $k_a$.
+where $\gamma_{a,t}$ is the maximum information gain associated with the \ac{ntk} kernel $k_a$.
 \end{lemma}
 \begin{proof}[Proof of Lemma \ref{lemma:log_det_Kt_bound}]
 
-From the definition of $\mathbf{H}_0$ and Lemma B.7 \cite{zhou2020neural}, we have that
+From the definition of $\mathbf{H}_0$ and Lemma B.7 in \citet{zhou2020neural}, we have that
 \begin{equation*}
 \begin{split}
     \log \det(\mathbf{I}+ \mathbf{H}_{0})
@@ -404,7 +406,7 @@ From the definition of $\mathbf{H}_0$ and Lemma B.7 \cite{zhou2020neural}, we ha
     & \leq 2 \gamma_{a,t} + 1, 
 \end{split}
 \end{equation*}
-where the first equality is from the definition of $\mathbf{K}_t$ in Definition \ref{def:linear_kernelized_terms}, the first inequality is from the convexity of $\log \det(\cdot)$ function, and the second inequality is from the fact that $\langle \mathbf{A}, \mathbf{B} \rangle \le \norm{\mathbf{A}}_F \norm{\mathbf{B}}_F$. The third inequality is from the choice of $m$ in Condition \ref{condition:network_width}, combined with Lemma \ref{lemma:neural_cbo_H_to_Phi} and Lemma 3 in \cite{chowdhury2017kernelized}.
+where the first equality is from the definition of $\mathbf{K}_t$ in Definition \ref{def:linear_kernelized_terms}, the first inequality is from the convexity of $\log \det(\cdot)$ function, and the second inequality is from the fact that $\langle \mathbf{A}, \mathbf{B} \rangle \le \norm{\mathbf{A}}_F \norm{\mathbf{B}}_F$. The third inequality is from the choice of $m$ in Condition \ref{condition:network_width}, combined with Lemma \ref{lemma:neural_cbo_H_to_Phi} and Lemma 3 in \citet{chowdhury2017kernelized}.
 \end{proof}
 
 \begin{lemma}[Lemma 8, \citet{phan2023neuralbo}]

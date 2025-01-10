@@ -1,6 +1,5 @@
 %\thispagestyle{plain}
 %\chaptermark{Abbreviation}
-\addcontentsline{toc}{chapter}{Abbreviations} \noindent
 %\renewcommand{\nomname}{List of Abbreviations}
 
 %--- Acronyms -----------------------------------------------------------------%
@@ -20,41 +19,48 @@
 %--- Acronyms -----------------------------------------------------------------%
 
 \chapter*{List of Abbreviations}
-\begin{multicols}{2}
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Abbreviations}
+% \begin{multicols}{2}
 \begin{acronym}
+        \acro{adam}[Adam]{Adaptive Moment Estimation}
+        \acro{bart}[BART]{Bayesian Additive Regression Tree}
+        \acro{bnn}[BNN]{Bayesian Neural Network}
         \acro{bo}[BO]{Black-box Optimization}
+        \acro{cbo}[CBO]{Black-box Optimization with Unknown Constraints}
+        \acro{cdf}[CDF]{Cumulative Distribution Function}
+        \acro{cg}[CG]{Conjugate Gradient}
+        \acro{cmaes}[CMA-ES]{Covariance Matrix Adaptation Evolution Strategy}
+        \acro{deepgp}[Deep GP]{Deep Gaussian Process}
+        \acro{dfo}[DFO]{Derivative-Free Optimization}
         \acro{dnn}[DNN]{Deep Neural Network}
         \acro{ei}[EI]{Expected Improvement}
         \acro{es}[ES]{Entropy Search}
-        \acro{pes}[PES]{Predictive Entropy Search}
-        \acro{mes}[MES]{Max-value Entropy Search}
-        \acro{kg}[KG]{Knowledge Gradient}
+        \acro{ga}[GA]{Genetic Algorithm}
+        \acro{gd}[GD]{Gradient Descent}
+        \acro{gbrt}[GBRT]{Gradient Boosted Regression Tree}
         \acro{gp}[GP]{Gaussian Process}
         \acrodefplural{gp}{Gaussian Processes}
+        \acro{kg}[KG]{Knowledge Gradient}
         \acro{lcb}[LCB]{Lower Confidence Bound}
+        \acro{mab}[MAB]{Multi-armed Bandit}
+        \acro{mf}[MF]{Mondrian Forest}
+        \acro{mes}[MES]{Max-value Entropy Search}
+        \acro{mig}[MIG]{Maximum Information Gain}
+        \acro{nag}[NAG]{Nesterov Accelerated Gradient}
         \acro{ntk}[NTK]{Neural Tangent Kernel}
-        \acro{rkhs}[RKHS]{Reproducing Kernel Hilbert Space}
+        \acro{pdf}[PDF]{Probability Density Function}
         \acro{pde}[PDE]{Partial Differential Equation}
+        \acro{pes}[PES]{Predictive Entropy Search}
+        \acro{PI}[PI]{Probability of Improvement}
         \acro{pinn}[PINN]{Physics-Informed Neural Network}
+        \acro{relu}[ReLU]{Rectified Linear Unit}
+        \acro{rf}[RF]{Random Forest}
+        \acro{rkhs}[RKHS]{Reproducing Kernel Hilbert Space}
+        \acro{rmsprop}[RMSProp]{Root Mean Square Propagation}
+        \acro{sa}[SA]{Simulated Annealing}
+        \acro{smac}[SMAC]{Sequential Model-Based Optimization for General Algorithm Configuration}
         \acro{ts}[TS]{Thompson Sampling}
         \acro{ucb}[UCB]{Upper Confidence Bound}
-        \acro{rf}[RF]{Random Forest}
-        \acro{bnn}[BNN]{Bayesian Neural Network}
-        \acro{deepgp}[Deep GP]{Deep Gaussian Process}
-        \acro{mig}[MIG]{Maximum Information Gain}
-        \acro{relu}[ReLU]{Rectified Linear Unit}
-        \acro{PI}[PI]{Probability of Improvement}
-        \acro{cdf}[CDF]{Cumulative Distribution Function}
-        \acro{pdf}[PDF]{Probability Density Function}
-        \acro{mab}[MAB]{Multi-armed Bandit}
-        \acro{gd}[GD]{Gradient Descent}
-        \acro{nag}[NAG]{Nesterov Accelerated Gradient}
-        \acro{adam}[Adam]{Adaptive Moment Estimation}
-        \acro{rmsprop}[RMSProp]{Root Mean Square Propagation}
-        \acro{cg}[CG]{Conjugate Gradient}
-        \acro{dfo}[DFO]{Derivative-Free Optimization}
-        \acro{ga}[GA]{Genetic Algorithm}
-        \acro{sa}[SA]{Simulated Annealing}
-        \acro{cmaes}[CMA-ES]{Covariance Matrix Adaptation Evolution Strategy}
 \end{acronym}
-\end{multicols}
+% \end{multicols}

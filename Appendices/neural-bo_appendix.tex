@@ -30,23 +30,7 @@ If $\epsilon \in [0,1]$,  with probability at least $1-\mathcal{O}(nL)e^{-\Omega
 \]
 \end{lemma}
 
-% By combining this lemma with techniques used in Lemma 4.1 of \cite{cao2019generalization}, Lemma B.3 
-%  of \cite{cao2019generalization} and Theorem 5 
-% of \cite{allen2019convergence}, we achieve a concentration property of estimated value $h(\mathbf{x}; \boldsymbol{\theta}_{t-1})$ from its true value $f(\mathbf{x})$ as follows:
-% \begin{lemma}
-% \label{lemma:predictive_bound}
-% Assume the width of the neural network $m$ satisfies Condition \ref{cond:set}. Given any $\alpha \in (0,1)$ and setting $\eta = C(m\lambda + mLT)^{-1}$, then for any $t \in [T]$ we have
 
-% \[\lvert h(\mathbf{x}; \boldsymbol{\theta}_{t-1}) - f(\mathbf{x}) \rvert \leq \nu_t \sigma_t(\mathbf{x}) + \epsilon(m), \forall \mathbf{x} \in \mathcal{D}_t, \]
-% holds with probability $\geq  1-\alpha/2$ and 
-% \begin{equation*}
-%     \begin{split}
-%      \epsilon(m) = & \frac{b}{a} C_{\epsilon,1} m^{-1/6}\lambda^{-2/3}L^3 \sqrt{\log m} + \frac{b}{a} C_{\epsilon,2} (1-\eta m\lambda)^J \sqrt{TL/\lambda}\\
-%      & + \left(\frac{b}{a}\right)^3 C_{\epsilon,3} m^{-1/6} \sqrt{\log m} L^4 T^{5/3} \lambda^{-5/3} (1+\sqrt{T/\lambda}), \\
-%     \end{split}
-% \end{equation*}
-% where $\{C_{\epsilon,i}\}_{i=1}^3$ are positive constants and $a,b$ are lower and upper norm bounds of input $\mathbf{x}$ as defined in Section \ref{neural-bo:problem_setting}. 
-% \end{lemma}
 The following lemma is the concentration property of sampling value $\widetilde{f}_t(\mathbf{x})$ from estimated mean value $h(\mathbf{x}; \boldsymbol{\theta}_{t-1})$.
 \begin{lemma}
 \label{lemma:sampling_bound}
@@ -141,7 +125,7 @@ Let $\alpha \in (0,1)$. If the network width $m$ satisfies  $m \geq C T^6L^6 \lo
 where $\gamma_t$ is maximum information gain associated with the kernel $k_\textup{NTK}$. We provided the proof of Lemma \ref{lemma:log_det_Kt_bound} in \ref{log_det_Kt_bound_proof}.
 \end{sublemma}
 
-\begin{sublemma}[Lemma D.2, \cite{kassraie2022neural}] 
+\begin{sublemma}[Lemma D.2, \citep{kassraie2022neural}] 
 \label{lemma:RKHS_expression}
 Let $\alpha \in (0,1)$. Under Assumption \ref{assumption:sufficient_exploration} , if the network width $m$ satisfies  $m \geq C T^6L^6 \log(TL/\alpha)$ and $f$ be a member of $\mathcal{H}_{k_\text{NTK}}$ with bounded RKHS norm $\norm{f}_{k_\text{NTK}} \leq B$, then with probability at least $1-\alpha$, there exists $\mathbf{w} \in \mathbb{R}^p$ such that 
 \[ f(\mathbf{x}) = \langle \mathbf{g}(\mathbf{x}; \boldsymbol{\theta}_0), \mathbf{w} \rangle, \norm{\mathbf{w}}_2 \leq \sqrt{\frac{2}{m}}B \]
@@ -226,7 +210,7 @@ For any $t \in [T], \mathbf{x} \in D$, we have $\mathbb{P}(\widetilde{f}_t (\mat
 
 
 For any step $t$, we consider how the standard deviation of the estimates for each point is, in comparison with the standard deviation for the optimal value.
-Following \cite{zhang2021neural}, we divide the discretization $\mathcal D_t$ into two sets: saturated and unsaturated sets. For more details, we define the set of saturated points as:
+Following \citet{zhang2021neural}, we divide the discretization $\mathcal D_t$ into two sets: saturated and unsaturated sets. For more details, we define the set of saturated points as:
 
 \begin{equation}
 \label{def:saturated_set}
@@ -243,7 +227,7 @@ S_t = \{\forall \mathbf{x} \in \mathcal{D}_t, f([\mathbf{x}^*]_t) - f(\mathbf{x}
 % $$\mathcal{E}^\mu_t = \{\forall \mathbf{x} \in \mathcal D, \rvert f(\mathbf{x}; \boldsymbol{\theta}_{t-1}) - f(\mathbf{x}) \lvert \leq \nu_t \sigma_t + \epsilon(m) \}$$ 
 % Event $\mathcal{E}^\mu_t$ holds w.p $1-\alpha/2, \alpha \in (0,1)$, from Lemma \ref{lemma:predictive_bound}.
 The following lemma shows that, the algorithm can pick unsaturated points $\mathbf{x}_t$ with high probability. 
-\begin{lemma}[Lemma 4.5, \cite{zhou2020neural}]
+\begin{lemma}[Lemma 4.5, \citep{zhou2020neural}]
 \label{lemma:unsaturated_points}
 
 Let $\mathbf{x}_t$ be the chosen point at step $t \in [T]$. Then, $\mathbb{P}(\mathbf{x}_t \not\in S_t \lvert \mathcal{F}_{t-1}) \geq \frac{1}{4e\sqrt{\pi}} - \frac{1}{t^2}$
@@ -262,7 +246,7 @@ where $C_1, C_2$ are absolute constants.
 
 \begin{proof} [Proof of Lemma \ref{lemma:neural-bo_regret_expectation}]
      
-This proof inherits the proof of Lemma 4.6 \cite{zhang2021neural}, and by using the result of unsaturated point $\mathbf{x}_t$ in Lemma \ref{lemma:unsaturated_points}, along with $\lvert f(x)  \rvert = \lvert \langle f, k(x,\cdot) \rangle \rvert \leq B$ instead of $\lvert f(x) \rvert  \leq 1$ as in \cite{zhang2021neural}, we have the following result:
+This proof inherits the proof of Lemma 4.6 in \citet{zhang2021neural}, and by using the result of unsaturated point $\mathbf{x}_t$ in Lemma \ref{lemma:unsaturated_points}, along with $\lvert f(x)  \rvert = \lvert \langle f, k(x,\cdot) \rangle \rvert \leq B$ instead of $\lvert f(x) \rvert  \leq 1$ as in \citet{zhang2021neural}, we have the following result:
 \begin{equation*}
 \begin{split}
     &  \mathbb{E} [f([\mathbf{x}^*]_t) - f(\mathbf{x}_t) \mid \mathcal{F}_{t-1}] \\
@@ -397,20 +381,8 @@ R_T & \leq \Bar C_1(1+c_T)\nu_T \sqrt{L} \sqrt{\frac{\lambda BT}{\log(B+1)} (2\g
 \label{section:neural-bo_aux_appendix}
 \subsection{Proof of Lemma \ref{lemma:NN_vs_linear}}
 \label{NN_vs_linear_proof}
-% We first need some previous results to prove Lemma \ref{lemma:NN_vs_linear}. 
 
-% Following \cite{allen2019convergence}, we first define \[\mathbf{h}_{i,0} = \mathbf{x}, \mathbf{h}_{i,0} = \phi(\mathbf{W}_l \mathbf{h}_{i, l-1}), l \in [1,L-1]\]
-% as the output of the hidden layer at layer $l$-th.
-% We start with the lemma that gives the norm bound of $\mathbf{h}_{i, l-1}$.
-
-% \begin{sublemma}
-% [Lemma 7.1, \cite{allen2019convergence}]
-% \label{lemma:bound_hil}
-% If $\epsilon \in [0.1]$,  with probability at least $1-\mathcal{O}(nL)e^{-\Omega(m\epsilon^2/L)}$, we have
-% \[ \forall i \in [T], l\in {1,\dots,  L}, \norm{\mathbf{h}_{i, l-1}} \in [ae^{-\epsilon}, be^\epsilon] 
-% \]
-% \end{sublemma}
-We strictly inherit the technique used in Lemma 4.1 \cite{cao2019generalization}, Lemma B.3 \cite{cao2019generalization} and Theorem 5 \cite{allen2019convergence}, combine with Lemma \ref{lemma:bound_hil} to achieve following results:
+We strictly inherit the technique used in Lemma 4.1 in \citet{cao2019generalization}, Lemma B.3 in \citet{cao2019generalization} and Theorem 5 in \citet{allen2019convergence}, combine with Lemma \ref{lemma:bound_hil} to achieve following results:
 \begin{sublemma}
 \label{lemma:NTK_related_bounds}
 There exists positive constants $\{C_i\}^2_{i=1}$ and $\Bar{C}_{\epsilon,1}$ such that for any $\alpha  \in (0,1]$, if $\tau$ satisfies that:
@@ -490,7 +462,7 @@ as stated in Lemma \ref{lemma:NN_vs_linear}.
 We bound the noise-affected term using the sub-Gaussianity assumption. Let $\mathbf{Z}_{t-1}^\top(\mathbf{x})  = \mathbf{g}(\mathbf{x}; \boldsymbol{\theta}_0)^\top \mathbf{U}^{-1}_{t-1} \mathbf{G}_{t-1} /m$. We will show that $\mathbf{Z}_{t-1}^\top(\mathbf{x}) \boldsymbol{\epsilon}_{t-1}$ is a sub-Gaussian random variable whose moment generating function is bounded by that
 of a Gaussian random variable with variance $\frac{R^2\sigma_{t}^2(\mathbf{x})}{\lambda}$.
 
-Following the proof style in \cite{vakili2021optimal}, we bound the noise-affected term $\mathbf{g}(\mathbf{x}; \boldsymbol{\theta}_0)^\top \mathbf{U}^{-1}_{t-1} \mathbf{G}_{t-1} \boldsymbol{\epsilon}_{t-1}/m = \mathbf{Z}_{t-1}^\top (\mathbf{x})\boldsymbol{\epsilon}_{t-1}$. Let $\zeta_i(\mathbf{x}) = [\mathbf{Z}_{t-1}(\mathbf{x})]_i$, then we have: 
+Following the proof style in \citet{vakili2021optimal}, we bound the noise-affected term $\mathbf{g}(\mathbf{x}; \boldsymbol{\theta}_0)^\top \mathbf{U}^{-1}_{t-1} \mathbf{G}_{t-1} \boldsymbol{\epsilon}_{t-1}/m = \mathbf{Z}_{t-1}^\top (\mathbf{x})\boldsymbol{\epsilon}_{t-1}$. Let $\zeta_i(\mathbf{x}) = [\mathbf{Z}_{t-1}(\mathbf{x})]_i$, then we have: 
 \begin{equation}
 \begin{split}
     \mathbb E \left[\exp ( \mathbf{Z}_{t-1}^\top(\mathbf{x})\boldsymbol{\epsilon}_{t-1} ) \right] & =  \mathbb{E}\left[ \exp \sum_{i=1}^{t-1} \zeta_i(\mathbf{x}) \boldsymbol{\epsilon}_i  \right] \\
@@ -519,7 +491,7 @@ where the second equation is the consequence of independence of $\zeta_i(\mathbf
 \end{equation}
 where the second equality is from definition of $\mathbf{Z}_{t-1}$ and the third inequality is from the note of Definition \ref{def:linear_kernelized_terms}.  The inequality is from the fact that  $\frac{\lambda}{m} \norm{\mathbf{g}(\mathbf{x}; \boldsymbol{\theta}_0) \mathbf{U}^{-2}_{t-1}}^2 \ge 0, \forall \mathbf{x},t$. Replace inequality \ref{eqn:bound_Z} to equation \ref{eqn:noise_effect} then we have 
 \[ \mathbb E \left[\exp \left( \mathbf{Z}_{t-1}^\top(\mathbf{x})\boldsymbol{\epsilon}_{t-1}   \right) \right] \leq \exp (\frac{R^2\sigma_t^2(\mathbf{x})}{2\lambda}) \]
-Thus, using Chernoff-Hoeffding inequality \cite{antonini2008convergence}, we have with probabilty at least $1-\alpha$: 
+Thus, using Chernoff-Hoeffding inequality \citep{antonini2008convergence}, we have with probabilty at least $1-\alpha$: 
 
 \begin{equation*}
     \begin{split}
@@ -533,7 +505,7 @@ Thus, using Chernoff-Hoeffding inequality \cite{antonini2008convergence}, we hav
 \label{log_det_Kt_bound_proof}
 \begin{proof}[Proof of Lemma \ref{lemma:log_det_Kt_bound}]
 
-From the definition of $\mathbf{K}_t$ and Lemma B.7 \cite{zhou2020neural}, we have that
+From the definition of $\mathbf{K}_t$ and Lemma B.7 in \citet{zhou2020neural}, we have that
 \begin{equation*}
 \begin{split}
     \log \det(\mathbf{I}+\lambda^{-1}\mathbf{K}_{t})
@@ -548,7 +520,7 @@ From the definition of $\mathbf{K}_t$ and Lemma B.7 \cite{zhou2020neural}, we ha
 \end{equation*}
 where the first equality is from the definition of $\mathbf{K}_t$ in Definition \ref{def:linear_kernelized_terms}, the first inequality is from the convexity of $\log \det(\cdot)$ function,
 and the second inequality is from the fact that $\langle \mathbf{A}, \mathbf{B} \rangle \le \norm{\mathbf{A}}_F \norm{\mathbf{B}}_F$. The third inequality is
-from the fact that $\norm{\mathbf{A}}_F \le \sqrt{t} \norm{\mathbf{A}}_2$ if $\mathbf{A} \in \mathbb{R}^{t \times t}$. The fourth inequality utilizes the choice of $\epsilon = T^{-3/2}$ and the last inequality inherits Lemma 3 in \cite{chowdhury2017kernelized}.
+from the fact that $\norm{\mathbf{A}}_F \le \sqrt{t} \norm{\mathbf{A}}_2$ if $\mathbf{A} \in \mathbb{R}^{t \times t}$. The fourth inequality utilizes the choice of $\epsilon = T^{-3/2}$ and the last inequality inherits Lemma 3 in \citet{chowdhury2017kernelized}.
 \end{proof}
 
 \subsection{Proof of Lemma \ref{lemma:min_B_vs_cov_norm}}
