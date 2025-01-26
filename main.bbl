@@ -17,6 +17,41 @@
 \endgroup
 
 \datalist[entry]{nyt/global//global/global/global}
+  \entry{abbasi2011improved}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=AYY}{%
+         family={Abbasi-Yadkori},
+         familyi={A\bibinithyphendelim Y\bibinitperiod},
+         given={Yasin},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=PD}{%
+         family={P{\'a}l},
+         familyi={P\bibinitperiod},
+         given={D{\'a}vid},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=SC}{%
+         family={Szepesv{\'a}ri},
+         familyi={S\bibinitperiod},
+         given={Csaba},
+         giveni={C\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{AYYPDSC1}
+    \strng{fullhash}{AYYPDSC1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2011}
+    \field{labeldatesource}{}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \field{title}{Improved algorithms for linear stochastic bandits}
+    \field{volume}{24}
+    \field{journaltitle}{Advances in neural information processing systems}
+    \field{year}{2011}
+  \endentry
+
   \entry{agrawal2012analysis}{inproceedings}{}{}
     \name{author}{2}{}{%
       {{hash=AS}{%
@@ -49,6 +84,38 @@
     \field{title}{Analysis of thompson sampling for the multi-armed bandit
   problem}
     \field{year}{2012}
+  \endentry
+
+  \entry{agrawal2013thompson}{inproceedings}{}{}
+    \name{author}{2}{}{%
+      {{hash=AS}{%
+         family={Agrawal},
+         familyi={A\bibinitperiod},
+         given={Shipra},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=GN}{%
+         family={Goyal},
+         familyi={G\bibinitperiod},
+         given={Navin},
+         giveni={N\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {PMLR}%
+    }
+    \strng{namehash}{ASGN1}
+    \strng{fullhash}{ASGN1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2013}
+    \field{labeldatesource}{}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \field{booktitle}{International conference on machine learning}
+    \field{pages}{127\bibrangedash 135}
+    \field{title}{Thompson sampling for contextual bandits with linear payoffs}
+    \field{year}{2013}
   \endentry
 
   \entry{agrawal2017thompson}{inproceedings}{}{}
@@ -93,6 +160,35 @@
     \field{pages}{76\bibrangedash 78}
     \field{title}{Thompson sampling for the mnl-bandit}
     \field{year}{2017}
+  \endentry
+
+  \entry{allen2019can}{article}{}{}
+    \name{author}{2}{}{%
+      {{hash=AZZ}{%
+         family={Allen-Zhu},
+         familyi={A\bibinithyphendelim Z\bibinitperiod},
+         given={Zeyuan},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=LY}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Yuanzhi},
+         giveni={Y\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{AZZLY1}
+    \strng{fullhash}{AZZLY1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2019}
+    \field{labeldatesource}{}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \field{title}{What can resnet learn efficiently, going beyond kernels?}
+    \field{volume}{32}
+    \field{journaltitle}{Advances in Neural Information Processing Systems}
+    \field{year}{2019}
   \endentry
 
   \entry{allen2019convergence}{inproceedings}{}{}
@@ -260,6 +356,7 @@
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
     \field{labelyear}{2019}
+    \field{extradate}{1}
     \field{labeldatesource}{}
     \field{sortinit}{A}
     \field{sortinithash}{A}
@@ -267,6 +364,60 @@
     \field{pages}{322\bibrangedash 332}
     \field{title}{Fine-grained analysis of optimization and generalization for
   overparameterized two-layer neural networks}
+    \field{year}{2019}
+  \endentry
+
+  \entry{arora2019exact}{article}{}{}
+    \name{author}{6}{}{%
+      {{hash=AS}{%
+         family={Arora},
+         familyi={A\bibinitperiod},
+         given={Sanjeev},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=DSS}{%
+         family={Du},
+         familyi={D\bibinitperiod},
+         given={Simon\bibnamedelima S},
+         giveni={S\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+      {{hash=HW}{%
+         family={Hu},
+         familyi={H\bibinitperiod},
+         given={Wei},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=LZ}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Zhiyuan},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=SRR}{%
+         family={Salakhutdinov},
+         familyi={S\bibinitperiod},
+         given={Russ\bibnamedelima R},
+         giveni={R\bibinitperiod\bibinitdelim R\bibinitperiod},
+      }}%
+      {{hash=WR}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Ruosong},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{AS+3}
+    \strng{fullhash}{ASDSSHWLZSRRWR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2019}
+    \field{extradate}{2}
+    \field{labeldatesource}{}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \field{title}{On exact computation with an infinitely wide neural net}
+    \field{volume}{32}
+    \field{journaltitle}{Advances in Neural Information Processing Systems}
     \field{year}{2019}
   \endentry
 
@@ -322,6 +473,59 @@
     \field{volume}{13}
     \field{journaltitle}{Journal of machine learning research}
     \field{year}{2012}
+  \endentry
+
+  \entry{berk2019exploration}{inproceedings}{}{}
+    \name{author}{5}{}{%
+      {{hash=BJ}{%
+         family={Berk},
+         familyi={B\bibinitperiod},
+         given={Julian},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=NV}{%
+         family={Nguyen},
+         familyi={N\bibinitperiod},
+         given={Vu},
+         giveni={V\bibinitperiod},
+      }}%
+      {{hash=GS}{%
+         family={Gupta},
+         familyi={G\bibinitperiod},
+         given={Sunil},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=RS}{%
+         family={Rana},
+         familyi={R\bibinitperiod},
+         given={Santu},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=VS}{%
+         family={Venkatesh},
+         familyi={V\bibinitperiod},
+         given={Svetha},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{BJ+1}
+    \strng{fullhash}{BJNVGSRSVS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2019}
+    \field{labeldatesource}{}
+    \field{sortinit}{B}
+    \field{sortinithash}{B}
+    \field{booktitle}{Machine Learning and Knowledge Discovery in Databases:
+  European Conference, ECML PKDD 2018, Dublin, Ireland, September 10--14, 2018,
+  Proceedings, Part II 18}
+    \field{pages}{621\bibrangedash 637}
+    \field{title}{Exploration enhanced expected improvement for Bayesian
+  optimization}
+    \field{year}{2019}
   \endentry
 
   \entry{berkenkamp2023bayesian}{article}{}{}
@@ -589,6 +793,92 @@
     \field{sortinithash}{C}
     \field{title}{Elements of information theory}
     \field{year}{1999}
+  \endentry
+
+  \entry{dani2008stochastic}{inproceedings}{}{}
+    \name{author}{3}{}{%
+      {{hash=DV}{%
+         family={Dani},
+         familyi={D\bibinitperiod},
+         given={Varsha},
+         giveni={V\bibinitperiod},
+      }}%
+      {{hash=HTP}{%
+         family={Hayes},
+         familyi={H\bibinitperiod},
+         given={Thomas\bibnamedelima P},
+         giveni={T\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+      {{hash=KSM}{%
+         family={Kakade},
+         familyi={K\bibinitperiod},
+         given={Sham\bibnamedelima M},
+         giveni={S\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{DVHTPKSM1}
+    \strng{fullhash}{DVHTPKSM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2008}
+    \field{labeldatesource}{}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{booktitle}{COLT}
+    \field{pages}{3}
+    \field{title}{Stochastic Linear Optimization under Bandit Feedback.}
+    \field{volume}{2}
+    \field{year}{2008}
+  \endentry
+
+  \entry{du2019gradient}{inproceedings}{}{}
+    \name{author}{5}{}{%
+      {{hash=DS}{%
+         family={Du},
+         familyi={D\bibinitperiod},
+         given={Simon},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=LJ}{%
+         family={Lee},
+         familyi={L\bibinitperiod},
+         given={Jason},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=LH}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Haochuan},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=WL}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Liwei},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=ZX}{%
+         family={Zhai},
+         familyi={Z\bibinitperiod},
+         given={Xiyu},
+         giveni={X\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {PMLR}%
+    }
+    \strng{namehash}{DS+1}
+    \strng{fullhash}{DSLJLHWLZX1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2019}
+    \field{labeldatesource}{}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{booktitle}{International conference on machine learning}
+    \field{pages}{1675\bibrangedash 1685}
+    \field{title}{Gradient descent finds global minima of deep neural networks}
+    \field{year}{2019}
   \endentry
 
   \entry{du2018gradient}{inproceedings}{}{}
@@ -1286,42 +1576,6 @@
     \field{volume}{13}
     \field{journaltitle}{Journal of Machine Learning Research}
     \field{year}{2012}
-  \endentry
-
-  \entry{hernandez2014predictive}{article}{}{}
-    \name{author}{3}{}{%
-      {{hash=HLJM}{%
-         family={Hern{\'a}ndez-Lobato},
-         familyi={H\bibinithyphendelim L\bibinitperiod},
-         given={Jos{\'e}\bibnamedelima Miguel},
-         giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod},
-      }}%
-      {{hash=HMW}{%
-         family={Hoffman},
-         familyi={H\bibinitperiod},
-         given={Matthew\bibnamedelima W},
-         giveni={M\bibinitperiod\bibinitdelim W\bibinitperiod},
-      }}%
-      {{hash=GZ}{%
-         family={Ghahramani},
-         familyi={G\bibinitperiod},
-         given={Zoubin},
-         giveni={Z\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{HLJMHMWGZ1}
-    \strng{fullhash}{HLJMHMWGZ1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{labelyear}{2014}
-    \field{labeldatesource}{}
-    \field{sortinit}{H}
-    \field{sortinithash}{H}
-    \field{title}{Predictive entropy search for efficient global optimization
-  of black-box functions}
-    \field{volume}{27}
-    \field{journaltitle}{Advances in neural information processing systems}
-    \field{year}{2014}
   \endentry
 
   \entry{hernandez2015predictive}{inproceedings}{}{}
@@ -2545,6 +2799,51 @@
     \field{year}{1978}
   \endentry
 
+  \entry{munteanu2022bounding}{inproceedings}{}{}
+    \name{author}{4}{}{%
+      {{hash=MA}{%
+         family={Munteanu},
+         familyi={M\bibinitperiod},
+         given={Alexander},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=OS}{%
+         family={Omlor},
+         familyi={O\bibinitperiod},
+         given={Simon},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=SZ}{%
+         family={Song},
+         familyi={S\bibinitperiod},
+         given={Zhao},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=WD}{%
+         family={Woodruff},
+         familyi={W\bibinitperiod},
+         given={David},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {PMLR}%
+    }
+    \strng{namehash}{MA+1}
+    \strng{fullhash}{MAOSSZWD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2022}
+    \field{labeldatesource}{}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{booktitle}{International Conference on Machine Learning}
+    \field{pages}{16083\bibrangedash 16122}
+    \field{title}{Bounding the width of neural networks via coupled
+  initialization a worst case analysis}
+    \field{year}{2022}
+  \endentry
+
   \entry{nelder1965simplex}{article}{}{}
     \name{author}{2}{}{%
       {{hash=NJA}{%
@@ -3427,6 +3726,35 @@
     \field{year}{2015}
   \endentry
 
+  \entry{song2019quadratic}{article}{}{}
+    \name{author}{2}{}{%
+      {{hash=SZ}{%
+         family={Song},
+         familyi={S\bibinitperiod},
+         given={Zhao},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=YX}{%
+         family={Yang},
+         familyi={Y\bibinitperiod},
+         given={Xin},
+         giveni={X\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SZYX1}
+    \strng{fullhash}{SZYX1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2019}
+    \field{labeldatesource}{}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{title}{Quadratic suffices for over-parametrization via matrix
+  chernoff bound}
+    \field{journaltitle}{arXiv preprint arXiv:1906.03593}
+    \field{year}{2019}
+  \endentry
+
   \entry{springenberg2016bayesian}{article}{}{}
     \name{author}{4}{}{%
       {{hash=SJT}{%
@@ -3541,6 +3869,36 @@
     \field{volume}{14}
     \field{journaltitle}{Journal of Global Optimization}
     \field{year}{1999}
+  \endentry
+
+  \entry{su2019learning}{article}{}{}
+    \name{author}{2}{}{%
+      {{hash=SL}{%
+         family={Su},
+         familyi={S\bibinitperiod},
+         given={Lili},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=YP}{%
+         family={Yang},
+         familyi={Y\bibinitperiod},
+         given={Pengkun},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SLYP1}
+    \strng{fullhash}{SLYP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2019}
+    \field{labeldatesource}{}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{title}{On learning over-parameterized neural networks: A functional
+  approximation perspective}
+    \field{volume}{32}
+    \field{journaltitle}{Advances in Neural Information Processing Systems}
+    \field{year}{2019}
   \endentry
 
   \entry{swersky2013multi}{article}{}{}
@@ -3787,6 +4145,44 @@
     \field{volume}{4}
     \field{journaltitle}{COURSERA: Neural networks for machine learning}
     \field{year}{2012}
+  \endentry
+
+  \entry{tirer2022kernel}{inproceedings}{}{}
+    \name{author}{3}{}{%
+      {{hash=TT}{%
+         family={Tirer},
+         familyi={T\bibinitperiod},
+         given={Tom},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=BJ}{%
+         family={Bruna},
+         familyi={B\bibinitperiod},
+         given={Joan},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=GR}{%
+         family={Giryes},
+         familyi={G\bibinitperiod},
+         given={Raja},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {PMLR}%
+    }
+    \strng{namehash}{TTBJGR1}
+    \strng{fullhash}{TTBJGR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2022}
+    \field{labeldatesource}{}
+    \field{sortinit}{T}
+    \field{sortinithash}{T}
+    \field{booktitle}{Mathematical and Scientific Machine Learning}
+    \field{pages}{921\bibrangedash 954}
+    \field{title}{Kernel-based smoothness analysis of residual networks}
+    \field{year}{2022}
   \endentry
 
   \entry{tran2016variational}{inproceedings}{}{}
@@ -4302,6 +4698,41 @@
     \field{year}{2021}
   \endentry
 
+  \entry{zhang2023constrained}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=ZF}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Fengxue},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=ZZ}{%
+         family={Zhu},
+         familyi={Z\bibinitperiod},
+         given={Zejie},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=CY}{%
+         family={Chen},
+         familyi={C\bibinitperiod},
+         given={Yuxin},
+         giveni={Y\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ZFZZCY1}
+    \strng{fullhash}{ZFZZCY1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2023}
+    \field{labeldatesource}{}
+    \field{sortinit}{Z}
+    \field{sortinithash}{Z}
+    \field{title}{Constrained Bayesian Optimization with Adaptive Active
+  Learning of Unknown Constraints}
+    \field{journaltitle}{arXiv preprint arXiv:2310.08751}
+    \field{year}{2023}
+  \endentry
+
   \entry{zhang2021neural}{inproceedings}{}{}
     \name{author}{4}{}{%
       {{hash=ZW}{%
@@ -4341,6 +4772,35 @@
   (ICLR)}
     \field{title}{Neural Thompson Sampling}
     \field{year}{2021}
+  \endentry
+
+  \entry{zhou2008derivative}{article}{}{}
+    \name{author}{1}{}{%
+      {{hash=ZDX}{%
+         family={Zhou},
+         familyi={Z\bibinitperiod},
+         given={Ding-Xuan},
+         giveni={D\bibinithyphendelim X\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier}%
+    }
+    \strng{namehash}{ZDX1}
+    \strng{fullhash}{ZDX1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2008}
+    \field{labeldatesource}{}
+    \field{sortinit}{Z}
+    \field{sortinithash}{Z}
+    \field{number}{1-2}
+    \field{pages}{456\bibrangedash 463}
+    \field{title}{Derivative reproducing properties for kernel methods in
+  learning theory}
+    \field{volume}{220}
+    \field{journaltitle}{Journal of computational and Applied Mathematics}
+    \field{year}{2008}
   \endentry
 
   \entry{zhou2020neural}{inproceedings}{}{}
@@ -4409,6 +4869,52 @@
     \field{volume}{35}
     \field{journaltitle}{Advances in neural information processing systems}
     \field{year}{2022}
+  \endentry
+
+  \entry{zou2020gradient}{article}{}{}
+    \name{author}{4}{}{%
+      {{hash=ZD}{%
+         family={Zou},
+         familyi={Z\bibinitperiod},
+         given={Difan},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=CY}{%
+         family={Cao},
+         familyi={C\bibinitperiod},
+         given={Yuan},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=ZD}{%
+         family={Zhou},
+         familyi={Z\bibinitperiod},
+         given={Dongruo},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=GQ}{%
+         family={Gu},
+         familyi={G\bibinitperiod},
+         given={Quanquan},
+         giveni={Q\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{ZD+1}
+    \strng{fullhash}{ZDCYZDGQ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2020}
+    \field{labeldatesource}{}
+    \field{sortinit}{Z}
+    \field{sortinithash}{Z}
+    \field{pages}{467\bibrangedash 492}
+    \field{title}{Gradient descent optimizes over-parameterized deep ReLU
+  networks}
+    \field{volume}{109}
+    \field{journaltitle}{Machine learning}
+    \field{year}{2020}
   \endentry
 \enddatalist
 \endinput

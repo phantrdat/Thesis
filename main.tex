@@ -23,7 +23,7 @@
 %----------------------------------------------------------------------------------------
 
 \documentclass[
-11pt, % The default document font size, options: 10pt, 11pt, 12pt
+12pt, % The default document font size, options: 10pt, 11pt, 12pt
 oneside, % Two side (alternating margins) for binding by default, uncomment to switch to one side
 english, % ngerman for German
 singlespacing, % Single line spacing, alternatives: onehalfspacing or doublespacing
@@ -64,6 +64,9 @@ headsepline, % Uncomment to get a line under the header
 \usepackage{thmtools}
 \usepackage{subcaption}
 \usepackage{pdfpages}
+\usepackage{enumitem}
+
+\allowdisplaybreaks 
 
 \setcounter{secnumdepth}{3}
 
@@ -80,8 +83,14 @@ headsepline, % Uncomment to get a line under the header
 \newtheorem{assumption}[theorem]{Assumption}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
-\newtheorem{sublemma}{Lemma}[lemma]
-\newtheorem{subcorollary}[sublemma]{Corollary}
+
+\newtheorem{sublemma}{Lemma}[lemma] 
+\newtheorem{subdefinition}[sublemma]{Definition}
+
+\newtheorem{auxlemma}{Lemma}[subsection]
+
+\newtheorem{subcorollary}[auxlemma]{Corollary}
+
 
 \DeclareMathOperator*{\argmax}{argmax}
 \DeclareMathOperator*{\argmin}{argmin}
@@ -105,8 +114,8 @@ headsepline, % Uncomment to get a line under the header
 
 \geometry{
 	paper=a4paper, % Change to letterpaper for US letter
-	inner=2.5cm, % Inner margin
-	outer=3.8cm, % Outer margin
+	inner=2cm, % Inner margin
+	outer=2.5cm, % Outer margin, 3.8cm by default
 	bindingoffset=.5cm, % Binding offset
 	top=1.5cm, % Top margin
 	bottom=1.5cm, % Bottom margin

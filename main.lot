@@ -2,11 +2,11 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces The p-values of KS-test "whether the data obtained from running our methods Neural-BO and all baselines are normally distributed".}}{64}{table.caption.225}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces One-sided t-tests were employed to assess whether the baseline achieves a lower function value compared to our proposed method, Neural-BO. The null hypothesis $H_0: \mu _\text {baseline} \le \mu _{\text {Neural-BO}}$ and the alternative hypothesis: $H_a: \mu _\text {baseline} > \mu _{\text {Neural-BO}}$. The p-value corresponding to each test is provided as the first value in each cell. Moreover, to account for multiple hypotheses testing, the Benjamini-Hochberg correction was applied and is reported as the second value in each cell. In the outcome, a "T" indicates that the null hypothesis is rejected, whereas an "F" signifies that it is not rejected.}}{65}{table.caption.226}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces The p-values of KS-test "whether the data obtained from running our methods Neural-BO and all baselines are normally distributed".}}{69}{table.caption.173}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces One-sided t-tests were employed to assess whether the baseline achieves a lower function value compared to our proposed method, Neural-BO. The null hypothesis $H_0: \mu _\text {baseline} \le \mu _{\text {Neural-BO}}$ and the alternative hypothesis: $H_a: \mu _\text {baseline} > \mu _{\text {Neural-BO}}$. The p-value corresponding to each test is provided as the first value in each cell. Moreover, to account for multiple hypotheses testing, the Benjamini-Hochberg correction was applied and is reported as the second value in each cell. In the outcome, a "T" indicates that the null hypothesis is rejected, whereas an "F" signifies that it is not rejected.}}{70}{table.caption.174}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces The input dimension and number of constraints for each synthetic objective function.}}{79}{table.caption.273}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces One-sided $t$-tests to evaluate whether the baseline outperforms Neural-CBO in terms of the best positive regret plus violation.}}{79}{table.caption.274}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces The input dimension and number of constraints for each synthetic objective function.}}{85}{table.caption.222}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces One-sided $t$-tests to evaluate whether the baseline outperforms Neural-CBO in terms of the best positive regret plus violation.}}{85}{table.caption.223}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

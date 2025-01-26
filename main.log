@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.18)  10 JAN 2025 14:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.18)  26 JAN 2025 19:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -22,8 +22,8 @@ File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 Package: xparse 2024-05-08 L3 Experimental document command parser
 ) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/base\book.cls
 Document Class: book 2024/02/08 v1.4n Standard LaTeX document class
-(C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/base\bk11.clo
-File: bk11.clo 2024/02/08 v1.4n Standard LaTeX file (size option)
+(C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/base\bk12.clo
+File: bk12.clo 2024/02/08 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count196
 \c@chapter=\count197
@@ -812,9 +812,18 @@ File: pppdftex.def 2024/10/28 v0.6c Pdfpages driver for pdfTeX (AM)
 \AM@lof@heading=\toks44
 \c@AM@survey=\count476
 \AM@templatesizebox=\box121
+) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/enumitem\enumitem.sty
+Package: enumitem 2019/06/20 v3.9 Customized lists
+\labelindent=\skip98
+\enit@outerparindent=\dimen272
+\enit@toks=\toks45
+\enit@inbox=\box122
+\enit@count@id=\count477
+\enitdp@description=\count478
 )
-\c@theorem=\count477
-\c@sublemma=\count478
+\c@theorem=\count479
+\c@sublemma=\count480
+\c@auxlemma=\count481
  (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/datetime\datetime.sty
 Package: datetime 2015/03/20 v2.60 Date Time Package
  (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/fmtcount\fmtcount.sty
@@ -822,51 +831,51 @@ Package: fmtcount 2024/10/18 v3.09
  (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/xkeyval\xkeyval.sty
 Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
  (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkeyval.tex (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkvutils.tex
-\XKV@toks=\toks45
-\XKV@tempa@toks=\toks46
+\XKV@toks=\toks46
+\XKV@tempa@toks=\toks47
 )
-\XKV@depth=\count479
+\XKV@depth=\count482
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 )) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/fmtcount\fcprefix.sty
 Package: fcprefix 2012/09/28
  (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/fmtcount\fcnumparser.sty
 Package: fcnumparser 2017/06/15
-\fc@digit@counter=\count480
+\fc@digit@counter=\count483
 ))
-\c@padzeroesN=\count481
-\fc@tmpcatcode=\count482
+\c@padzeroesN=\count484
+\fc@tmpcatcode=\count485
  (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/fmtcount\fc-english.def
 File: fc-english.def 2016/01/12
 )
-\@DT@modctr=\count483
-\@ordinalctr=\count484
-\@orgargctr=\count485
-\@strctr=\count486
-\@tmpstrctr=\count487
-\@DT@loopN=\count488
-\@DT@X=\count489
+\@DT@modctr=\count486
+\@ordinalctr=\count487
+\@orgargctr=\count488
+\@strctr=\count489
+\@tmpstrctr=\count490
+\@DT@loopN=\count491
+\@DT@X=\count492
 ) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/datetime\datetime-defaults.sty
 Package: datetime-defaults 2013/09/10
 )
-\@day=\count490
-\@month=\count491
-\@year=\count492
-\c@HOUR=\count493
-\c@HOURXII=\count494
-\c@MINUTE=\count495
-\c@TOHOUR=\count496
-\c@TOMINUTE=\count497
-\c@SECOND=\count498
-\currenthour=\count499
-\currentminute=\count500
-\currentsecond=\count501
+\@day=\count493
+\@month=\count494
+\@year=\count495
+\c@HOUR=\count496
+\c@HOURXII=\count497
+\c@MINUTE=\count498
+\c@TOHOUR=\count499
+\c@TOMINUTE=\count500
+\c@SECOND=\count501
+\currenthour=\count502
+\currentminute=\count503
+\currentsecond=\count504
 Package datetime Info: No datetime.cfg file found, using default settings on input line 308.
-\@dtctr=\count502
-\dayofyear=\count503
-\dayofweek=\count504
+\@dtctr=\count505
+\dayofyear=\count506
+\dayofweek=\count507
 LaTeX Info: Redefining \today on input line 736.
-\dt@a=\toks47
-\dt@b=\toks48
+\dt@a=\toks48
+\dt@b=\toks49
 ) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
 Package: hyperref 2024-05-23 v7.01i Hypertext links for LaTeX
  (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.sty
@@ -882,13 +891,13 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count505
+\c@section@level=\count508
 ) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 )
-\@linkdim=\dimen272
-\Hy@linkcounter=\count506
-\Hy@pagecounter=\count507
+\@linkdim=\dimen273
+\Hy@linkcounter=\count509
+\Hy@pagecounter=\count510
  (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
 File: pd1enc.def 2024-05-23 v7.01i Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -896,7 +905,7 @@ Now handling font encoding PD1 ...
 ) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count508
+\Hy@SavedSpaceFactor=\count511
  (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
 File: puenc.def 2024-05-23 v7.01i Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
@@ -909,17 +918,17 @@ Package hyperref Info: Plain pages OFF on input line 4172.
 Package hyperref Info: Backreferencing OFF on input line 4177.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4424.
-\c@Hy@tempcnt=\count509
+\c@Hy@tempcnt=\count512
 LaTeX Info: Redefining \url on input line 4763.
-\XeTeXLinkMargin=\dimen273
+\XeTeXLinkMargin=\dimen274
  (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
  (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count510
-\Field@Width=\dimen274
-\Fld@charsize=\dimen275
+\Fld@menulength=\count513
+\Field@Width=\dimen275
+\Fld@charsize=\dimen276
 Package hyperref Info: Hyper figures OFF on input line 6042.
 Package hyperref Info: Link nesting OFF on input line 6047.
 Package hyperref Info: Hyper index ON on input line 6050.
@@ -931,9 +940,9 @@ Package hyperref Info: PDF/A mode OFF on input line 6072.
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count511
-\c@Item=\count512
-\c@Hfootnote=\count513
+\Hy@abspage=\count514
+\c@Item=\count515
+\c@Hfootnote=\count516
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
  (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
@@ -942,8 +951,8 @@ File: hpdftex.def 2024-05-23 v7.01i Hyperref driver for pdfTeX
 Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
 with kernel methods
 )
-\Fld@listcount=\count514
-\c@bookmark@seq@number=\count515
+\Fld@listcount=\count517
+\c@bookmark@seq@number=\count518
  (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.sty
 Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
  (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniquecounter.sty
@@ -951,39 +960,39 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
 )
-\Hy@SectionHShift=\skip98
+\Hy@SectionHShift=\skip99
 )
-Package hyperref Info: Option `bookmarksopen' set `true' on input line 141.
-Package hyperref Info: Option `hypertexnames' set `false' on input line 141.
-Package hyperref Info: Option `colorlinks' set `true' on input line 141.
-Package hyperref Info: Option `unicode' set `true' on input line 141.
-Package hyperref Info: Option `breaklinks' set `true' on input line 141.
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 150.
+Package hyperref Info: Option `hypertexnames' set `false' on input line 150.
+Package hyperref Info: Option `colorlinks' set `true' on input line 150.
+Package hyperref Info: Option `unicode' set `true' on input line 150.
+Package hyperref Info: Option `breaklinks' set `true' on input line 150.
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
-LaTeX Font Info:    Trying to load font information for T1+ppl on input line 141.
+LaTeX Font Info:    Trying to load font information for T1+ppl on input line 150.
  (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1ppl.fd
 File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
 ) (main.aux (Utils/acknowledgements.aux) (Utils/list_of_publications.aux) (Utils/abbreviations.aux) (Chapters/abstract.aux) (Chapters/introduction.aux) (Chapters/background.aux) (Chapters/neural-bo.aux) (Chapters/neural-cbo.aux) (Chapters/pinn-bo.aux) (Chapters/conclusion.aux) (Appendices/neural-bo_appendix.aux) (Appendices/neural-cbo_appendix.aux) (Appendices/pinn-bo_appendix.aux) (Utils/copyrights.aux))
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 150.
+LaTeX Font Info:    ... okay on input line 150.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 150.
+LaTeX Font Info:    ... okay on input line 150.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 150.
+LaTeX Font Info:    ... okay on input line 150.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 150.
+LaTeX Font Info:    ... okay on input line 150.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 150.
+LaTeX Font Info:    ... okay on input line 150.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 150.
+LaTeX Font Info:    ... okay on input line 150.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 150.
+LaTeX Font Info:    ... okay on input line 150.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 150.
+LaTeX Font Info:    ... okay on input line 150.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 150.
+LaTeX Font Info:    ... okay on input line 150.
 
 
 Package siunitx Warning: Detected the "physics" package:
@@ -999,20 +1008,20 @@ Package siunitx Warning: Detected the "physics" package:
 (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/translations/dicts\translations-basic-dictionary-english.trsl
 File: translations-basic-dictionary-english.trsl (english translation file `translations-basic-dictionary')
 )
-Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 141.
+Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 150.
  (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count516
-\scratchdimen=\dimen276
-\scratchbox=\box122
-\nofMPsegments=\count517
-\nofMParguments=\count518
-\everyMPshowfont=\toks49
-\MPscratchCnt=\count519
-\MPscratchDim=\dimen277
-\MPnumerator=\count520
-\makeMPintoPDFobject=\count521
-\everyMPtoPDFconversion=\toks50
+\scratchcounter=\count519
+\scratchdimen=\dimen277
+\scratchbox=\box123
+\nofMPsegments=\count520
+\nofMParguments=\count521
+\everyMPshowfont=\toks50
+\MPscratchCnt=\count522
+\MPscratchDim=\dimen278
+\MPnumerator=\count523
+\makeMPintoPDFobject=\count524
+\everyMPtoPDFconversion=\toks51
 ) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -1033,23 +1042,23 @@ Package caption Info: End \AtBeginDocument code.
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * bindingoffset: 14.22636pt
 * modes: includehead includefoot 
-* h-part:(L,W,R)=(71.13188pt, 404.02908pt, 108.12054pt)
+* h-part:(L,W,R)=(56.9055pt, 455.24413pt, 71.13188pt)
 * v-part:(T,H,B)=(42.67912pt, 759.6886pt, 42.67912pt)
 * \paperwidth=597.50787pt
 * \paperheight=845.04684pt
-* \textwidth=404.02908pt
-* \textheight=693.49821pt
-* \oddsidemargin=13.08826pt
-* \evensidemargin=-1.1381pt
+* \textwidth=455.24413pt
+* \textheight=689.15318pt
+* \oddsidemargin=-1.13812pt
+* \evensidemargin=-15.36449pt
 * \topmargin=-29.59087pt
-* \headheight=18.85364pt
+* \headheight=20.66162pt
 * \headsep=19.8738pt
-* \topskip=11.0pt
-* \footskip=27.46295pt
-* \marginparwidth=62.0pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=47.0pt
 * \marginparsep=7.0pt
 * \columnsep=10.0pt
-* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -1059,12 +1068,12 @@ Package caption Info: End \AtBeginDocument code.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package scrbase Info: activating english \abbrevname on input line 141.
-Package scrbase Info: activating english \byname on input line 141.
-Package scrbase Info: activating english \acknowledgementname on input line 141.
-Package scrbase Info: activating english \authorshipname on input line 141.
-Package scrbase Info: activating english \constantsname on input line 141.
-Package scrbase Info: activating english \symbolsname on input line 141.
+Package scrbase Info: activating english \abbrevname on input line 150.
+Package scrbase Info: activating english \byname on input line 150.
+Package scrbase Info: activating english \acknowledgementname on input line 150.
+Package scrbase Info: activating english \authorshipname on input line 150.
+Package scrbase Info: activating english \constantsname on input line 150.
+Package scrbase Info: activating english \symbolsname on input line 150.
 Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
 (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/lbx\english.lbx
@@ -1081,8 +1090,8 @@ Package biblatex Info: Data encoding 'utf8' specified.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' found.
  (main.bbl)
-Package biblatex Info: Reference section=0 on input line 141.
-Package biblatex Info: Reference segment=0 on input line 141.
+Package biblatex Info: Reference section=0 on input line 150.
+Package biblatex Info: Reference segment=0 on input line 150.
  (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/pdflscape\pdflscape.sty
 Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
  (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/pdflscape\pdflscape-nometadata.sty
@@ -1092,11 +1101,11 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 ) (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/lscapeenhanced\lscapeenhanced.sty
 Package: lscapeenhanced 2024-04-16 v1.0 improved lscape package
 Package lscapeenhanced Info: \landscape patched to make \textheight change optional on input line 72.
-\@lscapeenhanced@textheight=\skip99
+\@lscapeenhanced@textheight=\skip100
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
-Package hyperref Info: Link coloring ON on input line 141.
+Package hyperref Info: Link coloring ON on input line 150.
  (main.out) (main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
@@ -1110,17 +1119,17 @@ Package hyperref Info: Link coloring ON on input line 141.
 {C:/Users/phant/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]
 
 pdfTeX warning: pdflatex (file ./extra_pages/candidate_declaration_Dat.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<extra_pages/candidate_declaration_Dat.pdf, id=535, 597.55246pt x 845.19763pt>
+<extra_pages/candidate_declaration_Dat.pdf, id=607, 597.55246pt x 845.19763pt>
 File: extra_pages/candidate_declaration_Dat.pdf Graphic file (type pdf)
 <use extra_pages/candidate_declaration_Dat.pdf>
-Package pdftex.def Info: extra_pages/candidate_declaration_Dat.pdf  used on input line 195.
+Package pdftex.def Info: extra_pages/candidate_declaration_Dat.pdf  used on input line 204.
 (pdftex.def)             Requested size: 597.551pt x 845.19557pt.
 
 
 pdfTeX warning: pdflatex (file ./extra_pages/candidate_declaration_Dat.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
 File: extra_pages/candidate_declaration_Dat.pdf Graphic file (type pdf)
 <use extra_pages/candidate_declaration_Dat.pdf>
-Package pdftex.def Info: extra_pages/candidate_declaration_Dat.pdf  used on input line 195.
+Package pdftex.def Info: extra_pages/candidate_declaration_Dat.pdf  used on input line 204.
 (pdftex.def)             Requested size: 597.551pt x 845.19557pt.
 
 
@@ -1128,45 +1137,45 @@ pdfTeX warning: pdflatex (file ./extra_pages/candidate_declaration_Dat.pdf): PDF
 
 
 pdfTeX warning: pdflatex (file ./extra_pages/candidate_declaration_Dat.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<extra_pages/candidate_declaration_Dat.pdf, id=538, page=1, 597.55246pt x 845.19763pt>
+<extra_pages/candidate_declaration_Dat.pdf, id=610, page=1, 597.55246pt x 845.19763pt>
 File: extra_pages/candidate_declaration_Dat.pdf Graphic file (type pdf)
 <use extra_pages/candidate_declaration_Dat.pdf, page 1>
-Package pdftex.def Info: extra_pages/candidate_declaration_Dat.pdf , page1 used on input line 195.
+Package pdftex.def Info: extra_pages/candidate_declaration_Dat.pdf , page1 used on input line 204.
 (pdftex.def)             Requested size: 597.551pt x 845.19557pt.
 File: extra_pages/candidate_declaration_Dat.pdf Graphic file (type pdf)
 <use extra_pages/candidate_declaration_Dat.pdf, page 1>
-Package pdftex.def Info: extra_pages/candidate_declaration_Dat.pdf , page1 used on input line 195.
+Package pdftex.def Info: extra_pages/candidate_declaration_Dat.pdf , page1 used on input line 204.
 (pdftex.def)             Requested size: 597.57834pt x 845.23425pt.
 File: extra_pages/candidate_declaration_Dat.pdf Graphic file (type pdf)
 <use extra_pages/candidate_declaration_Dat.pdf, page 1>
-Package pdftex.def Info: extra_pages/candidate_declaration_Dat.pdf , page1 used on input line 195.
+Package pdftex.def Info: extra_pages/candidate_declaration_Dat.pdf , page1 used on input line 204.
 (pdftex.def)             Requested size: 597.57834pt x 845.23425pt.
 File: extra_pages/candidate_declaration_Dat.pdf Graphic file (type pdf)
 <use extra_pages/candidate_declaration_Dat.pdf, page 1>
-Package pdftex.def Info: extra_pages/candidate_declaration_Dat.pdf , page1 used on input line 195.
+Package pdftex.def Info: extra_pages/candidate_declaration_Dat.pdf , page1 used on input line 204.
 (pdftex.def)             Requested size: 597.57834pt x 845.23425pt.
 
 
 File: extra_pages/candidate_declaration_Dat.pdf Graphic file (type pdf)
 <use extra_pages/candidate_declaration_Dat.pdf, page 1>
-Package pdftex.def Info: extra_pages/candidate_declaration_Dat.pdf , page1 used on input line 195.
+Package pdftex.def Info: extra_pages/candidate_declaration_Dat.pdf , page1 used on input line 204.
 (pdftex.def)             Requested size: 597.57834pt x 845.23425pt.
 [1
 
  <./extra_pages/candidate_declaration_Dat.pdf>]
 
 pdfTeX warning: pdflatex (file ./extra_pages/neuralbo_authorship_statement.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<extra_pages/neuralbo_authorship_statement.pdf, id=579, 597.55246pt x 845.07718pt>
+<extra_pages/neuralbo_authorship_statement.pdf, id=651, 597.55246pt x 845.07718pt>
 File: extra_pages/neuralbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/neuralbo_authorship_statement.pdf>
-Package pdftex.def Info: extra_pages/neuralbo_authorship_statement.pdf  used on input line 201.
+Package pdftex.def Info: extra_pages/neuralbo_authorship_statement.pdf  used on input line 210.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 
 
 pdfTeX warning: pdflatex (file ./extra_pages/neuralbo_authorship_statement.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
 File: extra_pages/neuralbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/neuralbo_authorship_statement.pdf>
-Package pdftex.def Info: extra_pages/neuralbo_authorship_statement.pdf  used on input line 201.
+Package pdftex.def Info: extra_pages/neuralbo_authorship_statement.pdf  used on input line 210.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 
 
@@ -1174,28 +1183,28 @@ pdfTeX warning: pdflatex (file ./extra_pages/neuralbo_authorship_statement.pdf):
 
 
 pdfTeX warning: pdflatex (file ./extra_pages/neuralbo_authorship_statement.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<extra_pages/neuralbo_authorship_statement.pdf, id=582, page=1, 597.55246pt x 845.07718pt>
+<extra_pages/neuralbo_authorship_statement.pdf, id=654, page=1, 597.55246pt x 845.07718pt>
 File: extra_pages/neuralbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/neuralbo_authorship_statement.pdf, page 1>
-Package pdftex.def Info: extra_pages/neuralbo_authorship_statement.pdf , page1 used on input line 201.
+Package pdftex.def Info: extra_pages/neuralbo_authorship_statement.pdf , page1 used on input line 210.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 File: extra_pages/neuralbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/neuralbo_authorship_statement.pdf, page 1>
-Package pdftex.def Info: extra_pages/neuralbo_authorship_statement.pdf , page1 used on input line 201.
+Package pdftex.def Info: extra_pages/neuralbo_authorship_statement.pdf , page1 used on input line 210.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 File: extra_pages/neuralbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/neuralbo_authorship_statement.pdf, page 1>
-Package pdftex.def Info: extra_pages/neuralbo_authorship_statement.pdf , page1 used on input line 201.
+Package pdftex.def Info: extra_pages/neuralbo_authorship_statement.pdf , page1 used on input line 210.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 File: extra_pages/neuralbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/neuralbo_authorship_statement.pdf, page 1>
-Package pdftex.def Info: extra_pages/neuralbo_authorship_statement.pdf , page1 used on input line 201.
+Package pdftex.def Info: extra_pages/neuralbo_authorship_statement.pdf , page1 used on input line 210.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 
 
 File: extra_pages/neuralbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/neuralbo_authorship_statement.pdf, page 1>
-Package pdftex.def Info: extra_pages/neuralbo_authorship_statement.pdf , page1 used on input line 201.
+Package pdftex.def Info: extra_pages/neuralbo_authorship_statement.pdf , page1 used on input line 210.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 [2
 
@@ -1203,37 +1212,37 @@ Package pdftex.def Info: extra_pages/neuralbo_authorship_statement.pdf , page1 u
  <./extra_pages/neuralbo_authorship_statement.pdf>]
 
 pdfTeX warning: pdflatex (file ./extra_pages/neuralbo_authorship_statement.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<extra_pages/neuralbo_authorship_statement.pdf, id=620, page=2, 597.55246pt x 845.07718pt>
+<extra_pages/neuralbo_authorship_statement.pdf, id=693, page=2, 597.55246pt x 845.07718pt>
 File: extra_pages/neuralbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/neuralbo_authorship_statement.pdf, page 2>
-Package pdftex.def Info: extra_pages/neuralbo_authorship_statement.pdf , page2 used on input line 201.
+Package pdftex.def Info: extra_pages/neuralbo_authorship_statement.pdf , page2 used on input line 210.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 File: extra_pages/neuralbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/neuralbo_authorship_statement.pdf, page 2>
-Package pdftex.def Info: extra_pages/neuralbo_authorship_statement.pdf , page2 used on input line 201.
+Package pdftex.def Info: extra_pages/neuralbo_authorship_statement.pdf , page2 used on input line 210.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 
 
 File: extra_pages/neuralbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/neuralbo_authorship_statement.pdf, page 2>
-Package pdftex.def Info: extra_pages/neuralbo_authorship_statement.pdf , page2 used on input line 201.
+Package pdftex.def Info: extra_pages/neuralbo_authorship_statement.pdf , page2 used on input line 210.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 [3
 
  <./extra_pages/neuralbo_authorship_statement.pdf>]
 
 pdfTeX warning: pdflatex (file ./extra_pages/neural-cbo_authorship_statement.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<extra_pages/neural-cbo_authorship_statement.pdf, id=637, 597.55246pt x 845.07718pt>
+<extra_pages/neural-cbo_authorship_statement.pdf, id=711, 597.55246pt x 845.07718pt>
 File: extra_pages/neural-cbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/neural-cbo_authorship_statement.pdf>
-Package pdftex.def Info: extra_pages/neural-cbo_authorship_statement.pdf  used on input line 203.
+Package pdftex.def Info: extra_pages/neural-cbo_authorship_statement.pdf  used on input line 212.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 
 
 pdfTeX warning: pdflatex (file ./extra_pages/neural-cbo_authorship_statement.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
 File: extra_pages/neural-cbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/neural-cbo_authorship_statement.pdf>
-Package pdftex.def Info: extra_pages/neural-cbo_authorship_statement.pdf  used on input line 203.
+Package pdftex.def Info: extra_pages/neural-cbo_authorship_statement.pdf  used on input line 212.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 
 
@@ -1241,65 +1250,65 @@ pdfTeX warning: pdflatex (file ./extra_pages/neural-cbo_authorship_statement.pdf
 
 
 pdfTeX warning: pdflatex (file ./extra_pages/neural-cbo_authorship_statement.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<extra_pages/neural-cbo_authorship_statement.pdf, id=640, page=1, 597.55246pt x 845.07718pt>
+<extra_pages/neural-cbo_authorship_statement.pdf, id=714, page=1, 597.55246pt x 845.07718pt>
 File: extra_pages/neural-cbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/neural-cbo_authorship_statement.pdf, page 1>
-Package pdftex.def Info: extra_pages/neural-cbo_authorship_statement.pdf , page1 used on input line 203.
+Package pdftex.def Info: extra_pages/neural-cbo_authorship_statement.pdf , page1 used on input line 212.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 File: extra_pages/neural-cbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/neural-cbo_authorship_statement.pdf, page 1>
-Package pdftex.def Info: extra_pages/neural-cbo_authorship_statement.pdf , page1 used on input line 203.
+Package pdftex.def Info: extra_pages/neural-cbo_authorship_statement.pdf , page1 used on input line 212.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 File: extra_pages/neural-cbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/neural-cbo_authorship_statement.pdf, page 1>
-Package pdftex.def Info: extra_pages/neural-cbo_authorship_statement.pdf , page1 used on input line 203.
+Package pdftex.def Info: extra_pages/neural-cbo_authorship_statement.pdf , page1 used on input line 212.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 File: extra_pages/neural-cbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/neural-cbo_authorship_statement.pdf, page 1>
-Package pdftex.def Info: extra_pages/neural-cbo_authorship_statement.pdf , page1 used on input line 203.
+Package pdftex.def Info: extra_pages/neural-cbo_authorship_statement.pdf , page1 used on input line 212.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 
 
 File: extra_pages/neural-cbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/neural-cbo_authorship_statement.pdf, page 1>
-Package pdftex.def Info: extra_pages/neural-cbo_authorship_statement.pdf , page1 used on input line 203.
+Package pdftex.def Info: extra_pages/neural-cbo_authorship_statement.pdf , page1 used on input line 212.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 [4
 
  <./extra_pages/neural-cbo_authorship_statement.pdf>]
 
 pdfTeX warning: pdflatex (file ./extra_pages/neural-cbo_authorship_statement.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<extra_pages/neural-cbo_authorship_statement.pdf, id=678, page=2, 597.55246pt x 845.07718pt>
+<extra_pages/neural-cbo_authorship_statement.pdf, id=753, page=2, 597.55246pt x 845.07718pt>
 File: extra_pages/neural-cbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/neural-cbo_authorship_statement.pdf, page 2>
-Package pdftex.def Info: extra_pages/neural-cbo_authorship_statement.pdf , page2 used on input line 203.
+Package pdftex.def Info: extra_pages/neural-cbo_authorship_statement.pdf , page2 used on input line 212.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 File: extra_pages/neural-cbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/neural-cbo_authorship_statement.pdf, page 2>
-Package pdftex.def Info: extra_pages/neural-cbo_authorship_statement.pdf , page2 used on input line 203.
+Package pdftex.def Info: extra_pages/neural-cbo_authorship_statement.pdf , page2 used on input line 212.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 
 
 File: extra_pages/neural-cbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/neural-cbo_authorship_statement.pdf, page 2>
-Package pdftex.def Info: extra_pages/neural-cbo_authorship_statement.pdf , page2 used on input line 203.
+Package pdftex.def Info: extra_pages/neural-cbo_authorship_statement.pdf , page2 used on input line 212.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 [5
 
  <./extra_pages/neural-cbo_authorship_statement.pdf>]
 
 pdfTeX warning: pdflatex (file ./extra_pages/pinnbo_authorship_statement.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<extra_pages/pinnbo_authorship_statement.pdf, id=695, 597.55246pt x 845.07718pt>
+<extra_pages/pinnbo_authorship_statement.pdf, id=771, 597.55246pt x 845.07718pt>
 File: extra_pages/pinnbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_authorship_statement.pdf>
-Package pdftex.def Info: extra_pages/pinnbo_authorship_statement.pdf  used on input line 205.
+Package pdftex.def Info: extra_pages/pinnbo_authorship_statement.pdf  used on input line 214.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 
 
 pdfTeX warning: pdflatex (file ./extra_pages/pinnbo_authorship_statement.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
 File: extra_pages/pinnbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_authorship_statement.pdf>
-Package pdftex.def Info: extra_pages/pinnbo_authorship_statement.pdf  used on input line 205.
+Package pdftex.def Info: extra_pages/pinnbo_authorship_statement.pdf  used on input line 214.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 
 
@@ -1307,48 +1316,48 @@ pdfTeX warning: pdflatex (file ./extra_pages/pinnbo_authorship_statement.pdf): P
 
 
 pdfTeX warning: pdflatex (file ./extra_pages/pinnbo_authorship_statement.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<extra_pages/pinnbo_authorship_statement.pdf, id=698, page=1, 597.55246pt x 845.07718pt>
+<extra_pages/pinnbo_authorship_statement.pdf, id=774, page=1, 597.55246pt x 845.07718pt>
 File: extra_pages/pinnbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_authorship_statement.pdf, page 1>
-Package pdftex.def Info: extra_pages/pinnbo_authorship_statement.pdf , page1 used on input line 205.
+Package pdftex.def Info: extra_pages/pinnbo_authorship_statement.pdf , page1 used on input line 214.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 File: extra_pages/pinnbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_authorship_statement.pdf, page 1>
-Package pdftex.def Info: extra_pages/pinnbo_authorship_statement.pdf , page1 used on input line 205.
+Package pdftex.def Info: extra_pages/pinnbo_authorship_statement.pdf , page1 used on input line 214.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 File: extra_pages/pinnbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_authorship_statement.pdf, page 1>
-Package pdftex.def Info: extra_pages/pinnbo_authorship_statement.pdf , page1 used on input line 205.
+Package pdftex.def Info: extra_pages/pinnbo_authorship_statement.pdf , page1 used on input line 214.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 File: extra_pages/pinnbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_authorship_statement.pdf, page 1>
-Package pdftex.def Info: extra_pages/pinnbo_authorship_statement.pdf , page1 used on input line 205.
+Package pdftex.def Info: extra_pages/pinnbo_authorship_statement.pdf , page1 used on input line 214.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 
 
 File: extra_pages/pinnbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_authorship_statement.pdf, page 1>
-Package pdftex.def Info: extra_pages/pinnbo_authorship_statement.pdf , page1 used on input line 205.
+Package pdftex.def Info: extra_pages/pinnbo_authorship_statement.pdf , page1 used on input line 214.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 [6
 
  <./extra_pages/pinnbo_authorship_statement.pdf>]
 
 pdfTeX warning: pdflatex (file ./extra_pages/pinnbo_authorship_statement.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<extra_pages/pinnbo_authorship_statement.pdf, id=737, page=2, 597.55246pt x 845.07718pt>
+<extra_pages/pinnbo_authorship_statement.pdf, id=814, page=2, 597.55246pt x 845.07718pt>
 File: extra_pages/pinnbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_authorship_statement.pdf, page 2>
-Package pdftex.def Info: extra_pages/pinnbo_authorship_statement.pdf , page2 used on input line 205.
+Package pdftex.def Info: extra_pages/pinnbo_authorship_statement.pdf , page2 used on input line 214.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 File: extra_pages/pinnbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_authorship_statement.pdf, page 2>
-Package pdftex.def Info: extra_pages/pinnbo_authorship_statement.pdf , page2 used on input line 205.
+Package pdftex.def Info: extra_pages/pinnbo_authorship_statement.pdf , page2 used on input line 214.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 
 
 File: extra_pages/pinnbo_authorship_statement.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_authorship_statement.pdf, page 2>
-Package pdftex.def Info: extra_pages/pinnbo_authorship_statement.pdf , page2 used on input line 205.
+Package pdftex.def Info: extra_pages/pinnbo_authorship_statement.pdf , page2 used on input line 214.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 [7
 
@@ -1377,17 +1386,17 @@ LaTeX Font Info:    Trying to load font information for OT1+zplm on input line 1
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 )
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 11.40997pt on input line 11.
+(Font)              scaled to size 12.50409pt on input line 11.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 11.
+(Font)              scaled to size 9.37807pt on input line 11.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 11.
+(Font)              scaled to size 7.29405pt on input line 11.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 11.40997pt on input line 11.
+(Font)              scaled to size 12.50409pt on input line 11.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 11.
+(Font)              scaled to size 9.37807pt on input line 11.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 11.
+(Font)              scaled to size 7.29405pt on input line 11.
 
 
 [8
@@ -1415,41 +1424,45 @@ although it is yet undefined on input line 24.
 
 
 ]
-Overfull \hbox (20.48788pt too wide) in paragraph at lines 48--48
- [][] [][][]\T1/ppl/m/n/10.95 Covariance Ma-trix Adap-ta-tion Evo-lu-tion Strat-egy (CMA- 
+Overfull \hbox (9.98047pt too wide) in paragraph at lines 48--48
+ [][] [][][]\T1/ppl/m/n/12 Covariance Ma-trix Adap-ta-tion Evo-lu-tion Strat-egy (CMA- 
+ []
+
+
+Overfull \hbox (7.80884pt too wide) in paragraph at lines 82--82
+ [][] [][][]\T1/ppl/m/n/12 The Con-nec-tion Be-tween Bandit-based Op-ti-miza-tion and 
  []
 
 
 
 [2]
-Package acronym Info: Label `acro:dnn' newly defined as it shall be overridden
-although it is yet undefined on input line 106.
-
-
-[3]
-Overfull \hbox (0.40404pt too wide) in paragraph at lines 167--167
- [][] [][][]\T1/ppl/m/n/10.95 NeuralBO: A black-box op-ti-miza-tion al-go-rithm us-ing deep neu-ral net- 
+Overfull \hbox (9.03278pt too wide) in paragraph at lines 100--100
+ [][] [][][]\T1/ppl/m/n/12 Designing Sen-si-tive Sam-ples for De-tec-tion of Model Tam- 
  []
 
-)
+Package acronym Info: Label `acro:dnn' newly defined as it shall be overridden
+although it is yet undefined on input line 107.
+
+Overfull \hbox (3.64449pt too wide) in paragraph at lines 119--119
+ [] [][][]\T1/ppl/b/n/12 Black-Box Op-ti-miza-tion Al-go-rithm Us-ing Physics-Informed Neu-ral Net-works[][] []  
+ []
+
+
+
+[3])
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
 
 
 [4] (main.lof
-Overfull \hbox (4.6748pt too wide) in paragraph at lines 9--9
- [][] [][][]\T1/ppl/m/n/10.95 Optimization re-sults for con-trol pa-ram-e-ters of 14D robot push-ing prob- 
+Overfull \hbox (8.29941pt too wide) in paragraph at lines 6--6
+ [][] [][][]\T1/ppl/m/n/12 The re-sults of bench-mark-ing our Neural-BO and the base-lines with COCO 
  []
 
 
-Overfull \hbox (13.02248pt too wide) in paragraph at lines 11--11
- [][] [][][]\T1/ppl/m/n/10.95 Minimization re-sult with 1-D ob-jec-tive func-tion $\OML/zplm/m/it/10.95 f\OT1/zplm/m/n/10.95 (\OML/zplm/m/it/10.95 x\OT1/zplm/m/n/10.95 ) = [][][] + [][][]$ 
- []
-
-
-Overfull \hbox (7.99391pt too wide) in paragraph at lines 13--13
- [][] [][][]\T1/ppl/b/n/10.95 Detection Rates \T1/ppl/m/n/10.95 cor-re-spond-ing to the num-ber of sam-ples on the MNIST 
+Overfull \hbox (5.2668pt too wide) in paragraph at lines 11--11
+ [][] [][][]\T1/ppl/m/n/12 Minimization re-sult with 1-D ob-jec-tive func-tion $\OML/zplm/m/it/12 f\OT1/zplm/m/n/12 (\OML/zplm/m/it/12 x\OT1/zplm/m/n/12 ) = [][][] + [][][]$ 
  []
 
 
@@ -1462,17 +1475,7 @@ Overfull \hbox (7.99391pt too wide) in paragraph at lines 13--13
 
 
 
-[6] (main.lot
-Overfull \hbox (10.7855pt too wide) in paragraph at lines 6--6
- [][] [][][]\T1/ppl/m/n/10.95 One-sided t-tests were em-ployed to as-sess whether the base-line achieves 
- []
-
-
-Overfull \hbox (5.2444pt too wide) in paragraph at lines 9--9
- [][] [][][]\T1/ppl/m/n/10.95 One-sided $\OML/zplm/m/it/10.95 t$\T1/ppl/m/n/10.95 -tests to eval-u-ate whether the base-line out-per-forms Neural- 
- []
-
-)
+[6] (main.lot)
 \tf@lot=\write7
 \openout7 = `main.lot'.
 
@@ -1499,15 +1502,15 @@ Package acronym Info: Label `acro:bo' newly defined as it shall be overridden
 although it is yet undefined on input line 7.
 Package acronym Info: Label `acro:gp' newly defined as it shall be overridden
 although it is yet undefined on input line 7.
-Package acronym Info: Label `acro:dnn' overridden on input line 11.
+Package acronym Info: Label `acro:dnn' overridden on input line 10.
 Package acronym Info: Label `acro:ts' newly defined as it shall be overridden
-although it is yet undefined on input line 11.
+although it is yet undefined on input line 10.
 Package acronym Info: Label `acro:ntk' newly defined as it shall be overridden
-although it is yet undefined on input line 11.
+although it is yet undefined on input line 10.
 Package acronym Info: Label `acro:lcb' newly defined as it shall be overridden
-although it is yet undefined on input line 13.
+although it is yet undefined on input line 12.
 Package acronym Info: Label `acro:ei' newly defined as it shall be overridden
-although it is yet undefined on input line 13.
+although it is yet undefined on input line 12.
 
 
 [1
@@ -1518,9 +1521,9 @@ although it is yet undefined on input line 13.
 
 ]
 Package acronym Info: Label `acro:pde' newly defined as it shall be overridden
-although it is yet undefined on input line 15.
+although it is yet undefined on input line 14.
 Package acronym Info: Label `acro:pinn' newly defined as it shall be overridden
-although it is yet undefined on input line 15.
+although it is yet undefined on input line 14.
 )
 
 [2]
@@ -1542,28 +1545,28 @@ File: ufplmbb.fd 2003/10/30 Fontinst v1.914 font definitions for U/fplmbb.
 Package acronym Info: Label `acro:ucb' newly defined as it shall be overridden
 although it is yet undefined on input line 24.
 Package acronym Info: Label `acro:rf' newly defined as it shall be overridden
-although it is yet undefined on input line 28.
+although it is yet undefined on input line 27.
 Package acronym Info: Label `acro:bnn' newly defined as it shall be overridden
-although it is yet undefined on input line 28.
+although it is yet undefined on input line 27.
 Package acronym Info: Label `acro:deepgp' newly defined as it shall be overridden
-although it is yet undefined on input line 28.
+although it is yet undefined on input line 27.
 
 
 [4]
 
 [5]
-LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 46.
+LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 43.
  (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ppl.fd
 File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
 )
 
 [6]
 Package acronym Info: Label `acro:es' newly defined as it shall be overridden
-although it is yet undefined on input line 60.
+although it is yet undefined on input line 57.
 Package acronym Info: Label `acro:pes' newly defined as it shall be overridden
-although it is yet undefined on input line 60.
+although it is yet undefined on input line 57.
 Package acronym Info: Label `acro:mes' newly defined as it shall be overridden
-although it is yet undefined on input line 60.
+although it is yet undefined on input line 57.
 
 
 [7])
@@ -1596,91 +1599,95 @@ although it is yet undefined on input line 125.
 [14]
 
 [15]
-Package hyperref Info: bookmark level for unknown theorem defaults to 0 on input line 220.
-
 
 [16]
+Package hyperref Info: bookmark level for unknown theorem defaults to 0 on input line 222.
+
 
 [17]
-Package acronym Info: Label `acro:gd' newly defined as it shall be overridden
-although it is yet undefined on input line 309.
-
 
 [18]
-Package acronym Info: Label `acro:nag' newly defined as it shall be overridden
-although it is yet undefined on input line 342.
+Package acronym Info: Label `acro:gd' newly defined as it shall be overridden
+although it is yet undefined on input line 312.
 
 
 [19]
+Package acronym Info: Label `acro:nag' newly defined as it shall be overridden
+although it is yet undefined on input line 345.
 Package acronym Info: Label `acro:adam' newly defined as it shall be overridden
-although it is yet undefined on input line 364.
-Package acronym Info: Label `acro:rmsprop' newly defined as it shall be overridden
-although it is yet undefined on input line 390.
+although it is yet undefined on input line 367.
 
 
 [20]
-Package acronym Info: Label `acro:cg' newly defined as it shall be overridden
-although it is yet undefined on input line 403.
+Package acronym Info: Label `acro:rmsprop' newly defined as it shall be overridden
+although it is yet undefined on input line 393.
 
 
 [21]
+Package acronym Info: Label `acro:cg' newly defined as it shall be overridden
+although it is yet undefined on input line 406.
+
 
 [22]
-Package acronym Info: Label `acro:dfo' newly defined as it shall be overridden
-although it is yet undefined on input line 499.
-
 
 [23]
-Package acronym Info: Label `acro:ga' newly defined as it shall be overridden
-although it is yet undefined on input line 539.
+Package acronym Info: Label `acro:dfo' newly defined as it shall be overridden
+although it is yet undefined on input line 502.
 
 
 [24]
-Package acronym Info: Label `acro:sa' newly defined as it shall be overridden
-although it is yet undefined on input line 573.
-Package acronym Info: Label `acro:cmaes' newly defined as it shall be overridden
-although it is yet undefined on input line 603.
+Package acronym Info: Label `acro:ga' newly defined as it shall be overridden
+although it is yet undefined on input line 542.
 
 
 [25]
+Package acronym Info: Label `acro:sa' newly defined as it shall be overridden
+although it is yet undefined on input line 576.
+
 
 [26]
+Package acronym Info: Label `acro:cmaes' newly defined as it shall be overridden
+although it is yet undefined on input line 606.
+
 
 [27]
 
 [28]
-Package acronym Info: Label `acro:smac' newly defined as it shall be overridden
-although it is yet undefined on input line 713.
-Package acronym Info: Label `acro:gbrt' newly defined as it shall be overridden
-although it is yet undefined on input line 718.
-Package acronym Info: Label `acro:bart' newly defined as it shall be overridden
-although it is yet undefined on input line 722.
-
 
 [29]
-Package acronym Info: Label `acro:mf' newly defined as it shall be overridden
-although it is yet undefined on input line 725.
+Package acronym Info: Label `acro:smac' newly defined as it shall be overridden
+although it is yet undefined on input line 715.
 
 
 [30]
+Package acronym Info: Label `acro:gbrt' newly defined as it shall be overridden
+although it is yet undefined on input line 720.
+Package acronym Info: Label `acro:bart' newly defined as it shall be overridden
+although it is yet undefined on input line 724.
+Package acronym Info: Label `acro:mf' newly defined as it shall be overridden
+although it is yet undefined on input line 727.
+
 
 [31]
-Package acronym Info: Label `acro:PI' newly defined as it shall be overridden
-although it is yet undefined on input line 790.
-Package acronym Info: Label `acro:cdf' newly defined as it shall be overridden
-although it is yet undefined on input line 802.
-
 
 [32]
-Package acronym Info: Label `acro:pdf' newly defined as it shall be overridden
-although it is yet undefined on input line 829.
-
 
 [33]
+Package acronym Info: Label `acro:sgd' newly defined as it shall be overridden
+although it is yet undefined on input line 821.
+
 
 [34]
+Package acronym Info: Label `acro:PI' newly defined as it shall be overridden
+although it is yet undefined on input line 841.
+Package acronym Info: Label `acro:cdf' newly defined as it shall be overridden
+although it is yet undefined on input line 853.
+
 
 [35]
+Package acronym Info: Label `acro:pdf' newly defined as it shall be overridden
+although it is yet undefined on input line 879.
+
 
 [36]
 
@@ -1689,20 +1696,20 @@ although it is yet undefined on input line 829.
 [38]
 
 [39]
-Package acronym Info: Label `acro:kg' newly defined as it shall be overridden
-although it is yet undefined on input line 964.
-
 
 [40]
-Package acronym Info: Label `acro:mab' newly defined as it shall be overridden
-although it is yet undefined on input line 987.
-
 
 [41]
 
 [42]
+Package acronym Info: Label `acro:kg' newly defined as it shall be overridden
+although it is yet undefined on input line 1015.
+
 
 [43]
+Package acronym Info: Label `acro:mab' newly defined as it shall be overridden
+although it is yet undefined on input line 1038.
+
 
 [44]
 
@@ -1711,9 +1718,6 @@ although it is yet undefined on input line 987.
 [46]
 
 [47]
-Package acronym Info: Label `acro:cbo' newly defined as it shall be overridden
-although it is yet undefined on input line 1248.
-
 
 [48]
 
@@ -1721,183 +1725,165 @@ although it is yet undefined on input line 1248.
 
 [50]
 
-[51])
+[51]
+Package acronym Info: Label `acro:cbo' newly defined as it shall be overridden
+although it is yet undefined on input line 1306.
+
 
 [52]
+
+[53]
+
+[54]
+
+[55]
+
+[56])
+
+[57]
 \openout2 = `Chapters/neural-bo.aux'.
 
  (Chapters/neural-bo.tex
 Chapter 3.
 
 
-[53
+[58
 
 
 
 
 ]
 Package acronym Info: Label `acro:relu' newly defined as it shall be overridden
-although it is yet undefined on input line 27.
+although it is yet undefined on input line 28.
 
-
-
-Package scrlayer-scrpage Warning: \headheight to low.
-(scrlayer-scrpage)                At least 27.2pt needed,
-(scrlayer-scrpage)                but only 18.85364pt found.
-(scrlayer-scrpage)                I'll enlarge \headheight, for further
-(scrlayer-scrpage)                processing, but you should do this yourself,
-(scrlayer-scrpage)                e.g., setting geometry's option
-(scrlayer-scrpage)                `head=27.2pt'.
-(scrlayer-scrpage)                I'll also decrease \topmargin on input line 36.
-
-
-Overfull \vbox (8.34636pt too high) has occurred while \output is active []
-
- [54]
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `htbp') on input line 47.
-
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 48.
-
-
-[55]
-Package hyperref Info: bookmark level for unknown definition defaults to 0 on input line 92.
-Package hyperref Info: bookmark level for unknown assumption defaults to 0 on input line 111.
-
-
-[56]
-Package hyperref Info: bookmark level for unknown remark defaults to 0 on input line 142.
-
-
-[57]
-
-[58]
 
 [59]
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 217.
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 217.
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 217.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 217.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 217.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 217.
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 217.
- (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
-File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-)
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `htbp') on input line 48.
+
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 49.
+
 
 [60]
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 231.
-
-<Figures/Neural-BO/A1.pdf, id=1796, 570.90486pt x 286.88681pt>
-File: Figures/Neural-BO/A1.pdf Graphic file (type pdf)
-<use Figures/Neural-BO/A1.pdf>
-Package pdftex.def Info: Figures/Neural-BO/A1.pdf  used on input line 235.
-(pdftex.def)             Requested size: 404.02908pt x 203.03879pt.
-<Figures/Neural-BO/A2.pdf, id=1797, 582.37975pt x 286.88681pt>
-File: Figures/Neural-BO/A2.pdf Graphic file (type pdf)
-<use Figures/Neural-BO/A2.pdf>
-Package pdftex.def Info: Figures/Neural-BO/A2.pdf  used on input line 239.
-(pdftex.def)             Requested size: 404.02908pt x 199.02898pt.
-<Figures/Neural-BO/L1.pdf, id=1798, 569.47055pt x 286.88681pt>
-File: Figures/Neural-BO/L1.pdf Graphic file (type pdf)
-<use Figures/Neural-BO/L1.pdf>
-Package pdftex.def Info: Figures/Neural-BO/L1.pdf  used on input line 243.
-(pdftex.def)             Requested size: 404.02908pt x 203.53783pt.
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 249.
-
-<Figures/Neural-BO/L2.pdf, id=1799, 570.90486pt x 286.88681pt>
-File: Figures/Neural-BO/L2.pdf Graphic file (type pdf)
-<use Figures/Neural-BO/L2.pdf>
-Package pdftex.def Info: Figures/Neural-BO/L2.pdf  used on input line 254.
-(pdftex.def)             Requested size: 404.02908pt x 203.03879pt.
-<Figures/Neural-BO/M1.pdf, id=1800, 570.90486pt x 286.88681pt>
-File: Figures/Neural-BO/M1.pdf Graphic file (type pdf)
-<use Figures/Neural-BO/M1.pdf>
-Package pdftex.def Info: Figures/Neural-BO/M1.pdf  used on input line 258.
-(pdftex.def)             Requested size: 404.02908pt x 203.03879pt.
-<Figures/Neural-BO/M2.pdf, id=1801, 566.6018pt x 286.88681pt>
-File: Figures/Neural-BO/M2.pdf Graphic file (type pdf)
-<use Figures/Neural-BO/M2.pdf>
-Package pdftex.def Info: Figures/Neural-BO/M2.pdf  used on input line 262.
-(pdftex.def)             Requested size: 404.02908pt x 204.57092pt.
-<Figures/Neural-BO/baselines.pdf, id=1802, 345.69853pt x 48.53833pt>
-File: Figures/Neural-BO/baselines.pdf Graphic file (type pdf)
-<use Figures/Neural-BO/baselines.pdf>
-Package pdftex.def Info: Figures/Neural-BO/baselines.pdf  used on input line 266.
-(pdftex.def)             Requested size: 323.22449pt x 45.38383pt.
-
-LaTeX Warning: Float too large for page by 23.53412pt on input line 270.
-
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 287.
-
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 324.
-
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 343.
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 343.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 343.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 343.
+Package hyperref Info: bookmark level for unknown definition defaults to 0 on input line 93.
+Package hyperref Info: bookmark level for unknown assumption defaults to 0 on input line 112.
 
 
 [61]
+Package hyperref Info: bookmark level for unknown remark defaults to 0 on input line 143.
 
-[62 <./Figures/Neural-BO/A1.pdf> <./Figures/Neural-BO/A2.pdf> <./Figures/Neural-BO/L1.pdf>]
 
-[63 <./Figures/Neural-BO/L2.pdf> <./Figures/Neural-BO/M1.pdf> <./Figures/Neural-BO/M2.pdf> <./Figures/Neural-BO/baselines.pdf>]
+[62]
+
+[63]
 
 [64]
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 350.
-
-<Figures/Neural-BO/Neural-BO_pprldmany_02D_noiselessall.pdf, id=2842, 462.52798pt x 346.89601pt>
-File: Figures/Neural-BO/Neural-BO_pprldmany_02D_noiselessall.pdf Graphic file (type pdf)
-<use Figures/Neural-BO/Neural-BO_pprldmany_02D_noiselessall.pdf>
-Package pdftex.def Info: Figures/Neural-BO/Neural-BO_pprldmany_02D_noiselessall.pdf  used on input line 353.
-(pdftex.def)             Requested size: 202.01454pt x 151.51254pt.
-<Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf, id=2843, 462.52798pt x 346.89601pt>
-File: Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf Graphic file (type pdf)
-<use Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf>
-Package pdftex.def Info: Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf  used on input line 359.
-(pdftex.def)             Requested size: 202.01454pt x 151.51254pt.
-<Figures/Neural-BO/Neural-BO_pprldmany_05D_noiselessall.pdf, id=2844, 462.52798pt x 346.89601pt>
-File: Figures/Neural-BO/Neural-BO_pprldmany_05D_noiselessall.pdf Graphic file (type pdf)
-<use Figures/Neural-BO/Neural-BO_pprldmany_05D_noiselessall.pdf>
-Package pdftex.def Info: Figures/Neural-BO/Neural-BO_pprldmany_05D_noiselessall.pdf  used on input line 365.
-(pdftex.def)             Requested size: 202.01454pt x 151.51254pt.
-<Figures/Neural-BO/Neural-BO_pprldmany_10D_noiselessall.pdf, id=2845, 462.52798pt x 346.89601pt>
-File: Figures/Neural-BO/Neural-BO_pprldmany_10D_noiselessall.pdf Graphic file (type pdf)
-<use Figures/Neural-BO/Neural-BO_pprldmany_10D_noiselessall.pdf>
-Package pdftex.def Info: Figures/Neural-BO/Neural-BO_pprldmany_10D_noiselessall.pdf  used on input line 371.
-(pdftex.def)             Requested size: 202.01454pt x 151.51254pt.
-<Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf, id=2847, 455.48354pt x 304.45345pt>
-File: Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf Graphic file (type pdf)
-<use Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf>
-Package pdftex.def Info: Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf  used on input line 387.
-(pdftex.def)             Requested size: 404.02908pt x 270.0661pt.
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 216.
+ (C:\Users\phant\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
+File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 10.42007pt on input line 218.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 7.91925pt on input line 218.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 6.25204pt on input line 218.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 10.42007pt on input line 218.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 7.91925pt on input line 218.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 6.25204pt on input line 218.
 
 
 [65]
+<Figures/Neural-BO/A1.pdf, id=1912, 570.90486pt x 286.88681pt>
+File: Figures/Neural-BO/A1.pdf Graphic file (type pdf)
+<use Figures/Neural-BO/A1.pdf>
+Package pdftex.def Info: Figures/Neural-BO/A1.pdf  used on input line 236.
+(pdftex.def)             Requested size: 364.19669pt x 183.02032pt.
+<Figures/Neural-BO/A2.pdf, id=1913, 582.37975pt x 286.88681pt>
+File: Figures/Neural-BO/A2.pdf Graphic file (type pdf)
+<use Figures/Neural-BO/A2.pdf>
+Package pdftex.def Info: Figures/Neural-BO/A2.pdf  used on input line 240.
+(pdftex.def)             Requested size: 364.19669pt x 179.40448pt.
+<Figures/Neural-BO/L1.pdf, id=1914, 569.47055pt x 286.88681pt>
+File: Figures/Neural-BO/L1.pdf Graphic file (type pdf)
+<use Figures/Neural-BO/L1.pdf>
+Package pdftex.def Info: Figures/Neural-BO/L1.pdf  used on input line 244.
+(pdftex.def)             Requested size: 364.19669pt x 183.4712pt.
+<Figures/Neural-BO/baselines.pdf, id=1915, 345.69853pt x 48.53833pt>
+File: Figures/Neural-BO/baselines.pdf Graphic file (type pdf)
+<use Figures/Neural-BO/baselines.pdf>
+Package pdftex.def Info: Figures/Neural-BO/baselines.pdf  used on input line 248.
+(pdftex.def)             Requested size: 364.19669pt x 51.13708pt.
+<Figures/Neural-BO/L2.pdf, id=1916, 570.90486pt x 286.88681pt>
+File: Figures/Neural-BO/L2.pdf Graphic file (type pdf)
+<use Figures/Neural-BO/L2.pdf>
+Package pdftex.def Info: Figures/Neural-BO/L2.pdf  used on input line 258.
+(pdftex.def)             Requested size: 364.19669pt x 183.02032pt.
+<Figures/Neural-BO/M1.pdf, id=1917, 570.90486pt x 286.88681pt>
+File: Figures/Neural-BO/M1.pdf Graphic file (type pdf)
+<use Figures/Neural-BO/M1.pdf>
+Package pdftex.def Info: Figures/Neural-BO/M1.pdf  used on input line 264.
+(pdftex.def)             Requested size: 364.19669pt x 183.02032pt.
+<Figures/Neural-BO/M2.pdf, id=1918, 566.6018pt x 286.88681pt>
+File: Figures/Neural-BO/M2.pdf Graphic file (type pdf)
+<use Figures/Neural-BO/M2.pdf>
+Package pdftex.def Info: Figures/Neural-BO/M2.pdf  used on input line 269.
+(pdftex.def)             Requested size: 364.19669pt x 184.40363pt.
+File: Figures/Neural-BO/baselines.pdf Graphic file (type pdf)
+<use Figures/Neural-BO/baselines.pdf>
+Package pdftex.def Info: Figures/Neural-BO/baselines.pdf  used on input line 274.
+(pdftex.def)             Requested size: 364.19669pt x 51.13708pt.
 
-[66 <./Figures/Neural-BO/Neural-BO_pprldmany_02D_noiselessall.pdf> <./Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 296.
+
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 11.40997pt on input line 352.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 352.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 11.40997pt on input line 352.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 352.
+
+
+[66]
+
+[67 <./Figures/Neural-BO/A1.pdf> <./Figures/Neural-BO/A2.pdf> <./Figures/Neural-BO/L1.pdf> <./Figures/Neural-BO/baselines.pdf>]
+
+[68 <./Figures/Neural-BO/L2.pdf> <./Figures/Neural-BO/M1.pdf> <./Figures/Neural-BO/M2.pdf>]
+
+[69]
+<Figures/Neural-BO/Neural-BO_pprldmany_02D_noiselessall.pdf, id=2957, 462.52798pt x 346.89601pt>
+File: Figures/Neural-BO/Neural-BO_pprldmany_02D_noiselessall.pdf Graphic file (type pdf)
+<use Figures/Neural-BO/Neural-BO_pprldmany_02D_noiselessall.pdf>
+Package pdftex.def Info: Figures/Neural-BO/Neural-BO_pprldmany_02D_noiselessall.pdf  used on input line 363.
+(pdftex.def)             Requested size: 227.62206pt x 170.71628pt.
+<Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf, id=2958, 462.52798pt x 346.89601pt>
+File: Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf Graphic file (type pdf)
+<use Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf>
+Package pdftex.def Info: Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf  used on input line 369.
+(pdftex.def)             Requested size: 227.62206pt x 170.71628pt.
+<Figures/Neural-BO/Neural-BO_pprldmany_05D_noiselessall.pdf, id=2959, 462.52798pt x 346.89601pt>
+File: Figures/Neural-BO/Neural-BO_pprldmany_05D_noiselessall.pdf Graphic file (type pdf)
+<use Figures/Neural-BO/Neural-BO_pprldmany_05D_noiselessall.pdf>
+Package pdftex.def Info: Figures/Neural-BO/Neural-BO_pprldmany_05D_noiselessall.pdf  used on input line 375.
+(pdftex.def)             Requested size: 227.62206pt x 170.71628pt.
+<Figures/Neural-BO/Neural-BO_pprldmany_10D_noiselessall.pdf, id=2960, 462.52798pt x 346.89601pt>
+File: Figures/Neural-BO/Neural-BO_pprldmany_10D_noiselessall.pdf Graphic file (type pdf)
+<use Figures/Neural-BO/Neural-BO_pprldmany_10D_noiselessall.pdf>
+Package pdftex.def Info: Figures/Neural-BO/Neural-BO_pprldmany_10D_noiselessall.pdf  used on input line 381.
+(pdftex.def)             Requested size: 227.62206pt x 170.71628pt.
+
+
+[70]
+
+[71 <./Figures/Neural-BO/Neural-BO_pprldmany_02D_noiselessall.pdf> <./Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf
 
 pdfTeX warning: pdflatex (file ./Figures/Neural-BO/Neural-BO_pprldmany_03D_noiselessall.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 > <./Figures/Neural-BO/Neural-BO_pprldmany_05D_noiselessall.pdf
@@ -1907,275 +1893,262 @@ pdfTeX warning: pdflatex (file ./Figures/Neural-BO/Neural-BO_pprldmany_05D_noise
 
 pdfTeX warning: pdflatex (file ./Figures/Neural-BO/Neural-BO_pprldmany_10D_noiselessall.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 >]
+<Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf, id=3232, 455.48354pt x 304.45345pt>
+File: Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf Graphic file (type pdf)
+<use Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf>
+Package pdftex.def Info: Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf  used on input line 405.
+(pdftex.def)             Requested size: 455.24413pt x 304.29938pt.
 
-[67 <./Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf>]
-<Figures/Neural-BO/Neural-BO_AmazonReview_dim_500_round_300.pdf, id=3178, 455.48354pt x 295.53073pt>
+
+[72 <./Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf>]
+<Figures/Neural-BO/Neural-BO_AmazonReview_dim_500_round_300.pdf, id=3298, 455.48354pt x 295.53073pt>
 File: Figures/Neural-BO/Neural-BO_AmazonReview_dim_500_round_300.pdf Graphic file (type pdf)
 <use Figures/Neural-BO/Neural-BO_AmazonReview_dim_500_round_300.pdf>
-Package pdftex.def Info: Figures/Neural-BO/Neural-BO_AmazonReview_dim_500_round_300.pdf  used on input line 401.
-(pdftex.def)             Requested size: 404.02908pt x 262.15118pt.
-
-
-[68 <./Figures/Neural-BO/Neural-BO_AmazonReview_dim_500_round_300.pdf>]
-<Figures/Neural-BO/Neural-BO_Robot_dim_14_round_6000.pdf, id=3249, 455.38632pt x 295.53073pt>
+Package pdftex.def Info: Figures/Neural-BO/Neural-BO_AmazonReview_dim_500_round_300.pdf  used on input line 418.
+(pdftex.def)             Requested size: 455.24413pt x 295.38118pt.
+<Figures/Neural-BO/Neural-BO_Robot_dim_14_round_6000.pdf, id=3301, 455.38632pt x 295.53073pt>
 File: Figures/Neural-BO/Neural-BO_Robot_dim_14_round_6000.pdf Graphic file (type pdf)
 <use Figures/Neural-BO/Neural-BO_Robot_dim_14_round_6000.pdf>
-Package pdftex.def Info: Figures/Neural-BO/Neural-BO_Robot_dim_14_round_6000.pdf  used on input line 413.
-(pdftex.def)             Requested size: 404.02908pt x 262.2053pt.
+Package pdftex.def Info: Figures/Neural-BO/Neural-BO_Robot_dim_14_round_6000.pdf  used on input line 428.
+(pdftex.def)             Requested size: 455.24413pt x 295.4443pt.
 )
 
-[69 <./Figures/Neural-BO/Neural-BO_Robot_dim_14_round_6000.pdf>]
+[73]
 
-[70]
+[74 <./Figures/Neural-BO/Neural-BO_AmazonReview_dim_500_round_300.pdf>]
+
+[75 <./Figures/Neural-BO/Neural-BO_Robot_dim_14_round_6000.pdf>]
 \openout2 = `Chapters/neural-cbo.aux'.
 
  (Chapters/neural-cbo.tex
 Chapter 4.
 
 
-[71
+[76
 
 
 
 
 ]
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 12.50409pt on input line 25.
+(Font)              scaled to size 15.0049pt on input line 34.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 12.50409pt on input line 25.
+(Font)              scaled to size 15.0049pt on input line 34.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 25.
+(hyperref)                removing `math shift' on input line 34.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 25.
+(hyperref)                removing `subscript' on input line 34.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 25.
+(hyperref)                removing `math shift' on input line 34.
 
 
 
-[72]
 
-[73]
-Package hyperref Info: bookmark level for unknown condition defaults to 0 on input line 108.
-Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input line 130.
-Package hyperref Info: bookmark level for unknown corollary defaults to 0 on input line 141.
-
-
-[74]
-<Figures/Neural-CBO/1d_toy.pdf, id=3383, 462.52798pt x 346.89601pt>
-File: Figures/Neural-CBO/1d_toy.pdf Graphic file (type pdf)
-<use Figures/Neural-CBO/1d_toy.pdf>
-Package pdftex.def Info: Figures/Neural-CBO/1d_toy.pdf  used on input line 211.
-(pdftex.def)             Requested size: 404.02908pt x 303.03569pt.
+Package scrlayer-scrpage Warning: \headheight to low.
+(scrlayer-scrpage)                At least 28.99998pt needed,
+(scrlayer-scrpage)                but only 20.66162pt found.
+(scrlayer-scrpage)                I'll enlarge \headheight, for further
+(scrlayer-scrpage)                processing, but you should do this yourself,
+(scrlayer-scrpage)                e.g., setting geometry's option
+(scrlayer-scrpage)                `head=28.99998pt'.
+(scrlayer-scrpage)                I'll also decrease \topmargin on input line 44.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+Overfull \vbox (8.33836pt too high) has occurred while \output is active []
 
-
-
-[75]
-
-[76]
-
-[77 <./Figures/Neural-CBO/1d_toy.pdf>]
+ [77]
 
 [78]
-<Figures/Neural-CBO/Branin-Simionescu-GasTransmission-Ackley-Hartmann-SpeedReducer.pdf, id=3508, 872.13953pt x 649.30641pt>
-File: Figures/Neural-CBO/Branin-Simionescu-GasTransmission-Ackley-Hartmann-SpeedReducer.pdf Graphic file (type pdf)
-<use Figures/Neural-CBO/Branin-Simionescu-GasTransmission-Ackley-Hartmann-SpeedReducer.pdf>
-Package pdftex.def Info: Figures/Neural-CBO/Branin-Simionescu-GasTransmission-Ackley-Hartmann-SpeedReducer.pdf  used on input line 324.
-(pdftex.def)             Requested size: 404.02908pt x 300.79489pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
+Package hyperref Info: bookmark level for unknown condition defaults to 0 on input line 117.
+Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input line 139.
 
 
 [79]
+Package hyperref Info: bookmark level for unknown corollary defaults to 0 on input line 150.
 
-[80 <./Figures/Neural-CBO/Branin-Simionescu-GasTransmission-Ackley-Hartmann-SpeedReducer.pdf>]
-<Figures/Neural-CBO/sensitive_sample_detection_rate.pdf, id=3651, 443.05148pt x 335.44322pt>
-File: Figures/Neural-CBO/sensitive_sample_detection_rate.pdf Graphic file (type pdf)
-<use Figures/Neural-CBO/sensitive_sample_detection_rate.pdf>
-Package pdftex.def Info: Figures/Neural-CBO/sensitive_sample_detection_rate.pdf  used on input line 389.
-(pdftex.def)             Requested size: 404.02908pt x 305.90897pt.
+
+[80]
+<Figures/Neural-CBO/1d_toy.pdf, id=3501, 462.52798pt x 346.89601pt>
+File: Figures/Neural-CBO/1d_toy.pdf Graphic file (type pdf)
+<use Figures/Neural-CBO/1d_toy.pdf>
+Package pdftex.def Info: Figures/Neural-CBO/1d_toy.pdf  used on input line 220.
+(pdftex.def)             Requested size: 455.24413pt x 341.44844pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 
 
 [81]
 
-[82 <./Figures/Neural-CBO/sensitive_sample_detection_rate.pdf>])
+[82 <./Figures/Neural-CBO/1d_toy.pdf>]
 
 [83]
+
+[84]
+<Figures/Neural-CBO/Branin-Simionescu-GasTransmission-Ackley-Hartmann-SpeedReducer.pdf, id=3624, 872.13953pt x 649.30641pt>
+File: Figures/Neural-CBO/Branin-Simionescu-GasTransmission-Ackley-Hartmann-SpeedReducer.pdf Graphic file (type pdf)
+<use Figures/Neural-CBO/Branin-Simionescu-GasTransmission-Ackley-Hartmann-SpeedReducer.pdf>
+Package pdftex.def Info: Figures/Neural-CBO/Branin-Simionescu-GasTransmission-Ackley-Hartmann-SpeedReducer.pdf  used on input line 333.
+(pdftex.def)             Requested size: 455.24413pt x 338.92926pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+
+[85]
+
+[86 <./Figures/Neural-CBO/Branin-Simionescu-GasTransmission-Ackley-Hartmann-SpeedReducer.pdf>]
+
+[87]
+<Figures/Neural-CBO/sensitive_sample_detection_rate.pdf, id=3774, 443.05148pt x 335.44322pt>
+File: Figures/Neural-CBO/sensitive_sample_detection_rate.pdf Graphic file (type pdf)
+<use Figures/Neural-CBO/sensitive_sample_detection_rate.pdf>
+Package pdftex.def Info: Figures/Neural-CBO/sensitive_sample_detection_rate.pdf  used on input line 412.
+(pdftex.def)             Requested size: 455.24413pt x 344.6863pt.
+
+
+[88 <./Figures/Neural-CBO/sensitive_sample_detection_rate.pdf>])
+
+[89]
 \openout2 = `Chapters/pinn-bo.aux'.
 
  (Chapters/pinn-bo.tex
 Chapter 5.
 
 
-[84
+[90
 
 
 
 
 ]
 
-[85]
-
-[86]
-
-[87]
-
-[88]
-
-[89]
-
-[90]
-
 [91]
-<Figures/PINN-BO/pinn-bo_all_synthetic.pdf, id=3842, 857.89429pt x 621.0452pt>
-File: Figures/PINN-BO/pinn-bo_all_synthetic.pdf Graphic file (type pdf)
-<use Figures/PINN-BO/pinn-bo_all_synthetic.pdf>
-Package pdftex.def Info: Figures/PINN-BO/pinn-bo_all_synthetic.pdf  used on input line 269.
-(pdftex.def)             Requested size: 404.02908pt x 292.48828pt.
-
 
 [92]
 
-[93 <./Figures/PINN-BO/pinn-bo_all_synthetic.pdf>]
-<Figures/PINN-BO/heat_py_pde_1000_test_1.pdf, id=3939, 394.21475pt x 315.83257pt>
-File: Figures/PINN-BO/heat_py_pde_1000_test_1.pdf Graphic file (type pdf)
-<use Figures/PINN-BO/heat_py_pde_1000_test_1.pdf>
-Package pdftex.def Info: Figures/PINN-BO/heat_py_pde_1000_test_1.pdf  used on input line 312.
-(pdftex.def)             Requested size: 197.97646pt x 158.61467pt.
-<Figures/PINN-BO/heat_py_pde_1000_test_2.pdf, id=3940, 394.21475pt x 315.83257pt>
-File: Figures/PINN-BO/heat_py_pde_1000_test_2.pdf Graphic file (type pdf)
-<use Figures/PINN-BO/heat_py_pde_1000_test_2.pdf>
-Package pdftex.def Info: Figures/PINN-BO/heat_py_pde_1000_test_2.pdf  used on input line 319.
-(pdftex.def)             Requested size: 197.97646pt x 158.61467pt.
-<Figures/PINN-BO/heat_py_pde_1000_test_3.pdf, id=3941, 394.21475pt x 315.83257pt>
-File: Figures/PINN-BO/heat_py_pde_1000_test_3.pdf Graphic file (type pdf)
-<use Figures/PINN-BO/heat_py_pde_1000_test_3.pdf>
-Package pdftex.def Info: Figures/PINN-BO/heat_py_pde_1000_test_3.pdf  used on input line 326.
-(pdftex.def)             Requested size: 202.01454pt x 161.84836pt.
-<Figures/PINN-BO/Heat_dim_2_bc1.pdf, id=3946, 461.18674pt x 334.37985pt>
-File: Figures/PINN-BO/Heat_dim_2_bc1.pdf Graphic file (type pdf)
-<use Figures/PINN-BO/Heat_dim_2_bc1.pdf>
-Package pdftex.def Info: Figures/PINN-BO/Heat_dim_2_bc1.pdf  used on input line 339.
-(pdftex.def)             Requested size: 197.97646pt x 143.54071pt.
-<Figures/PINN-BO/Heat_dim_2_bc2.pdf, id=3947, 460.71497pt x 334.37985pt>
-File: Figures/PINN-BO/Heat_dim_2_bc2.pdf Graphic file (type pdf)
-<use Figures/PINN-BO/Heat_dim_2_bc2.pdf>
-Package pdftex.def Info: Figures/PINN-BO/Heat_dim_2_bc2.pdf  used on input line 346.
-(pdftex.def)             Requested size: 197.97646pt x 143.68867pt.
-<Figures/PINN-BO/Heat_dim_2_bc3.pdf, id=3948, 460.71497pt x 334.37985pt>
-File: Figures/PINN-BO/Heat_dim_2_bc3.pdf Graphic file (type pdf)
-<use Figures/PINN-BO/Heat_dim_2_bc3.pdf>
-Package pdftex.def Info: Figures/PINN-BO/Heat_dim_2_bc3.pdf  used on input line 353.
-(pdftex.def)             Requested size: 202.01454pt x 146.61736pt.
-
+[93]
 
 [94]
 
-[95 <./Figures/PINN-BO/heat_py_pde_1000_test_1.pdf> <./Figures/PINN-BO/heat_py_pde_1000_test_2.pdf> <./Figures/PINN-BO/heat_py_pde_1000_test_3.pdf>]
+[95]
 
-[96 <./Figures/PINN-BO/Heat_dim_2_bc1.pdf> <./Figures/PINN-BO/Heat_dim_2_bc2.pdf> <./Figures/PINN-BO/Heat_dim_2_bc3.pdf>]
-<Figures/PINN-BO/beam.pdf, id=4167, 502.85051pt x 404.59846pt>
+[96]
+
+[97]
+
+[98]
+<Figures/PINN-BO/pinn-bo_all_synthetic.pdf, id=3960, 857.89429pt x 621.0452pt>
+File: Figures/PINN-BO/pinn-bo_all_synthetic.pdf Graphic file (type pdf)
+<use Figures/PINN-BO/pinn-bo_all_synthetic.pdf>
+Package pdftex.def Info: Figures/PINN-BO/pinn-bo_all_synthetic.pdf  used on input line 271.
+(pdftex.def)             Requested size: 455.24413pt x 329.55986pt.
+
+
+[99]
+
+[100 <./Figures/PINN-BO/pinn-bo_all_synthetic.pdf>]
+<Figures/PINN-BO/heat_py_pde_1000_test_1.pdf, id=4055, 394.21475pt x 315.83257pt>
+File: Figures/PINN-BO/heat_py_pde_1000_test_1.pdf Graphic file (type pdf)
+<use Figures/PINN-BO/heat_py_pde_1000_test_1.pdf>
+Package pdftex.def Info: Figures/PINN-BO/heat_py_pde_1000_test_1.pdf  used on input line 308.
+(pdftex.def)             Requested size: 223.07211pt x 178.72041pt.
+<Figures/PINN-BO/heat_py_pde_1000_test_2.pdf, id=4056, 394.21475pt x 315.83257pt>
+File: Figures/PINN-BO/heat_py_pde_1000_test_2.pdf Graphic file (type pdf)
+<use Figures/PINN-BO/heat_py_pde_1000_test_2.pdf>
+Package pdftex.def Info: Figures/PINN-BO/heat_py_pde_1000_test_2.pdf  used on input line 315.
+(pdftex.def)             Requested size: 223.07211pt x 178.72041pt.
+<Figures/PINN-BO/heat_py_pde_1000_test_3.pdf, id=4057, 394.21475pt x 315.83257pt>
+File: Figures/PINN-BO/heat_py_pde_1000_test_3.pdf Graphic file (type pdf)
+<use Figures/PINN-BO/heat_py_pde_1000_test_3.pdf>
+Package pdftex.def Info: Figures/PINN-BO/heat_py_pde_1000_test_3.pdf  used on input line 322.
+(pdftex.def)             Requested size: 227.62206pt x 182.36856pt.
+
+
+[101 <./Figures/PINN-BO/heat_py_pde_1000_test_1.pdf> <./Figures/PINN-BO/heat_py_pde_1000_test_2.pdf> <./Figures/PINN-BO/heat_py_pde_1000_test_3.pdf>]
+<Figures/PINN-BO/Heat_dim_2_bc1.pdf, id=4116, 461.18674pt x 334.37985pt>
+File: Figures/PINN-BO/Heat_dim_2_bc1.pdf Graphic file (type pdf)
+<use Figures/PINN-BO/Heat_dim_2_bc1.pdf>
+Package pdftex.def Info: Figures/PINN-BO/Heat_dim_2_bc1.pdf  used on input line 349.
+(pdftex.def)             Requested size: 223.07211pt x 161.74033pt.
+<Figures/PINN-BO/Heat_dim_2_bc2.pdf, id=4117, 460.71497pt x 334.37985pt>
+File: Figures/PINN-BO/Heat_dim_2_bc2.pdf Graphic file (type pdf)
+<use Figures/PINN-BO/Heat_dim_2_bc2.pdf>
+Package pdftex.def Info: Figures/PINN-BO/Heat_dim_2_bc2.pdf  used on input line 356.
+(pdftex.def)             Requested size: 223.07211pt x 161.9036pt.
+<Figures/PINN-BO/Heat_dim_2_bc3.pdf, id=4118, 460.71497pt x 334.37985pt>
+File: Figures/PINN-BO/Heat_dim_2_bc3.pdf Graphic file (type pdf)
+<use Figures/PINN-BO/Heat_dim_2_bc3.pdf>
+Package pdftex.def Info: Figures/PINN-BO/Heat_dim_2_bc3.pdf  used on input line 363.
+(pdftex.def)             Requested size: 227.62206pt x 165.20474pt.
+
+
+[102 <./Figures/PINN-BO/Heat_dim_2_bc1.pdf> <./Figures/PINN-BO/Heat_dim_2_bc2.pdf> <./Figures/PINN-BO/Heat_dim_2_bc3.pdf>]
+
+[103]
+<Figures/PINN-BO/beam.pdf, id=4284, 502.85051pt x 404.59846pt>
 File: Figures/PINN-BO/beam.pdf Graphic file (type pdf)
 <use Figures/PINN-BO/beam.pdf>
-Package pdftex.def Info: Figures/PINN-BO/beam.pdf  used on input line 382.
-(pdftex.def)             Requested size: 177.77377pt x 143.03769pt.
-<Figures/PINN-BO/BeamDeflection_dim_1.pdf, id=4168, 460.71497pt x 334.37985pt>
+Package pdftex.def Info: Figures/PINN-BO/beam.pdf  used on input line 397.
+(pdftex.def)             Requested size: 200.30852pt x 161.16975pt.
+<Figures/PINN-BO/BeamDeflection_dim_1.pdf, id=4285, 460.71497pt x 334.37985pt>
 File: Figures/PINN-BO/BeamDeflection_dim_1.pdf Graphic file (type pdf)
 <use Figures/PINN-BO/BeamDeflection_dim_1.pdf>
-Package pdftex.def Info: Figures/PINN-BO/BeamDeflection_dim_1.pdf  used on input line 389.
-(pdftex.def)             Requested size: 197.97646pt x 143.68867pt.
+Package pdftex.def Info: Figures/PINN-BO/BeamDeflection_dim_1.pdf  used on input line 404.
+(pdftex.def)             Requested size: 223.07211pt x 161.9036pt.
 )
 
-[97 <./Figures/PINN-BO/beam.pdf> <./Figures/PINN-BO/BeamDeflection_dim_1.pdf>]
+[104 <./Figures/PINN-BO/beam.pdf> <./Figures/PINN-BO/BeamDeflection_dim_1.pdf>]
 \openout2 = `Chapters/conclusion.aux'.
 
  (Chapters/conclusion.tex
 Chapter 6.
 
 
-[98
-
+[105
 
 
 
 
 ])
 
-[99]
+[106]
 \openout2 = `Appendices/neural-bo_appendix.aux'.
 
  (Appendices/neural-bo_appendix.tex
 Appendix A.
-Package hyperref Info: bookmark level for unknown sublemma defaults to 0 on input line 44.
 
 
-[100
+[107
 
 
 
 
 ]
+Package hyperref Info: bookmark level for unknown subdefinition defaults to 0 on input line 80.
 
-[101]
-
-[102]
-
-[103]
-
-[104]
-
-[105]
-
-[106]
-
-[107]
 
 [108]
 
 [109]
 
-[110])
+[110]
 
 [111]
-\openout2 = `Appendices/neural-cbo_appendix.aux'.
 
- (Appendices/neural-cbo_appendix.tex
-Appendix B.
-
-Overfull \hbox (34.9161pt too wide) detected at line 35
-[]
- []
-
-
-
-[112
-
-
-
-
-]
-Overfull \hbox (22.70116pt too wide) detected at line 73
-[]
- []
-
+[112]
+Package hyperref Info: bookmark level for unknown auxlemma defaults to 0 on input line 337.
 
 
 [113]
-Overfull \hbox (25.31866pt too wide) detected at line 130
-[]
- []
-
-
 
 [114]
 
@@ -2184,40 +2157,28 @@ Overfull \hbox (25.31866pt too wide) detected at line 130
 [116]
 
 [117]
-Overfull \hbox (31.50449pt too wide) detected at line 300
-[]
- []
 
-
-
-[118]
-Overfull \hbox (60.86755pt too wide) detected at line 358
-[]
- []
-
-
+[118])
 
 [119]
+\openout2 = `Appendices/neural-cbo_appendix.aux'.
 
-[120])
-
-[121]
-\openout2 = `Appendices/pinn-bo_appendix.aux'.
-
- (Appendices/pinn-bo_appendix.tex
-Appendix C.
+ (Appendices/neural-cbo_appendix.tex
+Appendix B.
 
 
-[122
+[120
 
 
 
 
 ]
 
-[123]
-Package hyperref Info: bookmark level for unknown subcorollary defaults to 0 on input line 188.
+[121]
 
+[122]
+
+[123]
 
 [124]
 
@@ -2228,14 +2189,25 @@ Package hyperref Info: bookmark level for unknown subcorollary defaults to 0 on 
 [127]
 
 [128]
+Overfull \hbox (25.5233pt too wide) detected at line 399
+[]
+ []
+
+
 
 [129]
 
 [130])
 
 [131]
+\openout2 = `Appendices/pinn-bo_appendix.aux'.
+
+ (Appendices/pinn-bo_appendix.tex
+Appendix C.
+
 
 [132
+
 
 
 
@@ -2250,161 +2222,217 @@ Package hyperref Info: bookmark level for unknown subcorollary defaults to 0 on 
 [136]
 
 [137]
+
+[138]
+
+[139]
+
+[140]
+
+[141]
+
+[142]
+
+[143]
+
+[144]
+
+[145]
+
+[146]
+Package hyperref Info: bookmark level for unknown subcorollary defaults to 0 on input line 770.
+
+
+[147]
+
+[148]
+
+[149]
+
+[150]
+
+[151]
+
+[152]
+
+[153]
+
+[154])
+
+[155]
+
+[156
+
+
+
+]
+
+[157]
+
+[158]
+
+[159]
+
+[160]
+
+[161]
+
+[162]
 \openout2 = `Utils/copyrights.aux'.
 
  (Utils/copyrights.tex
-<Figures/Elsvier.png, id=4759, 964.35281pt x 360.59718pt>
+<Figures/Elsvier.png, id=5040, 964.35281pt x 360.59718pt>
 File: Figures/Elsvier.png Graphic file (type png)
 <use Figures/Elsvier.png>
-Package pdftex.def Info: Figures/Elsvier.png  used on input line 5.
-(pdftex.def)             Requested size: 404.02908pt x 151.07562pt.
-<extra_pages/pinnbo_copyrights.pdf, id=4761, 614.295pt x 794.97pt>
+Package pdftex.def Info: Figures/Elsvier.png  used on input line 7.
+(pdftex.def)             Requested size: 455.24413pt x 170.229pt.
+<extra_pages/pinnbo_copyrights.pdf, id=5042, 614.295pt x 794.97pt>
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf  used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf  used on input line 11.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf  used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf  used on input line 11.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
-<extra_pages/pinnbo_copyrights.pdf, id=4764, page=1, 614.295pt x 794.97pt>
+<extra_pages/pinnbo_copyrights.pdf, id=5045, page=1, 614.295pt x 794.97pt>
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 1>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page1 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page1 used on input line 11.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 1>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page1 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page1 used on input line 11.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 
 
-[138
+[163
 
 
  <./Figures/Elsvier.png>]
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 1>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page1 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page1 used on input line 11.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 1>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page1 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page1 used on input line 11.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 
 
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 1>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page1 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page1 used on input line 11.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-[139
+[164
 
  <./extra_pages/pinnbo_copyrights.pdf>]
-<extra_pages/pinnbo_copyrights.pdf, id=4784, page=2, 614.295pt x 794.97pt>
+<extra_pages/pinnbo_copyrights.pdf, id=5066, page=2, 614.295pt x 794.97pt>
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 2>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page2 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page2 used on input line 11.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 2>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page2 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page2 used on input line 11.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 
 
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 2>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page2 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page2 used on input line 11.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-[140
+[165
 
  <./extra_pages/pinnbo_copyrights.pdf>]
-<extra_pages/pinnbo_copyrights.pdf, id=4794, page=3, 614.295pt x 794.97pt>
+<extra_pages/pinnbo_copyrights.pdf, id=5076, page=3, 614.295pt x 794.97pt>
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 3>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page3 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page3 used on input line 11.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 3>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page3 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page3 used on input line 11.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 
 
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 3>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page3 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page3 used on input line 11.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-[141
+[166
 
  <./extra_pages/pinnbo_copyrights.pdf>]
-<extra_pages/pinnbo_copyrights.pdf, id=4804, page=4, 614.295pt x 794.97pt>
+<extra_pages/pinnbo_copyrights.pdf, id=5086, page=4, 614.295pt x 794.97pt>
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 4>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page4 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page4 used on input line 11.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 4>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page4 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page4 used on input line 11.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 
 
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 4>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page4 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page4 used on input line 11.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-[142
+[167
 
  <./extra_pages/pinnbo_copyrights.pdf>]
-<extra_pages/pinnbo_copyrights.pdf, id=4809, page=5, 614.295pt x 794.97pt>
+<extra_pages/pinnbo_copyrights.pdf, id=5091, page=5, 614.295pt x 794.97pt>
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 5>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page5 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page5 used on input line 11.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 5>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page5 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page5 used on input line 11.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 
 
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 5>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page5 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page5 used on input line 11.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-[143
+[168
 
  <./extra_pages/pinnbo_copyrights.pdf>]
-<extra_pages/pinnbo_copyrights.pdf, id=4819, page=6, 614.295pt x 794.97pt>
+<extra_pages/pinnbo_copyrights.pdf, id=5102, page=6, 614.295pt x 794.97pt>
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 6>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page6 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page6 used on input line 11.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 6>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page6 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page6 used on input line 11.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 
 
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 6>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page6 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page6 used on input line 11.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-[144
+[169
 
  <./extra_pages/pinnbo_copyrights.pdf>]
-<extra_pages/pinnbo_copyrights.pdf, id=4825, page=7, 614.295pt x 794.97pt>
+<extra_pages/pinnbo_copyrights.pdf, id=5107, page=7, 614.295pt x 794.97pt>
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 7>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page7 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page7 used on input line 11.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 7>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page7 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page7 used on input line 11.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 
 
 File: extra_pages/pinnbo_copyrights.pdf Graphic file (type pdf)
 <use extra_pages/pinnbo_copyrights.pdf, page 7>
-Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page7 used on input line 9.
+Package pdftex.def Info: extra_pages/pinnbo_copyrights.pdf , page7 used on input line 11.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-[145
+[170
 
  <./extra_pages/pinnbo_copyrights.pdf>]) (main.aux (Utils/acknowledgements.aux) (Utils/list_of_publications.aux) (Utils/abbreviations.aux) (Chapters/abstract.aux) (Chapters/introduction.aux) (Chapters/background.aux) (Chapters/neural-bo.aux) (Chapters/neural-cbo.aux) (Chapters/pinn-bo.aux) (Chapters/conclusion.aux) (Appendices/neural-bo_appendix.aux) (Appendices/neural-cbo_appendix.aux) (Appendices/pinn-bo_appendix.aux) (Utils/copyrights.aux))
  ***********
@@ -2412,23 +2440,23 @@ LaTeX2e <2024-06-01> patch level 1
 L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: F47C6652A212E57F06CC1CE0A453C2D6;26935.
+(rerunfilecheck)             Checksum: DFD17A79A7FFD64561BF7890BEB3B0E0;29792.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 38198 strings out of 473920
- 822105 string characters out of 5726973
- 1975908 words of memory out of 5000000
- 59649 multiletter control sequences out of 15000+600000
- 659468 words of font info for 258 fonts, out of 8000000 for 9000
+ 38726 strings out of 473920
+ 833200 string characters out of 5726973
+ 1994908 words of memory out of 5000000
+ 60139 multiletter control sequences out of 15000+600000
+ 657171 words of font info for 255 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 96i,25n,94p,3361b,2835s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\phant\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1095.pk> <C:\Users\phant\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0900.pk><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmb.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmbb.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmbi.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmr.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmri.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplbi8a.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (164 pages, 16405354 bytes).
+ 96i,26n,94p,3362b,2812s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\phant\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\phant\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1200.pk><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmb.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmbb.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmbi.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmr.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmri.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplbi8a.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/phant/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on main.pdf (189 pages, 16560928 bytes).
 PDF statistics:
- 5136 PDF objects out of 5155 (max. 8388607)
- 732 named destinations out of 1000 (max. 500000)
- 1329 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 5426 PDF objects out of 6186 (max. 8388607)
+ 766 named destinations out of 1000 (max. 500000)
+ 1473 words of extra memory for PDF output out of 10000 (max. 10000000)
 

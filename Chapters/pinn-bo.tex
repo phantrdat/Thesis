@@ -1,8 +1,7 @@
-\chapter{PINN-BO: A Black-Box Optimization
-Algorithm Using Physics-Informed
+\chapter[Black-Box Optimization Algorithm Using Physics-Informed
+Neural Networks]{PINN-BO: A Black-Box Optimization Algorithm Using Physics-Informed
 Neural Networks} % Main chapter title
 \label{chap:pinn-bo}
-\section{Introduction}
 
 In many scientific and engineering problems, the behavior of systems is often described by mathematical equations called \acfp{pde}. These equations represent fundamental physical laws, such as how heat spreads over time (the heat equation) or how fluids flow while considering factors like viscosity and external forces (the Navier-Stokes equations). \acp{pde} are essential tools in various fields, including structural analysis and electromagnetic, showing their broad importance.
 
@@ -18,11 +17,11 @@ This chapter presents PINN-BO, a black-box optimization framework that employs a
     
     \item We propose PINN-BO, a black-box optimization algorithm employing \acl{pinn} with \acfp{pde} induced by natural laws to perform efficient optimization, bringing several benefits: improved sample-efficiency of optimization, scalable computation that only grows linearly with the number of function evaluations, and the ability to incorporate a broad class of \acp{pde}.
      
-    \item We provide a theoretical analysis of our proposed PINN-BO algorithm to illustrate that incorporating linear \acp{pde} can lead to $\mathcal{O}\left(\sqrt{T\gamma_T}\sqrt{\gamma_T - I (f; \mathbf{Y}_T; \mathbf{U}_r) } \right)$ regret, where $T$ is the number of black-box function evaluations and $I (f; \mathbf{Y}_T; \mathbf{U}_r)$ is interaction information between the black-box function  $f$, its observations $\mathbf{Y}_T$ and the \ac{pde} data $\mathbf{U}_r$ (see Section \ref{section:pinn-bo_theoretical_analysis}).
+    \item We provide a theoretical analysis of our proposed PINN-BO algorithm to establish that incorporating linear \acp{pde} can lead to $\mathcal{O}\left(\sqrt{T\gamma_T}\sqrt{\gamma_T - I (f; \mathbf{Y}_T; \mathbf{U}_r) } \right)$ regret, where $T$ is the number of black-box function evaluations and $I (f; \mathbf{Y}_T; \mathbf{U}_r)$ is interaction information between the black-box function  $f$, its observations $\mathbf{Y}_T$ and the \ac{pde} data $\mathbf{U}_r$ (see Section \ref{section:pinn-bo_theoretical_analysis}).
     
     \item We perform experiments with a variety of tasks showing that our algorithm outperforms current state-of-the-art black-box optimization methods.
 \end{itemize} 
-This chapter begins by introducing the problem setting and give an example to illustrate our proposed setting, followed by a detailed description of the PINN-BO framework and its theoretical analysis.
+This chapter begins by formally introducing the problem setting and give an example to illustrate our proposed setting, followed by a detailed description of the PINN-BO framework and its theoretical analysis.
  % For referencing the chapter elsewhere, use \ref{chap:background}
 \section{Problem Setting}
 \label{section:pinn-bo_problem_setting}
@@ -30,7 +29,7 @@ In this chapter, we consider a global optimization problem setting where the obj
 \begin{equation*}
         \underset{\mathbf{x} \in \mathcal{D}}{\min} f(\mathbf{x}) \text{ s.t. }  \mathcal{N}[f](\mathbf{x}) = g(\mathbf{x}),
 \end{equation*} 
-where $\mathcal{D} \subset \mathbb{R}^d$ is a $d$-dimensional bounded domain and $\mathcal{N}[f]$ denotes a differential operator of the function $f$ with respect to the input $\mathbf{x}$. The function $f$ is an expensive, black-box function, and its evaluations are obtainable only through noisy measurements in the form of $y = f(\mathbf{x}) + \epsilon$, where $\epsilon$ represents sub-Gaussian noise. Additionally, the function $g(\mathbf{x})$ is a cheap-to-evaluate function, which may also involve noise, with respect to the \ac{pde}-constraint. Furthermore, it is assumed that the \textbf{boundary conditions} of the PDEs are either \textit{unknown or inaccessible}.
+where $\mathcal{D} \subset \mathbb{R}^d$ is a $d$-dimensional bounded domain and $\mathcal{N}[f]$ denotes a differential operator of the function $f$ with respect to the input $\mathbf{x}$. The function $f$ is an expensive, black-box function, and its evaluations are obtainable only through noisy measurements in the form of $y = f(\mathbf{x}) + \epsilon$, where $\epsilon$ represents sub-Gaussian noise. Additionally, the function $g(\mathbf{x})$ is a cheap-to-evaluate function (possibly noisy) with respect to the \ac{pde}-constraint. Furthermore, it is assumed that the \textbf{boundary conditions} of the PDEs are either \textit{unknown or inaccessible}.
 \begin{remark}
     Considering the damped harmonic oscillator from classical physics as a real-world example where $f(x)$ is the displacement of the oscillator as a black-box function of time $x$, and measuring the displacement of a damped harmonic oscillator accurately can be expensive due to several factors, e.g., instrumentation cost, environmental factors, and calibration requirements. This displacement is governed by the \ac{pde}: $m \frac{d^2f}{dx^2} + c \frac{df}{dx} + kf = 0$, where $\mathcal{N}[f](x) = m \frac{d^2f}{dx^2} + c \frac{df}{dx} + kf$, $g(x)=0$, $m, c, k$ are mass, damping and spring values, respectively. 
 \end{remark}
@@ -40,6 +39,7 @@ where $\mathcal{D} \subset \mathbb{R}^d$ is a $d$-dimensional bounded domain and
 
 
 \section{Proposed PINN-BO Method}
+\label{section:pinn-bo_proposed_method}
 In this section, we present our proposed \ac{pinn} based \acl{bo} (PINN-BO). PINN-BO algorithm combines optimization and machine learning techniques to efficiently optimize an unknown black-box function over a given input space while leveraging physics-informed constraints described by a \ac{pde}. Following the fundamental principles of Bayesian optimization, our algorithm consists of two primary steps: (1) constructing a model of the black-box objective function, and (2) employing this model to select the next function evaluation point during each iteration. In the first step, our approach diverges from traditional Bayesian Optimization algorithms that typically utilize \acfp{gp} to model the objective function. Instead, we employ a fully connected neural network denoted as $h(\mathbf{x}; \boldsymbol{\theta})$ to learn the function $f$ as follows:
 \[
 h(\mathbf{x};\boldsymbol{\theta}) = \frac{1}{\sqrt{m}} \mathbf{W}_L \psi(\mathbf{W}_{L-1}\psi(\cdots \psi(\mathbf{W}_1 \mathbf{x})),
@@ -82,7 +82,7 @@ $\boldsymbol{\Omega}_r  = [\omega(\mathbf{z}_1)^\top, \dots, \omega(\mathbf{z}_{
 \State $\widetilde{f_t}(\mathbf{x}) = h(\mathbf{x}; \boldsymbol{\theta}_{t-1})$ 
 \State Choose $\mathbf{x}_t = \argmin_{\mathbf{x} \in \mathcal{D}} \widetilde{f_t}(\mathbf{x}) $ and receive observation $y_t = f(\mathbf{x}_t) + \epsilon_t$
 \State Update $\mathcal{D}_t = \mathcal{D}_{t-1} \cup \{\mathbf{x}_t, y_t\}$
-\State Update $ \boldsymbol{\theta}_t = \argmin_{\boldsymbol{\theta}} \mathcal{L}(\boldsymbol{\theta})$ using Eqn. \ref{eqn:pinn_loss} by gradient descent with $\nu = \nu_t$.
+\State Update $ \boldsymbol{\theta}_t = \argmin_{\boldsymbol{\theta}} \mathcal{L}(\boldsymbol{\theta})$ using Eqn. \eqref{eqn:pinn_loss} by gradient descent with $\nu = \nu_t$.
 \EndFor
 \end{algorithmic}
 \end{algorithm}
@@ -173,7 +173,7 @@ where
 \end{equation*}
 \end{restatable}
 
-Generic \ac{bo} methods (without the extra information from \ac{pde}) utilized the \textit{maximum information gain} over search space $\mathcal{D}$ at time $t$:
+Generic \ac{bo} methods (without the extra information from \ac{pde}) utilize the \textit{maximum information gain} over search space $\mathcal{D}$ at time $t$:
     $\gamma_t := \max_{\mathcal{A} \subset \mathcal{D}: \lvert \mathcal{A} \rvert=t} I(\mathbf{Y}_\mathcal{A}, f_\mathcal{A})$, 
     where $I(\mathbf{Y}_\mathcal{A}, f_\mathcal{A})$ denotes the mutual information between $f_\mathcal{A} = [f(\mathbf{x})]_{\mathbf{x}\in \mathcal{A}}$ and noisy observations $\mathbf{Y}_\mathcal{A}$, which quantifies the reduction in uncertainty about the objective function $f$ after observing $y_A$. The maximum information gain is the fundamental component when analyzing regret bound for their algorithm \citep{srinivas2009gaussian,vakili2021optimal}. Further details on this concept can be found in Section \ref{section:MIG}. However, in our work, the \ac{pde} evaluations $\{u_j\}_{j=1}^{N_r}$ of the function $g$ is considered as the second source of information that contributes to reduce the uncertainty of $f$. Therefore, we introduce the \textit{interaction information} as the generalization of \textit{mutual information} for three random variables:
 \begin{definition}
@@ -208,7 +208,7 @@ Our next result shows how the prediction of the neural network model is concentr
 
 \begin{restatable}{lemma}{PINNBOConfidenceBound}
 \label{lemma:pinn-bo_confidence_bound}
-     Assume that $\norm{\omega(\cdot)}_2 \le L$, where $\omega(\cdot)  = \nabla_{\boldsymbol{\theta}} \mathcal{N}[h] (\cdot; \boldsymbol{\theta}_0)$ and $\rho_{min}(\mathbf{K}_{uu})$ the smallest eigenvalue of kernel matrix $\mathbf{K}_{uu}$ defined in lemma 1. Set $N_r = c_r\left(1+ \frac{\rho_{min}(\mathbf{K}_{uu})}{\lambda_1}\right)/L^2$ for a positive constant $c_r$. Under the same hypotheses as stated in Assumption \ref{assumption:pinn-bo_subgaussian} and Assumption \ref{assumption:pinn-bo_rkhs}, and denote $\widetilde{R} = \sqrt{\left(\frac{R_1}{\lambda_1}\right)^2 + \left(\frac{R_2}{\lambda_2}\right)^2}$. Let $\delta \in (0,1)$. Then,  with  probability at least $1 - \delta$, the following confidence bound holds for all $\mathbf{x} \in \mathcal{D}$ and $t \ge 1$:
+     Assume that $\norm{\omega(\cdot)}_2 \le L$, where $\omega(\cdot)  = \nabla_{\boldsymbol{\theta}} \mathcal{N}[h] (\cdot; \boldsymbol{\theta}_0)$ and $\rho_{min}(\mathbf{K}_{uu})$ the smallest eigenvalue of kernel matrix $\mathbf{K}_{uu}$ defined in Lemma \ref{lemma:pinn-bo_PINN_mean_cov}. Set $N_r = c_r\left(1+ \frac{\rho_{min}(\mathbf{K}_{uu})}{\lambda_1}\right)/L^2$ for a positive constant $c_r$. Under the same hypotheses as stated in Assumption \ref{assumption:pinn-bo_subgaussian} and Assumption \ref{assumption:pinn-bo_rkhs}, and denote $\widetilde{R} = \sqrt{\left(\frac{R_1}{\lambda_1}\right)^2 + \left(\frac{R_2}{\lambda_2}\right)^2}$. Let $\delta \in (0,1)$. Then,  with  probability at least $1 - \delta$, the following confidence bound holds for all $\mathbf{x} \in \mathcal{D}$ and $t \ge 1$:
     \begin{equation*}
     \begin{aligned}
             & \lvert f(\mathbf{x}) - \mu_t^f(\mathbf{x}) \rvert \\
@@ -247,11 +247,11 @@ Let $\delta \in (0,1)$. Assume that $\norm{\omega(\cdot)}_2 \le L$ and  $\rho_{m
 
 
 \section{Experiments}
-
-In this section, we demonstrate the effectiveness of our proposed PINN-BO algorithm through its application of synthetic benchmark optimization functions as well as real-world optimization problems. Our implementations of both problems are available at: \url{https://github.com/phantrdat/neural-cbo}.  
+\label{section:pinn-bo_experiments}
+In this section, we demonstrate the effectiveness of our proposed PINN-BO algorithm through its application of synthetic benchmark optimization functions as well as real-world optimization problems. Our implementations of both problems are available at: \url{https://github.com/phantrdat/pinn-bo}.  
 
 \subsection{Experimental Setup}
-\label{section:baselines}
+\label{section:pinn-bo_baselines}
 For all experiments, we compared our algorithm with common classes of surrogate models used in black-box optimization, including Gaussian Processes (GPs) and Deep Neural Networks (DNNs). For GPs, we employ the most popular strategy GP-EI \citep{mockus1978application} and GP-UCB \citep{srinivas2009gaussian} with the Mat\'ern Kernel. Our implementations for GP-based Bayesian Optimization baselines utilize public library GPyTorch  \url{https://gpytorch.ai/} and BOTorch \url{https://botorch.org/}. We also include two recent DNNs-based works for black-box optimization: Neural Greedy \citep{pariagreedy} and Neural-BO \citep{phan2023neuralbo} described below:
 \begin{itemize}
     \item Neural Greedy in \citet{pariagreedy} fits a neural network to the current set of observations, where the function values are randomly perturbed before learning the neural network. The learned neural network is then used as the acquisition function to determine the next query point. Since the NeuralGreedy code is not publicly available, we use our own implementation following the setting described in     \citet{pariagreedy} (see Appendix F.2 therein).
@@ -264,20 +264,24 @@ For our proposed PINN-BO algorithm, we employ a fully connected deep neural netw
 All experiments reported here are averaged over 10 runs, each with random initialization. All methods begin with the same initial points. The results demonstrate that our PINN-BO is better than all other baseline methods, including GP-based BO algorithms (GP-EI, GP-UCB), and NN-based BO algorithms (NeuralBO, NeuralGreedy). 
 
 
-\begin{figure}[H] %
+
+
+\begin{figure}[ht] %
   \centering
   \includegraphics[width=\textwidth]{Figures/PINN-BO/pinn-bo_all_synthetic.pdf} 
   \caption{The optimization results for Rastrigin, Michalewics and Cosine Mixture, DropWave and Styblinski-Tang functions comparing the proposed PINN-BO with the baselines. The standard errors are shown by color shading.}
   \label{fig:pinn-bo_synthetic}
 \end{figure}
 
-
 \subsection{Real-world Applications}
-In this section, we explore two real-world applications where the objective functions are constrained by specific \acp{pde}. We consider two tasks: (1) optimizing the Steady-State temperature distribution, satisfying the  Laplace equation, and (2) optimizing the displacement of a beam element, adhering to the non-uniform Euler-Bernoulli equation. We continue to compare our proposed method with the baselines mentioned in Section \ref{section:baselines}. 
-
+In this section, we explore two real-world applications where the objective functions are constrained by specific \acp{pde}. We consider two tasks: (1) optimizing the Steady-State temperature distribution, satisfying the  Laplace equation, and (2) optimizing the displacement of a beam element, adhering to the non-uniform Euler-Bernoulli equation. We continue to compare our proposed method with the baselines mentioned in Section \ref{section:pinn-bo_baselines}. 
 \subsubsection{Optimizing Steady-State Temperature}
 \label{section:pinn-bo_experiments_2d_laplace}
 In this study, we showcase the benchmark optimization outcomes achieved by our proposed PINN-BO algorithm, comparing them with baseline methods for the steady-state temperature optimization task. The steady-state heat equation represents a special case of the heat equation when the temperature distribution no longer changes over time. It describes the equilibrium state of a system where the temperature is constant, and no heat is being added or removed.  The governing PDE for the temperature distribution is expressed as: $\nabla^2 T(x, y) = 0$, where $x, y$ are spatial variables that represent the positions within a two-dimensional space. We explore the heat equation in a domain where $x$ and $y$ lie within the defined range of $[0,2\pi]$. To thoroughly investigate the problem, we consider three different heat equations, where the solution of each problem is associated with one (unknown) boundary condition, each contributing to a deeper understanding of the system: 
+
+
+
+
 
  \paragraph{Heat Equation with Boundary Conditions 1}
  \label{para:heat1}
@@ -295,17 +299,9 @@ In this study, we showcase the benchmark optimization outcomes achieved by our p
     T(0, y) &= \sqrt{2y}  \sin(y) + y^3\cos(2y)   + e^{\cos(y)} \\
     T(2\pi, y) &= \sin(y) \cos(2y) + y^3\sqrt{2y}   + e^{\sin(y)}
 \end{align*}
-\paragraph{Heat Equation with Boundary Conditions 3}
-\label{para:heat3}
-\begin{align*}
-    T(x, 0) &= \left(\sin(x) + \cos(2x) \right) \sqrt{3x} + x^2 + e^{\sin(x)} \\
-    T(x, 2\pi) &= \left(e^{\sin(x)} + \sqrt{3x} \right) \cos(x) + \left(\sin^2(x) + x^2\right)  e^{\cos(x)}
-    \\
-    T(0, y) &= \left(\sqrt{2y} + \sin(y)\right)  \left(\cos(2y) + y^3 \right) + e^{\cos(y)}\\
-    T(2\pi, y) &= \left(\sin(y) + \cos(2y)\right) \left(\sqrt{2y} + y^3\right) + e^{\sin(y)}
-\end{align*}
-We utilized \texttt{py-pde}, a Python package designed for solving partial differential equations (PDEs), available at the following GitHub repository: \url{https://github.com/zwicker-group/py-pde}. This tool enabled us to obtain solutions to heat equations at various input points, with specific boundary conditions serving as the input data. In Figure \ref{fig:heat_dist}, the temperature distribution within the defined domain $[0, 2\pi]$ is visualized. It is important to emphasize that the boundary conditions used for benchmarking purposes are unknown to the methods employed. Adhering to the framework of black-box optimization, we assume that solving the PDEs incurs a substantial computational cost. The figure illustrates the spatial distribution of temperature values $T(x,y)$ across domain $[0, 2\pi] \times [0, 2\pi]$, with each subfigure corresponding to one of the mentioned boundary conditions.  
-\begin{figure}[ht]
+
+
+\begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
@@ -331,8 +327,22 @@ We utilized \texttt{py-pde}, a Python package designed for solving partial diffe
     \label{fig:heat_dist}
 \end{figure}
 
-We conducted temperature optimization by identifying the locations $(x,y)$ where the temperature reaches its maximum. As illustrated in Figure \ref{fig:heat_dist}, the area with high temperatures is relatively small in comparison to the regions with medium or low temperatures. For each baseline, we performed the optimization process 10 times, computing the average results. The comparative outcomes are presented in Figure \ref{fig:heat_opt}. 
-\begin{figure}[ht]
+\paragraph{Heat Equation with Boundary Conditions 3}
+\label{para:heat3}
+\begin{align*}
+    T(x, 0) &= \left(\sin(x) + \cos(2x) \right) \sqrt{3x} + x^2 + e^{\sin(x)} \\
+    T(x, 2\pi) &= \left(e^{\sin(x)} + \sqrt{3x} \right) \cos(x) + \left(\sin^2(x) + x^2\right)  e^{\cos(x)}
+    \\
+    T(0, y) &= \left(\sqrt{2y} + \sin(y)\right)  \left(\cos(2y) + y^3 \right) + e^{\cos(y)}\\
+    T(2\pi, y) &= \left(\sin(y) + \cos(2y)\right) \left(\sqrt{2y} + y^3\right) + e^{\sin(y)}
+\end{align*}
+ 
+
+
+
+
+
+\begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
@@ -357,7 +367,9 @@ We conducted temperature optimization by identifying the locations $(x,y)$ where
     \caption{The figure shows the temperature optimization results of our PINN-BO and other baselines. For all three cases with different positions of maximum temperature, our PINN-BO performs better than all other baselines.}
     \label{fig:heat_opt}
 \end{figure}
+We utilized \texttt{py-pde}, a Python package designed for solving partial differential equations (PDEs), available at the following GitHub repository: \url{https://github.com/zwicker-group/py-pde}. This tool enabled us to obtain solutions to heat equations at various input points, with specific boundary conditions serving as the input data. In Figure \ref{fig:heat_dist}, the temperature distribution within the defined domain $[0, 2\pi]$ is visualized. It is important to emphasize that the boundary conditions used for benchmarking purposes are unknown to the methods employed. Adhering to the framework of black-box optimization, we assume that solving the PDEs incurs a substantial computational cost. The figure illustrates the spatial distribution of temperature values $T(x,y)$ across domain $[0, 2\pi] \times [0, 2\pi]$, with each subfigure corresponding to one of the mentioned boundary conditions. 
 
+We conducted temperature optimization by identifying the locations $(x,y)$ where the temperature reaches its maximum. As illustrated in Figure \ref{fig:heat_dist}, the area with high temperatures is relatively small in comparison to the regions with medium or low temperatures. For each baseline, we performed the optimization process 10 times, computing the average results. The comparative outcomes are presented in Figure \ref{fig:heat_opt}. 
 
 \subsubsection{Optimizing Beam Displacement}
 We present the benchmark optimization outcomes obtained through our proposed method, PINN-BO, and the baseline approaches, addressing the task of minimizing the deflection of a non-uniform Euler-Bernoulli beam. The governing differential equation describing the behavior of a non-uniform Euler-Bernoulli beam is provided below: 
@@ -374,8 +386,11 @@ In our implementation, we consider the detailed expression of $\text{EI}(x)$ and
     &+ 80 e^{2 x} \cos{\left(20 x \right)} + 16 \pi e^{2 x} \cos{\left(4 \pi e^{2 x} \right)} + 0.4
 \end{align*}
 We employed the Finite Difference Method (FDM) to solve the non-uniform Euler-Bernoulli beam equation. It's crucial to note that this step is solely for generating observations at each input point. Despite obtaining this solution, our methods and all baseline techniques continue to treat this solution as a black-box function, accessing observations solely through querying. In Figure \ref{fig:beam_illustration}, the displacement values $w(x)$ for $x \in (0,1)$ are illustrated. The optimization results for both our PINN-BO and the other baseline methods are presented in Figure \ref{fig:beam_opt}.
-\clearpage
-\begin{figure}[!t]
+
+\section{Conclusion}
+We introduced a novel black-box optimization scenario incorporating \aclp{pde} as additional information. Our solution, PINN-BO, is a new algorithm tailored to this challenge. We conducted a theoretical analysis, demonstrating its convergence with a tighter regret bound. Through experiments involving synthetic benchmark functions and real-world optimization tasks, we validated the efficacy of our approach. Our method, due to using a neural network, is applicable to a broad set of optimization problems where the input space is complex (e.g. drug discovery), and can significantly accelerate the optimization by leveraging the auxiliary knowledge via \acp{pde}.
+
+\begin{figure}[H]
     \centering
     \begin{subfigure}[t]{0.44\textwidth}
         \centering
@@ -394,45 +409,6 @@ We employed the Finite Difference Method (FDM) to solve the non-uniform Euler-Be
     \label{fig:beam}
 \end{figure}
 
+  
 
-
-%  The steady-state heat equation is given by: $\nabla^2 T(x, y) = 0$, 
-%  In this paper, our task is to find the best position $(x,y)$ that maximizes temperature $T$ within the defined domain. Formally, this problem can be defined as: 
-% \begin{equation*}
-%         \underset{x,y \in \mathcal{U}}{\max}  \;T(x,y) \text{ s.t. }  \nabla^2 T(x, y) = 0,
-% \end{equation*}
-% The details and the results of optimizing these heat equation problems are provided in Section A.2. The optimization results of our PINN-BO, in comparison to other baseline methods, for the first case of the heat equation, are depicted in Figure \ref{fig:heat_main}.
-
-% \begin{figure}
-%   \centering
-%   \begin{subfigure}[t]{0.48\textwidth}
-%     \includegraphics[width=\textwidth]{Figures/PINN-BO/Heat_dim_2.pdf}
-%   \caption{The optimization results for finding the maximum temperature comparing the proposed PINN-BO with the baselines. It can be seen that, using the \ac{pde} heat equation, PINN-BO found the maximum temperature faster than all baselines.}
-%   \label{fig:heat_main}
-%   \end{subfigure}
-%   \hfill
-%   \begin{subfigure}[t]{0.48\textwidth}
-%     \includegraphics[width=\textwidth]{Figures/PINN-BO/BeamDeflection_dim_1.pdf}
-%   \caption{The minimum displacement on the non-uniform Euler beam under given loads $q(x)$,  flexural rigidity $EI(x)$, and boundary conditions. In comparison with other baselines, our proposed PINN-BO found the location with the smallest displacement, ensuring stability when placing the load over the beam.}
-%   \label{fig:beam_main}
-%   \end{subfigure}
-%   \caption{The optimization results for real-world applications comparing the proposed PINN-BO with the baselines.}
-% \end{figure}
-
-% \subsubsection{Optimizing Beam Displacement}
-% Euler-Bernoulli beam theory is a widely used model in engineering and physics to describe the behavior of slender beams under various loads. The governing differential equation for a non-uniform Euler-Bernoulli beam is given by: 
-% \begin{equation*}
-%     \frac{d^2}{dx^2} \left( EI(x) \frac{d^2 w(x)}{dx^2} \right) = q(x),
-% \end{equation*}
-% where
-% $EI(x)$ represents the flexural rigidity of the beam, which can vary with position $x$, and $w(x)$ represents the vertical displacement of the beam at position $x$, and $q(x)$ represents the distributed or concentrated load applied to the beam. The lower value deflection leads to a stiffer and more resilient structure, hence reducing the risk of structural failure and serviceability issues.  In this paper, we consider the task of finding the position $x$ that minimizes displacement $w(x)$. This problem can be defined as: 
-% \begin{align*}
-%     \underset{x \in \mathcal{S}}{\min}  \;
-%         w(x) \\
-% \text{ s.t. }  \frac{d^2}{dx^2} \left( EI(x) \frac{d^2 w(x)}{dx^2} \right) = q(x)
-% \end{align*}
-
-
-% \section{Conclusion}
-% \label{section:pinn-bo_conclusion}
-% We introduced a novel black-box optimization scenario incorporating \acfp{pde} as additional information. Our solution, PINN-BO, is a new algorithm tailored to this challenge. We conducted a theoretical analysis, demonstrating its convergence with a tighter regret bound. Through experiments involving synthetic benchmark functions and real-world optimization tasks, we validated the efficacy of our approach. Our method, due to using a neural network, is applicable to a broad set of optimization problems where the input space is complex (e.g. drug discovery), and can significantly accelerate the optimization by leveraging the auxiliary knowledge via \acp{pde}.  
+  

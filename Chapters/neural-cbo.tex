@@ -1,14 +1,13 @@
-\chapter{Black-box Optimization with Unknown Black-box Constraints via Overparameterized Deep Neural Networks} % Main chapter title
-
+\chapter{Black-box Optimization with Unknown Constraints via Overparameterized Deep Neural Networks} % Main chapter title
 \label{chap:neural-cbo} % For referencing the chapter elsewhere, use \ref{chap:background}
 
 \acl{bo} with \textit{unknown constraints} (CBO) adjusts the acquisition function to find solutions that satisfy constraints while optimizing the objective function. A well-known method, Expected Improvement with Constraints (cEI), incorporates feasibility into the optimization process, focusing on regions likely to contain feasible solutions.
 
 Alternative approaches, such as Predictive Entropy Search with Constraints (PESC) \citep{hernandez2015predictive}, Min-Value Entropy Search \citep{takeno2022sequential}, Augmented Lagrangian Bayesian Optimization (ALBO) \citep{gramacy2016modeling}, and Bayesian Optimization with Unknown Constraints using the Alternating Direction Method of Multipliers (ADMMBO) \citep{ariafar2019admmbo}, use various techniques, from information-theoretic methods to numerical optimization strategies, as discussed in Section \ref{section:bo_unknown_constraints}. However, these methods rely on \acp{gp} as surrogate models, which suffer from poor computational scalability. The cubic complexity of kernel matrix inversion becomes impractical as the number of constraints increases.
 
-In contrast, \acp{dnn} provide a scalable alternative. They perform exceptionally well in feature extraction and maintain linear complexity as the dataset size grows. While \acp{dnn} have been successful in unconstrained black-box optimization \citep{snoek2015scalable} and contextual bandits in discrete search spaces \citep{zhou2020neural,zhang2021neural}, their application to constrained black-box optimization with theoretical guarantees remains largely unexplored. This gap motivates the development of neural network-based methods for CBO.
+In contrast, \acp{dnn} provide a scalable alternative. They perform exceptionally well in feature extraction and maintain linear complexity as the dataset size grows. While \acp{dnn} have been successful in unconstrained black-box optimization \citep{snoek2015scalable} and contextual bandits in discrete search spaces \citep{zhou2020neural,zhang2021neural}, their application to constrained black-box optimization with theoretical guarantees \emph{remains largely unexplored}. This \emph{gap} motivates the development of neural network-based methods for CBO.
 
-In Chapter \ref{chap:neural-cbo}, we inherited a similar motivation as in Chapter \ref{chap:neural-bo} to apply for \ac{bo} with unknown, expensive constraints setting. We provided Neural-CBO, a method to alternate canonical \ac{gp} by \ac{dnn} as the surrogate model in \ac{bo} in CBO. \textbf{The contributions of this chapter} are highlighted as follows:
+This chapter inherits a similar motivation as in Chapter \ref{chap:neural-bo} to apply for \ac{bo} with unknown, expensive constraints setting. We provided Neural-CBO, a method to alternate canonical \ac{gp} by \ac{dnn} as the surrogate model to model both objective function and constraints in CBO. \textbf{The contributions of this chapter} are highlighted as follows:
 
 \begin{itemize}
     \item We propose a \ac{dnn}-based black-box optimization algorithm with unknown constraints (Neural-CBO), where both the objective function and constraints are modeled using deep neural networks. We use \ac{ei} as the acquisition function to find the next samples in a feasible region which is determined using \acf{lcb} satisfaction conditions to all constraints. Using \ac{lcb}-based conditions ensure that the feasible regions of these constraints are covered by the regions suggested by these conditions (with our problem setting), while leaving spaces for constraint explorations, particularly when feasible regions are much smaller than the search space.
@@ -17,13 +16,23 @@ In Chapter \ref{chap:neural-cbo}, we inherited a similar motivation as in Chapte
     \item We provide a theoretical analysis of our proposed Neural-CBO algorithm based on recent advances in \ac{ntk} theory. Under certain regularity assumptions, we show that cumulative regret as well as cumulative constraint violation has an upper bound of the form $\mathcal{O}(\gamma_T\sqrt{T})$, where $\gamma_T$ is the maximum information gain. This result is comparable to previous \ac{gp}-based methods. It is worth noting that, our \ac{dnn} models only required the network width as $m=\Omega(T)$  for the convergence. 
     \item We conduct benchmarking experiments on synthetic and real-world tasks to prove our algorithm's effectiveness empirically. The numerical results indicate that our algorithm achieves competitive performance with well-known approaches.
     \end{itemize}
-    
+\section{Problem Setting}
+In this chapter, we tackle the problem of black-box optimization, where the search space is subject to constraints imposed by other unknown black-box functions. These constraints arise from \emph{real-valued} feedback $c_i(\mathbf{x})$, and the constraint condition $c_i(\mathbf{x})$ is satisfied if and only if $c_i(\mathbf{x}) \leq 0$.  
+Formally, this problem is defined as follows:
+\begin{equation*}
+    \begin{split}
+        & \underset{\mathbf{x} \in \mathcal{D}}{\min} f(\mathbf{x}),  \text{ subject to }  c_i (\mathbf{x})  \leq 0, \text{ for all } i = 1, \dots, K,
+    \end{split}
+\end{equation*}  
+where $\mathcal{D} \subset \mathbb{R}^d$ is a bounded domain, and $f$ and $\{c_i\}_{i=1}^K \colon \mathbb{R}^d \rightarrow \mathbb{R}$ are unknown functions that can be evaluated at specific points. We consider this problem in a \textbf{coupled} setting, where both the objective function and constraints are evaluated simultaneously.
+
+
 \section{Proposed Neural-CBO Method}
 \label{section:neural-cbo}
-Here, we will introduce the general \acp{dnn} architect used to model objective function and the constraints, followed by basis theory accompanying by these networks. Then, the Neural-CBO algorithm is introduced. 
+Here, we first introduce the general \acp{dnn} architecture used to model the objective function and the constraints, followed by basis theoretical properties accompanying of these networks. Then, the Neural-CBO algorithm is introduced. 
 
 \subsection{The \acl{dnn} for an Arbitrary Function $f_a$}
-\label{section:arbitrary_nn}
+\label{section:neural-cbo_arbitrary_nn}
 Given a black-box, expensive function $f_a$, we use a fully connected neural network, denoted as $a(\mathbf{x}; \mathbf{W})$, to model $f_a$:
 \begin{equation}
 \label{eqn:fcn}
@@ -128,7 +137,7 @@ Let Assumptions \ref{assumption:rkhs} and \ref{assumption:subgaussian_noise} hol
     & \mathcal{E}(m) = \mathcal{O}(C^{2L} L^{3/2} m^{11/36}).
 \end{align*}
 \end{restatable}
-Here, the coefficient $\beta_{a,t}$ control the uncertainty of $a(\mathbf{x}; \mathbf{W}_{t-1})$ about $f_a(\mathbf{x})$ at $\mathbf{x}$, while $ \mathcal{E}(m)$ indicates the approximation error appeared when using the neural network's output $a(\mathbf{x}; \boldsymbol{W})$ to learn the underlying function $f_a$.     
+Here, the coefficient $\beta_{a,t}$ control the uncertainty of $a(\mathbf{x}; \mathbf{W}_{t-1})$ about $f_a(\mathbf{x})$ at $\mathbf{x}$, while $ \mathcal{E}(m)$ indicates the approximation error when using the neural network's output $a(\mathbf{x}; \boldsymbol{W})$ to learn the underlying function $f_a$.     
 
 To facilitate the following algorithm design and discussion, we introduce the \acf{lcb} and \acf{ucb} functions w.r.t the \textit{arbitrary} function $f_a$: 
 \begin{align*}
@@ -148,7 +157,7 @@ and $1 \le t \le T$:
 \subsection{Neural-CBO Algorithm}
 In the remaining parts of this chapter, we refer to $v(\mathbf{x}; \boldsymbol{\theta})$ and $\{u_{c_i}(\mathbf{x}; \boldsymbol{\omega}_{c_i})\}_{i=1}^K$ as the neural network models for the unknown objective function $f$ and constraints $\{c_i\}_{i=1}^K$, respectively. 
 
-Our algorithm starts by initializing the neural networks $v(\mathbf{x}; \boldsymbol{\theta})$ and $\{u_{c_i}(\mathbf{x}; \boldsymbol{\omega}_{c_i})\}_{i=1}^K$ using the initialization scheme described in Section \ref{section:arbitrary_nn}. We use the \ac{ei} acquisition function to identify the next samples within the feasible region, determined by applying \ac{lcb}-based conditions to all constraints. These conditions ensure that the feasible regions of these constraints are covered by the regions suggested by these conditions while leaving room for constraint exploration, particularly when the feasible region is much smaller than the overall search space  (Line~\ref{alg:line_lcb_ei} of Alg. \ref{alg:PINN-BO}). At each optimization iteration $t$, the next evaluation point $\mathbf{x}_t$ is determined by maximizing the acquisition function $\textsc{EI}_{f,t}(\mathbf{x})$ subject to the lower confidence bound constraints for all unknown black-box constraints $\{c_i(\mathbf{x})\}_{i=1}^K$:
+Our algorithm starts by initializing the neural networks $v(\mathbf{x}; \boldsymbol{\theta})$ and $\{u_{c_i}(\mathbf{x}; \boldsymbol{\omega}_{c_i})\}_{i=1}^K$ using the initialization scheme described in Section \ref{section:neural-cbo_arbitrary_nn}. We use the \ac{ei} acquisition function to identify the next samples within the feasible region, determined by applying \ac{lcb}-based conditions to all constraints. These conditions ensure that the feasible regions of these constraints are covered by the regions suggested by these conditions while leaving room for constraint exploration, particularly when the feasible region is much smaller than the overall search space  (Line~\ref{alg:line_lcb_ei} of Alg. \ref{alg:PINN-BO}). At each optimization iteration $t$, the next evaluation point $\mathbf{x}_t$ is determined by maximizing the acquisition function $\textsc{EI}_{f,t}(\mathbf{x})$ subject to the lower confidence bound constraints for all unknown black-box constraints $\{c_i(\mathbf{x})\}_{i=1}^K$:
 \[
 \text{LCB}_{c_i,t}(\mathbf{x}, \boldsymbol{\omega}_{c_i,t}) \le 0, \forall i \in [K].
 \]
@@ -246,7 +255,7 @@ We apply the general assumption stated in the Assumption \ref{assumption:rkhs} a
 \end{itemize}
 Now we can now state our main theorem:
 \begin{restatable}{theorem}{TheoremMain}
-\label{theorem:main}
+\label{theorem:neural-cbo_main}
     Under Assumption \ref{assumption:rkhs}, Assumption \ref{assumption:subgaussian_noise} and Condition \ref{condition:network_width}, set the step size used to train the neural networks in Alg. \ref{alg:neural_cbo} as $\alpha_t \le \frac{\nu}{(T+1)^2}$, then for any $\delta \in (0,1)$,  with probability at least $1 - \delta \exp (\Omega(C^{-L} m^{1/36}))$, the Cumulative Regret $R_T$ and Cumulative Violation $V_{c_i, T}$ after $T$ iterations are bounded as:
     \begin{align*}
         & V_{c_i, T} \le 2 \beta_{c_i,T} \sqrt{\frac{S_i T}{\log(S_i+1)} (2\gamma_{c_i,T}+1)} + 2\mathcal{E}(m),
@@ -280,7 +289,7 @@ As described in Section \ref{section:neural-cbo}, the network's weights are init
 
 \subsection{Synthetic Benchmark Functions}
 \label{section:neural-cbo_synthetic}
-We conducted optimization experiments on four synthetic objective functions: Branin, Ackley, Simionescu and Hartmann. The input dimension of each objective function and the corresponding number of constraints are summarized in Table \ref{table:synthetic_info}. Due to space limitations, we present the expression of each function and its constraints in the Supplementary material. 
+We conducted optimization experiments on four synthetic objective functions: Branin, Ackley, Simionescu and Hartmann. The input dimension of each objective function and the corresponding number of constraints are summarized in Table \ref{tab:neural-cbo_synthetic_info}. We present the expression of each function and its constraints in the Appendix \ref{section:neural-cbo_experiments_synthetic}. 
   \begin{table}[h]
   \centering
  \caption{The input dimension and number of constraints for each synthetic objective function.}
@@ -291,12 +300,12 @@ We conducted optimization experiments on four synthetic objective functions: Bra
 \textbf{Dim}                   & 2   & 2               & 5 & 6                  \\ \hline
 \textbf{Constraints}       & 1      & 1              & 2       & 1          \\ \hline
 \end{tabular}
-\label{table:synthetic_info}
+\label{tab:neural-cbo_synthetic_info}
 \end{table}
 % \looseness=-1
 The noise in function evaluations follows a normal distribution with zero mean, and the variance is set to 1\% of the function range. All experiments reported here are averaged over 20 runs, each with random initialization. We report the (Log10 of) the Best Positive Regret plus Violation in Figure \ref{fig:neural-cbo_synthetic}
 
-To ensure statistical significance, we performed one-sided $t$-tests to assess whether a baseline outperforms Neural-CBO in terms of the best positive regret plus violation. The null hypothesis is $H_0: \mu_\text{baseline} \leq \mu_{\text{Neural-CBO}}$, and the alternative hypothesis is $H_a: \mu_\text{baseline} > \mu_{\text{Neural-CBO}}$, where $\mu_\text{baseline}$ and $\mu_{\text{Neural-CBO}}$ represent the means of the (Log10 of) Best Positive Regret plus Violation values of the baseline and our proposed Neural-CBO, respectively. Note that lower values indicate better performance. We present the statistical test results for four synthetic benchmark functions and two real-world tasks (described in Section \ref{section:neural-cbo_gas} and \ref{section:neural-cbo_speed}) in Table \ref{table:t-test}. Each cell in the table shows the $p$-value from the $t$-test as the first value. To account for multiple comparisons, the Benjamini-Hochberg correction was applied, with the corrected value provided as the second value. A result is labeled as ``T'' if the null hypothesis is rejected, meaning that Neural-CBO is statistically better to the compared baselines. Conversely, a result is labeled ``F'' if we cannot reject the null hypothesis, meaning that the baselines and the Neural-CBO are comparable.
+To ensure statistical significance, we performed one-sided $t$-tests to assess whether a baseline outperforms Neural-CBO in terms of the best positive regret plus violation. The null hypothesis is $H_0: \mu_\text{baseline} \leq \mu_{\text{Neural-CBO}}$, and the alternative hypothesis is $H_a: \mu_\text{baseline} > \mu_{\text{Neural-CBO}}$, where $\mu_\text{baseline}$ and $\mu_{\text{Neural-CBO}}$ represent the means of the (Log10 of) Best Positive Regret plus Violation values of the baseline and our proposed Neural-CBO, respectively. Note that lower values indicate better performance. We present the statistical test results for four synthetic benchmark functions and two real-world tasks (described in Section \ref{section:neural-cbo_gas} and \ref{section:neural-cbo_speed}) in Table \ref{tab:neural-cbo_t-test}. Each cell in the table shows the $p$-value from the $t$-test as the first value. To account for multiple comparisons, the Benjamini-Hochberg correction was applied, with the corrected value provided as the second value. A result is labeled as ``T'' if the null hypothesis is rejected, meaning that Neural-CBO is statistically better to the compared baselines. Conversely, a result is labeled ``F'' if we cannot reject the null hypothesis, meaning that the baselines and the Neural-CBO are comparable.
 \begin{table}[ht]
 \caption{One-sided $t$-tests to evaluate whether the baseline outperforms Neural-CBO in terms of the best positive regret plus violation.}
   \vspace{0.15in}
@@ -314,7 +323,7 @@ To ensure statistical significance, we performed one-sided $t$-tests to assess w
 \textbf{Speed Reducer}               & (0.77, F)       & (6.99e-74, T) & (5.22e-77, T) & (0.38, F)    \\ 
 \hline
 \end{tabular}
-\label{table:t-test}
+\label{tab:neural-cbo_t-test}
 }
 \end{table}
 
@@ -381,15 +390,10 @@ This task involves designing a speed reducer for a small aircraft engine, focusi
     \end{cases},
 \end{align*}
 
-We report numerical results of Section \ref{section:neural-cbo_gas} and  \ref{section:neural-cbo_speed} in Figure \ref{fig:neural-cbo_synthetic} and Table \ref{table:t-test}.
-\subsection{Designing Sensitive Samples for Detection of Model Tampering}
+We report numerical results of Section \ref{section:neural-cbo_gas} and  \ref{section:neural-cbo_speed} in Figure \ref{fig:neural-cbo_synthetic} and Table \ref{tab:neural-cbo_t-test}.
+\subsection{Designing Sensitive Samples for Model Tampering Detection}
 \label{section:neural-cbo_sensitive_sample}
-\begin{figure}[H]
-    \centering
-\includegraphics[width=\textwidth]{Figures/Neural-CBO/sensitive_sample_detection_rate.pdf}
-    \caption{ \textbf{Detection Rates} corresponding to the number of samples on the MNIST dataset. As shown in the figure, Neural-CBO can generate sensitive samples that achieve nearly 85\% of the detection rate with at least 10 samples.}
-    \label{fig:sensitive_sample}
-\end{figure}
+
 
 We build on the sensitive sample generation example described in Section \ref{section:neural-bo_sensitive_samples} to address an additional practical challenge: incorporating constraints on the generated samples to ensure their realism. Specifically, in scenarios where tampered machine learning models are hosted on cloud services, attackers may attempt to bypass detection by modifying models while keeping their behavior on plausible inputs unchanged. To prevent attackers from evading detection, sensitive samples must resemble normal inputs. Therefore, a human-in-the-loop process is employed, where reviewers rate the realism of each sample on a scale of $(0,1)$; higher scores indicate more realistic samples. These scores serve as constraints in the optimization, where obtaining human feedback can be costly. Assuming a pre-trained model $s_\varphi(\mathbf{x})$ may have been altered after being uploaded, the goal is to find sensitive samples by solving the optimization problem: 
 \begin{align*}
@@ -399,11 +403,16 @@ We build on the sensitive sample generation example described in Section \ref{se
 \end{align*}
 where $\norm{\cdot}_F$ denotes the Frobenius norm, $realistic(\cdot)$ is the human-based scoring function and $h$ is a pre-defined threshold. A detection is \emph{successful} if at least one of the $N_S$ sensitive samples shows a different top-1 prediction between the tampered and original models.  
 
-We employed the same experimental setup outlined in Section \ref{section:neural-bo_sensitive_samples}, using a pre-trained MNIST handwritten digit classification model and compared our method's performance against several baselines based on average detection rates for sensitive samples. The model was tampered with by adding noise to its weights 1,000 times, producing 1,000 distinct versions. While the original model had a top-1 accuracy of 93\%, this dropped to $87.73\% \pm 0.08\%$ after tampering. To reduce computational costs, we downscaled the images from $28 \times 28$ to $7 \times 7$, optimized in this 49-dimensional space, and then restored them to the original resolution to generate sensitive samples. Feasible samples were chosen based on their realistic scores. Figure \ref{fig:sensitive_sample} shows the detection rates of (feasible) sensitive samples generated by our method compared to four baselines, demonstrating that our samples achieved higher detection rates. As expected, the detection rate improves with more samples and our method is consistently competitive.
+We employed the same experimental setup outlined in Section \ref{section:neural-bo_sensitive_samples}, using a pre-trained MNIST handwritten digit classification model and compared our method's performance against several baselines based on average detection rates for sensitive samples. The model was tampered with by adding noise to its weights 1,000 times, producing 1,000 distinct versions. While the original model had a top-1 accuracy of 93\%, this dropped to $87.73\% \pm 0.08\%$ after tampering. To reduce computational costs, we downscaled the images from $28 \times 28$ to $7 \times 7$, optimized in this 49-dimensional space, and then restored them to the original resolution to generate sensitive samples. Feasible samples were chosen based on their realistic scores. Figure \ref{fig:neural-cbo_sensitive_sample} shows the detection rates of (feasible) sensitive samples generated by our method compared to four baselines, demonstrating that our samples achieved higher detection rates. As expected, the detection rate improves with more samples and our method is consistently competitive.
 
 
 
-
+\begin{figure}[H]
+    \centering
+\includegraphics[width=\textwidth]{Figures/Neural-CBO/sensitive_sample_detection_rate.pdf}
+    \caption{Detection Rates w.r.t to the number of samples for the MNIST dataset. As shown in the figure, Neural-CBO can generate sensitive samples that achieve nearly 85\% of the detection rate with just 10 samples.}
+    \label{fig:neural-cbo_sensitive_sample}
+\end{figure}
 
 
 

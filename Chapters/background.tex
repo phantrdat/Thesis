@@ -3,11 +3,11 @@
 \label{chap:background} 
 
 % Define some commands to keep the formatting separated from the content 
-This chapter provides a structured exploration of \acl{bo}, beginning with the basic mathematical concepts necessary for understanding the subject. Section \ref{section:math_backgrounds} introduces the fundamental mathematical tools and principles that support optimization theory, ensuring a solid foundation for later discussions. Section \ref{section:optimization_introduction} provides a general overview of optimization, distinguishing between local and global approaches and highlighting their respective roles and applications.
+This chapter provides a background of \acl{bo}, beginning with the basic mathematical concepts necessary for understanding the subject. It also discusses the related works on various topics relevant to this thesis. Section \ref{section:math_backgrounds} introduces the fundamental mathematical tools and principles that support optimization theory, ensuring a solid foundation for later discussions. Section \ref{section:optimization_introduction} provides a general overview of optimization, distinguishing between local and global approaches and highlighting their respective roles and applications.
 
 In Section \ref{section:black_box_optimization}, we shift our focus to black-box optimization, examining the challenges posed by functions that are expensive to evaluate or lack explicit mathematical representation. Section \ref{section:bo_unknown_constraints} extends this discussion by addressing problems with unknown constraints, emphasizing strategies to effectively explore feasible regions in such complex scenarios. Section \ref{section:bo_physics} explores how incorporating physics-based knowledge into optimization frameworks can improve both solution accuracy and computational efficiency. Finally, in Section \ref{section:bo_further_research}, we conclude the chapter by outlining potential future research directions, focusing on unresolved challenges and emerging opportunities in black-box optimization.
 
-\section{Essential Mathematics Backgrounds}
+\section{Essential Mathematical Backgrounds}
 \label{section:math_backgrounds}
 \subsection{Gaussian and Sub-Gaussian Random Variables}
 \subsubsection{Gaussian Random Variables}  
@@ -36,10 +36,10 @@ An equivalent definition involves the moment generating function (MGF). A random
 \mathbb{E}[\exp(\lambda(X - \mathbb{E}[X]))] \leq \exp\left(\frac{\lambda^2 \sigma^2}{2}\right), \quad \forall \lambda \in \mathbb{R}.
 \]  
 
-Many common random variables exhibit sub-Gaussian behavior, including Gaussian, bounded, and discrete random variables. Below are some illustrative examples:  
+Many common random variables exhibit sub-Gaussian behavior, including Gaussian, bounded random variables, and discrete random variables. Below are some illustrative examples:  
 \begin{itemize}
     \item \textbf{Gaussian Random Variables:} Any Gaussian random variable \( X \sim \mathcal{N}(\mu, \sigma^2) \) is inherently sub-Gaussian, with \( \sigma^2 \) as its variance.  
-    \item \textbf{Bounded Random Variables:} If \( X \) is a bounded random variable, i.e., \( \vert X \vert \leq B \) almost surely, then \( X \) is sub-Gaussian with \( \sigma \leq B \).  
+    \item \textbf{Bounded Random Variables:} If \( X \) is a bounded random variable, i.e., \( \vert X \vert \leq B \) almost surely, then \( X \) is sub-Gaussian with \( \sigma^2 \leq B^2 \).
     \item \textbf{Rademacher Random Variables:} A Rademacher random variable, which takes values \( \pm 1 \) with equal probability, is sub-Gaussian with \( \sigma = 1 \).  
 \end{itemize}  
 
@@ -50,15 +50,15 @@ Sub-Gaussian random variables exhibit several important properties that make the
     \item \textbf{Sum of Independent Sub-Gaussians:} If \( X_1, X_2, \dots, X_n \) are independent sub-Gaussian random variables, their sum \( S_n = \sum_{i=1}^n X_i \) is also sub-Gaussian, with the variance parameter satisfying \( \sigma^2_{S_n} = \sum_{i=1}^n \sigma_i^2 \).  
 \end{itemize} 
 
-While sub-Gaussian random variables provide valuable tools for modeling uncertainties in single values, many real-world problems cannot be modeled with single values, as these problems often deal with the uncertainty over entire functions. Therefore, it becomes necessary to capture the dependencies between the values of the function at different locations or times, which implies a need for working with joint distributions. The key challenge arises when dealing with functions, which can take values at infinitely many points, thus requiring a notion of probability distributions over functions. In the next section,  we introduce \acf{gp}, which is the natural extension of the normal distribution from the case of individual random variables to function spaces.
+While sub-Gaussian random variables provide valuable tools for modeling uncertainties in scalar values, many real-world problems cannot be modeled with scalar values, as these problems often deal with the uncertainty over entire functions. Therefore, it becomes necessary to capture the dependencies between the values of the function at different locations or times, which implies a need for working with joint distributions. The key challenge arises when dealing with functions, which can take values at infinitely many points, thus requiring a notion of probability distributions over functions. In the next section,  we introduce \acf{gp}, which is the natural extension of the normal distribution from the case of individual random variables to function spaces.
 
 \subsection{Gaussian Process}
 \label{section:gaussian_process}
-A \acf{gp} is a finite collection of normally distributed random variables with each having a multivariate normal distribution. \ac{gp} offers a prior distribution over smooth functions and are completely specified by a mean function, $\mu(\mathbf{x})$ and covariance function, $k(\mathbf{x}, \mathbf{x}^\prime)$. We have \begin{equation}
+A \acf{gp} is defined as a (infinite) collection of random variables such that any finite set of them follow a multivariate normal distribution. \ac{gp} offers a prior distribution over smooth functions and are completely specified by a mean function, $\mu(\mathbf{x})$ and covariance function, $k(\mathbf{x}, \mathbf{x}^\prime)$. We have \begin{equation*}
     \label{def:GP}
     f({\bf x})\sim\mathrm{GP}(\mu({\bf x}),k({\bf x},{\bf x}^\prime))
-\end{equation}
-where the mean and variance of a normal distribution is returned as the value of $f(\mathbf{x})$ for an arbitrary $\mathbf{x}$. Without loss in generality, $f(\mathbf{x})$ values can be assumed as a realization of random variables with prior mean as zero thus making the Gaussian process fully specified by the covariance matrix \citep{rasmussen2006gaussian}. There are many popular covariance functions including Mat\'ern kernel, Linear kernel, Squared Exponential kernel. These kernels will be briefly introduced in the next section.
+\end{equation*}
+Without loss in generality, $f(\mathbf{x})$ values can be assumed as a realization of random variables with prior mean as zero thus making the Gaussian process fully specified by the covariance matrix \citep{rasmussen2006gaussian}. There are many popular covariance functions including Mat\'ern kernel, Linear kernel, Squared Exponential kernel. These kernels will be briefly introduced in the next section.
 
 % In that the Squared Exponential (SE) kernel is a popular choice.
 
@@ -76,7 +76,7 @@ values $f(\mathbf{x}_{1:t})$ follow a multivariate Gaussian distribution $\mathc
     k(\mathbf{x}_t, \mathbf{x}_1) & \dots  & k(\mathbf{x}_t, \mathbf{x}_t)
     \end{bmatrix}
 \]
-Given a new point $\mathbf{x}_{t+1}$, then $\mathbf{x}_{t+1},  y_{1:t}$ and $f(\mathbf{x}_{t+1})$ are jointly Gaussian. By the properties of \ac{gp} we can write
+Given a new point $\mathbf{x}_{t+1}$, then $y_{1:t}$ and $f(\mathbf{x}_{t+1})$ are jointly Gaussian. By the properties of \ac{gp} we can write
 
 \[
 \begin{pmatrix}
@@ -105,7 +105,7 @@ The choice of kernel is a critical aspect of \ac{gp} modeling, as it directly im
 \paragraph{Linear Kernel:}
 The linear kernel is defined as:
 \[k(\mathbf{x}, \mathbf{x}^\prime) = \mathbf{x}^T \mathbf{x}^\prime\]
-where $\mathbf{x}$ and $\mathbf{x}^\prime$ are vectors in the input space. This kernel models the assumption that the function values are linearly related to the inputs. The resulting functions are linear combinations of the input variables. This kernel is useful when there is a reason to assume that the underlying data has a linear structure, or when working with high-dimensional data where the kernel has less sensitivity to changes in the input. However, this kernel is often too restrictive for complex functions due to its lack of flexibility and can't capture non-linear patterns. 
+where $\mathbf{x}$ and $\mathbf{x}^\prime$ are vectors in the input space. This kernel assumes that the underlying function values are linearly dependent on the inputs. This kernel is useful when there is a reason to assume that the underlying data has a linear structure, or when working with high-dimensional data where the kernel has less sensitivity to changes in the input. However, this kernel is often too restrictive for complex functions due to its lack of flexibility and can't capture non-linear patterns. 
 
 \paragraph{Squared Exponential (RBF) Kernel}
 
@@ -117,9 +117,9 @@ where $\ell$ is the length-scale parameter. The RBF kernel assumes that the func
 
 The Mat\'ern kernel is a more general kernel and is defined as:
 \[ k(\mathbf{x}, \mathbf{x}^\prime) = \frac{2^{1-\nu}}{\Gamma(\nu)}\left(\frac{\sqrt{2\nu}\norm{\mathbf{x}-\mathbf{x}^\prime}}{\ell}\right)^\nu K_\nu\left(\frac{\sqrt{2\nu}\norm{\mathbf{x}-\mathbf{x}^\prime}}{\ell}\right)\]
-where $\nu > 0$ is the smoothness parameter, $\ell$ is the length-scale parameter, and $K_\nu$ is the modified Bessel function of the second kind. The Mat\'ern kernel is a generalization of the RBF kernel, which is obtained in the limit of large $\nu$.  This kernel allows for controlling the smoothness of the underlying function, providing a continuous range of possibilities. The smoothness of functions associated with the Mat\'ern kernel is determined by the parameter $\nu$. A low $\nu$ implies less smooth functions, whereas, as $\nu$ increases, the functions become increasingly smoother. This parameter also has an impact on the convergence of Bayesian Optimization algorithms. Mat\'ern kernels with different smoothness parameters have also been found to have a crucial effect in the generalization capacity of \ac{gp} models, as it reflects the trade-off between modeling data and having a smooth prior \citep{rasmussen2006gaussian}. The Mat\'ern kernel allows the flexibility of the RBF kernel, but includes an additional parameter that enables one to control the smoothness of the modeled function. This parameter is not present in the case of RBF kernels.
+where $\nu > 0$ is the smoothness parameter, $\ell$ is the length-scale parameter, and $K_\nu$ is the modified Bessel function of the second kind. The Mat\'ern kernel is a generalization of the RBF kernel, which is obtained in the limit of large $\nu$.  This kernel allows for controlling the smoothness of the underlying function, providing a continuous range of possibilities. The smoothness of functions associated with the Mat\'ern kernel is determined by the parameter $\nu$. A low $\nu$ implies less smooth functions, whereas, as $\nu$ increases, the functions become increasingly smoother. This parameter also has an impact on the convergence of Bayesian Optimization algorithms. Mat\'ern kernels with different smoothness parameters have also been found to have a crucial effect in the generalization capacity of \ac{gp} models, as it reflects the trade-off between modeling data and having a smooth prior \citep{rasmussen2006gaussian}. The Mat\'ern kernel allows the flexibility of the RBF kernel, but includes an additional parameter that enables one to control the smoothness of the modeled function. This parameter is not present in RBF kernels.
 
-The choice of the kernel is not merely a matter of convenience; it directly influences the properties of the function space over which the \ac{gp} operates. Selecting an appropriate kernel demands a careful understanding of the underlying assumptions of each kernel type and considering the characteristics of the function to be modeled. Kernels enable us to encode our prior beliefs about the function, and hence, proper selection is crucial for the efficiency and generalization capability of our \ac{gp} model. We have presented three common kernels that are often used in practice, and their differences highlight the importance of selecting the appropriate kernel for the task. The theoretical properties of these kernels can be found in the literature. Choosing between them requires an understanding of the properties of the data and the functions to be modeled.
+The choice of the kernel is not merely a matter of convenience; it directly influences the properties of the function space over which the \ac{gp} operates. Selecting an appropriate kernel demands a careful understanding of the underlying assumptions of each kernel type and considering the characteristics of the function to be modeled. Kernels enable us to encode our prior beliefs about the function, and hence, proper selection is crucial for the efficiency and generalization capability of our \ac{gp} model. We have presented three common kernels that are often used in practice, and their differences highlight the importance of selecting the appropriate kernel for the task. Choosing between them requires an understanding of the properties of the data and the functions to be modeled.
 \subsection{Maximum Information Gain}
 \label{section:MIG}
 In the context of machine learning and information theory, \ac{mig} is a principle used to select features, queries, or actions that yield the highest amount of information about an unknown variable of interest. The concept of information gain is rooted in Shannon’s entropy theory and measures the reduction in uncertainty about a random variable after observing another variable. 
@@ -138,9 +138,9 @@ H(X \vert Y) = - \sum_{\mathbf{y} \in \mathcal{Y}} p(\mathbf{y}) \sum_{\mathbf{x
 \]
 The conditional entropy quantifies the uncertainty in $X$ given that we know $Y$. If observing $Y$ provides information about $X$, we expect $H(X \vert Y) < H(X)$.
 
-\subsubsection{Mutual Information}
-
-The \textit{mutual information} $IG(X; Y)$ between two random variables $X$ and $Y$ is defined as the reduction in entropy of $X$ after observing $Y$, and is given by:
+\subsubsection{Information Gain}
+\label{section:information_gain}
+The \textit{informatiom gain} $IG(X; Y)$ between two random variables $X$ and $Y$ is defined as the reduction in entropy of $X$ after observing $Y$, and is given by:
 \[
 IG(X; Y) = H(X) - H(X \vert Y).
 \]
@@ -150,14 +150,16 @@ IG(X; Y) = I(X; Y),
 \]
 where mutual information is defined as:
 \[
-I(X; Y) = \sum_{\mathbf{x} \in \mathcal{X}} \sum_{\mathbf{y} \in \mathcal{Y}} p(\mathbf{x}, \mathbf{y}) \log \frac{p(\mathbf{x}, \mathbf{y})}{p(\mathbf{x}) p(\mathbf{y})}.
+I(X; Y) = \sum_{x \in \mathcal{X}} \sum_{y \in \mathcal{Y}} P_{(X, Y)}(x, y) \log \frac{P_{(X, Y)}(x, y)}{P_X(x) P_Y(y)},
 \]
-Mutual information is symmetric and non-negative, i.e., $I(X; Y) = I(Y; X) \geq 0$, and measures the amount of shared information between $X$ and $Y$.
+where \( P_{(X, Y)} \) is the joint probability mass function of \( X \) and \( Y \), and \( P_X \) and \( P_Y \) are the marginal probability mass functions of \( X \) and \( Y \), respectively.
 
-While the concept of Mutual Information generally quantifies the reduction in uncertainty about one random variable when observing another, its application becomes specialized within the context of \acp{gp}. Specifically, when using a \ac{gp} to learn an unknown function $f$, the information gain is redefined as the mutual information between the noisy observations (the function values at chosen points) and the true, underlying function values $f$. This specialization allows us to analyze the effectiveness of our \ac{gp} learning process based on the information provided by our observed data. 
+Mutual information is symmetric and non-negative, i.e., $I(X; Y) = I(Y; X) \geq 0$, and measures the amount of shared information between $X$ and $Y$. A mutual information value of zero indicates that $X$ and $Y$ are completely independent, meaning that knowing one provides no information about the other. Conversely, higher values of mutual information signify a stronger dependence or association between $X$ and $Y$, with the value being maximized when the two variables are perfectly correlated or deterministic functions of each other.
+
+While the concept of information gain generally quantifies the reduction in uncertainty about one random variable when observing another, its application becomes specialized within the context of \acp{gp}. Specifically, when using a \ac{gp} to learn an unknown function $f$, the information gain is redefined as the mutual information between the noisy observations (the function values at chosen points) and the true, underlying function values $f$. This specialization allows us to analyze the effectiveness of our \ac{gp} learning process based on the information provided by our observed data. 
 \subsubsection{Maximum Information Gain in GP regression}
 
-Assume we have a \ac{gp} prior over \( f \) with mean function \( \mu(\mathbf{x}) \) and covariance \( k(\mathbf{x}, \mathbf{x}^\prime) \). After $t$ steps, the model receives an input sequence $\mathcal{X}_t = (\mathbf{x}_1, \mathbf{x}_2, \dots  \mathbf{x}_t)$ and observes noisy rewards $\mathbf{y}_t = (y_1, y_2, \dots, y_t)$. The \emph{information gain} at step $t$, quantifies the reduction in uncertainty about $f$ after observing $\mathbf{y}_t$, defined as the mutual information between  $\mathbf{y}_t$ and $f$:
+Assume we have a \ac{gp} prior over \( f \) with mean function \( \mu(\mathbf{x}) \) and covariance \( k(\mathbf{x}, \mathbf{x}^\prime) \). After $t$ steps, the model receives an input sequence $\mathcal{X}_t = (\mathbf{x}_1, \mathbf{x}_2, \dots  \mathbf{x}_t)$ and observes noisy rewards $\mathbf{y}_t = (y_1, y_2, \dots, y_t)$. Following Section \ref{section:information_gain}, the \emph{information gain} at step $t$, quantifies the reduction in uncertainty about $f$ after observing $\mathbf{y}_t$, defined as the mutual information between  $\mathbf{y}_t$ and $f$:
 \[
 I(\mathbf{y}_t; f) \coloneqq  H(\mathbf{y}_t) - H(\mathbf{y}_t \rvert f), 
 \]
@@ -167,11 +169,11 @@ where $\lambda > 0$ is a regularization parameter, $\mathbf{K}_t$ is the covaria
 and \( \mathbf{I}_t \) is the identity matrix.
 
 
-The Information Gain obtained is highly dependent on the specific locations where observations are made. To address this variability, the \acf{mig} after observing $t$ data points, represented as $\gamma_t$, is introduced as an upper bound. Instead of focusing on a particular point selection, \ac{mig} quantifies the maximum possible information that could be gained from any set of $t$ points in the input space. \ac{mig} provides an input-independent and kernel-specific bound on the information that can be acquired:
+The \textit{information gain} obtained is highly dependent on the specific locations where observations are made. To address this variability, the \acf{mig} after observing $t$ data points, represented as $\gamma_t$, is introduced as an upper bound. Instead of focusing on a particular point selection, \ac{mig} quantifies the maximum possible information that could be gained from any set of $t$ points in the input space. \ac{mig} provides an input-independent and kernel-specific bound on the information that can be acquired:
 
 \[ \gamma_t := \max_{\mathcal{A} \subset \mathcal{X}, \lvert \mathcal{A} \rvert = t} I(\mathbf{y}_A; \mathbf{f}_A),\]
 
-As mentioned above, $\mathcal{A}$ represents a set of $t$ input points in the input space $\mathcal{X}$, $\mathbf{y}_\mathcal{A}$ denotes the noisy observations of the objective function $f$ at these points, and $\mathbf{f}_\mathcal{A}$ represents the corresponding function values \textit{without} noise. $I(\mathbf{y}_\mathcal{A}; \mathbf{f}_\mathcal{A})$ is the mutual information between the observed data $\mathbf{y}_\mathcal{A}$ and the underlying function values $\mathbf{f}_\mathcal{A}$. Basically, the \ac{mig} quantifies the maximum amount of information that \textit{any} set of $t$ points could possibly reveal about the unknown objective function $f$. Specifically, the \ac{mig} serves as an upper bound on the information obtained by any selection of $t$ points. This means that even in the worst-case scenario (i.e., the scenario where we choose the least informative set of points within the optimization algorithm), the amount of information gained will never surpass the \ac{mig}. The work by \citet{srinivas2009gaussian} provides crucial kernel-specific bounds on the \ac{mig}. Specifically, they analyzed three common kernels: Linear, RBF, and Mat\'ern introduced in Section \ref{section:kernels}. The bounds on \ac{mig} for these kernels are:
+As mentioned above, $\mathcal{A}$ represents a set of $t$ input points in the input space $\mathcal{X}$, $\mathbf{y}_\mathcal{A}$ denotes the noisy observations of the objective function $f$ at these points, and $\mathbf{f}_\mathcal{A}$ represents the corresponding function values \textit{without} noise. $I(\mathbf{y}_\mathcal{A}; \mathbf{f}_\mathcal{A})$ is the mutual information between the observed data $\mathbf{y}_\mathcal{A}$ and the underlying function values $\mathbf{f}_\mathcal{A}$. Basically, the \ac{mig} quantifies the maximum amount of information that \textit{any} set of $t$ points could possibly reveal about the unknown objective function $f$. Specifically, the \ac{mig} serves as an upper bound on the information obtained by any selection of $t$ points. This means that even in the worst-case scenario (i.e., the scenario where we choose the least informative set of points within the optimization algorithm), the amount of information to be gained will never surpass the \ac{mig}. The work by \citet{srinivas2009gaussian} provides crucial kernel-specific bounds on the \ac{mig}. Specifically, they analyzed three common kernels: Linear, RBF, and Mat\'ern introduced in Section \ref{section:kernels}. The bounds on \ac{mig} for these kernels are:
 
 \begin{itemize}
     \item \textbf{Linear Kernel:}
@@ -278,7 +280,8 @@ Optimization is a fundamental mathematical process focused on identifying the be
 \[
 \mathbf{x}^* = \arg \min_{\mathbf{x} \in \mathcal{X}} f(\mathbf{x}),
 \]
-where \( \mathcal{X} \) represents the set of feasible inputs. In certain cases, \( f \) might have a well-defined mathematical form, enabling direct algebraic solution. However, in practical, real-world scenarios, the function is often too complex. In such cases, the function's value must be estimated by evaluating it at various inputs. The key challenge is how to effectively select which inputs to evaluate. Randomly selecting, although straightforward, does not guarantee convergence to an optimal solution within a finite number of evaluations. Therefore, specialized algorithms are required to guide the selection of inputs, ensuring both efficient and effective optimization.
+where \( \mathcal{X} \) represents the set of feasible inputs. In certain cases, 
+$f$ might have a well-defined mathematical form, allowing direct algebraic solutions or enabling the computation of gradients for gradient-based optimization methods. However, when the function $f$ is black-box, alternative approaches, such as derivative-free optimization methods, are required. These methods estimate the function's value by evaluating it at various inputs, making them particularly suited for black-box scenarios. The key challenge is how to effectively select which inputs to evaluate. Randomly selecting, although straightforward, does not guarantee convergence to an optimal solution within a finite number of evaluations. Therefore, specialized algorithms are required to guide the selection of inputs, ensuring both efficient and effective optimization.
 
 
 \subsection{Gradient-Based Optimization}
@@ -308,16 +311,16 @@ We will now provide a detailed examination of the mathematical foundations of va
 
 \noindent In its simplest form, \ac{gd} updates the solution by moving in the direction of the negative gradient. The negative gradient points towards the direction of the steepest descent on the error surface. This update pushes the solution in the direction that decreases the objective function the most.
 
-\begin{equation}
+\begin{equation*}
 d_k = -\nabla f(\mathbf{x}_k)
-\end{equation}
+\end{equation*}
 
-\noindent The update rule of Eqn. \ref{eq:general_update} thus becomes:
+\noindent The update rule of Eqn. \eqref{eq:general_update} thus becomes:
 
-\begin{equation}
+\begin{equation*}
 \mathbf{x}_{k+1} = \mathbf{x}_k - \alpha_k \nabla f(\mathbf{x}_k),
 \label{eq:gd_update}
-\end{equation}
+\end{equation*}
 where $\nabla f(\mathbf{x}_k) = \left(\frac{\partial f}{\partial \mathbf{x}_1}, \frac{\partial f}{\partial \mathbf{x}_2}, \dots, \frac{\partial f}{\partial \mathbf{x}_d} \right)$ is the gradient vector of $f$ at $x_k$.
 
 
@@ -329,17 +332,17 @@ Building on the foundational principles of gradient-based optimization, we turn 
 Momentum introduces a velocity term that accumulates gradients, which helps to smooth the optimization trajectory and escape shallow local minima.
 
 The update rule involves an intermediate variable called velocity $\mathbf{v}_k$.
-\begin{equation}
+\begin{equation*}
    \mathbf{v}_k = \beta \mathbf{v}_{k-1} - \alpha_k \nabla f(\mathbf{x}_k),
    \label{eq:momentum_v}
-\end{equation}
+\end{equation*}
 where $\beta$ is the momentum parameter, typically a scalar in the range \( [0, 1) \), controlling the influence of past gradients. Then the update of $\mathbf{x}_k$ becomes:
 
-\begin{equation}
+\begin{equation*}
 \mathbf{x}_{k+1} = \mathbf{x}_k + \mathbf{v}_k
 \label{eq:momentum_update}
-\end{equation}
-The momentum term $\beta v_{k-1}$ effectively remembers previous gradients, adding them to the current gradient, which acts as a smoothing filter. This helps the solution continue in a similar direction even if it encounters small hills or valleys on the error surface. Momentum-based methods, such as classical Momentum and \ac{nag}, are widely used for their ability to overcome challenges like slow convergence on flat surfaces and oscillations in steep directions. These methods are particularly beneficial for optimizing non-convex functions, where standard \ac{gd} often struggles.
+\end{equation*}
+The momentum term $\beta \mathbf{v}_{k-1}$ effectively remembers previous gradients, adding them to the current gradient, which acts as a smoothing filter. This helps the solution continue in a similar direction even if it encounters small hills or valleys on the error surface. Momentum-based methods, such as classical Momentum and \ac{nag}, are widely used for their ability to overcome challenges like slow convergence on flat surfaces and oscillations in steep directions. These methods are particularly beneficial for optimizing non-convex functions, where standard \ac{gd} often struggles.
 
 \subsubsection{Adaptive Learning Rate Algorithms}
 \label{subsubsection:adaptive_learning_rates}
@@ -363,25 +366,25 @@ where:
 \label{paragraph:adam}
 Another popular algorithm, \ac{adam} (Adaptive Moment Estimation), introduced by \citet{kingma2014adam}, builds upon Adagrad to address its limitations, particularly its tendency to excessively decay the learning rate in the presence of accumulated gradients. \ac{adam} combines momentum with adaptive learning rates and maintains both a first-moment estimate (momentum) and a second-moment estimate (variance) for more robust optimization. This dual approach helps stabilize parameter updates and adaptively scales learning rates for each parameter:
 
-\begin{align}
+\begin{align*}
 \mathbf{m}_k &= \beta_1 \mathbf{m}_{k-1} + (1 - \beta_1) \nabla f(\mathbf{x}_k), \\  
 \mathbf{v}_k &= \beta_2 \mathbf{v}_{k-1} + (1 - \beta_2) (\nabla f(\mathbf{x}_k))^2,
-\end{align}
+\end{align*}
 
 \noindent where $\mathbf{m}_k$ is the estimate for the first-order moment (mean of the gradients), and $\mathbf{v}_k$ is the estimate for the second-order moment (uncentered variance of the gradients). The hyperparameters $\beta_1 \in [0, 1)$ and $\beta_2 \in [0, 1)$ control the exponential decay rates of the moving averages for the first and second moments, respectively. Common default values are $\beta_1 = 0.9$ and $\beta_2 = 0.999$, as recommended in the original paper. 
 
 To address bias introduced by initializing $\mathbf{m}_k$ and $\mathbf{v}_k$ to zero at the beginning of training, corrected estimates are computed as:
 
-\begin{align}
+\begin{align*}
     \hat{\mathbf{m}}_k &= \frac{\mathbf{m}_k}{1-\beta_1^k}, \\  
     \hat{\mathbf{v}}_k &= \frac{\mathbf{v}_k}{1-\beta_2^k},
-\end{align}
+\end{align*}
 
 \noindent These bias-corrected estimates ensure that $\hat{\mathbf{m}}_k$ and $\hat{\mathbf{v}}_k$ are unbiased, particularly during the initial steps when $k$ is small. The final parameter update step is given by:
 
-\begin{equation}
+\begin{equation*}
 \mathbf{x}_{k+1} = \mathbf{x}_k - \alpha \frac{\hat{\mathbf{m}}_k}{\sqrt{\hat{\mathbf{v}}_k} + \epsilon},
-\end{equation}
+\end{equation*}
 
 \noindent where $\alpha$ is the learning rate, typically set to a small value (e.g., $0.001$ in many applications), and $\epsilon$ is a small constant added to prevent division by zero. A typical value for $\epsilon$ is $10^{-8}$. The inclusion of $\epsilon$ improves numerical stability, particularly in cases where $\hat{\mathbf{v}}_k$ approaches zero.
 
@@ -389,10 +392,10 @@ To address bias introduced by initializing $\mathbf{m}_k$ and $\mathbf{v}_k$ to 
 \label{paragraph:rmsprop}
 \ac{rmsprop}, proposed by \citet{tieleman2012lecture}, is another popular optimization algorithm designed to overcome the drawbacks of Adagrad in non-convex optimization problems. While Adagrad's aggressive learning rate decay can hinder optimization over time, \ac{rmsprop} mitigates this by using an exponentially decaying average of squared gradients to adapt learning rates. This mechanism ensures a more stable and efficient convergence, particularly in neural network training. The update rule for \ac{rmsprop} is given by:
 
-\begin{align}
+\begin{align*}
 \mathbf{v}_k &= \beta \mathbf{v}_{k-1} + (1 - \beta) (\nabla f(\mathbf{x}_k))^2, \\
 \mathbf{x}_{k+1} &= \mathbf{x}_k - \alpha \frac{\nabla f(\mathbf{x}_k)}{\sqrt{\mathbf{v}_k} + \epsilon},
-\end{align}
+\end{align*}
 
 \noindent where $\mathbf{v}_k$ represents the moving average of the squared gradients, and $\beta \in [0, 1)$ is a hyperparameter controlling the decay rate of this average, typically set to $0.9$. The term $\epsilon$ is a small positive constant, commonly $10^{-8}$, added for numerical stability to avoid division by zero. The adaptive scaling of gradients via $\sqrt{\mathbf{v}_k}$ allows \ac{rmsprop} to handle large gradients effectively while maintaining a consistent learning rate for smaller gradients. This balance makes \ac{rmsprop} particularly well-suited for deep learning applications involving non-stationary loss functions.
 
@@ -402,21 +405,21 @@ To address bias introduced by initializing $\mathbf{m}_k$ and $\mathbf{v}_k$ to 
 
 The \ac{cg} method is a powerful optimization algorithm primarily used for solving large-scale, unconstrained quadratic minimization problems, particularly when the Hessian matrix is too large to store explicitly. Introduced by \citet{hestenes1952methods}, \ac{cg} iteratively updates the solution by combining gradient descent with a conjugacy condition, ensuring that successive search directions are mutually conjugate with respect to the quadratic form. This approach enables faster convergence compared to standard gradient descent. At each iteration, the solution is updated as:
 
-\begin{align}
+\begin{align*}
 \mathbf{x}_{k+1} &= \mathbf{x}_k + \alpha_k \mathbf{p}_k, \\
 \mathbf{p}_{k+1} &= -\nabla f(\mathbf{x}_{k+1}) + \beta_k \mathbf{p}_k,
-\end{align}
+\end{align*}
 where $\mathbf{p}_k$ is the search direction, $\alpha_k$ is the step size determined by line search, and $\beta_k$ is the conjugate gradient coefficient. The value of $\beta_k$ can be computed using various formulas, including Fletcher-Reeves and Polak-Ribiere. The Fletcher-Reeves formula defines $\beta_k$ as:
 
-\begin{equation}
+\begin{equation*}
 \beta_k^{\text{FR}} = \frac{\norm{\nabla f(\mathbf{x}_{k+1})}^2}{\norm{\nabla f(\mathbf{x}_k)}^2},
-\end{equation}
+\end{equation*}
 
 \noindent while the Polak-Ribiere formula introduces a more flexible approach:
 
-\begin{equation}
+\begin{equation*}
 \beta_k^{\text{PR}} = \frac{\nabla f(\mathbf{x}_{k+1})^\top (\nabla f(\mathbf{x}_{k+1}) - \nabla f(\mathbf{x}_k))}{\norm{\nabla f(\mathbf{x}_k)}^2}.
-\end{equation}
+\end{equation*}
 
 \noindent The Polak-Ribiere method can handle non-quadratic objective functions more effectively and may reset $\beta_k$ to zero when its value becomes negative, reverting to the steepest descent for better stability. These formulations ensure that successive directions remain conjugate, allowing \ac{cg} to converge in at most $n$ iterations for a quadratic objective with $n$ variables. The \ac{cg} method is particularly efficient for sparse systems and avoids the need to compute or store the full Hessian matrix, making it well-suited for high-dimensional problems. Extensions of \ac{cg}, such as the nonlinear Conjugate Gradient method, adapt these principles to more general optimization scenarios.
 
@@ -424,9 +427,9 @@ where $\mathbf{p}_k$ is the search direction, $\alpha_k$ is the step size determ
 \label{subsubsection:newtons_method}
 Newton's Method is a second-order optimization algorithm widely used for solving unconstrained optimization problems. It leverages both gradient and curvature information to achieve faster convergence, especially near the optimum. At each iteration, Newton's Method approximates the objective function $f(\mathbf{x})$ as a second-order Taylor expansion around the current point $\mathbf{x}_k$ and updates the parameters by solving the resulting quadratic model. The update rule is given by:
 
-\begin{equation}
+\begin{equation*}
 \mathbf{x}_{k+1} = \mathbf{x}_k - \mathbf{H}_k^{-1} \nabla f(\mathbf{x}_k),
-\end{equation}
+\end{equation*}
 
 \noindent where $\nabla f(\mathbf{x}_k)$ is the gradient vector, and $\mathbf{H}_k$ is the Hessian matrix, representing the second-order partial derivatives of $f(\mathbf{x})$ with respect to the parameters. The inverse Hessian $\mathbf{H}_k^{-1}$ scales and modifies the gradient direction to account for the curvature of the objective function, allowing for more precise steps toward the optimum.
 
@@ -450,23 +453,23 @@ Newton's Method is particularly effective for convex optimization problems where
 \label{subsubsection:quasi_newton}
 Quasi-Newton methods are iterative optimization algorithms that approximate Newton's Method while avoiding the explicit computation and inversion of the Hessian matrix, making them more computationally efficient for high-dimensional problems. Among these, the Broyden-Fletcher-Goldfarb-Shanno (BFGS) algorithm is one of the most widely used. At each iteration, the search direction $\mathbf{p}_k$ is computed as:
 
-\begin{equation}
+\begin{equation*}
 \mathbf{p}_k = -\mathbf{H}_k^{-1} \nabla f(\mathbf{x}_k),
-\end{equation}
+\end{equation*}
 
 \noindent where $\mathbf{H}_k^{-1}$ is the approximation of the inverse Hessian matrix. The parameter update is then performed as:
 
-\begin{equation}
+\begin{equation*}
 \mathbf{x}_{k+1} = \mathbf{x}_k + \alpha_k \mathbf{p}_k,
-\end{equation}
+\end{equation*}
 
 \noindent with $\alpha_k$ representing the step size, typically determined through a line search. In the BFGS algorithm, the approximation of the Hessian matrix $\mathbf{H}_k$ itself is updated iteratively using the formula:
 
-\begin{equation}
+\begin{equation*}
 \mathbf{H}_{k+1} = \mathbf{H}_k 
 + \frac{\mathbf{y}_k \mathbf{y}_k^\top}{\mathbf{y}_k^\top \mathbf{s}_k} 
 - \frac{\mathbf{H}_k \mathbf{s}_k \mathbf{s}_k^\top \mathbf{H}_k}{\mathbf{s}_k^\top \mathbf{H}_k \mathbf{s}_k},
-\end{equation}
+\end{equation*}
 
 \noindent where $\mathbf{s}_k = \mathbf{x}_{k+1} - \mathbf{x}_k$ and $\mathbf{y}_k = \nabla f(\mathbf{x}_{k+1}) - \nabla f(\mathbf{x}_k)$. The first term ensures the positive definiteness of $\mathbf{H}_{k+1}$, while the second term adjusts the curvature information. To maintain computational feasibility, $\mathbf{H}_k$ is often initialized as a scaled identity matrix, $\mathbf{H}_0 = \gamma \mathbf{I}$, where $\gamma$ is a positive scalar.
 
@@ -506,27 +509,27 @@ At each iteration, the algorithm evaluates the objective function at the vertice
 
 \begin{itemize}
     \item \textbf{Reflection}: Reflect the worst vertex \(\mathbf{x}_h\) through the centroid \(\mathbf{c}\) of the remaining vertices:
-    \begin{equation}
+    \begin{equation*}
     \mathbf{x}_r = \mathbf{c} + \alpha (\mathbf{c} - \mathbf{x}_h),
-    \end{equation}
+    \end{equation*}
     where \(\alpha > 0\) is the reflection coefficient, typically set to 1.
 
 \item \textbf{Expansion}: If the reflected point \(\mathbf{x}_r\) is better than all other vertices, an expansion is attempted:
-\begin{equation}
+\begin{equation*}
 \mathbf{x}_e = \mathbf{c} + \gamma (\mathbf{x}_r - \mathbf{c}),
-\end{equation}
+\end{equation*}
 where \(\gamma > 1\) is the expansion coefficient.
 
 \item \textbf{Contraction}: If the reflected point \(\mathbf{x}_r\) is not better than the current best, a contraction is performed:
-\begin{equation}
+\begin{equation*}
 \mathbf{x}_c = \mathbf{c} + \rho (\mathbf{x}_h - \mathbf{c}),
-\end{equation}
+\end{equation*}
 where \(0 < \rho < 1\) is the contraction coefficient.
 
 \item \textbf{Shrinkage}: If no improvement is observed, the entire simplex is shrunk towards the best vertex:
-\begin{equation}
+\begin{equation*}
 \mathbf{x}_i = \mathbf{x}_b + \sigma (\mathbf{x}_i - \mathbf{x}_b),
-\end{equation}
+\end{equation*}
 for all vertices \(i\), where \(0 < \sigma < 1\) is the shrinkage coefficient, and \(\mathbf{x}_b\) is the best vertex.
 \end{itemize}
 
@@ -548,18 +551,18 @@ A typical \ac{ga} involves the following key steps:
     \item \textbf{Selection}: Candidate solutions are selected for reproduction based on their fitness. Common selection strategies include roulette wheel selection, tournament selection, and rank-based selection.
     
     \item \textbf{Crossover (Recombination)}: Pairs of selected candidates undergo crossover to produce offspring by exchanging segments of their representations. For example, in single-point crossover, a crossover point is chosen, and the segments are swapped:
-    \begin{equation}
+    \begin{equation*}
     \text{Offspring 1} = \text{Parent 1}_{[1:c]} + \text{Parent 2}_{[c+1:end]},
-    \end{equation}
-    \begin{equation}
+    \end{equation*}
+    \begin{equation*}
     \text{Offspring 2} = \text{Parent 2}_{[1:c]} + \text{Parent 1}_{[c+1:end]},
-    \end{equation}
+    \end{equation*}
     where \(c\) is the crossover point.
     
     \item \textbf{Mutation}: To maintain diversity in the population and avoid premature convergence, mutation is applied to the offspring by randomly altering one or more bits or values in their representation:
-    \begin{equation}
+    \begin{equation*}
     \text{Mutated Offspring} = \text{Original Offspring} + \delta,
-    \end{equation}
+    \end{equation*}
     where \(\delta\) represents a small random change.
     
     \item \textbf{Replacement}: The offspring replace some or all members of the current population, creating a new generation.
@@ -580,13 +583,13 @@ Another widely used Derivative-Free Optimization method is \ac{sa}, inspired by 
     \item \textbf{Generate a Neighbor}: At each iteration \(k\), generate a new candidate solution \(\mathbf{x}_{k+1}\) by applying a small random perturbation to the current solution \(\mathbf{x}_k\).
     
     \item \textbf{Acceptance Criterion}: Evaluate the change in objective function value, \(\Delta f = f(\mathbf{x}_{k+1}) - f(\mathbf{x}_k)\). Accept the new solution with a probability:
-    \begin{equation}
+    \begin{equation*}
     P = 
     \begin{cases} 
     1 & \text{if } \Delta f < 0, \\
     \exp\left(-\frac{\Delta f}{T_k}\right) & \text{if } \Delta f \geq 0,
     \end{cases}
-    \end{equation}
+    \end{equation*}
     where \(T_k\) is the temperature at iteration \(k\). This allows the algorithm to escape local minima by occasionally accepting worse solutions.
     
     \item \textbf{Update the Temperature}: Gradually decrease the temperature according to a cooling schedule, such as \(T_{k+1} = \alpha T_k\), where \(0 < \alpha < 1\) is the cooling rate.
@@ -607,60 +610,60 @@ One of the most advanced and widely used Derivative-Free Optimization methods is
     \item \textbf{Initialization}: Start with an initial mean vector \(\mathbf{m}_0\), an initial covariance matrix \(\mathbf{C}_0 = \sigma_0^2 \mathbf{I}\), and a step size \(\sigma_0\). Define the population size \(\lambda\) and the weights $w$ for weighted recombination.
     
     \item \textbf{Sampling}: At each iteration \(k\), generate \(\lambda\) offspring solutions by sampling from the current multivariate normal distribution:
-    \begin{equation}
+    \begin{equation*}
     \mathbf{x}_i^{(k)} \sim \mathcal{N}(\mathbf{m}_k, \sigma_k^2 \mathbf{C}_k), \quad i = 1, \dots, \lambda.
-    \end{equation}
+    \end{equation*}
     
     \item \textbf{Evaluation and Selection}: Evaluate the objective function for each offspring \(\mathbf{x}_i^{(k)}\) and rank them based on their fitness. Select the top \(\mu\) solutions (\(\mu < \lambda\)) for recombination.
     
     \item \textbf{Recombination}: Compute the new mean vector as a weighted sum of the selected solutions:
-    \begin{equation}
+    \begin{equation*}
     \mathbf{m}_{k+1} = \sum_{i=1}^\mu w_i \mathbf{x}_{i:\lambda}^{(k)},
-    \end{equation}
+    \end{equation*}
     where \(\mathbf{x}_{i:\lambda}\) denotes the \(i\)-th best solution.
     
     \item \textbf{Covariance Matrix Adaptation}: The covariance matrix \(\mathbf{C}_k\) is updated to reflect the distribution of successful steps, capturing correlations among variables:
-    \begin{equation}
+    \begin{equation*}
     \mathbf{C}_{k+1} = (1 + c_1 \delta(h_\sigma) - c_1 - c_\mu \sum_{j=1}^\mu w_j) \mathbf{C}_k + c_1 \mathbf{p}_c \mathbf{p}_c^\top + c_\mu \sum_{i=1}^\lambda w_i^\text{o} \mathbf{y}_{i:\lambda} \mathbf{y}_{i:\lambda}^\top,
-    \end{equation}
+    \end{equation*}
     where \(\mathbf{p}_c\) is the evolution path for the covariance matrix, \(\mathbf{y}_{i:\lambda} = \frac{\mathbf{x}_{i:\lambda} - \mathbf{m}_k}{\sigma_k}\), and \(c_1, c_\mu\) are adaptation parameters. The term \(\delta(h_\sigma)\) incorporates the Heaviside function:
-    \begin{equation}
+    \begin{equation*}
     h_\sigma = 
     \begin{cases}
     1, & \text{if } \frac{\norm{\mathbf{p}_\sigma}}{\sqrt{1 - (1 - c_\sigma)^{2(g+1)}}} < \left(1.4 + \frac{2}{n+1}\right) \mathbb{E} \norm{\mathcal{N}(\mathbf{0}, \mathbf{I})}, \\
     0, & \text{otherwise}.
     \end{cases}
-    \end{equation}
+    \end{equation*}
     This condition prevents a too fast increase of axes of \(\mathbf{C}_k\) when the step size is initially set too small or the objective function changes over time. The weights \(w_i^\text{o}\) are calculated as:  
-    \begin{equation}
+    \begin{equation*}
     w_i^\text{o} = w_i \times 
     \begin{cases} 
     1, & \text{if } w_i \geq 0, \\ 
     \frac{n}{\norm{\mathbf{C}^{-\frac{1}{2}} \mathbf{y}_{i:\lambda}}^2}, & \text{otherwise}.
     \end{cases}
-    \end{equation}
+    \end{equation*}
     Here, \(n\) is the problem dimension, and \(\mathbf{C}^{-\frac{1}{2}}\) is the inverse square root of the covariance matrix. This adjustment ensures that the covariance matrix adaptation is robust and efficient, even in challenging optimization landscapes.
 
     
     \item \textbf{Evolution Paths}: CMA-ES uses evolution paths to track the progress of the search and guide the adaptation of the covariance matrix and step size:
     \begin{itemize}
         \item The evolution path for the covariance matrix, \(\mathbf{p}_c\), accumulates successive step directions:
-        \begin{equation}
+        \begin{equation*}
         \mathbf{p}_c = (1 - c_c) \mathbf{p}_c + \sqrt{c_c (2 - c_c) \mu_\text{eff}} \frac{\mathbf{m}_{k+1} - \mathbf{m}_k}{\sigma_k},
-        \end{equation}
+        \end{equation*}
         where \(c_c\) is the learning rate, and \(\mu_\text{eff}\) is the effective number of selected solutions.
         
         \item The evolution path for step size, \(\mathbf{p}_\sigma\), adapts the step size dynamically based on the normalized step directions:
-        \begin{equation}
+        \begin{equation*}
         \mathbf{p}_\sigma = (1 - c_\sigma) \mathbf{p}_\sigma + \sqrt{c_\sigma (2 - c_\sigma) \mu_\text{eff}} \mathbf{C}_k^{-\frac{1}{2}} \frac{\mathbf{m}_{k+1} - \mathbf{m}_k}{\sigma_k},
-        \end{equation}
+        \end{equation*}
         where \(c_\sigma\) is the learning rate for step size adaptation.
     \end{itemize}
     
     \item \textbf{Step Size Adaptation}: Adjust the step size \(\sigma_k\) using the evolution path \(\mathbf{p}_\sigma\):
-    \begin{equation}
+    \begin{equation*}
     \sigma_{k+1} = \sigma_k \exp\left(\frac{c_\sigma}{d_\sigma} \left(\frac{\norm{\mathbf{p}_\sigma}}{\mathbb{E}[\norm{\mathcal{N}(0, \mathbf{I})}]} - 1\right)\right),
-    \end{equation}
+    \end{equation*}
     where \(d_\sigma\) is a damping factor.
 \end{itemize}
 
@@ -670,7 +673,8 @@ One of the most advanced and widely used Derivative-Free Optimization methods is
 \section{Black-box Optimization}
 \label{section:black_box_optimization}
 \subsection{Introduction to Black-box Optimization}
-In previous sections, Gradient-Based Optimization and Derivative-Free Optimization are introduced. While gradient-based methods leverage explicit derivative information and derivative-free methods only rely on function evaluations, both assume some level of access to the structure or behavior of the objective function. \acf{bo}, in contrast, deals with scenarios where the objective function is a black-box, allowing evaluation only through expensive and potentially noisy queries. This requires suitable approaches that balance efficiency and accuracy while navigating the unknown landscape of the function.  Mathematically, \ac{bo} is the process of finding the optimal solution to a problem where the objective function  $f(\mathbf{x})$ is unknown or analytically intractable. The function $f(\mathbf{x})$ is accessible only through point-wise evaluations, typically via simulations, experiments, or complex computations. This makes \ac{bo} particularly challenging, as each evaluation can be computationally expensive or time-consuming.  
+In previous sections, Gradient-Based Optimization and Derivative-Free Optimization are introduced.
+While gradient-based methods leverage explicit derivative information, derivative-free methods rely on function evaluations to infer insights about the objective function's behavior. \acf{bo}, a special case of derivative-free optimization, deals with scenarios where the objective function is a black-box, allowing evaluation only through expensive and potentially noisy queries. This requires suitable approaches that balance efficiency and accuracy while navigating the unknown landscape of the function.  Mathematically, \ac{bo} is the process of finding the optimal solution to a problem where the objective function  $f(\mathbf{x})$ is unknown or analytically intractable. The function $f(\mathbf{x})$ is accessible only through point-wise evaluations, typically via simulations, experiments, or complex computations. This makes \ac{bo} particularly challenging, as each evaluation can be computationally expensive or time-consuming.  
 
 \paragraph{Problem Definition}
 
@@ -690,9 +694,8 @@ where $\mathcal{X} \subseteq \mathbb{R}^d$ represents the feasible domain, which
 \item \textbf{Complex Constraints}: The search space \( \mathcal{X} \) may include unknown or black-box constraints \( g_i(x) \leq 0 \), \( i = 1, \dots, m \)
 \end{itemize}
 
-% ### Exploration vs. Exploitation  
 
-A key challenge in \ac{bo} is balancing ``exploration'', searching unvisited areas to discover new optima, and ``exploitation'', refining evaluations near promising regions. This balance is often managed using acquisition functions \( a(\mathbf{x}) \), guiding the search by estimating the utility of sampling at \( \mathbf{x} \).  
+In \ac{bo}, function evaluations are used to build a surrogate model that approximates the true function. This model is then used to efficiently guide the search for the optimal solution. However, a key challenge in \ac{bo} is balancing ``exploration'', searching unvisited areas to discover new optima, and ``exploitation'', refining evaluations near promising regions. This balance is often managed using acquisition functions \( a(\mathbf{x}) \), guiding the search by estimating the utility of sampling at \( \mathbf{x} \).  
 
 % ### Mathematical Framework  
 
@@ -707,72 +710,120 @@ In black-box optimization, the objective function is often expensive to evaluate
 
 \subsubsection{Gaussian Processes}
 
-\acfp{gp}, discussed in detail in Section~\ref{section:gaussian_process}, are among the most widely used models in Bayesian optimization due to their ability to provide probabilistic predictions. These predictions, characterized by a well-defined posterior mean and variance, form the basic components of acquisition functions that guide the search for optimal solutions in \ac{bo}. \acp{gp} assume a smooth structure for the objective function, making them particularly effective for modeling expensive-to-evaluate functions in low-dimensional spaces. Despite their widespread adoption and effectiveness, \acp{gp} face scalability challenges as they become computationally infeasible for high-dimensional problems or large datasets, where alternatives like deep neural networks or random feature approximations are increasingly explored.
-
+\acfp{gp}, discussed in detail in Section~\ref{section:gaussian_process}, are among the most widely used models in Bayesian optimization due to their ability to provide probabilistic predictions. These predictions, characterized by a well-defined posterior mean and variance, form the basic components of acquisition functions that guide the search for optimal solutions in \ac{bo}. \acp{gp} assume a structure for the objective function, making them particularly effective for modeling expensive-to-evaluate functions in low-dimensional spaces. Despite their widespread adoption and effectiveness, \acp{gp} face scalability challenges as they become computationally infeasible for high-dimensional problems or large datasets. 
 \subsubsection{Random Forest}
 Tree-based models were first introduced as surrogate models for \ac{bo} by \citet{hutter2011sequential} in their \ac{smac} framework. Following this foundational work, \acfp{rf} have been widely adopted as \ac{bo} surrogates in several other methods \citep{feurer2015efficient, lindauer2022smac3}. One of the key advantages of \acp{rf} in this role is their low computational overhead, making them among the fastest surrogate models available for \ac{bo} \citep{kim2022uncertainty}. This computational efficiency makes \acp{rf} particularly appealing for large-scale and high-dimensional datasets. 
 
 Despite these strengths, \ac{rf} surrogates face notable challenges. Studies by \citet{nickson2014automated} and \citet{shahriari2015taking} highlighted that \ac{rf}-based surrogate and its uncertainty estimates tend to be overly confident in unexplored regions. Furthermore, the predictive mean of \acp{rf} often results in unrealistic extrapolations when data is sparse. 
-\citet{lim2021extrapolative} also demonstrated that \acp{rf} might produce overly conservative uncertainty estimates, leading to uncertainty intervals that are significantly larger than those provided by \acp{gp}. These observations suggest that \acp{rf} may struggle to accurately approximate the true underlying function and provide reliable uncertainty estimates for these approximations. Additionally, while \acp{rf} often outperform \ac{gp} surrogates in handling categorical or mixed data domains \citep{hutter2011sequential, hutter2013evaluation}, they tend to underperform in purely continuous domains compared to other surrogates like \acp{gp} \citep{hutter2013evaluation}. Despite this limitation, \acp{smac} and its variants have been widely adopted in optimizing machine learning models and configuring combinatorial optimization solvers, demonstrating their versatility and efficacy in real-world applications \cite{feurer2019hyperparameter}.
+\citet{lim2021extrapolative} also demonstrated that \acp{rf} might produce overly conservative uncertainty estimates, leading to uncertainty intervals that are significantly larger than those provided by \acp{gp}. These observations suggest that \acp{rf} may struggle to accurately approximate the true underlying function and provide reliable uncertainty estimates for these approximations. Additionally, while \acp{rf} often outperform \ac{gp} surrogates in handling categorical or mixed data domains \citep{hutter2011sequential, hutter2013evaluation}, they tend to underperform in purely continuous domains compared to \acp{gp} \citep{hutter2013evaluation}. Despite this limitation, \acp{smac} and its variants have been widely adopted in optimizing machine learning models and configuring combinatorial optimization solvers, demonstrating their versatility and efficacy in real-world applications \citep{feurer2019hyperparameter}.
 
-Boosting-based ensembles, such as \acp{gbrt}, are another popular choice for tree-based surrogates in \ac{bo}. Many \ac{bo} libraries include \acp{gbrt} as an option for surrogate modeling \citep{thebelt2021entmoot}. In machine learning literature, \acp{gbrt} are widely recognized for their strong performance in regression tasks \citep{nielsen2016tree}. Supporting this, \citet{thebelt2021entmoot} demonstrated that \acp{gbrt} often outperform \acp{rf} in various \ac{bo} scenarios, and \citep{lim2021extrapolative} showed that \acp{gbrt} can be more effective than \acp{rf} in standard \ac{bo}. However, both studies highlight that \acp{gp} can still outperform \acp{gbrt} in certain contexts, with the relative performance of these surrogates often depending heavily on the benchmark function \cite{kim2022uncertainty}. 
+Boosting-based ensembles, such as \acp{gbrt}, are another popular choice for tree-based surrogates in \ac{bo}. Many \ac{bo} libraries include \acp{gbrt} as an option for surrogate modeling \citep{thebelt2021entmoot}. In machine learning literature, \acp{gbrt} are widely recognized for their strong performance in regression tasks \citep{nielsen2016tree}. Supporting this, \citet{thebelt2021entmoot} demonstrated that \acp{gbrt} often outperform \acp{rf} in various \ac{bo} scenarios, and \citep{lim2021extrapolative} showed that \acp{gbrt} can be more effective than \acp{rf} in standard \ac{bo}. However, both studies highlight that \acp{gp} can still outperform \acp{gbrt} in certain contexts, with the relative performance of these surrogates often depending heavily on the benchmark function \citep{kim2022uncertainty}. 
 
-A more recent \ac{gbrt}-based regression algorithm is NG-Boost \citep{duan2020ngboost}, which have been reported promising results in certain \ac{bo} tasks \citep{duan2020ngboost,kim2022uncertainty}. However, \citet{kim2022uncertainty} noted that NG-Boost struggles to scale effectively in high-dimensional settings compared to \acp{rf} or standard \acp{gbrt}. While NG-Boost provides state-of-the-art uncertainty estimates, its predictive mean often underperforms relative to traditional \acp{gbrt} in regression tasks.
+A more recent \ac{gbrt}-based regression algorithm is NG-Boost \citep{duan2020ngboost}, which have been reported to achieve promising results in certain \ac{bo} tasks \citep{duan2020ngboost,kim2022uncertainty}. However, \citet{kim2022uncertainty} noted that NG-Boost struggles to scale effectively in high-dimensional settings compared to \acp{rf} or standard \acp{gbrt}. While NG-Boost provides state-of-the-art uncertainty estimates, its predictive mean often underperforms relative to traditional \acp{gbrt} in regression tasks.
 
-Recently, \ac{bart} have also emerged as alternative \ac{bo} surrogates. Unlike \acp{rf} and \acp{gbrt}, \acp{bart} employs a Bayesian framework, which enables it to extrapolate better in regions far from the training data by reverting predictions toward the prior distribution, similar to \acp{gp}. This property makes \acp{bart} appealing for \ac{bo}, as it can enhance exploration efficiency, hence, has been shown to outperform other tree-based surrogates in several \ac{bo} tasks \citep{lei2021bayesian}. However, \acp{bart} has limitations as a \ac{bo} surrogate: its sampling-based training method is computationally expensive and less scalable in high-dimensional spaces \citep{scillitoe2021uncertainty}. Additionally, \acp{bart} models are trained in batch mode, lacking the online sequential training capability of \acp{gbrt}, which can make them slower and less flexible \cite{kim2022uncertainty}.
-
-
-Another tree-based Bayesian model used as a surrogate in \ac{bo} is the \ac{mf} \citep{lakshminarayanan2014mondrian}. Similar to \acp{bart}, \acp{mf} employ a Bayesian framework that incorporates a prior. This enables \acp{mf} to extrapolate more effectively than \acp{rf} and \acp{gbrt} in regions with limited training data, as the model can revert to a sensible prior. Consequently, \acp{mf} have seen success as surrogates in standard \ac{bo} tasks in recent years \cite{scillitoe2021uncertainty}. 
-
-Unlike \acp{bart}, \acp{mf} avoid the computational overhead of expensive sampling procedures and can be trained in an online, sequential manner. Mondrian trees, the foundational structure of \acp{mf}, are constructed efficiently with a computational complexity of \(O(\lvert \mathcal{D} \rvert \log \lvert \mathcal{D} \rvert)\), where \(\lvert \mathcal{D} \rvert\) is the number of data points. This online construction capability makes \acp{mf} particularly attractive for \ac{bo}, as they provide the benefits of Bayesian modeling while maintaining scalability and training speed. These attributes give \acp{mf} an advantage over \acp{bart}, which, despite its strong extrapolation capabilities, struggles with high-dimensional problems and requires longer training times \cite{kim2022uncertainty}. 
+Recently, \ac{bart} have also emerged as alternative \ac{bo} surrogates. Unlike \acp{rf} and \acp{gbrt}, \acp{bart} employs a Bayesian framework, which enables it to extrapolate better in regions far from the training data by reverting predictions toward the prior distribution, similar to \acp{gp}. This property makes \acp{bart} appealing for \ac{bo}, as it can enhance exploration efficiency, hence, has been shown to outperform other tree-based surrogates in several \ac{bo} tasks \citep{lei2021bayesian}. However, \acp{bart} has limitations as a \ac{bo} surrogate: its sampling-based training method is computationally expensive and less scalable in high-dimensional spaces \citep{scillitoe2021uncertainty}. Additionally, \acp{bart} models are trained in batch mode, lacking the online sequential training capability of \acp{gbrt}, which can make them slower and less flexible \citep{kim2022uncertainty}.
 
 
+Another tree-based Bayesian model used as a surrogate in \ac{bo} is the \ac{mf} \citep{lakshminarayanan2014mondrian}. Similar to \acp{bart}, \acp{mf} employ a Bayesian framework that incorporates a prior. This enables \acp{mf} to extrapolate more effectively than \acp{rf} and \acp{gbrt} in regions with limited training data, as the model can revert to a sensible prior. Consequently, \acp{mf} have seen success as surrogates in standard \ac{bo} tasks in recent years \citep{scillitoe2021uncertainty}. 
 
-
-
-% \acf{rf} models are another choice for surrogate modeling in \ac{bo}, particularly when dealing with high-dimensional spaces or mixed data types, including continuous, categorical, and discrete variables. Unlike \ac{gp}, \ac{rf} models do not rely on smoothness assumptions, making them more flexible and scalable in such scenarios. The first significant application of \ac{rf} in \ac{bo} was introduced in the Sequential Model-based Algorithm Configuration (SMAC) framework by \citet{hutter2011sequential}, which has since been refined in SMAC3 \cite{lindauer2022smac3}. SMAC extends \ac{rf}-based BO to noisy and stochastic objective functions, making it particularly effective for algorithm configuration and hyperparameter tuning. By employing \ac{rf} models, SMAC provides robust handling of categorical parameters, problem instances, and large mixed numerical/categorical configuration spaces. While \ac{rf} models performs well in making accurate predictions in the neighborhood of training data, they struggle with extrapolation to poorly represented regions of the search space \cite{shahriari2015taking}. 
+Unlike \acp{bart}, \acp{mf} avoid the computational overhead of expensive sampling procedures and can be trained in an online, sequential manner. Mondrian trees, the foundational structure of \acp{mf}, are constructed efficiently with a computational complexity of \(O(\lvert \mathcal{D} \rvert \log \lvert \mathcal{D} \rvert)\), where \(\lvert \mathcal{D} \rvert\) is the number of data points. This online construction capability makes \acp{mf} particularly attractive for \ac{bo}, as they provide the benefits of Bayesian modeling while maintaining scalability and training speed. These attributes give \acp{mf} an advantage over \acp{bart}, which, despite its strong extrapolation capabilities, struggles with high-dimensional problems and requires longer training times \citep{kim2022uncertainty}. 
 
 \subsubsection{Deep Neural Network and Neural Tangent Kernel}
 \label{section:NTK}
 
 \acfp{dnn} are a significant improvement over traditional Artificial Neural Networks achieved by stacking more layers, resulting in a deeper network capable of representing complex functions. This deeper structure allows \acp{dnn} to learn hierarchical representations, where lower layers capture basic features, and higher layers capture more abstract patterns. A key component of \acp{dnn} is the activation function, which introduces non-linearity, enabling the network to approximate complex, non-linear mappings. Popular choices for activation functions include ReLU, sigmoid, and tanh, each with distinct properties suited for specific tasks.
 
-Recently, due to their effectiveness in learning both non-linear input-output mappings and intrinsic structures of the input data, \acp{dnn} have garnered significant attention and are widely used in fields such as computer vision, natural language processing, and scientific computing. In this report, I consider fully-connected \acp{dnn} with layers numbered from \(0\) (input) to \(L\) (output), where each layer contains \(n_0, \ldots, n_L\) neurons, and a non-linear activation function \( \sigma (\cdot) : \mathbb{R} \to \mathbb{R} \). 
+Recently, due to their effectiveness in learning both non-linear input-output mappings and intrinsic structures of the input data, \acp{dnn} have garnered significant attention and are widely used in fields such as computer vision, natural language processing, and scientific computing. The models used in this thesis use fully-connected \acp{dnn} with layers numbered from \(0\) (input) to \(L\) (output), where each layer contains \(n_0, \ldots, n_L\) neurons, and a non-linear activation function \( \phi (\cdot) : \mathbb{R} \to \mathbb{R} \). 
 
 The network function is defined as \( f(\mathbf{x}, \boldsymbol{\theta}) := \widetilde{\alpha}^{(L)}(\mathbf{x}, \boldsymbol{\theta}) \), where the pre-activation and post-activation functions, \( \widetilde{\alpha}^{(l)}(\cdot, \boldsymbol{\theta}) : \mathbb{R}^{n_0} \to \mathbb{R}^{n_l} \) and \( \alpha^{(l)}(\cdot, \boldsymbol{\theta}) : \mathbb{R}^{n_0} \to \mathbb{R}^{n_l} \), are recursively defined as follows:
 \[
 \begin{aligned}
     \alpha^{(0)} (\mathbf{x}, \boldsymbol{\theta}) &= \mathbf{x}, \\
     \widetilde{\alpha}^{(l+1)} (\mathbf{x}, \boldsymbol{\theta}) &= \frac{1}{\sqrt{n_l}} \mathbf{W}^{(l)} \alpha^{(l)}(\mathbf{x}, \boldsymbol{\theta}) + \beta \mathbf{b}^{(l)}, \\
-    \alpha^{(l)} (\mathbf{x}, \boldsymbol{\theta}) &= \sigma(\widetilde{\alpha}^{(l+1)} (\mathbf{x}, \boldsymbol{\theta})),
+    \alpha^{(l)} (\mathbf{x}, \boldsymbol{\theta}) &= \phi(\widetilde{\alpha}^{(l+1)} (\mathbf{x}, \boldsymbol{\theta})),
 \end{aligned}
 \]
-where \( \mathbf{W}^{(l)} \in \mathbb{R}^{n_l \times n_{l+1}} \) are connection matrices and \( \mathbf{b}^{(l)} \in \mathbb{R}^{n_{l+1}} \) are bias vectors. Parameters are initialized using LeCun initialization \cite{lecun2002efficient}, with \( \mathbf{W}_{ij} \sim \mathcal{N}(0, 1/n_l) \) and \( \mathbf{b}_j \sim \mathcal{N}(0, 1) \) (or sometimes \( \mathbf{b}_j = 0 \)). This initialization helps maintain stable gradients during training, particularly for sigmoid or tanh activations.
+where \( \mathbf{W}^{(l)} \in \mathbb{R}^{n_l \times n_{l+1}} \) are connection matrices and \( \mathbf{b}^{(l)} \in \mathbb{R}^{n_{l+1}} \) are bias vectors. Parameters are initialized using LeCun initialization \citep{lecun2002efficient}, with \( \mathbf{W}_{ij} \sim \mathcal{N}(0, 1/n_l) \) and \( \mathbf{b}_j \sim \mathcal{N}(0, 1) \) (or sometimes \( \mathbf{b}_j = 0 \)). This initialization helps maintain stable gradients during training, particularly for sigmoid or tanh activations.
 
 To simplify the analysis, we assume that all hidden layers have the same width, i.e., \( n_0 = n_1 = \ldots = n_L \). The parameters \( \boldsymbol{\theta} \), comprising all weights and biases, are collected as \( \boldsymbol{\theta} = (\mathrm{vec}(\mathbf{W}_1), \ldots, \mathrm{vec}(\mathbf{W}_L)) \in \mathbb{R}^p \), where \( p = md + m^2(L-2) + m \) is the total number of parameters, with \( m \) being the number of neurons per layer and \( d \) the input dimension.
 
-The \ac{ntk} framework, introduced by \citet{jacot2018neural}, provides theoretical insights into the convergence and generalization properties of over-parameterized neural networks. At the infinite-width limit, where the number of neurons \( m \to \infty \), the \ac{dnn} can be analyzed as a kernel predictor governed by the \ac{ntk}. This approach bridges the study of \acp{dnn} with kernel methods, offering powerful tools for theoretical analysis.
+% The \ac{ntk} framework, introduced by \citet{jacot2018neural}, provides theoretical insights into the convergence and generalization properties of over-parameterized neural networks. At the infinite-width limit, where the number of neurons \( m \to \infty \), the \ac{dnn} can be analyzed as a kernel predictor governed by the \ac{ntk}. This approach bridges the study of \acp{dnn} with kernel methods, offering powerful tools for theoretical analysis.
 
-The kernel matrix \(\mathbf{H}(t) \in \mathbb{R}^{n \times n}\), defined as:
+% The kernel matrix \(\mathbf{H}(t) \in \mathbb{R}^{n \times n}\), defined as:
+% \[
+% [\mathbf{H}(t)]_{ij} = \langle \mathbf{g}(\mathbf{x}_i, \boldsymbol{\theta}_t), \mathbf{g}(\mathbf{x}_j, \boldsymbol{\theta}_t) \rangle, \quad \forall i, j \in [n],
+% \]
+% has two key properties: symmetry and positive semidefiniteness. These properties make the \ac{ntk} a valid kernel, enabling effective theoretical and practical applications in training dynamics, generalization, and optimization. 
+
+% Under the infinite-width assumption, \( \mathbf{H}(t) \) remains constant during training, equal to its initialization \( \mathbf{H}(0) \). Moreover, \( \mathbf{H}(0) \) converges in probability to a deterministic matrix \( \mathbf{H} \), called the Neural Tangent Kernel (\ac{ntk}). Recursive equations for computing \( \mathbf{H} \) involve covariance matrices \( \Sigma^{(l)}_{ij} \), capturing layer-wise dependencies and interactions between neurons and are defined as:
+% \[ \widetilde{\mathbf{H}}_{i,j}^{(1)} = \boldsymbol{\Sigma}_{i,j}^{(1)} = \langle \mathbf{x}_i, \mathbf{x}_j \rangle\ , \mathbf{A}_{i,j}^{(l)} = 
+% \begin{pmatrix}
+% \boldsymbol{\Sigma}_{i,i}^{(l)} & \boldsymbol{\Sigma}_{i,j}^{(l)} 
+% \\
+
+% \boldsymbol{\Sigma}_{i,j}^{(l)} & \boldsymbol{\Sigma}_{j,j}^{(l)}
+% \end{pmatrix}, 
+% \boldsymbol{\Sigma}_{i,j}^{(l+1)} = 2 \mathbb{E}_{(u,v) \sim \mathbf{N}(\mathbf{0}, \mathbf{A}_{i,j}^{(l)})} [\phi(u) \phi(v)] \]
+
+% \[ \widetilde{\mathbf{H}}_{i,j}^{(l+1)} = 2\widetilde{\mathbf{H}}_{i,j}^{(l)}\mathbb{E}_{(u,v) \sim \mathbf{N}(\mathbf{0}, \mathbf{A}_{i,j}^{(l)}} [\phi^\prime(u) \phi^\prime(v)] + \boldsymbol{\Sigma}_{i,j}^{(l+1)}\]
+% Then $\mathbf{H} = \frac{\mathbf{\widetilde{H}}^{(L)}+ \boldsymbol{\Sigma} ^ {(L)}}{2}$ is called the NTK matrix on the set $\mathbf{X} $. 
+
+
+The \ac{ntk} framework, introduced by \citet{jacot2018neural}, provides theoretical insights into the convergence and generalization properties of over-parameterized neural networks. At the infinite-width limit, where the number of neurons \( m \to \infty \), \acp{dnn} behave as kernel predictors governed by the \ac{ntk}. This connection bridges the study of \acp{dnn} with kernel methods, offering a powerful analytical framework. During training, neural networks aim to minimize a loss function, often the mean squared error (MSE), expressed as:
 \[
-[\mathbf{H}(t)]_{ij} = \langle \mathbf{g}(\mathbf{x}_i, \boldsymbol{\theta}_t), \mathbf{g}(\mathbf{x}_j, \boldsymbol{\theta}_t) \rangle, \quad \forall i, j \in [n],
+\mathcal{L}(\boldsymbol{\theta}, \mathcal{D}) = \frac{1}{2n} \sum_{i=1}^n (f(\mathbf{x}_i, \boldsymbol{\theta}) - y_i)^2,
 \]
-has two key properties: symmetry and positive semidefiniteness. These properties make the \ac{ntk} a valid kernel, enabling effective theoretical and practical applications in training dynamics, generalization, and optimization. 
+where \( \mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i=1}^n \) represents the training data, and \( f(\mathbf{x}, \boldsymbol{\theta}) \) is the network's output for input \( \mathbf{x} \) given parameters \( \boldsymbol{\theta} \).
+
+Under the NTK regime, the network output evolves approximately linearly during training:
+\[
+f(\mathbf{x}, \boldsymbol{\theta}_t) \approx f(\mathbf{x}, \boldsymbol{\theta}_0) + \nabla_{\boldsymbol{\theta}} f(\mathbf{x}, \boldsymbol{\theta}_0)^\top (\boldsymbol{\theta}_t - \boldsymbol{\theta}_0),
+\]
+where \( \nabla_{\boldsymbol{\theta}} f(\mathbf{x}, \boldsymbol{\theta}_0) \) is the Jacobian of the network output with respect to the parameters, evaluated at initialization. The dynamics of \( f(\mathbf{x}_i, \boldsymbol{\theta}_t) \) during training are governed by:
+\[
+\frac{\partial f(\mathbf{x}_i, \boldsymbol{\theta}_t)}{\partial t} = -\sum_{j=1}^n \mathbf{H}_{ij}(t) \left( f(\mathbf{x}_j, \boldsymbol{\theta}_t) - y_j \right),
+\]
+where \( \mathbf{H}_{ij}(t) \) represents the element of the Neural Tangent Kernel (NTK) matrix at time \( t \) and its elements are defined as:
+\[
+[\mathbf{H}(t)]_{ij} = \langle \nabla_{\boldsymbol{\theta}} f(\mathbf{x}_i, \boldsymbol{\theta}_t), \nabla_{\boldsymbol{\theta}} f(\mathbf{x}_j, \boldsymbol{\theta}_t) \rangle, \quad \forall i, j \in [n].
+\]
+At the infinite-width limit, \( \mathbf{H}(t) \) becomes constant and equal to its initialization \( \mathbf{H}(0) \). This simplifies the training dynamics to:
+\[
+\frac{\partial}{\partial t} \mathbf{f}_t = -\mathbf{H}(0)(\mathbf{f}_t - \mathbf{y}),
+\]
+where:
+\[
+\mathbf{f}_t = [f(\mathbf{x}_1, \boldsymbol{\theta}_t), f(\mathbf{x}_2, \boldsymbol{\theta}_t), \ldots, f(\mathbf{x}_n, \boldsymbol{\theta}_t)]^\top
+\]
+denotes the vector of network outputs for the training inputs at time \( t \), and:
+\[
+\mathbf{y} = [y_1, y_2, \ldots, y_n]^\top
+\]
+is the vector of corresponding target outputs.
+
+The solution to this equation, showing exponential convergence of \( \mathbf{f}_t \) to \( \mathbf{y} \), is given by:
+\[
+\mathbf{f}_t = \mathbf{y} + (\mathbf{f}_0 - \mathbf{y})e^{-\mathbf{H}(0)t},
+\]
+where \( \mathbf{f}_0 = [f(\mathbf{x}_1, \boldsymbol{\theta}_0), \ldots, f(\mathbf{x}_n, \boldsymbol{\theta}_0)]^\top \) represents the initial outputs of the network at initialization.
 
 Under the infinite-width assumption, \( \mathbf{H}(t) \) remains constant during training, equal to its initialization \( \mathbf{H}(0) \). Moreover, \( \mathbf{H}(0) \) converges in probability to a deterministic matrix \( \mathbf{H} \), called the Neural Tangent Kernel (\ac{ntk}). Recursive equations for computing \( \mathbf{H} \) involve covariance matrices \( \Sigma^{(l)}_{ij} \), capturing layer-wise dependencies and interactions between neurons and are defined as:
-\[ \widetilde{\mathbf{H}}_{i,j}^{(1)} = \boldsymbol{\Sigma}_{i,j}^{(1)} = \langle \mathbf{x}_i, \mathbf{x}_j \rangle\ , \mathbf{A}_{i,j}^{(l)} = 
-\begin{pmatrix}
-\boldsymbol{\Sigma}_{i,i}^{(l)} & \boldsymbol{\Sigma}_{i,j}^{(l)} 
-\\
-
-\boldsymbol{\Sigma}_{i,j}^{(l)} & \boldsymbol{\Sigma}_{j,j}^{(l)}
-\end{pmatrix}, 
-\boldsymbol{\Sigma}_{i,j}^{(l+1)} = 2 \mathbb{E}_{(u,v) \sim \mathbf{N}(\mathbf{0}, \mathbf{A}_{i,j}^{(l)})} [\sigma(u) \sigma(v)] \]
-
-\[ \widetilde{\mathbf{H}}_{i,j}^{(l+1)} = 2\widetilde{\mathbf{H}}_{i,j}^{(l)}\mathbb{E}_{(u,v) \sim \mathbf{N}(\mathbf{0}, \mathbf{A}_{i,j}^{(l)}} [\sigma'(u) \sigma'(v)] + \boldsymbol{\Sigma}_{i,j}^{(l+1)}\]
-Then $\mathbf{H} = \frac{\mathbf{\widetilde{H}}^{(L)}+ \boldsymbol{\Sigma} ^ {(L)}}{2}$ is called the NTK matrix on the set $\mathbf{X} $. 
+\[
+\boldsymbol{\Sigma}_{i,j}^{(l+1)} = 2 \mathbb{E}_{(u,v) \sim \mathbf{N}(\mathbf{0}, \mathbf{A}_{i,j}^{(l)})} [\phi(u) \phi(v)],
+\]
+and
+\[
+\widetilde{\mathbf{H}}_{i,j}^{(l+1)} = 2\widetilde{\mathbf{H}}_{i,j}^{(l)}\mathbb{E}_{(u,v) \sim \mathbf{N}(\mathbf{0}, \mathbf{A}_{i,j}^{(l)})} [\phi^\prime(u) \phi^\prime(v)] + \boldsymbol{\Sigma}_{i,j}^{(l+1)},
+\]
+where \( \phi(\cdot) \) and \( \phi^\prime(\cdot) \) are the activation function and its derivative, respectively. Then $\mathbf{H} = \frac{\mathbf{\widetilde{H}}^{(L)}+ \boldsymbol{\Sigma} ^ {(L)}}{2}$ is called the NTK matrix on the set $\mathcal{D}$.
 
 
+Recent research has advanced our understanding of gradient descent in neural networks by focusing on the role of kernel methods, particularly the \ac{ntk}. The foundational work by \citet{jacot2018neural} revealed that training infinite-width neural networks via gradient descent can be interpreted as optimization using the \ac{ntk}. Building on this, studies such as \citet{du2018gradient, allen2019convergence, su2019learning, arora2019fine, du2019gradient, zou2020gradient} established links between \acf{gd} or \acf{sgd} and the \ac{ntk}, demonstrating that under overparameterization and random initialization, the training error diminishes to zero. Furthermore, similar convergence behaviors have been observed in various architectures beyond feedforward neural networks, including convolutional neural networks (CNNs) and residual networks (ResNets), as shown in works like \citet{arora2019exact, allen2019can, du2019gradient, zou2020gradient, tirer2022kernel}.
+
+The convergence of the \ac{ntk} matrix has been extensively studied. \citet{du2018gradient} showed that, given a batch \(\{\mathbf{x}_i\}_{i=1}^n\) data points, the \ac{ntk} matrix from the last hidden layer is close to a deterministic kernel matrix, with the gap upper bounded by $\mathcal{O}(1/\sqrt{m})$, requiring \(m = \Omega(n^6)\) to ensure the bound remains small. Similar upper bounds for the \ac{ntk} matrix of 2-layer neural networks are reported in \citet{song2019quadratic, munteanu2022bounding}. Recently, \citet{xu2024overparametrized} improved this result by establishing uniform concentration of the \ac{ntk} matrix over all \(\mathbf{x} \in \mathbb{S}^{d-1}\) and for a \ac{dnn}, e.g., across all layers \(\ell \in [L]\). This stronger result requires only \(m = \Omega(\exp(L^2) \, \mathrm{poly}(d))\) to achieve the same error bound, highlighting the significant advancement in their analysis.
+
+
+ 
 
 
 
@@ -783,33 +834,32 @@ Then $\mathbf{H} = \frac{\mathbf{\widetilde{H}}^{(L)}+ \boldsymbol{\Sigma} ^ {(L
 \subsection{Utility-Based Acquisition Functions}
 \label{section:acquisition_functions}
 
-In Bayesian optimization, the objective is to efficiently locate the global optimum of an expensive-to-evaluate function, a task particularly challenging in scenarios where gradient information is unavailable or unreliable \citep{mockus1978application,jones1998efficient}. Traditional optimization methods, often reliant on such gradient information, fall short in these contexts, necessitating alternative strategies. Bayesian optimization addresses this problem by employing a probabilistic surrogate model, often a \acf{gp} \citep{rasmussen2006gaussian}, to approximate the objective function. This surrogate model provides not only predictions of the objective function's values at unobserved points, but also measures of uncertainty associated with these predictions. The selection of the next evaluation point is critical to the success of this methodology and is guided by \textit{acquisition functions}. These functions quantify the utility or desirability of evaluating a given point based on the model’s predictions and uncertainty, effectively navigating the trade-off between \textit{exploration} of less-sampled regions and \textit{exploitation} of regions that have yielded promising results [Citation1].  The choice of acquisition function plays a pivotal role in the optimization process, determining the efficiency and effectiveness of convergence to the global optimum [Citation2, Citation3]. The following subsections will detail several widely used utility-based acquisition functions, emphasizing their mathematical formulations, the underlying intuitions, and their relative strengths and weaknesses.
+In Bayesian optimization, the objective is to efficiently locate the global optimum of an expensive-to-evaluate function, a task particularly challenging in scenarios where gradient information is unavailable or unreliable \citep{mockus1978application,jones1998efficient}. Traditional optimization methods, often reliant on such gradient information, fall short in these contexts, necessitating alternative strategies. Bayesian optimization addresses this problem by employing a probabilistic surrogate model, often a \acf{gp} \citep{rasmussen2006gaussian}, to approximate the objective function. This surrogate model provides not only predictions of the objective function's values at unobserved points, but also measures of uncertainty associated with these predictions. The selection of the next evaluation point is critical to the success of this methodology and is guided by \textit{acquisition functions}. These functions quantify the utility or desirability of evaluating a given point based on the model’s predictions and uncertainty, effectively navigating the trade-off between \textit{exploration} of less-sampled regions and \textit{exploitation} of regions that have yielded promising results.  The choice of acquisition function plays a pivotal role in the optimization process, determining the efficiency and effectiveness of convergence to the global optimum. The following subsections will detail several widely used utility-based acquisition functions, emphasizing their mathematical formulations, the underlying intuitions, and their relative strengths and weaknesses.
 \subsubsection{Probability of Improvement}
 \label{section:pi}
 
-The \ac{PI} acquisition function, introduced by \citet{kushner1964new}, is a straightforward yet effective strategy for guiding Bayesian optimization, with the specific purpose of improving upon the current best-observed value. Unlike \ac{ucb} and \ac{ts}, \ac{PI} does not explicitly incorporate the uncertainty of the prediction directly into its selection criteria; instead, it focuses only on the probability of improvement over the current best observation. The simplicity and computational efficiency of \ac{PI} have made it a popular technique for many \ac{bo} problems, especially when computational resources are limited, or quick convergence is preferred.
+The \ac{PI} acquisition function, introduced by \citet{kushner1964new}, is a straightforward yet effective strategy for guiding Bayesian optimization, with the specific purpose of improving upon the current best-observed value. Unlike \ac{ucb} and \ac{ts}, \ac{PI} does not explicitly incorporate the uncertainty of the prediction directly into its selection criteria; instead, it focuses only on the probability of improvement over the current best observation. The simplicity and computational efficiency of \ac{PI} have made it a popular technique for many \ac{bo} problems, especially when computational resources are limited.
 
-Given the best-observed objective function value \(f(\mathbf{x}^+)\) up to the current iteration, and the predictive mean \(\mu(\mathbf{x})\) and standard deviation \(\sigma(\mathbf{x})\) of a point \(\mathbf{x}\), the \ac{PI} function is defined as:
-\begin{equation}
-\alpha_{\text{PI}}(\mathbf{x}) = P(f(\mathbf{x}) > f(\mathbf{x}^+) + \xi) = \Phi\left( \frac{\mu(\mathbf{x}) - f(\mathbf{x}^+) - \xi}{\sigma(\mathbf{x})} \right)
+Given the best-observed objective function value \(f(\mathbf{x}^+)\) up to the current iteration $t$, and the predictive mean \(\mu_t(\mathbf{x})\) and standard deviation \(\sigma_t(\mathbf{x})\) of a point \(\mathbf{x}\), the \ac{PI} function is defined as:
+\begin{equation*}
+\alpha_{\text{PI}}(\mathbf{x}) = P(f(\mathbf{x}) > f(\mathbf{x}^+) + \xi) = \Phi\left( \frac{\mu_t(\mathbf{x}) - f(\mathbf{x}^+) - \xi}{\sigma_t(\mathbf{x})} \right)
 \label{eq:pi_formula}
-\end{equation}
+\end{equation*}
 where:
 \begin{itemize}
     \item \(f(\mathbf{x}^+)\) is the best function value observed so far in the optimization process;
     \item \(\mu(\mathbf{x})\) is the predicted mean of the objective function at the point \(\mathbf{x}\);
     \item \(\sigma(\mathbf{x})\) is the predicted standard deviation (or uncertainty) of the objective function at the point \(\mathbf{x}\);
     \item \(\Phi(\cdot)\) is the \ac{cdf} of the standard Normal distribution, which is used since it is assumed that the objective function \(f(\mathbf{x})\) is distributed as a Gaussian;
-    \item \(\xi \geq 0\) is an optional hyperparameter that allows a trade-off between exploration and exploitation.
+    \item \(\xi \geq 0\) is an optional hyperparameter that allows a trade-off between exploration and exploitation. 
 \end{itemize}
 
-Equation \eqref{eq:pi_formula} mathematically expresses the probability that the true objective function value at a location \(\mathbf{x}\), denoted as \(f(\mathbf{x})\), will be greater than the current best value seen so far, \(f(\mathbf{x}^+)\), with an optional margin \(\xi\) to encourage exploration. This probability is computed under the assumption that \(f(\mathbf{x})\) follows a Gaussian distribution with the predicted mean \(\mu(\mathbf{x})\) and standard deviation \(\sigma(\mathbf{x})\), as modeled by the surrogate function (e.g., \ac{gp}). The term \(\frac{\mu(\mathbf{x}) - f(\mathbf{x}^+) - \xi}{\sigma(\mathbf{x})}\) represents the normalized distance from the predicted mean to the current best value, adjusted by the exploration parameter \(\xi\) and the uncertainty \(\sigma(\mathbf{x})\).
+Eqn. \eqref{eq:pi_formula} mathematically expresses the probability that the true objective function value at a location \(\mathbf{x}\), denoted as \(f(\mathbf{x})\), will be greater than the current best value seen so far, \(f(\mathbf{x}^+)\), with an optional margin \(\xi\) to encourage exploration. This probability is computed under the assumption that \(f(\mathbf{x})\) follows a Gaussian distribution with the predicted mean \(\mu_t(\mathbf{x})\) and standard deviation \(\sigma_t(\mathbf{x})\), as modeled by the surrogate function (e.g., \ac{gp}). The term \(\frac{\mu_t(\mathbf{x}) - f(\mathbf{x}^+) - \xi}{\sigma_t(\mathbf{x})}\) represents the normalized distance from the predicted mean to the current best value, adjusted by the exploration parameter \(\xi\) and the uncertainty \(\sigma_t(\mathbf{x})\). Larger values of \(\xi\) encourage exploration, but tuning this parameter is non-trivial and problem-specific.
 
-The \ac{PI} function prioritizes points that are likely to lead to an improvement over the current best-observed value. This intuition makes it useful for situations when the optimization goal is primarily about exploiting promising regions of the search space. However, this behavior contrasts with acquisition functions such as Expected Improvement (\ac{ei}), which incorporate both the magnitude and probability of improvement, or Upper Confidence Bound (\ac{ucb}), which balances exploration and exploitation more explicitly.
+The \ac{PI} function prioritizes points that are likely to lead to an improvement over the current best-observed value. This intuition makes it useful for situations when the optimization goal is primarily about exploiting promising regions of the search space. However, this behavior contrasts with acquisition functions such as Expected Improvement (\ac{ei}), which incorporate both the magnitude and probability of improvement, or Upper Confidence Bound (\ac{ucb}), which balances exploration and exploitation more explicitly (See subsequent sections).
 
 While \ac{PI} is straightforward to understand and implement due to its simple formulation, it has limitations. A key benefit of PI is its computational efficiency, requiring only basic calculations to determine the next evaluation point. Additionally, it typically performs well in scenarios where the objective function is unimodal or when exploitation is prioritized. However, \ac{PI}'s greedy nature can result in overly local search behavior. By focusing exclusively on high-probability regions, it may neglect areas with higher uncertainty, leading to poor exploration. This can cause \ac{PI} to converge prematurely to local optima, particularly in multi-modal or high-dimensional optimization problems where global exploration is crucial.
-
-To mitigate this issue, the exploration parameter \(\xi\) can be introduced, increasing the focus on regions with higher uncertainty. Larger values of \(\xi\) encourage exploration, but tuning this parameter is non-trivial and problem-specific. 
+ 
 
 \subsubsection{Expected Improvement}
 \label{section:ei}
@@ -817,26 +867,27 @@ To mitigate this issue, the exploration parameter \(\xi\) can be introduced, inc
 \acf{ei} is an acquisition function that extends the concept of \ac{PI} by quantifying the expected magnitude of improvement, rather than simply the probability of improvement \citep{mockus1978application, jones1998efficient}. 
 
 The \ac{ei} is defined as the expected value of the maximum between zero and the difference of the current point and the best-observed objective function value. Formally:
-\begin{equation}
+\begin{equation*}
 \alpha_{\text{EI}}(\mathbf{x}) = \mathbb{E} [\max(0, f(\mathbf{x}^+) - f(\mathbf{x}))].
 \label{eq:ei_definition}
-\end{equation}
-Assuming that the values of the objective function \(f(\mathbf{x})\) at a location \(\mathbf{x}\) are normally distributed with mean \(\mu(\mathbf{x})\) and standard deviation \(\sigma(\mathbf{x})\), the expected improvement in equation \eqref{eq:ei_definition} can be rewritten as:
-\begin{equation}
-    \alpha_{\text{EI}}(\mathbf{x}) = \sigma(\mathbf{x}) [ z \Phi(z) + \phi(z) ],
+\end{equation*}
+In the context of \ac{bo}, at the optimization iteration $t$, assuming that the values of the objective function \(f(\mathbf{x})\) at a location \(\mathbf{x}\) are normally distributed with mean \(\mu_t(\mathbf{x})\) and standard deviation \(\sigma_t(\mathbf{x})\), the expected improvement in equation \eqref{eq:ei_definition} can be rewritten as:
+\begin{equation*}
+    \alpha_{\text{EI}}(\mathbf{x}) = \sigma_t(\mathbf{x}) [ z \Phi(z) + \phi(z) ],
     \label{eq:ei_formula}
-\end{equation}
-where: \(z =  \frac{f(\mathbf{x}^+) - \mu(\mathbf{x})}{\sigma(\mathbf{x})}\); \(f(\mathbf{x}^+)\) is the best function value observed so far in the optimization process; \(\mu(\mathbf{x})\) is the predicted mean of the objective function at point \(\mathbf{x}\); \(\sigma(\mathbf{x})\) is the predicted standard deviation (or uncertainty) of the objective function at point \(\mathbf{x}\); \(\Phi(\cdot)\) is the \ac{cdf} of the standard normal distribution; and \(\phi(\cdot)\) is the \ac{pdf} of the standard Normal distribution. The next evaluation point is then selected by maximizing the \ac{ei} function:
+\end{equation*}
+where: \(z =  \frac{f(\mathbf{x}^+) - \mu_t(\mathbf{x})}{\sigma_t(\mathbf{x})}\); \(f(\mathbf{x}^+)\) is the best function value observed so far in the optimization process; \(\mu_t(\mathbf{x})\) is the predicted mean of the objective function at point \(\mathbf{x}\); \(\sigma_t(\mathbf{x})\) is the predicted standard deviation (or uncertainty) of the objective function at point \(\mathbf{x}\); \(\Phi(\cdot)\) is the \ac{cdf} of the standard normal distribution; and \(\phi(\cdot)\) is the \ac{pdf} of the standard Normal distribution. The next evaluation point is then selected by maximizing the \ac{ei} function:
 
 \[
-x_t = \argmax_{\mathbf{x} \in \mathcal{D}}  \alpha_{\text{EI}}(\mathbf{x})
+\mathbf{x}_t = \argmax_{\mathbf{x} \in \mathcal{D}}  \alpha_{\text{EI}}(\mathbf{x})
 \]
 
-The formulation in equation \eqref{eq:ei_formula} allows computation of the \ac{ei} by combining the mean and standard deviation predicted by a \ac{gp}. Intuitively, it represents a trade-off between the standard deviation \(\sigma(\mathbf{x})\), which tends to promote exploration, and the \(z\) term which tends to promote exploitation of promising areas. This makes it a more comprehensive approach compared to other methods such as \ac{PI}, which focuses mainly on the probability of improvement, rather than its magnitude as well.
+The formulation in Eqn. \eqref{eq:ei_formula} allows computation of the \ac{ei} by combining the mean and standard deviation predicted by a \ac{gp}. Intuitively, it represents a trade-off between the standard deviation \(\sigma_t(\mathbf{x})\), which tends to promote exploration, and the \(z\) term which tends to promote exploitation of promising areas. This makes it a more comprehensive approach compared to other methods such as \ac{PI}, which focuses mainly on the probability of improvement, rather than its magnitude as well.
 
 The \ac{ei} function is designed to provide a more balanced approach than the \ac{PI} acquisition function, considering both the probability and magnitude of potential improvements. The EI values are higher for locations with high predicted mean values and/or high standard deviation, since the expected improvement is a combination of the probability of improvement and the size of the improvement itself. The EI selects the point that, on average, is expected to provide the greatest improvement in the objective function relative to the best-observed value. This balanced approach allows navigating the search space in a more effective way \citep{shahriari2015taking}.
 
-\ac{ei} is well regarded for providing a more robust balance between exploration and exploitation compared to \ac{PI}, which often results in a more efficient optimization process and faster convergence to optimal solutions \citep{frazier2018tutorial}. It has shown good empirical performance across a range of different optimization problems and has been adopted as the main acquisition function in many different Bayesian Optimization libraries. However, similar to \ac{PI}, \ac{ei} might not be suitable when specific high levels of accurate and precise exploration or exploitation are needed, since it still might make greedy choices and get trapped in local optima. Furthermore, its performance can also be affected by the accuracy of the Gaussian Process prediction, as its formulation depends on the model prediction for a Gaussian distribution.
+\ac{ei} is well regarded for providing a more robust balance between exploration and exploitation compared to \ac{PI}, which often results in a more efficient optimization process and faster convergence to optimal solutions \citep{frazier2018tutorial}. It has shown good empirical performance across a range of different optimization problems and has been adopted as the main acquisition function in many different Bayesian Optimization libraries. 
+However, while \ac{ei} offers better exploration compared to \ac{PI}, it still might make greedy choices and tends to over-exploit in many situations, particularly when it converges prematurely to a local optimum \citep{berk2019exploration}. Furthermore, its performance can also be affected by the accuracy of the Gaussian Process prediction, as its formulation depends on the model prediction for a Gaussian distribution.
 
 \subsubsection{Upper Confidence Bound}
 \label{section:ucb}
@@ -844,16 +895,15 @@ The \ac{ei} function is designed to provide a more balanced approach than the \a
 The \acf{ucb} acquisition function is a widely adopted strategy in Bayesian optimization, particularly when a balance between exploration and exploitation is crucial \citep{auer2002finite, srinivas2009gaussian}. \ac{ucb} operates on the principle of selecting the point with the highest upper confidence bound on its predicted value, effectively encouraging both the evaluation of points with high predicted objective values and those with high uncertainty, thus enabling a comprehensive coverage of the search space. This balance is achieved by incorporating both the predictive mean and the uncertainty (typically standard deviation) associated with that prediction into a single criterion. The \ac{ucb} strategy is appealing due to its relatively simple implementation and strong theoretical underpinnings. \ac{ucb} is a variant of the so-called "optimism in the face of uncertainty" principle, a well-established technique in the reinforcement learning field.
 
 In the context of \ac{bo}, at the optimization iteration $t$, given a set of observations $\mathcal{D}_t$ and a probabilistic predictive model, such as a \ac{gp}, which provides a mean prediction \(\mu_t(\mathbf{x})\) and a standard deviation \(\sigma_t(\mathbf{x})\) at a new point \(\mathbf{x}\), the \ac{ucb} function is defined as:
-\begin{equation}
-\alpha_{\text{UCB}}(\mathbf{x}) = \mu(\mathbf{x}) + \sqrt{\beta_t} \sigma(\mathbf{x}),
+\begin{equation*}
+\alpha_{\text{UCB}}(\mathbf{x}) = \mu_t(\mathbf{x}) + \sqrt{\beta_t} \sigma_t(\mathbf{x}),
 \label{eq:ucb_formula}
-\end{equation}
-where: \(\mu_t(\mathbf{x})\) represents the predicted mean of the objective function at point \(\mathbf{x}\), obtained from the predictive model; \(\sigma(\mathbf{x})\) denotes the predicted standard deviation (or uncertainty) of the objective function at point \(\mathbf{x}\), also derived from the predictive model; and \(\beta_t\) is a hyperparameter, often referred to as the exploration-exploitation trade-off parameter, that controls the relative importance of exploration and exploitation. A higher \(\beta_t\) encourages greater exploration, prioritizing the evaluation of points with high uncertainty, which typically correspond to less sampled regions.
+\end{equation*}
+where: \(\mu_t(\mathbf{x})\) represents the predicted mean of the objective function at point \(\mathbf{x}\), obtained from the predictive model; \(\sigma_t(\mathbf{x})\) denotes the predicted standard deviation (or uncertainty) of the objective function at point \(\mathbf{x}\), also derived from the predictive model; and \(\beta_t\) is a hyperparameter, often referred to as the exploration-exploitation trade-off parameter, that controls the relative importance of exploration and exploitation. A higher \(\beta_t\) encourages greater exploration, prioritizing the evaluation of points with high uncertainty, which typically correspond to less sampled regions.
 
 \ac{ucb} is relatively straightforward to implement and computationally efficient, requiring only simple arithmetic operations given the predictive mean and standard deviation. It has been shown to perform well in practice across a range of optimization problems, particularly in the early stages of optimization, because of its tendency to explore unknown regions efficiently. It is also accompanied by strong theoretical guarantees for convergence under certain conditions, which provides a formal justification for its effectiveness and is also a factor in its popularity among practitioners.
 
-Following \citep{srinivas2009gaussian}, assuming the chosen
-kernel has the smooth property for some constants $a, b, L > 0$:
+Following \citep{srinivas2009gaussian}, assuming the objective function $f$ has the smooth property for some constants $a, b, L > 0$:
 \[
 \mathbb{P} \left\{ \sup_{\mathbf{x} \in \mathcal{X}} \left \vert \frac{\partial f}{\partial x_i} \right \vert > L \right\} \leq a e^{-(L/b)^2}, \quad i=1 \ldots d, 
 \]
@@ -873,9 +923,9 @@ Rather than optimizing an explicit acquisition function based on a balance of me
 
 \acf{ts} does not have an explicit analytical formula for the acquisition function itself. Instead, it relies on the following iterative process, which is grounded in sampling the posterior function:
 \begin{enumerate}
-    \item \textit{Posterior Sampling}: At each step $t$,  sample a function $\Hat{f}_t$ from the posterior distribution given the observed data, i.e., sample $\Hat{f}_t \sim P(f \mid \mathcal{D}_t)$. In the case of a \ac{gp} as the predictive model, this involves sampling a mean function from the posterior with the covariance also defined by the posterior. This is achieved by sampling from a multivariate Gaussian distribution. For a \ac{gp}, the posterior distribution of the objective function $f(x)$ at a new point $x$ is given by the formula in Section \ref{section:gaussian_process}. Then \ac{ts} with \ac{gp} has a general form: $\Hat{f}_t (\cdot) \sim \mathcal{GP}(\mu_t(\cdot), \nu^2 \sigma_t(\cdot))$. Here, $\nu$ us the exploration parameter and can be time-dependent. 
+    \item \textit{Posterior Sampling}: At each step $t$,  sample a function $\Hat{f}_t$ from the posterior distribution given the observed data, i.e., sample $\Hat{f}_t \sim P(f \vert \mathcal{D}_t)$. In the case of a \ac{gp} as the predictive model, this involves sampling a mean function from the posterior with the covariance also defined by the posterior. This is achieved by sampling from a multivariate Gaussian distribution. For a \ac{gp}, the posterior distribution of the objective function $f(x)$ at a new point $x$ is given by the formula in Section \ref{section:gaussian_process}. Then \ac{ts} with \ac{gp} has a general form: $\Hat{f}_t (\cdot) \sim \mathcal{GP}(\mu_t(\cdot), \nu^2 \sigma_t(\cdot))$. Here, $\nu$ is the exploration parameter and can be time-dependent. 
     
-    \item \textit{Minimization}: Find the next location, $\mathbf{x}_{\text{new}}$, by minimizing the value of the sampled function $\Hat{f}(\mathbf{x})$, i.e., find the $\mathbf{x}$ such that $\mathbf{x}_{\text{new}} = \arg \min_\mathbf{x} \Hat{f}_t(\mathbf{x})$.
+    \item \textit{Minimization}: Find the next location, $\mathbf{x}_{t+1}$, by minimizing the value of the sampled function $\Hat{f}(\mathbf{x})$, i.e., find the $\mathbf{x}$ such that $\mathbf{x}_{t+1} = \arg \min_\mathbf{x} \Hat{f}_t(\mathbf{x})$.
 \end{enumerate}
 This process is repeated at each step to select the next evaluation point, thus making \ac{ts} an iterative and adaptive procedure, rather than a method where one can easily calculate and evaluate an acquisition function. The power of \ac{ts} lies in this step-by-step process, which balances both the exploitation and exploration capabilities.
 
@@ -883,7 +933,7 @@ This process is repeated at each step to select the next evaluation point, thus 
 
 However, the performance of \ac{ts} depends heavily on the quality of the posterior approximation and the sampling method used. For \acp{gp}, the posterior is typically a multivariate Gaussian distribution, and sampling involves drawing from this distribution at each step. In practice, the computational overhead associated with repeatedly sampling from the posterior can be higher compared to methods that rely on closed-form acquisition functions such as \ac{ucb}. For large-scale problems, this could lead to scalability issues, as sampling from the posterior involves evaluating the covariance matrix, which can become computationally expensive in high-dimensional spaces. 
 
-The use of sampling-based methods such as \ac{ts} also introduces the possibility of overfitting, especially when the model is highly flexible or the amount of observed data is small. If the posterior distribution becomes overly confident in its predictions due to a limited number of samples, the algorithm may prematurely focus on regions that do not lead to further improvements. This can be mitigated through techniques like regularization or the use of more robust probabilistic models.
+The use of sampling-based methods such as \ac{ts} also introduces the possibility of overfitting, especially when the model is highly flexible or the amount of observed data is small. This can be mitigated through techniques like regularization or the use of more robust probabilistic models.
 
 In certain cases, especially when the posterior distribution is complex, methods such as Markov Chain Monte Carlo (MCMC) are used to sample from the posterior more efficiently. While MCMC can offer more accurate posterior samples, it can also introduce additional computational complexity. The trade-off between accuracy and computational cost is an important consideration when implementing \acf{ts}.
 
@@ -900,35 +950,34 @@ Information-theoretic acquisition functions offer a different perspective on the
 Given a posterior distribution over the objective function $f$ and its corresponding location of the optimum $\mathbf{x}^*$, \ac{es} aims to maximize the expected information gain about $\mathbf{x}^*$ obtained by observing the function value at a new point $\mathbf{x}$. This process naturally links the concepts of uncertainty reduction and optimization, as reducing uncertainty about $\mathbf{x}^*$ guides the optimization process more effectively.
 
 As presented in Section \ref{section:entropy}, the entropy of a random variable quantifies the uncertainty associated with its probability distribution. Therefore, selecting the point with maximum information about $\mathbf{x}^*$ is equivalent to selecting the point that reduces the uncertainty about its location. Mathematically, the acquisition function for \ac{es} can be expressed as:
-\begin{equation}
-    \alpha_{\text{ES}}(\mathbf{x}) = \mathbb{E}_{f(\mathbf{x})\vert \mathcal{D}} \left[H(p(\mathbf{x}^* \vert \mathcal{D})) - H(p(\mathbf{x}^* \vert \mathcal{D} \cup (\mathbf{x}, f(\mathbf{x}))))\right],
-\end{equation}
-where $H(\cdot)$ represents the entropy of a probability distribution, $p(\mathbf{x}^* \vert \mathcal{D})$ is the posterior distribution over the location of the global optimum $\mathbf{x}^*$ given the observed data $\mathcal{D}$, and $p(\mathbf{x}^* \vert \mathcal{D} \cup (\mathbf{x}, f(\mathbf{x})))$ is the updated posterior distribution after evaluating the objective function at $\mathbf{x}$. The expectation $\mathbb{E}_{f(\mathbf{x}) \vert \mathcal{D}}$ is taken with respect to the predictive distribution of the function value at $\mathbf{x}$, conditioned on the observed data $\mathcal{D}$.
+\begin{equation*}
+    \alpha_{\text{ES}}(\mathbf{x}) = H(p(\mathbf{x}^* \vert \mathcal{D})) - \mathbb{E}_{p(y \vert \mathcal{D}, \mathbf{x})} \left[ H(p(\mathbf{x}^* \vert \mathcal{D} \cup (\mathbf{x}, y)))\right],
+\end{equation*}
+where $H(\cdot)$ represents the entropy of a probability distribution, $p(\mathbf{x}^* \vert \mathcal{D})$ is the posterior distribution over the location of the global optimum $\mathbf{x}^*$ given the observed data $\mathcal{D}$, and $p(\mathbf{x}^* \vert \mathcal{D} \cup (\mathbf{x}, y))$ is the updated posterior distribution after evaluating the objective function at $\mathbf{x}$. The expectation $\mathbb{E}_{p(y \vert \mathcal{D}, \mathbf{x})}$ is taken with respect to the predictive distribution of the function value at $\mathbf{x}$, conditioned on the observed data $\mathcal{D}$.
 
-The term $H(p(\mathbf{x}^* \vert \mathcal{D}))$ quantifies the posterior entropy of the optimum location before observing the new data point $\mathbf{x}$, while $H(p(\mathbf{x}^* \vert \mathcal{D} \cup (\mathbf{x}, f(\mathbf{x}))))$ represents the posterior entropy after the observation. The acquisition function seeks to maximize the reduction in entropy, prioritizing the evaluation of points that contribute the most to reducing uncertainty about $\mathbf{x}^*$.
+The term $H(p(\mathbf{x}^* \vert \mathcal{D}))$ quantifies the posterior entropy of the optimum location before observing the new data point $\mathbf{x}$, while $H(p(\mathbf{x}^* \vert \mathcal{D} \cup (\mathbf{x}, y)))$ represents the posterior entropy after the observation. The acquisition function seeks to maximize the reduction in entropy, prioritizing the evaluation of points that contribute the most to reducing uncertainty about $\mathbf{x}^*$.
 
 This information-theoretic perspective naturally emphasizes exploration in regions where the model is uncertain while also focusing on exploitation near promising candidates for the global optimum. As a result, \ac{es} is prefered in scenarios where a balance between exploration and exploitation is crucial. For instance, in multi-modal problems where local optima might mislead the optimization process, \ac{es} ensures that the search considers broader regions of the parameter space.
 
 However, while the theoretical formulation of \ac{es} is elegant and well-suited to complex optimization problems, it is computationally intensive. The evaluation of the entropy terms and the expectation over the posterior distributions often requires solving high-dimensional integrals, which can be challenging and time-consuming. Approximations and sampling methods are typically employed to make the computations tractable, but these can introduce additional complexity and computational overhead. Consequently, while \ac{es} offers significant advantages in terms of guiding the search effectively, its application is often limited to problems with manageable computational demands or where its potential benefits justify the additional cost.
 
 \subsubsection{Predictive Entropy Search}
-\acf{pes} of \citet{hernandez2014predictive} is an advanced information-theoretic acquisition function that builds upon the principles of \ac{es}. While \ac{es} focuses on reducing the entropy of the posterior distribution over the location of the global optimum, \ac{pes} offers a computationally efficient reformulation by directly evaluating the expected reduction in entropy of the predictive distribution over the function values.
+While \ac{es} focuses on reducing the entropy of the posterior distribution over the location of the global optimum, \acf{pes} offers a computationally efficient reformulation by directly evaluating the expected reduction in entropy of the predictive distribution over the function values.
 
 The fundamental idea behind \ac{pes} is to quantify the expected information gain about the location of the global optimum $\mathbf{x}^*$ when observing the objective function at a new point $\mathbf{x}$. However, instead of working with the posterior distribution over $\mathbf{x}^*$, \ac{pes} reformulates the acquisition function by focusing on the entropy of the predictive distribution of the function values. This reformulation simplifies the computation while preserving the core objective of reducing uncertainty about $\mathbf{x}^*$. The acquisition function for \ac{pes} is defined as:
-\begin{equation}
-    \alpha_{\text{PES}}(\mathbf{x}) = H(p(f(\mathbf{x}) \vert \mathcal{D})) - \mathbb{E}_{\mathbf{x}^* \vert \mathcal{D}} \left[ H(p(f(\mathbf{x}) \vert \mathcal{D}, \mathbf{x}^*)) \right],
-\end{equation}
+\begin{equation*}
+    \alpha_{\text{PES}}(\mathbf{x}) = H(p(y \vert \mathcal{D}, \mathbf{x})) - \mathbb{E}_{p(\mathbf{x}^* \vert \mathcal{D})} \left[ H(p(y \vert \mathcal{D}, \mathbf{x}, \mathbf{x}^*)) \right],
+\end{equation*}
 where:
 \begin{itemize}
-    \item $H(\cdot)$ denotes the entropy of a probability distribution.
-    \item $p(f(\mathbf{x}) \vert \mathcal{D})$ is the predictive distribution over the function value at $\mathbf{x}$ given the observed data $\mathcal{D}$.
-    \item $p(f(\mathbf{x}) \vert \mathcal{D}, \mathbf{x}^*)$ is the predictive distribution over the function value at $\mathbf{x}$, conditioned on the data $\mathcal{D}$ and the location of the optimum $\mathbf{x}^*$.
-    \item $\mathbb{E}_{\mathbf{x}^* \vert \mathcal{D}}$ represents the expectation over the posterior distribution of the global optimum location $\mathbf{x}^*$ given the observed data $\mathcal{D}$.
+    \item $p(y \vert \mathcal{D}, \mathbf{x})$ is the predictive distribution over the function value at $\mathbf{x}$ given the observed data $\mathcal{D}$.
+    \item $p(y \vert \mathcal{D}, \mathbf{x}, \mathbf{x}^*)$ is the predictive distribution over the function value at $\mathbf{x}$, conditioned on the data $\mathcal{D}$ and the location of the optimum $\mathbf{x}^*$.
+    \item $\mathbb{E}_{p(\mathbf{x}^* \vert \mathcal{D})}$ represents the expectation over the posterior distribution of the global optimum location $\mathbf{x}^*$ given the observed data $\mathcal{D}$.
 \end{itemize}
 
-The first term, $H(p(f(\mathbf{x}) \vert \mathcal{D}))$, represents the entropy of the predictive distribution over the function value at $\mathbf{x}$ before incorporating any new information about the global optimum. The second term, $\mathbb{E}_{\mathbf{x}^* \vert \mathcal{D}} \left[ H(p(f(\mathbf{x}) \vert \mathcal{D}, \mathbf{x}^*)) \right]$, represents the expected entropy of the predictive distribution after accounting for the global optimum's posterior distribution. By maximizing the difference between these terms, \ac{pes} selects the evaluation point $\mathbf{x}$ that provides the most expected information about the global optimum.
+The first term, $H(p(f(y \vert \mathcal{D}, \mathbf{x}))$, represents the entropy of the predictive distribution over the function value at $\mathbf{x}$ before incorporating any new information about the global optimum. The second term, $\mathbf{x}) \left[ H(p(f(\mathbf{x}) \vert \mathcal{D}, \mathbf{x}^*)) \right]$, represents the expected entropy of the predictive distribution after accounting for the global optimum's posterior distribution. By maximizing the difference between these terms, \ac{pes} selects the evaluation point $\mathbf{x}$ that provides the most expected information about the global optimum.
 
-The reformulation introduced by \ac{pes} offers two significant advantages over traditional \ac{es}. First, the entropy terms in \ac{pes} are evaluated directly on the predictive distributions of function values rather than the posterior over $\mathbf{x}^*$, which can simplify computation. Second, the sampling-based approach to evaluate $\mathbb{E}_{\mathbf{x}^* \vert \mathcal{D}}$ enables \ac{pes} to scale better to higher-dimensional problems and more complex posterior distributions, where exact computation of the entropy terms in \ac{es} becomes intractable.
+The reformulation introduced by \ac{pes} offers two significant advantages over traditional \ac{es}. First, the entropy terms in \ac{pes} are evaluated directly on the predictive distributions of function values rather than the posterior over $\mathbf{x}^*$, which can simplify computation. Second, the sampling-based approach to evaluate $\mathbb{E}_{p({\mathbf{x}^* \vert \mathcal{D}})}$ enables \ac{pes} to scale better to higher-dimensional problems and more complex posterior distributions, where exact computation of the entropy terms in \ac{es} becomes intractable.
 
 While \ac{pes} shares many strengths with \ac{es}, such as its ability to balance exploration and exploitation effectively and its suitability for multi-modal optimization problems, it also addresses some of the computational challenges inherent in \ac{es}. However, \ac{pes} still requires accurate sampling from the posterior over $\mathbf{x}^*$ and evaluations of the predictive distributions, which can introduce computational overhead and implementation complexity.
 
@@ -940,122 +989,124 @@ While \ac{pes} shares many strengths with \ac{es}, such as its ability to balanc
 The central idea behind \ac{mes} is to quantify the expected reduction in entropy of the maximum value of the objective function, $y^*$, after observing a new function evaluation. Here, $y^*$ represents the maximum value that the objective function can achieve over the entire search space. By reducing uncertainty about $y^*$, \ac{mes} implicitly narrows the search toward regions likely to contain the global optimum.
 
 The acquisition function for \ac{mes} is defined as:
-\begin{equation}
-    \alpha_{\text{MES}}(\mathbf{x}) = H(p(y^* \vert \mathcal{D})) - \mathbb{E}_{f(\mathbf{x}) \vert \mathcal{D}} \left[ H(p(y^* \vert \mathcal{D} \cup \{(\mathbf{x}, f(\mathbf{x}))\})) \right],
-\end{equation}
+\begin{equation*}
+\begin{split}
+    \alpha_{MES}(x) &= I(\{\mathbf{x}, y\}; y^* \vert \mathcal{D}) 
+\\
+    &= H(p(y \vert \mathcal{D}, \mathbf{x)}) - \mathbb{E}_{p(y^* \vert \mathcal{D})}\big[ H(p(y \vert \mathcal{D}, \mathbf{x}, y^*)) \big],
+\end{split}
+\end{equation*}
 where:
 \begin{itemize}
-    \item $H(\cdot)$ denotes the entropy of a probability distribution.
-    \item $p(y^* \vert \mathcal{D})$ is the current posterior distribution over the maximum value $y^*$, given the observed data $\mathcal{D}$.
-    \item $p(y^* \vert \mathcal{D} \cup \{(\mathbf{x}, f(\mathbf{x}))\})$ is the updated posterior distribution over $y^*$ after observing the function value $f(\mathbf{x})$ at $\mathbf{x}$.
-    \item $\mathbb{E}_{f(\mathbf{x}) \vert \mathcal{D}}$ represents the expectation over the predictive distribution of $f(\mathbf{x})$ conditioned on the observed data $\mathcal{D}$.
+    \item $p(y \vert \mathcal{D}, \mathbf{x})$ is the predictive distribution over the function value at $\mathbf{x}$ given the observed data $\mathcal{D}$.
+    \item \(p(y \vert \mathcal{D}, x, y^*)\) is the predictive distribution of the objective function value \(y\) at \(x\), given the observed data \(\mathcal{D}\) and the knowledge that the global maximum value is \(y^*\)
+
 \end{itemize}
 
-The first term, $H(p(y^* \vert \mathcal{D}))$, captures the current uncertainty about the maximum value $y^*$ across the search space, while the second term, $\mathbb{E}_{f(\mathbf{x}) \vert \mathcal{D}} \left[ H(p(y^* \vert \mathcal{D} \cup \{(\mathbf{x}, f(\mathbf{x}))\})) \right]$, represents the expected uncertainty after evaluating the function at $\mathbf{x}$. By maximizing the reduction in uncertainty about $y^*$, \ac{mes} selects evaluation points that are most informative about the maximum value.
+The first term, \(H(p(y \vert \mathcal{D}, \mathbf{x}))\), represents the entropy of the predictive distribution over the function value at \(\mathbf{x}\) before incorporating any new information about the global optimum, while the second term, \(\mathbb{E}_{p(y^* \vert \mathcal{D})}\left[ H(p(y \vert \mathcal{D}, \mathbf{x}, y^*)) \right]\), represents the expected entropy of the predictive distribution after conditioning on the global optimum value \(y^*\). This difference quantifies the reduction in uncertainty about the function value at \(\mathbf{x}\) due to knowledge of the global optimum, and it guides the selection of the next evaluation point to maximize information gain about \(y^*\).
+ 
 
 The computational efficiency of \ac{mes} stems from its use of $y^*$ as a one-dimensional summary of the optimization problem. Unlike \ac{es}, which requires sampling the posterior over the entire location of the optimum, \ac{mes} simplifies the entropy computations by working directly with the scalar value $y^*$. Sampling-based approximations, such as Monte Carlo integration, are used to estimate the entropies, making \ac{mes} practical even in higher-dimensional spaces.
-
-\ac{mes} is particularly effective in balancing exploration and exploitation. Points with high predictive uncertainty in regions where the function could exceed the current estimate of $y^*$ are naturally prioritized, encouraging exploration of unexplored areas. Simultaneously, regions close to known high values are also favored, supporting exploitation of promising areas.
 
 While \ac{mes} addresses many computational challenges associated with other information-theoretic methods, it still requires accurate sampling from the posterior distribution of $y^*$ and the predictive distribution of $f(\mathbf{x})$. These requirements can introduce computational overhead, especially in high-dimensional or complex posterior landscapes. However, its focused nature and simplicity often make \ac{mes} more practical and scalable compared to methods like \ac{es}.
 \subsubsection{Knowledge Gradient}
 \label{section:knowledge_gradient}
 
-The \acf{kg} acquisition function in \citet{frazier2008knowledge, wu2016parallel} provides a principled way to select evaluation points by directly optimizing the improvement in the expected value of the solution to the optimization problem. Unlike entropy-based approaches such as \ac{es} or \ac{mes}, which focus on reducing uncertainty about the global optimum or maximum value, \ac{kg} measures the value of information gained from a single evaluation in terms of its impact on the expected objective value.
+The \acf{kg} acquisition function in \citet{frazier2008knowledge, wu2016parallel} provides a principled way to select evaluation points by directly optimizing the improvement in the expected value of the solution to the optimization problem. Unlike entropy-based approaches such as \ac{es} or \ac{mes}, which focus on reducing uncertainty about the global optimum or maximum value, \ac{kg} measures the value of information gained from a single evaluation in terms of its impact on the expected objective value. Furthermore, as \acf{ei} acquisition function prioritizes points that offer the largest immediate improvement over the current best observed value, \ac{kg} explicitly considers the future impact of an evaluation on the overall optimization process. 
 
 The key idea behind \ac{kg} is to evaluate the utility of an experiment by estimating how much it improves the decision-making process. Specifically, \ac{kg} selects the point $\mathbf{x}$ that maximizes the expected increase in the maximum posterior mean value of the objective function after observing the outcome of evaluating $f(\mathbf{x})$. Formally, the \ac{kg} acquisition function is defined as:
-\begin{equation}
-    \alpha_{\text{KG}}(\mathbf{x}) = \mathbb{E}_{f(\mathbf{x}) \vert \mathcal{D}} \left[ \min_{\mathbf{x}' \in \mathcal{X}} \mu_{t+1}(\mathbf{x}') \right] - \min_{\mathbf{x}' \in \mathcal{X}} \mu_t(\mathbf{x}'),
-\end{equation}
+\begin{equation*}
+    \alpha_{\text{KG}}(\mathbf{x}) = \mathbb{E}_{f(\mathbf{x}) \vert \mathcal{D}} \left[ \min_{\mathbf{x} \in \mathcal{X}} \mu_{t+1}(\mathbf{x}) \right] - \min_{\mathbf{x} \in \mathcal{X}} \mu_t(\mathbf{x}),
+\end{equation*}
 where:
 \begin{itemize}
-    \item $\mu_t(\mathbf{x}')$ is the posterior mean of the objective function at $\mathbf{x}'$ given the current data $\mathcal{D}$.
-    \item $\mu_{t+1}(\mathbf{x}')$ is the updated posterior mean after observing the value of $f(\mathbf{x})$ at $\mathbf{x}$.
+    \item $\mu_t(\mathbf{x})$ is the posterior mean of the objective function at $\mathbf{x}$ given the current data $\mathcal{D}$.
+    \item $\mu_{t+1}(\mathbf{x})$ is the updated posterior mean after observing the value of $f(\mathbf{x})$ at $\mathbf{x}$.
     \item $\mathbb{E}_{f(\mathbf{x}) \vert \mathcal{D}}$ denotes the expectation over the predictive distribution of $f(\mathbf{x})$ given the observed data $\mathcal{D}$.
 \end{itemize}
 
-The first term, $\mathbb{E}_{f(\mathbf{x}) \vert \mathcal{D}} \left[ \min_{\mathbf{x}' \in \mathcal{X}} \mu_{t+1}(\mathbf{x}') \right]$, represents the expected maximum posterior mean after evaluating $f(\mathbf{x})$. The second term, $\min_{\mathbf{x}' \in \mathcal{X}} \mu_t(\mathbf{x}')$, is the current minimum posterior mean. The \ac{kg} acquisition function seeks to maximize the difference between these two quantities, guiding evaluations to points that are expected to improve the decision about the best location.
+The first term, $\mathbb{E}_{f(\mathbf{x}) \vert \mathcal{D}} \left[ \min_{\mathbf{x} \in \mathcal{X}} \mu_{t+1}(\mathbf{x}) \right]$, represents the expected minimum posterior mean after evaluating $f(\mathbf{x})$. The second term, $\min_{\mathbf{x} \in \mathcal{X}} \mu_t(\mathbf{x})$, is the current minimum posterior mean. The \ac{kg} acquisition function seeks to maximize the difference between these two quantities, guiding evaluations to points that are expected to improve the decision about the best location.
 
-The \ac{kg} approach has several appealing properties. By directly focusing on the impact of new information on decision-making, \ac{kg} inherently balances exploration and exploitation. Points in regions with high uncertainty are likely to lead to significant updates in the posterior mean, encouraging exploration. Meanwhile, points near current estimates of the maximum mean are prioritized for exploitation.
+The \ac{kg} approach has several appealing properties. By directly focusing on the impact of new information on decision-making, \ac{kg} inherently balances exploration and exploitation. Points in regions with high uncertainty are likely to lead to significant updates in the posterior mean, encouraging exploration. Meanwhile, points near current estimates of the minimum mean are prioritized for exploitation.
 
-\ac{kg} is particularly effective in problems where evaluations are expensive, and it is crucial to optimize every experiment to maximize learning. Its ability to quantify the value of information gained from a single evaluation makes it a strong candidate for sequential optimization settings. However, implementing \ac{kg} can be computationally demanding. The expectation over the predictive distribution and the maximization over the posterior mean both require accurate approximation techniques, such as Monte Carlo integration or surrogate modeling with Gaussian processes. In high-dimensional or highly multimodal problems, the computational cost can increase significantly, requiring careful optimization strategies.
+\ac{kg} is particularly effective in problems where evaluations are expensive, and it is crucial to optimize every experiment to optimize learning. Its ability to quantify the value of information gained from a single evaluation makes it a strong candidate for sequential optimization settings. However, implementing \ac{kg} can be computationally demanding. The expectation over the predictive distribution and the minimization over the posterior mean both require accurate approximation techniques, such as Monte Carlo integration or surrogate modeling with Gaussian processes. In high-dimensional or highly multimodal problems, the computational cost can increase significantly, requiring careful optimization strategies.
 
 \subsection{Bandit-based Optimization}
 Bandit-based optimization is a foundational framework in sequential decision-making and optimization under uncertainty. The central objective is to maximize cumulative rewards over time while balancing exploration (gathering information about suboptimal choices) and exploitation (leveraging known high-reward choices). This paradigm is often used in various applications such as recommendation systems, clinical trials, and Bayesian optimization \citep{lattimore2020bandit, bubeck2012regret}.
 
 \subsubsection{Multi-armed Bandits}
-The \ac{mab} problem is a classic formulation in the bandit optimization framework. It derives its name from a metaphorical scenario involving a gambler faced with a row of slot machines (or "one-armed bandits"), each with an unknown probability distribution of payouts. The gambler must decide which machines to play, in what order, and how many times, to maximize their total reward over a sequence of trials \citep{robbins1952some}. Formally, the \ac{mab} problem can be described as follows:
+The \ac{mab} problem is a classic formulation in the bandit optimization framework. It derives its name from a metaphorical scenario involving a gambler faced with a row of slot machines (or "one-armed bandits"), each with an unknown probability distribution of payouts. The gambler must decide which machines to play, to maximize their total reward over a sequence of trials \citep{robbins1952some}. Formally, the \ac{mab} problem can be described as follows:
 \begin{itemize}
     \item There are $K$ arms (options), indexed by $i \in \{1, 2, \ldots, K\}$.
     \item Each arm $i$ is associated with a reward distribution $P_i$, with an unknown mean reward $\mu_i = \mathbb{E}[r_i]$, where $r_i$ is the reward obtained from pulling arm $i$.
     \item At each time step $t \in \{1, 2, \ldots, T\}$, the player selects an arm $a_t \in \{1, 2, \ldots, K\}$ and observes a stochastic reward $r_{a_t} \sim P_{a_t}$.
     \item The goal is to maximize the cumulative reward over $T$ rounds:
-    \begin{equation}
+    \begin{equation*}
         R_T = \sum_{t=1}^T r_{a_t}.
-    \end{equation}
+    \end{equation*}
 \end{itemize}
 
 The core challenge lies in the trade-off between \textit{exploration} - pulling less-sampled arms to estimate their reward distributions and \textit{exploitation} - pulling arms with known high rewards to accumulate gains. This trade-off is typically quantified using the concept of \textbf{regret}, which quantifies the cumulative loss incurred by not always selecting the optimal arm.
 
-\paragraph{Regret Minimization}
+\paragraph{Regret:}
 Regret measures the difference between the cumulative reward of an optimal strategy and the actual cumulative reward obtained by a given algorithm. Formally, the \textit{cumulative regret} $R(T)$ is defined as:
-\begin{equation}
+\begin{equation*}
     R(T) = T \mu^* - \mathbb{E}\left[\sum_{t=1}^T r_{a_t}\right],
-\end{equation}
+\end{equation*}
 where $\mu^* = \max_{i \in \{1, \ldots, K\}} \mu_i$ is the mean reward of the optimal arm. The objective of any bandit algorithm is to minimize $R(T)$ as $T$ grows large.
 
 \subsubsection{Algorithms for MAB}
 Several algorithms have been developed to solve the MAB problem effectively. Key strategies include:
 
-\paragraph{$\epsilon$-Greedy Algorithm}
+\paragraph{$\epsilon$-Greedy Algorithm:}
 The $\epsilon$-greedy algorithm balances exploration and exploitation by selecting the arm with the highest estimated mean reward with probability $1 - \epsilon$, and exploring a random arm with probability $\epsilon$. Formally, at each time step $t$, the algorithm selects:
-\begin{equation}
+\begin{equation*}
     a_t =
     \begin{cases}
-        \arg \max_i \hat{\mu}_i & \text{with probability } 1 - \epsilon, \\
+        \arg \max_{i} \hat{\mu}_{t,i} & \text{with probability } 1 - \epsilon, \\
         \text{randomly select from } \{1, \ldots, K\} & \text{with probability } \epsilon,
     \end{cases}
-\end{equation}
-where $\hat{\mu}_i$ is the estimated mean reward of arm $i$ based on past observations.
+\end{equation*}
+where $\hat{\mu}_{t,i}$ is the estimated mean reward of arm $i$ at step $t$ based on past observations.
 
-\paragraph{Upper Confidence Bound Algorithm}
+\paragraph{Upper Confidence Bound Algorithm:}
 The \ac{ucb} algorithm addresses the exploration-exploitation trade-off by assigning a confidence interval to each arm’s estimated mean reward and selecting the arm with the highest upper confidence bound. At each step $t$, the arm $a_t$ is chosen as:
-\begin{equation}
-    a_t = \arg \max_i \left( \hat{\mu}_i + \sqrt{\frac{2 \ln t}{n_i}} \right),
-\end{equation}
+\begin{equation*}
+    a_t = \arg \max_i \left( \hat{\mu}_{t,i} + \sqrt{\frac{2 \ln t}{n_i}} \right),
+\end{equation*}
 where $n_i$ is the number of times arm $i$ has been pulled, and $\ln t$ encourages exploration by weighting uncertainty higher in earlier stages. The UCB algorithm is particularly effective due to its logarithmic regret bounds \citep{auer2002finite}.
 
-\paragraph{Thompson Sampling (TS)}
+\paragraph{Thompson Sampling (TS):}
 \acf{ts} is a Bayesian approach to \ac{mab} problems, where posterior distributions over the mean rewards of each arm are maintained and updated based on observed rewards. At each time step, an arm is sampled from its posterior distribution and played. Formally, the algorithm selects:
-\begin{equation}
-    a_t = \arg \max_i \mu_i^{(t)},
-\end{equation}
-where $\mu_i^{(t)}$ is a sample from the posterior distribution of arm $i$. \ac{ts} has been shown to achieve asymptotically optimal regret in many settings \citep{agrawal2012analysis}.
+\begin{equation*}
+    a_t = \arg \max_i \bar{\mu}_{t,i},
+\end{equation*}
+where $\bar{\mu}_{t,i}$ is a sample from the posterior distribution of arm $i$ with estimated mean reward $\hat{\mu}_{t,i}$. \ac{ts} has been shown to achieve asymptotically optimal regret in many settings \citep{agrawal2012analysis}.
 
 \subsubsection{Contextual Bandits}
-Contextual bandits extend the multi-armed bandit framework by introducing a context $\mathbf{c}_t \in \mathcal{C}$ at each round $t$. This context provides additional information to inform the decision-making process, allowing for more tailored arm selections. The challenge lies in effectively modeling the relationship between context and reward, as well as balancing exploration and exploitation in this extended setting. At each step, the algorithm observes a context vector $\mathbf{x}_t$ before selecting an arm. The objective is to learn a mapping from contexts to arm selection policies that maximize cumulative rewards. This framework has found widespread applications in areas such as personalized recommendations and adaptive experimentation \citep{li2010contextual}. In contrast to traditional multi-armed bandits, contextual bandits incorporate context. This integration allows for more adaptive and precise policy learning, which is crucial in dynamic and personalized environments.
+Contextual bandits extend the multi-armed bandits framework by introducing a context $\mathbf{c}_t \in \mathcal{C}$ at each round $t$. This context provides additional information to inform the decision-making process, allowing for more tailored arm selections. The challenge lies in effectively modeling the relationship between context and reward, as well as balancing exploration and exploitation in this extended setting. At each step, the algorithm observes a context vector $\mathbf{c}_t$ before selecting an arm. The objective is to learn a mapping from contexts to arm selection policies that maximize cumulative rewards. This framework has found widespread applications in areas such as personalized recommendations and adaptive experimentation \citep{li2010contextual}. This integration allows for more adaptive and precise policy learning, which is crucial in dynamic and personalized environments.
  
-Formally, contextual bandit problems involve a sequential decision-making process where, at each time step $t$, an agent observes a \textit{context} $\mathbf{c}_t \in \mathcal{X}$, selects an \textit{action} $a_t \in \mathcal{A}$, and receives a \textit{reward} $r_t$. Unlike standard \ac{mab} problems, contextual bandits leverage the context $\mathbf{c}_t$ to inform the action selection process.  The objective is to maximize the cumulative reward over a sequence of interactions.  Having established the problem setting of contextual bandits, we now present the general step of a standard Contextual Bandit Algorithm.
+Formally, contextual bandit problems involve a sequential decision-making process where, at each time step $t$, an agent observes a \textit{context} $\mathbf{c}_t \in \mathcal{X}$, selects an \textit{action} $a_t \in \mathcal{A}$, and receives a \textit{reward} $r_t$. The objective is to maximize the cumulative reward over a sequence of interactions.  Having established the problem setting of contextual bandits, we now present the general step of a standard Contextual Bandit Algorithm.
 
-\paragraph{Steps in a Contextual Bandit Algorithm.}
+\paragraph{Steps in a Contextual Bandit Algorithm:}
 A standard contextual bandit algorithm typically proceeds as follows:
 \begin{enumerate}
-    \item \textbf{Observe context:} A new data point arrives, described by a context $\mathbf{c}_t$ (e.g., a user with specific attributes such as device type and location).
-    \item \textbf{Select action:} Based on the observed context and the exploration strategy (e.g., $\epsilon$-Greedy or \acl{ts}), the algorithm selects an action $a_t$ (e.g., a recommendation or treatment).
-    \item \textbf{Receive reward:} After the action is performed, the algorithm observes the outcome $r_t$ (e.g., a user's response or purchase behavior).
+    \item \textbf{Observe context:} A new data point arrives, described by a context $\mathbf{c}_t$ (e.g., a user with specific attributes such as device type and browsing history).
+    \item \textbf{Select action:} Based on the observed context and the exploration strategy (e.g., $\epsilon$-Greedy or \ac{ts}), the algorithm selects an action $a_t$ (e.g., displaying a specific advertisement).
+    \item \textbf{Receive reward:} After the action is performed, the algorithm observes the outcome $r_t$ (e.g., whether the user clicked on the advertisement or made a purchase).
     \item \textbf{Update model:} The model is updated using the new context-action-reward tuple. To reduce noise, updates are often performed in batches rather than after every single sample.
     \item \textbf{Repeat:} This process continues over multiple rounds to optimize the cumulative reward.
 \end{enumerate}
 
-In contextual bandits, the context $\mathbf{c}_t$ acts as side information that is observed before selecting an arm. This involves a trade-off between exploring different actions to learn their potential rewards and exploiting actions that are known to produce good rewards given the current context. However, unlike classical multi-armed bandits, where exploration focuses solely on the arms, contextual bandits require exploration across both arms and the context space. This dual exploration-exploitation trade-off leads to questions such as:
+In contextual bandits, the context $\mathbf{c}_t$ acts as side information that is observed before selecting an arm. This involves a trade-off between exploring different actions to learn their potential rewards and exploiting actions that are known to produce good rewards given the current context. This dual exploration-exploitation trade-off leads to questions such as:
 \begin{itemize}
-    \item Should rare or less-sampled contexts be prioritized during exploration?
-    \item How can the algorithm balance exploring unseen arms versus unseen contexts?
+    \item In some situations, where one can select context, should rare or less-sampled contexts be prioritized during exploration?
+    \item How can the algorithm balance exploring unseen arms?
 \end{itemize}
-Furthermore, the success of contextual bandit algorithms heavily depends on the choice of the model used to estimate the expected reward. Hence, it introduces challenges such as modeling the reward function $r(\mathbf{c}_t, a)$, which maps context-arm pairs to rewards or managing the complexity of high-dimensional contexts while ensuring computational tractability. To address these challenges, it is crucial to select robust methods for modeling the reward function. A well-suited model not only needs to capture the underlying patterns and dependencies accurately but also maintain a balance between computational efficiency and predictive performance.
+Furthermore, the success of contextual bandit algorithms heavily depends on the choice of the model used to estimate the expected reward. This introduces challenges like modeling the reward function $r(\mathbf{c}_t, a)$, which links context-arm pairs to rewards, and handling high-dimensional contexts while keeping computations efficient. To address these challenges, it is crucial to select robust methods for modeling the reward function. A well-suited model not only needs to capture the underlying patterns and dependencies accurately but also maintain a balance between computational efficiency and predictive performance.
 
-\paragraph{Modeling the Reward Function.} 
-$\mathbb{E}[r_t \mid \mathbf{c}_t, a]$:
+\paragraph{Modeling the Reward Function:} 
+$\mathbb{E}[r_t \vert \mathbf{c}_t, a]$:
 \begin{itemize}
     \item Linear models offer simplicity and computational efficiency but are limited in capturing non-linear relationships.
     \item Non-linear models, such as neural networks, provide flexibility but come at the cost of increased computational overhead and the need for larger datasets to generalize effectively.
@@ -1073,25 +1124,25 @@ To address these challenges, various algorithms have been proposed using both li
 
 \subsubsection{Linear Bandits}
 Linear models assume that the expected reward for a given context and action can be represented as a linear combination of some features. Specifically, we assume there exists an unknown parameter vector $\boldsymbol{\theta}$ such that the expected reward can be approximated by the inner product of this vector with a context-action feature vector:
-\begin{equation}
+\begin{equation*}
     \mathbb{E}[r_t  \vert  \mathbf{c}_t, a_t] = \boldsymbol{\theta}^T \phi(\mathbf{c}_t, a_t)
-\end{equation}
+\end{equation*}
 where $\phi(\mathbf{c}_t, a_t)$ is the feature mapping of context $\mathbf{c}_t$ and action $a_t$ into a feature vector.
 
-\paragraph{Linear Upper Confidence Bound (LinUCB) Algorithm}
-LinUCB operates by maintaining an estimate of the parameter vector $\boldsymbol{\theta}$, and using confidence bounds to balance exploration and exploitation. It calculates an upper confidence bound on the expected reward using a known hyperparameter $\alpha$ to balance exploration/exploitation trade-off. At each time step, the action that maximizes the upper confidence bound is selected. The algorithm works as follows:
+\paragraph{Linear Upper Confidence Bound (LinUCB) Algorithm:}
+LinUCB in \citet{dani2008stochastic, li2010contextual} operates by maintaining an estimate of the parameter vector $\boldsymbol{\theta}$, and using confidence bounds to balance exploration and exploitation. It calculates an upper confidence bound on the expected reward using a known hyperparameter $\alpha$ to balance exploration/exploitation trade-off. At each time step, the action that maximizes the upper confidence bound is selected. The algorithm works as follows:
     \begin{enumerate}
-        \item Initialize $\mathbf{A}_0 = \mathbf{I}$ (identity matrix), $\mathbf{b}_0 = \mathbf{0}$, $\hat{\boldsymbol{\theta}}_0 = \mathbf{0}$.
+        \item Initialize design matrix $\mathbf{A}_0 = \mathbf{I}$ (identity matrix), $\mathbf{b}_0 = \mathbf{0}$, $\hat{\boldsymbol{\theta}}_0 = \mathbf{0}$.
         \item At each time step $t$:
           \begin{enumerate}
-              \item Observe context $\mathbf{x}_t$.
+              \item Observe context $\mathbf{c}_t$.
               \item For each action $a \in \mathcal{A}$, compute:
               \begin{align*}
                 \hat{r}_t(a) &= \hat{\boldsymbol{\theta}}_{t-1}^T \phi(\mathbf{c}_t, a) + \alpha \sqrt{ \phi(\mathbf{c}_t, a)^T \mathbf{A}_{t-1}^{-1} \phi(\mathbf{c}_t, a)}
               \end{align*}
               \item Select action $a_t = \text{argmax}_{a \in \mathcal{A}} \hat{r}_t(a)$.
               \item Observe reward $r_t$.
-              \item Update:
+              \item Update parameters:
               \begin{align*}
                   \mathbf{A}_t &= \mathbf{A}_{t-1} + \phi(\mathbf{c}_t, a_t) \phi(\mathbf{c}_t, a_t)^T \\
                   \mathbf{b}_t &= \mathbf{b}_{t-1} + r_t \phi(\mathbf{c}_t, a_t) \\
@@ -1099,28 +1150,36 @@ LinUCB operates by maintaining an estimate of the parameter vector $\boldsymbol{
               \end{align*}
           \end{enumerate}
     \end{enumerate}
-\paragraph{Thompson Sampling for Linear Models}: \acf{ts} for linear bandits also attempts to learn the weight vector $\boldsymbol{\theta}$ by maintaining a posterior distribution over these weights. At each step, the agent samples a weight vector from the posterior, and uses this weight vector to select the action that maximizes the reward. The algorithm works as follows:
+LinUCB is proved to achieve a regret bound of \( \tilde{\mathcal{O}}(d \sqrt{T}) \), as stated in \citet{dani2008stochastic}. Here, \( d \) is the dimensionality of the feature vector. This bound demonstrates that the regret grows sublinearly with \( T \), ensuring that the algorithm becomes more efficient as it collects more observations.
+
+\paragraph{Thompson Sampling for Linear Models:} \acf{ts} for linear bandits \citep{agrawal2013thompson} also attempts to learn the weight vector $\hat{\boldsymbol{\theta}}$ by maintaining a posterior distribution over these weights. At each step, the agent samples a weight vector from the posterior, and uses this weight vector to select the action that maximizes the reward. The algorithm works as follows:
     \begin{enumerate}
-    \item Initialize the posterior using a prior distribution for $\boldsymbol{\theta}$ and a covariance matrix. Usually a gaussian distribution is used for the prior.
+    \item Initialize design matrix $\mathbf{A}_0$, bias vector $\mathbf{b}_0$ and parameter $\hat{\boldsymbol{\theta}}_0$ as in LinUCB. 
     \item At each time step $t$:
       \begin{enumerate}
         \item Observe context $\mathbf{c}_t$.
-        \item Sample parameter $\hat{\boldsymbol{\theta}}_t$ from posterior distribution.
-        \item Select action $a_t = \text{argmax}_{a \in \mathcal{A}} \hat{\boldsymbol{\theta}}_t^T \phi(\mathbf{c}_t, a)$.
+        \item Sample parameter $\widetilde{\boldsymbol{\theta}}_t \sim \mathcal{N}(\hat{\boldsymbol{\theta}}_t, \mathbf{A}_t^{-1})$. 
+        \item Select action $a_t = \text{argmax}_{a \in \mathcal{A}} \widetilde{\boldsymbol{\theta}}_t^T \phi(\mathbf{c}_t, a)$.
         \item Observe reward $r_t$.
-        \item Update the posterior distribution based on observation.
+        \item Update parameters:
+              \begin{align*}
+                  \mathbf{A}_t &= \mathbf{A}_{t-1} + \phi(\mathbf{c}_t, a_t) \phi(\mathbf{c}_t, a_t)^T \\
+                  \mathbf{b}_t &= \mathbf{b}_{t-1} + r_t \phi(\mathbf{c}_t, a_t) \\
+                  \hat{\boldsymbol{\theta}}_t &= \mathbf{A}_t^{-1} \mathbf{b}_t
+              \end{align*}
       \end{enumerate}
     \end{enumerate}
+\citet{agrawal2013thompson} proved that the regret of \ac{ts}-based linear contextual bandits satisfies the bound $\tilde{\mathcal{O}}(d^2 \sqrt{T})$, where \( d \) is the dimension of the context vectors. This regret bound indicates that the cumulative regret grows sublinearly with \( T \), ensuring that the average regret per round decreases over time. 
 
-Linear models offer several advantages, making them a popular choice in contextual bandit algorithms. They are computationally efficient, requiring fewer resources and enabling faster computations, which is particularly valuable in large-scale applications. Their simplicity makes them easier to understand and implement, reducing the complexity of algorithm design. Additionally, linear models often come with well-established theoretical guarantees, providing performance bounds that enhance their reliability. However, these models also have notable limitations. They struggle to capture complex non-linear relationships, which can result in poor performance when the underlying connection between context, action, and reward deviates from linearity. Furthermore, their effectiveness heavily depends on the quality of feature mappings, as the performance hinges on well-designed features in $\phi(\mathbf{x}_t, a_t)$. To mitigate these limitations, proper feature engineering and careful tuning of hyperparameters are critical to achieving good performance with linear bandit algorithms.
+Linear models offer several advantages, making them a popular choice in contextual bandit algorithms. They are computationally efficient, requiring fewer resources and enabling faster computations, which is particularly valuable in large-scale applications. Their simplicity makes them easier to understand and implement, reducing the complexity of algorithm design. Additionally, linear models often come with well-established theoretical guarantees, providing performance bounds that enhance their reliability. However, these models also have notable limitations. They struggle to capture complex non-linear relationships, which can result in poor performance when the underlying connection between context, action, and reward deviates from linearity. Furthermore, their effectiveness heavily depends on the quality of feature mappings, as the performance hinges on well-designed features in $\phi(\mathbf{c}_t, a_t)$. To mitigate these limitations, proper feature engineering and careful tuning of hyperparameters are critical to achieving good performance with linear bandit algorithms.
 To address the limitations of linear models in capturing complex relationships, non-linear models offer a more flexible and expressive alternative. 
 
 
 \subsubsection{Non-Linear Bandits}
 Non-linear models relax the linearity assumption and allow the expected reward for a given context and action to be represented by more complex, non-linear functions. These models aim to capture intricate relationships between the context, action, and reward, which are often observed in real-world scenarios. Formally, we assume the expected reward can be expressed as:
-\begin{equation}
+\begin{equation*}
     \mathbb{E}[r_t  \vert  \mathbf{c}_t, a_t] = f(\mathbf{x}_{t,a}, \boldsymbol{\theta_t}),
-\end{equation}
+\end{equation*}
 where $f$ is a non-linear function, such as a neural network, and $\mathbf{x}_{t,a}  = \phi(\mathbf{c}_t, a_t)$ is the feature mapping of the context $\mathbf{c}_t$ and action $a_t$.
 
 \paragraph{Neural Upper Confidence Bound (NeuralUCB) Algorithm}
@@ -1132,12 +1191,11 @@ NeuralUCB \citep{zhou2020neural} is an advanced algorithm for addressing the sto
         \item Observe feature vectors $\{\mathbf{x}_{t,a}\}_{a=1}^K$.
         \item For each round \( t \) and for each action \( a \), compute the \ac{ucb} as follows:
         \[
-        \hat{r}_{t,a} = f(\mathbf{x}_{t,a}; \boldsymbol{\theta}_{t-1}) + \gamma_{t-1} \sqrt{\mathbf{g}(\mathbf{x}_{t,a}; \boldsymbol{\theta}_{t-1})^\top \mathbf{A}_{t-1}^{-1} \mathbf{g}(\mathbf{x}_{t,a}; \boldsymbol{\theta}_{t-1}) / m}, 
+        \hat{h}_{t,a} = f(\mathbf{x}_{t,a}; \boldsymbol{\theta}_{t-1}) + \gamma_{t-1} \sqrt{\mathbf{g}(\mathbf{x}_{t,a}; \boldsymbol{\theta}_{t-1})^\top \mathbf{A}_{t-1}^{-1} \mathbf{g}(\mathbf{x}_{t,a}; \boldsymbol{\theta}_{t-1}) / m}, 
         \]
-        where $\mathbf{g}(\cdot; \boldsymbol{\theta}) = \nabla_{\boldsymbol{\theta}} f(\cdot, \boldsymbol{\theta})$ is the gradient of the neural network function. 
-        \item Select action $a_t = \text{argmax}_{a \in \mathcal{A}} \hat{r}_t(a)$.
-        \item Select the action \( a_t \) that maximizes the UCB: $ a_t = \arg\max_{a \in [K]} \hat{r}_{t,a}.$
-        \item Observe reward $r_t$ and update the neural network parameters $\theta$ to minimize the prediction error.
+        where $\mathbf{g}(\cdot; \boldsymbol{\theta}) = \nabla_{\boldsymbol{\theta}} f(\cdot, \boldsymbol{\theta})$ is the gradient of the neural network function with respect to its parameters.  
+        \item Select the action \( a_t \) that maximizes the UCB: $ a_t = \arg\max_{a \in [K]} \hat{h}_{t,a}.$
+        \item Observe reward $r_{t, a_t}$ and update the neural network parameters $\boldsymbol{\theta}$ using the existing observations to minimize the prediction error.
         \item Update the regularization matrix:
             \[
             \mathbf{A}_t = \mathbf{A}_{t-1} + \frac{\mathbf{g}(\mathbf{x}_{t,a_t}; \boldsymbol{\theta}_t) \mathbf{g}(\mathbf{x}_{t,a_t}; \boldsymbol{\theta}_t)^\top}{m}.
@@ -1151,7 +1209,7 @@ NeuralUCB \citep{zhou2020neural} is an advanced algorithm for addressing the sto
 Neural Thompson Sampling (NeuralTS) \citep{zhang2021neural} is an advanced algorithm designed for the stochastic contextual bandit problem, where the reward function is highly complex and potentially non-linear.
 While NeuralUCB employs an upper confidence bound framework to guide exploration based on uncertainty, NeuralTS adopts a probabilistic approach by sampling reward estimates from a posterior distribution. NeuralTS extends traditional \acl{ts} approaches by employing deep neural networks to model the reward structure while maintaining computational efficiency through a random feature mapping. Unlike classical Thompson sampling methods, NeuralTS uses neural networks for representation learning and uncertainty quantification. The key steps are as follows:  
 \begin{enumerate}  
-    \item Initialize $\mathbf{A}_0 = \lambda \mathbf{I}$, where $\lambda$ is a regularization parameter, and initialize neural network weights $\boldsymbol{\theta}_0$ randomly. NeuralTS starts with a random initialization for the weight matrices $\mathbf{W}$ across all layers, sampled from Gaussian distributions independently and scaled by the network width \(m\).  
+    \item Initialize $\mathbf{A}_0 = \lambda \mathbf{I}$, where $\lambda$ is a regularization parameter, and initialize neural network weights $\boldsymbol{\theta}_0$ randomly which is sampled from Gaussian distributions independently and scaled by the network width \(m\).  
     \item At each time step \(t\):  
     \begin{enumerate}  
         \item Observe the context vectors $\{\mathbf{x}_{t,a}\}_{a=1}^K$ for the available actions.  
@@ -1160,12 +1218,12 @@ While NeuralUCB employs an upper confidence bound framework to guide exploration
         \sigma^2_{t,a} = \lambda \, \mathbf{g}(\mathbf{x}_{t,a}; \boldsymbol{\theta}_{t-1})^\top \mathbf{U}_{t-1}^{-1} \mathbf{g}(\mathbf{x}_{t,a}; \boldsymbol{\theta}_{t-1}) / m,  
         \]  
         where $\mathbf{g}(\cdot; \boldsymbol{\theta}) = \nabla_{\boldsymbol{\theta}} f(\cdot; \boldsymbol{\theta})$ is the gradient of the neural network function with respect to its parameters.  
-        \item Sample a reward estimate for each action \(a\):  
+        \item Sample a reward value for each action \(a\):  
         \[  
-        \tilde{r}_{t,a} \sim \mathcal{N}(f(\mathbf{x}_{t,k}; \boldsymbol{\theta}_{t-1}), \nu^2 \sigma^2_{t,k}),  
+        \hat{h}_{t,a} \sim \mathcal{N}(f(\mathbf{x}_{t,a}; \boldsymbol{\theta}_{t-1}), \nu^2 \sigma^2_{t,a}),  
         \]  
-        where \(\nu\) controls the exploration variance.  
-        \item Select the action \(a_t = \arg\max_k \tilde{r}_{t,k}\) and observe the reward \(r_{t,a_t}\).  
+        where \(\nu\) controls the exploration.  
+        \item Select the action \(a_t = \arg\max_{a \in \mathcal{A}} \hat{h}_{t,a}\) and observe the reward \(r_{t,a_t}\).  
         \item Update the neural network parameters \(\boldsymbol{\theta}\) by performing gradient descent on the prediction error.  
         \item Update the matrix $\mathbf{A}_t$:  
         \[  
@@ -1241,7 +1299,7 @@ Cumulative regret provides a measure of how efficiently the algorithm balances e
 
 \subsubsection{Comparison and Relevance}
 
-Simple regret and cumulative regret capture different trade-offs in BO. Simple regret focuses solely on the quality of the final solution and is particularly suited for offline optimization problems, where the cost of intermediate evaluations is less critical. In contrast, cumulative regret is more relevant in settings where every evaluation incurs a cost, such as online optimization, and emphasizes the efficiency of the entire optimization process. Both metrics are essential for evaluating the performance of BO algorithms, offering complementary insights into their behavior and effectiveness across various applications.
+Simple regret and cumulative regret capture different trade-offs in \ac{bo}. Simple regret focuses solely on the quality of the final solution and is particularly suited for offline optimization problems, where the cost of intermediate evaluations is less critical. In contrast, cumulative regret is more relevant in settings where every evaluation incurs a cost, such as online optimization, and emphasizes the efficiency of the entire optimization process. Both metrics are essential for evaluating the performance of \ac{bo} algorithms, offering complementary insights into their behavior and effectiveness across various applications.
 
 \section{Black-box Optimization with Unknown Black-box Constraints}
 \label{section:bo_unknown_constraints}
@@ -1314,14 +1372,21 @@ In the realm of objective functions encountered in scientific and engineering do
 Recently, the \acf{pinn} was introduced in \citet{raissi2019physics,yang2021b}, which offers a viable approach for tackling general \acp{pde}. Unlike \ac{gp}, \ac{pinn} leverages the expressive power of neural networks to approximate complex, nonlinear relationships within the data. This inherent flexibility enables \ac{pinn} to handle a broader range of \acp{pde} including nonlinear \acp{pde}, making them well-suited for diverse scientific and engineering applications. Further, there is research providing a deeper insight into the theoretical aspect of incorporating the \acp{pde} using \ac{pinn} \citep{schiassi2021extreme,wangL2}, and analyzing the connection between \ac{gp} and \ac{pinn} models to learn the underlying functions that satisfy \ac{pde} equations \citep{wang2022and}. 
 
 As the \acp{pde} hold promise as a valuable source of information, they could greatly improve the modeling of the black-box function and thus help towards sample-efficient optimization, reducing the number of function evaluations. It is worth noting that there has been relatively little exploration of how \acp{pde} can be leveraged in the context of black-box optimization settings, where the objective function is treated as an unknown and potentially noisy function.
-\section{Further Research in Black-box Optimization}
+
+
+\section{Open Problems in Black-box Optimization}
 \label{section:bo_further_research}
 
-In this chapter, we have introduced the foundational background necessary to support research in \acl{bo}, highlighting key challenges and identifying unexplored problems in the field. In particular, we emphasized the computational expense of \ac{bo} when \aclp{gp} are used as surrogate models, motivating the search for alternative approaches. This thesis addresses this gap by exploring the use of \aclp{dnn} as surrogate models in BO.
+In this chapter, we have introduced the foundational background necessary for research in \acl{bo}, highlighting key challenges and identifying unexplored problems in the field. In particular, we emphasized the computational cost of \ac{bo} when \aclp{gp} are used as surrogate models, which motivates the need for alternative approaches. Despite recent progress, several important problems remain unsolved.
 
-The following chapters present our contributions to advancing \ac{bo} methodologies. Chapter \ref{chap:neural-bo} introduces a \ac{dnn}-based approach for \ac{bo} under the standard, unconstrained setting. Building on this, Chapters \ref{chap:neural-cbo} and \ref{chap:pinn-bo} shift focus to constrained BO, tackling scenarios where constraints are either unknown or derived from physical knowledge. Chapter \ref{chap:neural-cbo} extends the use of \acp{dnn} to model both the objective function and black-box constraints, offering a robust framework for constrained optimization. In Chapter \ref{chap:pinn-bo}, we leverage physical knowledge encoded as \aclp{pde} to enrich the optimization process. Here, we propose a \acl{pinn} based method that integrates known physical laws to enhance both modeling accuracy and exploration efficiency.
+First, developing a \ac{dnn}-based approach for \ac{bo} in the standard, unconstrained setting with theoretical guarantees is still an open problem. Such an approach could use the flexibility of \acp{dnn} to handle complex, structural inputs and high-dimensional problems, but it also requires solid theoretical foundations, which are currently lacking.
 
-Across all these works, we demonstrate the effectiveness of our methods through extensive experiments and provide rigorous theoretical analyzes to establish convergence guarantees, ensuring the reliability and robustness of our approaches.   
 
+Second, extending \ac{bo} to problems with unknown constraints is another challenge. Using \acp{dnn} to model both the objective function and the constraints offers a promising direction, yet no existing work has fully explored \acp{dnn} for this purpose. Moreover, The absence of methods that integrate \acp{dnn} with theoretical guarantees for handling unknown constraints adds further complexity to this task, making it an open and demanding research problem.
+
+Finally, while there is growing interest in solving \acfp{pde} using \acfp{dnn} and \acfp{gp}, incorporating physical laws described by \acp{pde} into the optimization process is still largely unexplored. This includes using \acp{pde} to guide \ac{bo} and providing a clear analysis of how they can improve optimization. Tackling this challenge could establish connections between \ac{bo} and physics-based modeling.
+
+
+In summary, while \ac{bo} has achieved significant success in various applications, the reliance on \aclp{gp} as surrogate models presents computational challenges. Replacing \acp{gp} with \acp{dnn} in different \ac{bo} frameworks offers a promising solution due to their scalability and ability to capture complex patterns. However, this direction still remains open and requires further development. Equally important is the need for strong theoretical support to establish the reliability and robustness of these \ac{dnn}-based approaches. This includes understanding their convergence properties, performance guarantees in comparison to traditional methods. Addressing these challenges will be key to advancing the field and broadening the impact  of \ac{bo} in practical applications. 
 
 
