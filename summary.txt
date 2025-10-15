@@ -1,0 +1,1 @@
+This thesis proposes three deep neural network methods for efficient black-box optimization: Neural Black-box Optimization for scalable, uncertainty-aware search; Neural Constrained Optimization for handling constraints; and Physics-Informed Optimization for integrating physical laws. These methods improve sample efficiency and performance in structured or physics-based domains.

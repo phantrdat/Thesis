@@ -18,7 +18,7 @@ This chapter begins with an outline of the problem setting and assumptions, foll
 
 \section{Problem Setting}
 \label{section:neural-bo_problem_setting}
-We consider a global optimization problem to maximize $f(\mathbf{x})$ subject to $\mathbf{x} \in \mathcal D \subset \mathbb{R}^d$, where $\mathbf{x}$ is the input with $d$ dimensions. The function $f$ is a noisy black-box function that can only be evaluated via noisy evaluations of $f$ in the form  $y= f(x) + \epsilon$, where $\epsilon$ is a sub-Gaussian noise which we will discuss more clearly in Assumption 2 in our regret analysis section. In our work, we consider input space $\mathcal D$ of the form: $a \leq \norm{\mathbf{x}}_2 \leq  b$,  where $a, b$ are absolute constants and $a \le b$. We note that this assumption is mild compared to current works in neural contextual bandits \citep{zhou2020neural,zhang2021neural,xu2020neural,kassraie2022neural} that required $\norm{\mathbf{x}}_2 = 1$.  
+We consider a global optimization problem to maximize $f(\mathbf{x})$ subject to $\mathbf{x} \in \mathcal D \subset \mathbb{R}^d$, where $\mathbf{x}$ is the input with $d$ dimensions. The function $f$ is a noisy black-box function that can only be evaluated via noisy evaluations of $f$ in the form  $y= f(x) + \epsilon$, where $\epsilon$ is a sub-Gaussian noise which we will discuss more clearly in Assumption 2 in our regret analysis section. In our work, we consider input space $\mathcal D$ of the form: $a \leq \norm{\mathbf{x}}_2 \leq  b$,  where $a, b$ are absolute constants and $a \le b$. We note that this assumption is mild compared to current works in neural contextual bandits \citep{zhou2020neural,zhang2021neural,xu2022neural,kassraie2022neural} that required $\norm{\mathbf{x}}_2 = 1$.  
 
 
 \section{Proposed Neural-BO Method}
@@ -29,7 +29,7 @@ where $\phi(x) = \max(x,0)$ is the \ac{relu} activation function, $\mathbf{W}_1 
 
 For the second step, we choose the next sample point $\mathbf{x}_t$ by using a Thompson Sampling strategy. In particular, given each $\mathbf{x}$, our algorithm maintains a Gaussian distribution for $f(\mathbf{x})$. To choose the next point, it samples a random function $\widetilde{f}_t$ from the posterior distribution $\mathcal{N}(h(\mathbf{x}, \boldsymbol{\theta}_{t-1}), \nu_t^2 \sigma^2_t (\mathbf{x}))$, where 
 \begin{align*}
-\sigma^2_t (\mathbf{x}) &= \lambda \mathbf{g}(\mathbf{x};\boldsymbol{\theta}_0)\mathbf{U}_{t-1}^{-1}\mathbf{g}(\mathbf{x};\boldsymbol{\theta}_0)
+\sigma^2_t (\mathbf{x}) &= \lambda \mathbf{g}(\mathbf{x};\boldsymbol{\theta}_0)\mathbf{U}_{t-1}^{-1}\mathbf{g}(\mathbf{x};\boldsymbol{\theta}_0),
 \\
 \mathbf{U}_{t-1} &= \sum_{i=0}^{t-1} \mathbf{g}(\mathbf{x}_i;\boldsymbol{\theta}_0)\mathbf{g}(\mathbf{x}_i; \boldsymbol{\theta}_0)^\top/m,
 \end{align*}
@@ -39,7 +39,7 @@ and $\nu_t = \sqrt{2}B +\frac{R}{\sqrt{\lambda}} \sqrt{2 \log(1/ \delta)}$. From
 
 Besides, to initialize the network $h(\mathbf{x}; \boldsymbol{\theta}_0)$, we randomly generate each element of $\boldsymbol{\theta}_0$ from an appropriate Gaussian distribution: for each $1 \leq l \leq L-1$, each entry of $\mathbf{W}$ is generated from $\mathcal N(0, 2/m)$ independently; while each entry of the last layer $\mathbf{W}_L$ is set to zero to make $h(\mathbf{x}, \boldsymbol{\theta}_0) = 0$. Here we inherit so-called \emph{He initialization} \citep{he2015delving}, which ensures the stability of the expected length of the output vector at each hidden layer. 
 
-The proposed Neural-BO is summarized using Algorithm \ref{alg:Neural-BO} and Algorithm \ref{alg:train_NN}. In section \ref{section:neural-bo_regret_analysis}, we will demonstrate that our algorithm can achieve a sublinear regret bound, and works well in practice (See our section \ref{section:neural-bo_experiments}).
+The proposed Neural-BO is summarized using Algorithm \ref{alg:Neural-BO} and Algorithm \ref{alg:neural-bo_train_NN}. In section \ref{section:neural-bo_regret_analysis}, we will demonstrate that our algorithm can achieve a sublinear regret bound, and works well in practice (See our section \ref{section:neural-bo_experiments}).
 \paragraph{Discussion}
 A simple way to have a \ac{dnn}-based black-box algorithm is to extend the existing works of \citet{zhou2020neural,zhang2021neural} or \citet{kassraie2022neural} to our setting where the search space is continuous. However, this is difficult because these algorithms are designed for a finite set of actions. A simple adaptation can yield non-vanishing bounds on cumulative regret. For example, the regret bound in \citet{kassraie2022neural} depends on the size of finite action spaces $\lvert \mathcal A \rvert$. If $\lvert \mathcal A \rvert \rightarrow \infty$ then the regret bound goes to infinity. In \citet{zhou2020neural,zhang2021neural}, the regret bounds are built on gram matrix $\mathbf{H}$ which is defined through the set of actions. \textit{However, such a matrix cannot even be defined in our setting where the search space (action space) is infinite. We solve this challenge by using a discretization of the search space at each iteration as mentioned in Section \ref{section:neural-bo_regret_analysis}}. In addition, for our confidence bound calculation, using $\mathbf{g}(\mathbf{x};\boldsymbol{\theta}_0)/\sqrt{m}$ instead of $\mathbf{g}(\mathbf{x};\boldsymbol{\theta}_t)/\sqrt{m}$ as in \citet{zhou2020neural,zhang2021neural} allows us to reduce a factor $\sqrt{m}$ from our regret bound.    
 
@@ -54,20 +54,20 @@ Our algorithm is also different from \citet{chowdhury2017kernelized} in traditio
 
 \For{$t = 1$ to $T$}
     % \State Set $\nu_t = B + R\sqrt{ \log(1+\lambda^{-1}(t-1))\widetilde{d}_{t-1}  + 2 + 2 \log(1/ \delta)}$
-\State $\sigma^2_t (\mathbf{x}) = \lambda \mathbf{g}(\mathbf{x};\boldsymbol{\theta}_0)^\top\mathbf{U}_{t-1}^{-1}\mathbf{g}(\mathbf{x};\boldsymbol{\theta}_0)/m$ \label{line:calculate_var}
+\State $\sigma^2_t (\mathbf{x}) = \lambda \mathbf{g}(\mathbf{x};\boldsymbol{\theta}_0)^\top\mathbf{U}_{t-1}^{-1}\mathbf{g}(\mathbf{x};\boldsymbol{\theta}_0)/m$ \label{line:neural-bo_calculate_var}
 
 \State $\widetilde{f_t}(\mathbf{x}) \sim \mathcal{N}(h(\mathbf{x}; \boldsymbol{\theta}_{t-1}), \nu_t^2 \sigma^2_t(\mathbf{x}))$ 
 \State Choose $\mathbf{x}_t = \argmax_{\mathbf{x} \in \mathcal{D}} \widetilde{f_t}(\mathbf{x}) $ and receive observation $y_t = f(\mathbf{x}_t) + \epsilon_t$ 
    
-\State Update $\boldsymbol{\theta}_t \leftarrow \text{TrainNN}(\{\mathbf{x}_i\}^t_{i=1} \{y_i\}^t_{i=1}, \boldsymbol{\theta}_0)$ using Algorithm \ref{alg:train_NN}. \label{line:train_NN}
-\State $\mathbf{U}_t \leftarrow \mathbf{U}_{t-1} +  \frac{\mathbf{g}(\mathbf{x}_t;\boldsymbol{\theta}_0)\mathbf{g}(\mathbf{x}_t; \boldsymbol{\theta}_0)^\top}{m} $ \label{line:update_Ut}
+\State Update $\boldsymbol{\theta}_t \leftarrow \text{TrainNN}(\{\mathbf{x}_i\}^t_{i=1} \{y_i\}^t_{i=1}, \boldsymbol{\theta}_0)$ using Algorithm \ref{alg:neural-bo_train_NN}. \label{line:neural-bo_train_NN}
+\State $\mathbf{U}_t \leftarrow \mathbf{U}_{t-1} +  \frac{\mathbf{g}(\mathbf{x}_t;\boldsymbol{\theta}_0)\mathbf{g}(\mathbf{x}_t; \boldsymbol{\theta}_0)^\top}{m} $ \label{line:neural-bo_update_Ut}
 \EndFor
 \end{algorithmic}
 \end{algorithm}
 
 \begin{algorithm}[H]
 \caption{TrainNN}
-\label{alg:train_NN}
+\label{alg:neural-bo_train_NN}
 \textbf{Input}: Chosen points $\{\mathbf{x}_i\}^t_{i=1}$, noisy observations $\{y_i\}^t_{i=1}$, initial parameter $\boldsymbol{\theta}_0$, number of gradient descent steps $J$, regularization parameter $\lambda$, network width $m$, learning rate $\eta$.
 \begin{algorithmic}[1]
 \State Define objective function $\mathcal{L}(\boldsymbol{\theta})  = \frac{1}{2}\sum^T_{i=1} (f(\mathbf{x}_i; \boldsymbol{\theta}) - y_i)^2 + \frac{1}{2}m\lambda\norm{\boldsymbol{\theta} - \boldsymbol{\theta}^{(0)}}^2_2$
@@ -91,61 +91,64 @@ For theoretical guarantees, we need to use the following definition and assumpti
 
 
 \begin{definition} [\cite{jacot2018neural}]
-\label{def:NTK_matrix}
+\label{def:neural-bo_NTK_matrix}
 Consider the same set $\mathcal{D}_t$ as above and define
 
-\[ \widetilde{\mathbf{H}}_{i,j}^{(1)} = \mathbf{\Sigma}_{i,j}^{(1)} = \langle  \mathbf{x}_i, \mathbf{x}_j \rangle\ , \mathbf{A}_{i,j}^{(l)} = 
-\begin{pmatrix}
-\mathbf{\Sigma}_{i,i}^{(l)} & \mathbf{\Sigma}_{i,j}^{(l)} 
+\begin{align*}
+    \widetilde{\mathbf{H}}_{i,j}^{(1)} & = \mathbf{\Sigma}_{i,j}^{(1)} = \langle  \mathbf{x}_i, \mathbf{x}_j \rangle\ , \mathbf{A}_{i,j}^{(l)} = 
+    \begin{pmatrix}
+    \mathbf{\Sigma}_{i,i}^{(l)} & \mathbf{\Sigma}_{i,j}^{(l)} 
+    \\
+    \mathbf{\Sigma}_{i,j}^{(l)} & \mathbf{\Sigma}_{j,j}^{(l)}
+    \end{pmatrix}, 
 \\
-\mathbf{\Sigma}_{i,j}^{(l)} & \mathbf{\Sigma}_{j,j}^{(l)}
-\end{pmatrix}\] 
+    \mathbf{\Sigma}_{i,j}^{(l+1)} &= 2 \mathbb{E}_{(u,v) \sim \mathbf{N}(\mathbf{0}, \mathbf{A}_{i,j}^{(l)})} [\phi(u) \phi(v)],
+\\
+    \widetilde{\mathbf{H}}_{i,j}^{(l+1)} &= 2\widetilde{\mathbf{H}}_{i,j}^{(l)}\mathbb{E}_{(u,v) \sim \mathbf{N}(\mathbf{0}, \mathbf{A}_{i,j}^{(l)}} [\phi^\prime(u) \phi^\prime(v)] + \mathbf{\Sigma}_{i,j}^{(l+1)},
+\end{align*}
 
-\[\mathbf{\Sigma}_{i,j}^{(l+1)} = 2 \mathbb{E}_{(u,v) \sim \mathbf{N}(\mathbf{0}, \mathbf{A}_{i,j}^{(l)})} [\phi(u) \phi(v)] \]
-
-\[ \widetilde{\mathbf{H}}_{i,j}^{(l+1)} = 2\widetilde{\mathbf{H}}_{i,j}^{(l)}\mathbb{E}_{(u,v) \sim \mathbf{N}(\mathbf{0}, \mathbf{A}_{i,j}^{(l)}} [\phi^\prime(u) \phi^\prime(v)] + \mathbf{\Sigma}_{i,j}^{(l+1)}, \]
-where $\phi(\cdot)$ is the activation function of the neural network $h(\mathbf{x}; \boldsymbol{\theta})$.
+\noindent where $\phi(\cdot)$ is the activation function of the neural network $h(\mathbf{x}; \boldsymbol{\theta})$.
 Then $\mathbf{H}_t = \frac{\mathbf{\widetilde{H}}^{(L)}+ \mathbf{\Sigma} ^ {(L)}}{2}$ is called the NTK matrix on the set $\mathcal{D}_t$. 
 \end{definition}
 
 
-\begin{assumption} \label{assumption:sufficient_exploration} There exists $\lambda_0 > 0$, 
+\begin{assumption} \label{assumption:neural-bo_sufficient_exploration} There exists $\lambda_0 > 0$, 
 $\mathbf{H}_T \ge \lambda_0 \mathbf{I}_T$.
 \end{assumption}
-This is a common assumption in the literature \citep{zhou2020neural,xu2020neural,zhang2021neural}, and is satisfied as long as we sufficiently explore the input space such that no two inputs $\mathbf{x}$ and $\mathbf{x}^\prime$ are identical.  
+This is a common assumption in the literature \citep{zhou2020neural,xu2022neural,zhang2021neural}, and is satisfied as long as we sufficiently explore the input space such that no two inputs $\mathbf{x}$ and $\mathbf{x}^\prime$ are identical.  
 
 \begin{assumption}
     We assume the objective function $f$ is from a \ac{rkhs} (See Section \ref{background:rkhs}) corresponding to a positive definite \ac{ntk}  $k_\text{NTK}$. In particular, $\norm{f}_{\mathcal{H}_{k_\text{NTK}}} \leq B$, for a finite $B > 0$. These assumptions indicate the smoothness of function $f$ and are regular as they have been typically used in many previous works \citep{chowdhury2017kernelized, srinivas2009gaussian,vakili2021information}.
 \end{assumption}
 \begin{assumption}
-\label{assumption:iid_noise}
+\label{assumption:neural-bo_iid_noise}
 We assume the noises $\{\epsilon_i\}_{i=1}^T$ where $\epsilon_i = y_i - f(\mathbf{x}_i)$, are i.i.d and sub-Gaussian with parameter $R > 0$ and are independent with $\{\mathbf{x}_i\}_{i=1}^T$. 
 %We also assume that the noise sequence $\{\epsilon_i\}_{i=1}^T$  are independent of $\{\mathbf{x}_i\}_{i=1}^T$. 
 \end{assumption} 
 This assumption is mild and similar to the work of \citet{vakili2021optimal} where the assumption is used to prove an optimal order of the regret bound for Gaussian process bandits. We use it here to provide a regret bound with the sublinear order for our proposed algorithm.    
 
 Now we are ready to bound the regret of our proposed Neural-BO algorithm. To measure the regret of the algorithm, we use the cumulative regret which is defined as follows: $R_T = \sum_{t=1}^T r_t $ after $T$ iterations, where $\mathbf{x}^* = \argmax_{\mathbf{x} \in \mathcal{D}} f(\mathbf{x}) $ is the maximum point of the unknown function $f$ and $r_t = f(\mathbf{x^*}) - f(\mathbf{x}_t)$ is instantaneous regret incurred at time $t$. For further details on cumulative regret and its role as a performance metric, refer to Section \ref{background:performance_metrics}. We present our main theoretical result.
-\begin{theorem}
+\begin{restatable}{theorem}{NeuralBOTheorem}
 \label{theorem:neural-bo_main} Let $\delta \in (0,1)$. Assume that the true underlying $f$ lies in the RKHS $\mathcal{H}_{k_\textup{NTK}}(\mathcal D)$ corresponding
 to the NTK kernel $k_{\textup{NTK}}(\mathbf{x}, \mathbf{x'})$ with RKHS norm bounded by $B$.
 Set the parameters in Algorithm \ref{alg:Neural-BO}
-as $\lambda = 1 + \frac{1}{T}$, $\nu_t = \sqrt{2}B +\frac{R}{\sqrt{\lambda}}( \sqrt{2 \log(1/ \delta)}$, where $R$ is the noise sub-Gaussianity parameter.  
+as $\lambda = 1 + \frac{1}{T}$, $\nu_t = \sqrt{2}B +\frac{R}{\sqrt{\lambda}} \sqrt{2 \log(1/ \delta)}$, where $R$ is the noise sub-Gaussianity parameter.  
 Set $\eta = (m\lambda + mLT)^{-1}$ and $J = (1+ LT /\lambda) \left(1+ \log(T^3L\lambda^{-1}\log \left(1/ \delta \right))\right)$. If the network width m satisfies:
 \[ m \geq \textup{poly}\left(\lambda, T, \log(1/\delta), \lambda_0^{-1}\right),\]
 then with probability at least $1-\delta$, the regret of Algorithm \ref{alg:Neural-BO} is bounded as
 
 \begin{flalign*}
 R_T & \leq C_1(1+c_T)\nu_T \sqrt{L} \sqrt{\frac{\lambda BT}{\log(B+1)} (2\gamma_T+1)}  \\
-     & +  (4+  C_2(1+c_T)\nu_T L)\sqrt{2 \log(1/\delta)T} + \frac{(2B+1)\pi^2}{6} + \frac{b(a^2+b^2)}{a^3}
+     & +  (4+  C_2(1+c_T)\nu_T L)\sqrt{2 \log(1/\delta)T} + \frac{(2B+1)\pi^2}{6} + \frac{b(a^2+b^2)}{a^3},
 \end{flalign*} 
 where $C_1, C_2$ are absolute constants, $a$ and $b$ are lower and upper norm bounds of $\mathbf{x} \in \mathcal{D}$  and $c_T=\sqrt{4\log T + 2 \log \ \lvert \mathcal D_t \rvert}$.
-\end{theorem}
+\end{restatable}
 \remark{There exists a component $\frac{b(a^2 + b^2)}{a^3}$ in the regret bound $R_T$. This component comes from the condition of the search space. If we remove the influence
 of constants $a,b, B$ and $R$, Theorem \ref{theorem:neural-bo_main} implies that our regret bound follows an order $\widetilde{O}( \sqrt{T\gamma_T})$. This regret bound has the same order as the one of the Maximum Variance Reduction algorithm in \citet{vakili2021optimal}, but is significantly better than traditional BO algorithms (e.g., \citep{srinivas2009gaussian, chowdhury2017kernelized}) 
  and existing neural contextual bandits (e.g., \citep{zhou2020neural,zhang2021neural}) that have the order $\widetilde{O}(\gamma_T\sqrt{T})$.  We note that the regret bounds in \citet{zhou2020neural,zhang2021neural} are expressed through the effective dimension $\widetilde{d} = \frac{ \log \det (\mathbf{I} + \mathbf{H}/\lambda)}{\log(1 + TK/\lambda)}$, where $K$ is the number of arm in contextual bandits setting. However, $\gamma_T$ and the effective dimension are of the same order up to a ratio of $1/(2 \text{log} (1 + TK/\lambda))$. The improvement of factor $\sqrt{\gamma_T}$ is significant because for \ac{ntk} kernel as shown by \citet{kassraie2022neural}, $\gamma_T$ follows order $\mathcal{O}(T^{1-1/d})$, where $d$ is the input dimension. For $d \ge 2$, existing bounds become vacuous and are no longer sublinear. In contrast, our regret bound remains sublinear for any $d>0$.} 
 
 
- \section{Proof Sketch of the Main Theorem}
+ \paragraph{Proof Sketch of Theorem \ref{theorem:neural-bo_main}}
 To perform analysis for continuous actions as in our setting, we use a discretization technique. At each time $t$, we use a discretization $\mathcal{D}_t \subset \mathcal{D}$ with the property that $\lvert f(\mathbf{x}) - f([\mathbf{x}]_t) \rvert \leq \frac{1}{t^2}$ where $[\mathbf{x}]_t \in \mathcal{D}_t$ is the closest point to $\mathbf{x} \in \mathcal{D}$. Then we choose $\mathcal{D}_t $ 
 with size $\lvert \mathcal{D}_t \rvert = \left( (b-a)BC_{\text{lip}}t^2 \right)^d$ that satisfies $\norm{\mathbf{x} - [\mathbf{x}]_t}_1 \leq \frac{b-a}{(b-a)BC_{\text{lip}}t^2} = \frac{1}{BC_{\text{lip}}t^2}$ for all $\mathbf{x} \in \mathcal{D}$,
 where $C_{\text{lip}}= \underset{\mathbf{x} \in \mathcal{D}} {\supremum} \underset{j \in [d]} {\supremum} \left( \frac{\partial^2 k_\text{NTK}(\mathbf{p},\mathbf{q})}{\partial \mathbf{p}_j \mathbf{q}_j} \lvert \mathbf{p}=\mathbf{q}=\mathbf{x} \right)$. This implies, for all $\mathbf{x} \in \mathcal{D}$:
@@ -153,63 +156,63 @@ where $C_{\text{lip}}= \underset{\mathbf{x} \in \mathcal{D}} {\supremum} \unders
 \label{eqn:neural-bo_rkhs_lipschitz}
     \lvert f(\mathbf{x}) - f([\mathbf{x}]_t) \rvert \leq \norm{f}_{\mathcal{H}_{k_\textup{NTK}}} C_{\text{lip}} \norm{\mathbf{x} - [\mathbf{x}]_t}_1 \leq BC_{\text{lip}} \frac{1}{BC_{\text{lip}}t^2} =  1/t^2, 
 \end{equation}
-is Lipschitz continuous of any $f \in \mathcal{H}_{k_\textup{NTK}}(\mathcal{D})$ with Lipschitz constant $B C_{\text{lip}}$, where we have used our assumption $\norm{f}_{\mathcal{H}_{k_\textup{NTK}}} \leq B$. We bound the regret of the proposed algorithm by starting from the instantaneous regret $r_t = f(\mathbf{x}^*) - f(\mathbf{x}_t)$ can be decomposed to $r_t = [f(\mathbf{x}^*) - f([\mathbf{x}^*]_t)] + [f([\mathbf{x}^*]_t - f(\mathbf{x}_t)]$. While the first term is bounded by Eqn. (\ref{eqn:neural-bo_rkhs_lipschitz}),  we bound the second term in Lemma \ref{lemma:neural-bo_regret_bound} provided in our Appendix. The proof of Lemma \ref{lemma:neural-bo_regret_bound} requires a few steps, namely (a) introduce a saturated set $\mathcal S_t$ (see Definition \ref{def:saturated_set}), then combine it with the results of Lemma \ref{lemma:neural-bo_sampling_bound} (deriving a bound on $\lvert \widetilde{f}_t(\mathbf{x}) - h(\mathbf{x}; \boldsymbol{\theta}_{t-1}) \rvert$) necessitated due to the Thompson sampling and Lemma \ref{lemma:neural-bo_predictive_bound} (deriving a bound on $\lvert f(\mathbf{x}) - h(\mathbf{x}; \boldsymbol{\theta}_{t-1}) \rvert$) utilizing the generalization result of the over-parameterized neural networks. Note that, in our proof, we consider the effect of our general search space setting (where input $\mathbf{x} \in \mathcal{D}$ is norm-bounded, i.e.,  $0 < a \le \norm{\mathbf{x}}_2 \le b$) on the output of the over-parameterized deep neural network at each layer in Lemma \ref{lemma:neural-bo_bound_hil} and on the gradient of this network utilized in Lemma \ref{lemma:neural-bo_NN_vs_linear}. These results contribute to the appearance of the lower and the upper norm bounds $a$ and $b$, the first in the generalization property of over-parameterized neural networks in Lemma \ref{lemma:neural-bo_predictive_bound} and the latter affect the cumulative regret bound in Theorem \ref{theorem:neural-bo_main}. Our proof follows the proof style of Lemma 4.1 of \citet{cao2019generalization}, Lemma B.3 of \citet{cao2019generalization} and Theorem 5 
+is Lipschitz continuous of any $f \in \mathcal{H}_{k_\textup{NTK}}(\mathcal{D})$ with Lipschitz constant $B C_{\text{lip}}$, where we have used our assumption $\norm{f}_{\mathcal{H}_{k_\textup{NTK}}} \leq B$. We bound the regret of the proposed algorithm by starting from the instantaneous regret $r_t = f(\mathbf{x}^*) - f(\mathbf{x}_t)$ can be decomposed to $r_t = [f(\mathbf{x}^*) - f([\mathbf{x}^*]_t)] + [f([\mathbf{x}^*]_t - f(\mathbf{x}_t)]$. While the first term is bounded by Eqn. (\ref{eqn:neural-bo_rkhs_lipschitz}),  we bound the second term in Lemma \ref{lemma:neural-bo_regret_bound} provided in our Appendix. The proof of Lemma \ref{lemma:neural-bo_regret_bound} requires a few steps, namely (a) introduce a saturated set $\mathcal S_t$ (see Definition \ref{def:neural-bo_saturated_set}), then combine it with the results of Lemma \ref{lemma:neural-bo_sampling_bound} (deriving a bound on $\lvert \widetilde{f}_t(\mathbf{x}) - h(\mathbf{x}; \boldsymbol{\theta}_{t-1}) \rvert$) necessitated due to the Thompson sampling and Lemma \ref{lemma:neural-bo_predictive_bound} (deriving a bound on $\lvert f(\mathbf{x}) - h(\mathbf{x}; \boldsymbol{\theta}_{t-1}) \rvert$) utilizing the generalization result of the over-parameterized neural networks. Note that, in our proof, we consider the effect of our general search space setting (where input $\mathbf{x} \in \mathcal{D}$ is norm-bounded, i.e.,  $0 < a \le \norm{\mathbf{x}}_2 \le b$) on the output of the over-parameterized deep neural network at each layer in Lemma \ref{lemma:neural-bo_bound_hil} and on the gradient of this network utilized in Lemma \ref{lemma:neural-bo_NN_vs_linear}. These results contribute to the appearance of the lower and the upper norm bounds $a$ and $b$, the first in the generalization property of over-parameterized neural networks in Lemma \ref{lemma:neural-bo_predictive_bound} and the latter affect the cumulative regret bound in Theorem \ref{theorem:neural-bo_main}. Our proof follows the proof style of Lemma 4.1 of \citet{cao2019generalization}, Lemma B.3 of \citet{cao2019generalization} and Theorem 5 
 of \citet{allen2019convergence}. 
 
-On the other hand, Lemma \ref{lemma:noise_affeted_bound}, based on Assumption \ref{assumption:iid_noise}, provides a tighter bound on the confidence interval that eliminated the factor $\sqrt{\gamma_T}$, in comparison with previous relevant works \citet{chowdhury2017kernelized, zhou2020neural}, leading to the sublinear regret bound in Theorem \ref{theorem:neural-bo_main}.   
-By these arguments, we achieve a cumulative regret bound for our proposed algorithm in terms of the maximum information gain $\gamma_T$ (Lemma \ref{lemma:neural-bo_regret_expectation}, \ref{lemma:neural-bo_regret_bound}, \ref{lemma:neural-bo_min_sigma}). \textbf{Our detailed proof is provided in Appendix \ref{section:neural-bo_appendix}}.
+On the other hand, Lemma \ref{lemma:noise_affeted_bound}, based on Assumption \ref{assumption:neural-bo_iid_noise}, provides a tighter bound on the confidence interval that eliminated the factor $\sqrt{\gamma_T}$, in comparison with previous relevant works \citet{chowdhury2017kernelized, zhou2020neural}, leading to the sublinear regret bound in Theorem \ref{theorem:neural-bo_main}.   
+By these arguments, we achieve a cumulative regret bound for our proposed algorithm in terms of the maximum information gain $\gamma_T$ (Lemma \ref{lemma:neural-bo_regret_expectation}, \ref{lemma:neural-bo_regret_bound}, \ref{lemma:neural-bo_min_sigma}). \textbf{Our detailed proof is provided in Section \ref{section:neural-bo_main_theorem_proof}, Appendix \ref{section:neural-bo_appendix}}.
 
 % after introducing saturated set $\mathcal{S}_t$ in Definition \ref{def:saturated_set} and achieving the bound for $\lvert f(\mathbf{x}) - h(\mathbf{x}; \boldsymbol{\theta}_{t-1}) \rvert$ using Gaussian concentration in Lemma \ref{lemma:neural-bo_sampling_bound} due to the sampling process in  Algorithm \ref{alg:Neural-BO} and $\lvert \widetilde{f}_t(\mathbf{x}) - h(\mathbf{x}; \boldsymbol{\theta}_{t-1}) \rvert$ in Lemma \ref{lemma:neural-bo_predictive_bound}, utilizing the generalization result of the trained over-parameterized neural network after $T$ rounds. 
 
 
 
-\begin{proof} [Proof Sketch for Theorem \ref{theorem:neural-bo_main}]
-% \label{proof:theorem_main}
-% Because Lemma \ref{lemma:neural-bo_predictive_bound} holds with probability at least $1-\delta$. Then, w
-With probability at least $1-\delta$, we have
+% \begin{proof} [Proof Sketch for Theorem \ref{theorem:neural-bo_main}]
+% % \label{proof:theorem_main}
+% % Because Lemma \ref{lemma:neural-bo_predictive_bound} holds with probability at least $1-\delta$. Then, w
+% With probability at least $1-\delta$, we have
+% % \begin{equation*}
+% % \begin{split}
+% \begin{align*}
+%  R_T &  = \sum^T_{t=1} f(\mathbf{x^*}) - f(\mathbf{x}_t) \\ 
+%      % & = \sum^T_{t=1} (f(\mathbf{x^*}) - f(\mathbf{x}_t)
+%      % \\ 
+%      & = \sum^T_{t=1} \left[f(\mathbf{x}^*) - f([\mathbf{x}^*]_t)\right] + \left[f([\mathbf{x}^*]_t) - f(\mathbf{x}_t) \right] \\ 
+%      &\leq 4T \epsilon(m) + \frac{(2B+1)\pi^2}{6} + \Bar{C}_1(1+c_T)\nu_T \sqrt{L} \sum^T_{i=1} \min(\sigma_t(\mathbf{x}_t), B) \\
+%      & \quad +(4+\Bar{C}_2(1+c_T)\nu_T L + 4\epsilon(m))\sqrt{2 \log(1/\delta)T} \\
+%      & \leq \Bar{C}_1 (1+c_T)\nu_T \sqrt{L} \sqrt{\frac{\lambda BT}{\log(B+1)} (2\gamma_T+1)} 
+%      + \frac{(2B+1)\pi^2}{6} + 4T \epsilon(m) \\
+%      & \quad + 4\epsilon(m)\sqrt{2 \log(1/\delta)T}  +  \left(4+\Bar{C}_2(1+c_T)\nu_T L\right)\sqrt{2 \log(1/\delta)T}  \\
+%      &  = \Bar{C}_1(1+c_T)\nu_t \sqrt{L} \sqrt{\frac{\lambda BT}{\log(B+1)} (2\gamma_T+1)} + \frac{(2B+1)\pi^2}{6} \\
+%      & \quad +  \epsilon(m)(4T+ \sqrt{2 \log(1/\delta)T}) + (4+\Bar{C}_2(1+c_T)\nu_t L)\sqrt{2 \log(1/\delta)T} \\
+%      \end{align*} 
+% The first inequality is due to Lemma \ref{lemma:neural-bo_regret_bound}, which provides the bound for cumulative regret $R_T$ in terms of $\sum^T_{t=1} \min(\sigma_t(\mathbf{x}_t),B)$.  The second inequality further provides the bound of term $\sum^T_{t=1} \min(\sigma_t(\mathbf{x}_t),B)$ due to Lemma \ref{lemma:neural-bo_min_sigma}, while the last equality rearranges addition.  Picking
+% \begin{align*}
+%     \eta &= (m\lambda + mLT)^{-1} \text{ and}
+%     \\
+%     J & = \left(1+LT/\lambda \right) \left(\log (C_{\epsilon,2} ) + \log(T^3L\lambda^{-1}\log(1/\delta)) \right),
+% \end{align*}
+% we have 
 % \begin{equation*}
 % \begin{split}
-\begin{align*}
- R_T &  = \sum^T_{t=1} f(\mathbf{x^*}) - f(\mathbf{x}_t) \\ 
-     % & = \sum^T_{t=1} (f(\mathbf{x^*}) - f(\mathbf{x}_t)
-     % \\ 
-     & = \sum^T_{t=1} \left[f(\mathbf{x}^*) - f([\mathbf{x}^*]_t)\right] + \left[f([\mathbf{x}^*]_t) - f(\mathbf{x}_t) \right] \\ 
-     &\leq 4T \epsilon(m) + \frac{(2B+1)\pi^2}{6} + \Bar{C}_1(1+c_T)\nu_T \sqrt{L} \sum^T_{i=1} \min(\sigma_t(\mathbf{x}_t), B) \\
-     & \quad +(4+\Bar{C}_2(1+c_T)\nu_T L + 4\epsilon(m))\sqrt{2 \log(1/\delta)T} \\
-     & \leq \Bar{C}_1 (1+c_T)\nu_T \sqrt{L} \sqrt{\frac{\lambda BT}{\log(B+1)} (2\gamma_T+1)} 
-     + \frac{(2B+1)\pi^2}{6} + 4T \epsilon(m) \\
-     & \quad + 4\epsilon(m)\sqrt{2 \log(1/\delta)T}  +  \left(4+\Bar{C}_2(1+c_T)\nu_T L\right)\sqrt{2 \log(1/\delta)T}  \\
-     &  = \Bar{C}_1(1+c_T)\nu_t \sqrt{L} \sqrt{\frac{\lambda BT}{\log(B+1)} (2\gamma_T+1)} + \frac{(2B+1)\pi^2}{6} \\
-     & \quad +  \epsilon(m)(4T+ \sqrt{2 \log(1/\delta)T}) + (4+\Bar{C}_2(1+c_T)\nu_t L)\sqrt{2 \log(1/\delta)T} \\
-     \end{align*} 
-The first inequality is due to Lemma \ref{lemma:neural-bo_regret_bound}, which provides the bound for cumulative regret $R_T$ in terms of $\sum^T_{t=1} \min(\sigma_t(\mathbf{x}_t),B)$.  The second inequality further provides the bound of term $\sum^T_{t=1} \min(\sigma_t(\mathbf{x}_t),B)$ due to Lemma \ref{lemma:neural-bo_min_sigma}, while the last equality rearranges addition.  Picking
-\begin{align*}
-    \eta &= (m\lambda + mLT)^{-1} \text{ and}
-    \\
-    J & = \left(1+LT/\lambda \right) \left(\log (C_{\epsilon,2} ) + \log(T^3L\lambda^{-1}\log(1/\delta)) \right),
-\end{align*}
-we have 
-\begin{equation*}
-\begin{split}
-      &\frac{b}{a} C_{\epsilon,2}(1 - \eta m \lambda)^J \sqrt{TL/\lambda} \left(4T+\sqrt{2 \log(1/\delta)T}\right)\\
-    = & \frac{b}{a} C_{\epsilon,2} \left(1-\frac{1}{1+LT/\lambda}\right)^{J} \left(4T+\sqrt{2 \log(1/\delta)T}\right) \\
-    = & \frac{b}{a} C_{\epsilon,2} e^{-\left(\log \left(C_{\epsilon,2}\right) + \log(T^3L\lambda^{-1}\log(1/\delta)) \right)} \left(4T+\sqrt{2 \log(1/\delta)T}\right)\\
-    = & \frac{b}{a}  \frac{1}{C_{\epsilon,2}}.T^{-3}L^{-1}\lambda \log^{-1}(1/\delta) \left(4T+\sqrt{2 \log(1/\delta)T}\right)  \le   \frac{b}{a}\\
-\end{split}
-\end{equation*}
-Then choosing $m$ that satisfies:
-\begin{equation*}
-    \begin{split}
-        \left(\frac{b}{a} C_{\epsilon,1} m^{-1/6}\lambda^{-2/3}L^3 \sqrt{\log m} + \left(\frac{b}{a}\right)^3 C_{\epsilon,3} m^{-1/6} \sqrt{\log m} L^4 T^{5/3} \lambda^{-5/3} (1+\sqrt{T/\lambda})\right) \\
-        \left(4T+  \sqrt{2 \log(1/\delta)T}\right) \le \left(\frac{b}{a}\right)^3 
-    \end{split}
-\end{equation*}
-We finally achieve the bound of $R_T$ as:
-\begin{flalign*}
-R_T & \leq \Bar C_1(1+c_T)\nu_T \sqrt{L} \sqrt{\frac{\lambda BT}{\log(B+1)} (2\gamma_T+1)}  \\
-     & +  (4+ \bar C_2(1+c_T)\nu_T L)\sqrt{2 \log(1/\delta)T} + \frac{(2B+1)\pi^2}{6} + \frac{b(a^2+b^2)}{a^3}
-\end{flalign*}
-\end{proof}
+%       &\frac{b}{a} C_{\epsilon,2}(1 - \eta m \lambda)^J \sqrt{TL/\lambda} \left(4T+\sqrt{2 \log(1/\delta)T}\right)\\
+%     = & \frac{b}{a} C_{\epsilon,2} \left(1-\frac{1}{1+LT/\lambda}\right)^{J} \left(4T+\sqrt{2 \log(1/\delta)T}\right) \\
+%     = & \frac{b}{a} C_{\epsilon,2} e^{-\left(\log \left(C_{\epsilon,2}\right) + \log(T^3L\lambda^{-1}\log(1/\delta)) \right)} \left(4T+\sqrt{2 \log(1/\delta)T}\right)\\
+%     = & \frac{b}{a}  \frac{1}{C_{\epsilon,2}}.T^{-3}L^{-1}\lambda \log^{-1}(1/\delta) \left(4T+\sqrt{2 \log(1/\delta)T}\right)  \le   \frac{b}{a}\\
+% \end{split}
+% \end{equation*}
+% Then choosing $m$ that satisfies:
+% \begin{equation*}
+%     \begin{split}
+%         \left(\frac{b}{a} C_{\epsilon,1} m^{-1/6}\lambda^{-2/3}L^3 \sqrt{\log m} + \left(\frac{b}{a}\right)^3 C_{\epsilon,3} m^{-1/6} \sqrt{\log m} L^4 T^{5/3} \lambda^{-5/3} (1+\sqrt{T/\lambda})\right) \\
+%         \left(4T+  \sqrt{2 \log(1/\delta)T}\right) \le \left(\frac{b}{a}\right)^3 
+%     \end{split}
+% \end{equation*}
+% We finally achieve the bound of $R_T$ as:
+% \begin{flalign*}
+% R_T & \leq \Bar C_1(1+c_T)\nu_T \sqrt{L} \sqrt{\frac{\lambda BT}{\log(B+1)} (2\gamma_T+1)}  \\
+%      & +  (4+ \bar C_2(1+c_T)\nu_T L)\sqrt{2 \log(1/\delta)T} + \frac{(2B+1)\pi^2}{6} + \frac{b(a^2+b^2)}{a^3}
+% \end{flalign*}
+% \end{proof}
 \section{Experiments}
 \label{section:neural-bo_experiments}
 
@@ -227,7 +230,7 @@ For all experiments, we compared our algorithm with common classes of surrogate 
 For our proposed Neural-BO algorithm, we model the functions using two-layer neural networks $f(\mathbf{x}; \boldsymbol{\theta}) = \sqrt{m}\mathbf{W}_2\sigma(\mathbf{W}_1\mathbf{x})$ with network width $m=500$. 
 The weights of the network are initialized with independent samples from a normal distribution $\mathcal{N} (0, 1/m)$. Since \ac{bo} typically involves a small number of data points, keeping the network architecture simple helps prevent overfitting while ensuring efficient training.  To train the surrogate neural network models, we use SGD optimizer with batch size 50, epochs 50, learning rate $\eta=0.001$ and regularizer $\lambda=0.01$. We set exploration parameter in Algorithm \ref{alg:Neural-BO}: $\nu_t = \nu$ and do a grid search over $\{0.1,1,10\}$. 
 
-\subsection{Synthetic Benchmarks}
+\subsection{Synthetic Benchmark Functions}
 We optimized several commonly used synthetic benchmark functions: Ackley, Levy, and Michalewics. The exact expression of these functions can be found at: \url{http://www.sfu.ca/~ssurjano/optimization.html}. To emphasize the adaptation of our method to various dimensions, for each function, we performed optimization for four different dimensions, including 10, 20, 50, and 100. This is done to evaluate the methods across a range of dimensions. The function evaluation noise follows a normal distribution with zero mean and the variance is set to 1\% of the function range.
 \begin{figure}[htbp]
     \centering
@@ -288,12 +291,7 @@ All reported experiments are averaged over 10 runs, each using a random initiali
 In order to assess the statistical significance of whether our proposed method outperforms all baselines, we conducted a series of tests. First, a Kolmogorov-Smirnov (KS) test was performed to check if the sample sets for the hypothesis test follow a normal distribution. The null hypothesis assumes no difference between the observed and normal distribution. The p-values obtained from the KS test are presented in Table \ref{tab:neural-bo_ks_test}.  As all p-values exceeded 0.05, we failed to reject the null hypothesis, indicating that all data can be considered as normally distributed. Subsequently, one-sided t-tests were employed (as the variance is unknown), along with the Benjamini-Hochberg correction for multiple hypotheses testing, for each pair of (baseline, Neural-BO). These tests aimed to determine whether the baseline achieves a lower objective function value than our proposed method, Neural-BO. The alternative hypothesis $H_a: \mu_\text{baseline} > \mu_{\text{Neural-BO}}$ was tested against the null hypothesis $H_0: \mu_\text{baseline} \le \mu_{\text{Neural-BO}}$. Detailed test results are provided in Table \ref{tab:neural-bo_t-test}, where each cell contains two values: the first value represents the p-value obtained from the t-test, and the second value (T or F) indicates the outcome of the Benjamini-Hochberg correction where "T" indicates that the null hypothesis is rejected, whereas an "F" indicates that it is not rejected.
 
 
-
-
-
-
-
-\begin{table}[]
+\begin{table}[ht]
 \resizebox{\textwidth}{!}{
 \begin{tabular}{|cc|c|c|c|c|c|c|c|}
 \hline
@@ -400,7 +398,7 @@ We used a handwritten digit classification model (pre-trained on MNIST data) as 
 
 To reduce the computations, we reduce the dimension of images from $28 \times 28$ to $7 \times 7$ and do the optimization process in 49-dimensional space. After finding the optimal points, we recover these points to the original dimension by applying an upscale operator to get sensitive samples. We compare our method with all other baselines by the average detection rate with respect to the number of sensitive samples. From Figure \ref{fig:neural-bo_sensitive_sample}, it can be seen that our method can generate  samples with better detection ability than other baselines. This demonstrates the ability of  our method to deal with complex structured data such as images. 
 
-\begin{figure}[H]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth]{Figures/Neural-BO/Neural-BO_sensitive_sample_detection_rate.pdf}
     \caption{The plot shows the detection rates corresponding to the number of samples on the MNIST dataset. The larger the number of sensitive samples, the higher the detection rate. As shown in the figure, Neural-BO can generate sensitive samples that achieve nearly 90\% of the detection rate with at least 8 samples.}
@@ -411,25 +409,26 @@ To reduce the computations, we reduce the dimension of images from $28 \times 28
 Next, we evaluate our proposed method on a retrieval problem where our goal is to retrieve a document from a corpus that matches user's preference. The optimization algorithm works as follows: it retrieves a document, receives user's feedback score and then updates its belief and attempts again until it reaches a high score, or its budget is depleted. The objective target function is defined as the user's evaluation of each document, which usually has a complex structure. It is clear that evaluations are expensive since the user must read each suggestion. Searching for the most relevant document is considered as finding document $d$ in the dataset $S_{text}$ that maximizes the match to the target document $d_t$: $d = \argmax_{d \in S_{text}} \textup{Match}(d, d_t)$, where $\textup{Match}(d, d_t)$ is a matching score between documents $d$ and $d_t$. We represent each document by a word frequency vector $x_{n} = (x_{n1}, \cdots, x_{nJ})$, where $x_{nj}$ is the number of occurrences of the $j$-th vocabulary term in the $n$-th document, and $J$ is the vocabulary size.  
 
 Our experiment uses Amazon product reviews 
-dataset\footnote{\url{https://www.kaggle.com/datasets/kashnitsky/hierarchical-text-classification}}, which are taken from users' product reviews from Amazon's online selling platform. This dataset has hierarchical categories, where the category classes are sorted from general to detail. The dataset is structured as: 6 classes in ``level 1'', 64 classes in ``level 2'' and 464 classes in ``level 3''. The number of users' reviews was originally 40K, which was reduced to 37738 after ignoring reviews with ``unknown'' category. We choose the size of vocabulary to be 500 and use the hierarchical F1-score introduced in  \citet{kiritchenko2005functional} as a scoring metric for the target and retrieved documents. We report the mean and standard deviation of hierarchical F1-score between target and retrieved documents over ten runs for all methods in Figure \ref{fig:text}. Figures \ref{fig:text} indicates that our method shows a better performance for the Amazon product review dataset in comparison with other approaches. 
+dataset\footnote{\url{https://www.kaggle.com/datasets/kashnitsky/hierarchical-text-classification}}, which are taken from users' product reviews from Amazon's online selling platform. This dataset has hierarchical categories, where the category classes are sorted from general to detail. The dataset is structured as: 6 classes in ``level 1'', 64 classes in ``level 2'' and 464 classes in ``level 3''. The number of users' reviews was originally 40K, which was reduced to 37738 after ignoring reviews with ``unknown'' category. We choose the size of vocabulary to be 500 and use the hierarchical F1-score introduced in  \citet{kiritchenko2005functional} as a scoring metric for the target and retrieved documents. We report the mean and standard deviation of hierarchical F1-score between target and retrieved documents over ten runs for all methods in Figure \ref{fig:neural-bo_text}. Figures \ref{fig:neural-bo_text} indicates that our method shows a better performance for the Amazon product review dataset in comparison with other approaches. 
 
-\begin{figure}[ht!]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth]{Figures/Neural-BO/Neural-BO_AmazonReview_dim_500_round_300.pdf}
     \caption{We search for the most related document for a specified target document in Amazon product reviews dataset and report the maximum hierachical F1 score found by all baselines. All methods show similar behaviour and Neural-BO performs comparably and much better than GP-based baselines.}
-    \label{fig:text}
+    \label{fig:neural-bo_text}
 \end{figure}
 \subsubsection{Optimizing control parameters for robot pushing} 
+Finally, we evaluate our method on tuning control parameters for the robot pushing problem considered in \citet{wang2017max}. We run each method for a total of 6000 evaluations and repeat ten times to take average optimization results. Neural-BO and all other methods are initialized with 15 points. Figure \ref{fig:neural-bo_robot_14D} summarizes the median of the best rewards achieved by all methods. It can be seen that Neural-BO achieves the highest reward after 5K optimization steps. 
 
-
-Finally, we evaluate our method on tuning control parameters for the robot pushing problem considered in \citet{wang2017max}. We run each method for a total of 6000 evaluations and repeat ten times to take average optimization results. Neural-BO and all other methods are initialized with 15 points. Figure \ref{fig:robot_14D} summarizes the median of the best rewards achieved by all methods. It can be seen that Neural-BO achieves the highest reward after 5K optimization steps. 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{Figures/Neural-BO/Neural-BO_Robot_dim_14_round_6000.pdf}
-    \vspace{-3mm}
     \caption{
     Optimization results for control parameters of 14D robot pushing problem. The X-axis shows iterations, and the y-axis shows the median of the best reward obtained.}
-    \label{fig:robot_14D}
-\end{figure}
+    \label{fig:neural-bo_robot_14D}
+\end{figure} 
+
+
+
 \section{Conclusion}
 We proposed a new algorithm for \acl{bo} using \aclp{dnn}. A key advantage of our algorithm is that it is computationally efficient (linear in the number of observations) and performs better than traditional \acl{gp} based methods, especially for complex structured design problems. We provided rigorous theoretical analysis for our proposed algorithm and showed that its cumulative regret converges with a sublinear regret bound. Using both synthetic benchmark optimization functions and a few real-world optimization tasks, we showed the effectiveness of our proposed algorithm. 

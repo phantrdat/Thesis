@@ -1,0 +1,77 @@
+\documentclass[12pt]{article}
+\usepackage{enumitem}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\title{Amendment Response for Ph.D. Thesis}
+\author{Dat Phan Trong}
+\date{}
+\begin{document}
+
+\maketitle
+
+\section*{Response to Comments of Examiner 1}
+I thank the examiner for their valuable feedback on my thesis. Below are my responses to the comments provided:
+\begin{enumerate}[leftmargin=0pt, label={\textbf{\arabic*.}}, itemsep=2em]
+
+    \item \textbf{Please provide a full stop if an equation ends a sentence. This should be made consistent throughout the thesis.}
+    I have carefully reviewed the thesis and made the necessary corrections to ensure that all equations ending a sentence are followed by a full stop.
+
+    \item \textbf{Page 15: it should be a full stop instead of a comma.}
+    I have corrected the punctuation on page 15 to replace the comma with a full stop.
+
+    
+    \item \textbf{Chapter 3 claims to use Deep Neural Networks to model the unknown function in black-box optimisation. However, in the experiment, only a two-layer neural network is used. With only 2 layers, it does not appear sufficient to justify the word ``Deep'' in the proposal. Furthermore, if the argument ``Since BO typically involves a small number of data points, keeping the network architecture simple helps prevent overfitting while ensuring efficient training.'' then is ``Deep'' really needed?}    
+    I appreciate the comment regarding the use of the term "Deep" in the context of neural networks. In the thesis, I have clarified that while the experiments primarily utilized a two-layer neural network, the proposed method is designed to be compatible with deeper architectures. The term "Deep" refers to the potential for using more complex models in future work, especially as more data becomes available. I have also revised the text to ensure clarity regarding the architecture used in the experiments.
+
+    \item \textbf{It seems that the left bracket for $v_t$ in Theorem 3.3.5 is not needed.}
+    
+    I have reviewed Theorem 3.3.5 and confirmed that the left bracket for $v_t$ is indeed unnecessary. I have removed it to improve clarity.
+
+    \item \textbf{According to Theorem 3.3.5, the regret upper bound can approach infinity if the magnitude of the input can be small, for example an image where the pixel values are small. What is the implication of this result for practical image applications?}
+    
+    The implication of this result is that while the theoretical framework provides a general regret bound, which is relied on the upper and lower bound of inputs' magnitude, practical applications involving images may require careful consideration of input scaling. In practice, we can normalize image pixel values to a suitable range to mitigate the risk of unbounded regret. 
+
+
+    \item \textbf{Section 3.4.3.1 attempts to demonstrate the proposed NeuralBO algorithm to a real-world application of adversarial attacks to machine learning models. However, the specific attack scenario (random weight perturbation) is somewhat simplistic and does not reflect the most common adversarial attack strategies. It is more realistic in a federated learning scenario, where updates are passed from many users to a central server, and a bad actor can poison those updates.}
+
+    While the adversarial attack scenario in Section 3.4.3.1 is relatively simple, it is representative of challenges encountered in Machine Learning as a Service (MLaaS) settings, where users interact with models in a black-box manner. This scenario effectively demonstrates the practical utility of black-box optimisation approaches. The federated learning scenario mentioned by the examiner is indeed a broader and more complex setting, involving distributed data and aggregation of updates from multiple clients. However, it introduces additional considerations such as communication constraints and privacy, which are beyond the primary focus of this thesis. Therefore, the chosen scenario remains appropriate for illustrating the core contributions of my work.
+
+    \item \textbf{In Sections 4.4.3.1 and 4.4.3.2, the unknown function $f(x)$ is already available analytically. Therefore, it does not appear to be a black-box optimisation problem anymore? Please explain.}
+
+    Thank you for the observation. In Sections 4.4.3.1 and 4.4.3.2, synthetic functions with known closed-form expressions are used to clearly illustrate the structure of the objective and constraint functions. However, in all experiments, the optimisation algorithms interact with these functions solely through point-wise evaluations (i.e., by querying function values at specific inputs), without utilizing their analytical forms. This setup faithfully mimics a black-box optimisation scenario, as the algorithms have no access to the internal structure of the functions and rely only on input-output queries. Moreover, knowing the closed form of the synthetic function serves as the ground truth, which is essential for objectively evaluating the performance of black-box optimisation methods. It allows for the computation of metrics such as regret or constraint violation, providing a reliable benchmark to assess and compare different algorithms.
+
+    \item \textbf{For the theoretical analysis in Chapter 5, a comment on the assurance of the nonnegativity of the term under the square root is probably needed.}
+    
+    The expression $I(f; \mathbf{Y}_t) - I(f; \mathbf{Y}_t; \mathbf{U}_r)$ is equivalent to the conditional mutual information $I(f; \mathbf{Y}_t|\mathbf{U}_r)$, which quantifies the expected mutual information between the function $f$ and the observations $\mathbf{Y}_t$, given $\mathbf{U}_r$. In information theory, the conditional mutual information $I(f; \mathbf{Y}_t|\mathbf{U}_r)$ is always non-negative ~\cite[Sec.~2.3]{polyanskiy2014lecture}. Therefore, the term under the square root is guaranteed to be non-negative.
+
+\end{enumerate}
+\section*{Response to Comments of Examiner 2}
+I sincerely thank the examiner for their thoughtful review and generous appreciation of my work. Their encouraging feedback is deeply valued and motivates me to continue striving for excellence in my research.
+\section*{Response to Comments of Examiner 3}
+I thank the examiner for their valuable feedback on my thesis. Below are my responses to the comments provided:
+\begin{enumerate}[leftmargin=0pt, label={\textbf{\arabic*.}}, itemsep=2em]
+\item \textbf{Clarify the Motivation and Practical Use-Cases Earlier}
+To address the examiner's suggestion, I have revised the introduction (Sections 1.1) to include concrete examples of challenging real-world black-box optimisation problems. For instance, hyperparameter tuning in deep learning often involves optimizing non-convex, expensive-to-evaluate objective functions where gradients are unavailable, making traditional optimisation methods impractical. Similarly, aerodynamic shape design in engineering and material discovery in chemistry require optimizing complex systems where each evaluation (e.g., a simulation or experiment) is costly, and the underlying function is unknown or intractable  (page 3).
+
+I have clarified how the proposed methods: Neural-BO, NeuralCBO, and PINN-BO are well-suited for these scenarios. Neural-BO leverages neural networks to model unknown objective functions, enabling efficient search in high-dimensional spaces. NeuralCBO extends this approach to handle constraints, which is crucial in engineering design where feasible solutions must satisfy safety or performance criteria. PINN-BO incorporates physics-informed neural networks to exploit known physical laws, further improving sample efficiency in domains like material discovery. These additions help illustrate the practical relevance and broad applicability of the proposed algorithms. 
+\item \textbf{Slightly Broaden Related Work Discussion}
+I appreciate the suggestion to broaden the discussion of related work. In the background chapter, I have already included several of the works mentioned by the examiner, providing context for the development of optimisation methods and their applications. Nevertheless, I have reviewed the related work section and added further discussion to ensure a more comprehensive coverage of recent advances and alternative approaches relevant to my thesis.
+\item \textbf{Elaborate on How the Feasibility-Aware Acquisition Function Works in NeuralCBO}
+
+Following the recommendation of the examiner, I have revised chapter 4 to provide a clearer motivation for the use of feasibility-aware acquisition functions in Neural-CBO. I have also added more details on how these functions operate, including their role in balancing exploration and exploitation while ensuring constraint satisfaction. These changes have been made at the end of page 79.
+\item \textbf{Deepen the Explanation of How Physics Knowledge is Embedded into PINN-BO}
+
+I have expanded the explanation of how physics knowledge is embedded into PINN-BO in chapter 5. Specifically, I have clarified how the physics-informed neural networks (PINNs) are trained to respect known physical laws, such as partial differential equations (PDEs), and how this integration enhances the optimisation process. The revised text now includes a more detailed description of the training process and how it ensures that the surrogate model remains aligned with the underlying physical system (page 92). 
+\item \textbf{Strengthen Discussion on Limitations and Future Work}
+
+In response to the examiner's suggestion, I have strengthened the discussion on the limitations of the proposed methods and provided a more detailed outlook on future research directions. Specifically, I have included a dedicated section on Limitations and improved the Future Directions section in Chapter 6 (page 105). These additions offer a balanced perspective on the current work and outline promising avenues for further investigation.
+
+\end{enumerate}
+\begin{thebibliography}{9}
+\bibitem{polyanskiy2014lecture}
+Polyanskiy, Yury and Wu, Yihong,
+\textit{Lecture notes on information theory},
+Lecture Notes for ECE563 (UIUC) and, vol. 6, no. 2012-2016, pp. 7, 2014, Citeseer.
+\end{thebibliography}
+\end{document}

@@ -6,160 +6,38 @@
 We present the mathematical expressions of five synthetic objective functions and their accompanied PDEs used in Section \ref{section:pinn-bo_experiments} of Chapter \ref{chap:pinn-bo} as follows: 
 \paragraph{Drop-Wave:} 
 \begin{align*}
-    f(\mathbf{x}) &= - \frac{1 + \cos(12\sqrt{\mathbf{x}_1^2 + \mathbf{x}_2^2})}{0.5(\mathbf{x}_1^2 + \mathbf{x}_1^2) + 2} \text{ s.t. } \mathbf{x}_1 \frac{\partial f}{\partial \mathbf{x}_2} - \mathbf{x}_2 \frac{\partial f}{\partial \mathbf{x}_1} = 0
+    f(\mathbf{x}) &= - \frac{1 + \cos(12\sqrt{\mathbf{x}_1^2 + \mathbf{x}_2^2})}{0.5(\mathbf{x}_1^2 + \mathbf{x}_1^2) + 2} \text{ s.t. } \mathbf{x}_1 \frac{\partial f}{\partial \mathbf{x}_2} - \mathbf{x}_2 \frac{\partial f}{\partial \mathbf{x}_1} = 0.
 \end{align*}
 \paragraph{Styblinski-Tang:}
 \begin{align*}
-        f(\mathbf{x}) &= \frac{1}{2} \sum_{i=1}^{d} (\mathbf{x}_i^4 - 16\mathbf{x}_i^2 + 5\mathbf{x}_i) \text{ s.t. }  \sum_{i=1}^d \frac{\partial f}{\partial \mathbf{x}_i} = \sum_{i=1}^{d}(2\mathbf{x}_i^3 -16\mathbf{x}_i +\frac{5}{2})
+        f(\mathbf{x}) &= \frac{1}{2} \sum_{i=1}^{d} (\mathbf{x}_i^4 - 16\mathbf{x}_i^2 + 5\mathbf{x}_i) \text{ s.t. }  \sum_{i=1}^d \frac{\partial f}{\partial \mathbf{x}_i} = \sum_{i=1}^{d}(2\mathbf{x}_i^3 -16\mathbf{x}_i +\frac{5}{2}).
 \end{align*}
 
 \paragraph{Rastrigin:}
 \begin{align*}
-        f(\mathbf{x}) &= 10d + \sum_{i=1}^{d} \left[ \mathbf{x}_i^2 - 10 \cos(2\pi \mathbf{x}_i) \right] 
+        f(\mathbf{x}) &= 10d + \sum_{i=1}^{d} \left[ \mathbf{x}_i^2 - 10 \cos(2\pi \mathbf{x}_i) \right], 
         \\
-        \text{s.t. }  &\mathbf{x}^\top \nabla f(\mathbf{x})  - f(\mathbf{x}) = 10\sum_{i=1}^d \left[ (\cos(2\pi \mathbf{x}_i)) + \pi \mathbf{x}_i (\sin(2\pi \mathbf{x}_i)) - 1 \right]
+        \text{s.t. }  &\mathbf{x}^\top \nabla f(\mathbf{x})  - f(\mathbf{x}) = 10\sum_{i=1}^d \left[ (\cos(2\pi \mathbf{x}_i)) + \pi \mathbf{x}_i (\sin(2\pi \mathbf{x}_i)) - 1 \right].
 \end{align*}
 \paragraph{Michalewics:}
 \begin{align*}
-        f(\mathbf{x}) &= -\sum_{i=1}^{d} \sin(\mathbf{x}_i) \sin^{2m}\left(\frac{i\mathbf{x}_i^2}{\pi}\right) \text{ s.t. } \mathbf{h}^\top \nabla f(\mathbf{x}) - f(\mathbf{x}) = 0,\\ & \text{where } \mathbf{h} = [\mathbf{h}_1, \mathbf{h}_2, \dots, \mathbf{h}_d]^\top, \mathbf{h}_i = \left[\frac{\cos(\mathbf{x}_i)}{\sin(\mathbf{x}_i)} + \frac{2\mathbf{x}_i (2m-1)}{\tan(\frac{i\mathbf{x}_i^2}{\pi})}\right]^{-1}
+        f(\mathbf{x}) &= -\sum_{i=1}^{d} \sin(\mathbf{x}_i) \sin^{2m}\left(\frac{i\mathbf{x}_i^2}{\pi}\right) \text{ s.t. } \mathbf{h}^\top \nabla f(\mathbf{x}) - f(\mathbf{x}) = 0,\\ & \text{where } \mathbf{h} = [\mathbf{h}_1, \mathbf{h}_2, \dots, \mathbf{h}_d]^\top, \mathbf{h}_i = \left[\frac{\cos(\mathbf{x}_i)}{\sin(\mathbf{x}_i)} + \frac{2\mathbf{x}_i (2m-1)}{\tan(\frac{i\mathbf{x}_i^2}{\pi})}\right]^{-1}.
 \end{align*}
 \paragraph{Cosine Mixture:}
 \begin{align*}
-    0.1 \sum_{i=1}^d \cos(5\pi\mathbf{x}_i) + \sum_{i=1}^d \mathbf{x}_i^2 \text{ s.t } \sum_{i=1}^d \left(\frac{\partial f}{\partial \mathbf{x}_i} - 2\mathbf{x}_i + 0.5\pi\sin(5\pi\mathbf{x}_i) \right)^2 = 0
+    0.1 \sum_{i=1}^d \cos(5\pi\mathbf{x}_i) + \sum_{i=1}^d \mathbf{x}_i^2 \text{ s.t } \sum_{i=1}^d \left(\frac{\partial f}{\partial \mathbf{x}_i} - 2\mathbf{x}_i + 0.5\pi\sin(5\pi\mathbf{x}_i) \right)^2 = 0.
 \end{align*}
 
-% \subsection{Real-world Applications}
-% \label{section:pinn-bo_experiments_real_world}
-% \subsubsection{Optimizing Steady-State Temperature}
-% \label{section:pinn-bo_experiments_2d_laplace}
-% In this study, we showcase the benchmark optimization outcomes achieved by our proposed PINN-BO algorithm, comparing them with baseline methods for the steady-state temperature optimization task.  The governing PDE dictating the temperature distribution is expressed as: $\nabla^2 T(x, y) = 0$. We explore the heat equation in a domain where $x$ and $y$ lie within the defined range of $[0,2\pi]$. To thoroughly investigate the problem, we consider three distinct boundary conditions for this equation, each contributing to a nuanced understanding of the system: 
-
-%  \paragraph{Heat Equation with boundary conditions 1}
-%  \label{para:heat1}
-%  \begin{align*}
-%      T(x, 0) &= 5\sin(y) + \sqrt{1+y} \\
-%     T(x, 2\pi) &= y\sin\left(3\cos(y) + 2\exp(y)\sin(y)\right) \\
-%    T(0, y) &= 10\cos(x) + x\exp(\sqrt{x^2 + \sin(x)}) \\
-%    T(2\pi, y) &= 3\sqrt{\exp(x\exp(-x))}\sin(x) + \cos(3x)\cos(3x)
-%  \end{align*}
-%  \paragraph{Heat Equation with boundary conditions 2}
-%  \label{para:heat2}
-% \begin{align*}
-%     T(x, 0) &= \sin(x) \cos(2x) + x^2\sqrt{3x}  + e^{\sin(x)} \\
-%     T(x, 2\pi) &= e^{\sin(x)} \sqrt{3x} + x^2 \cos(x)  \sin^2(x)   + e^{\cos(x)} \\
-%     T(0, y) &= \sqrt{2y}  \sin(y) + y^3\cos(2y)   + e^{\cos(y)} \\
-%     T(2\pi, y) &= \sin(y) \cos(2y) + y^3\sqrt{2y}   + e^{\sin(y)}
-% \end{align*}
-% \paragraph{Heat Equation with boundary conditions 3}
-% \label{para:heat3}
-% \begin{align*}
-%     T(x, 0) &= \left(\sin(x) + \cos(2x) \right) \sqrt{3x} + x^2 + e^{\sin(x)} \\
-%     T(x, 2\pi) &= \left(e^{\sin(x)} + \sqrt{3x} \right) \cos(x) + \left(\sin^2(x) + x^2\right)  e^{\cos(x)}
-%     \\
-%     T(0, y) &= \left(\sqrt{2y} + \sin(y)\right)  \left(\cos(2y) + y^3 \right) + e^{\cos(y)}\\
-%     T(2\pi, y) &= \left(\sin(y) + \cos(2y)\right) \left(\sqrt{2y} + y^3\right) + e^{\sin(y)}
-% \end{align*}
-% We utilized py-pde, a Python package designed for solving partial differential equations (PDEs), available at the following GitHub repository: \url{https://github.com/zwicker-group/py-pde}. This tool enabled us to obtain solutions to heat equations at various input points, with specific boundary conditions serving as the input data. In Figure \ref{fig:heat_dist}, the temperature distribution within the defined domain $[0, 2\pi]$ is visualized. It is important to emphasize that the boundary conditions used for benchmarking purposes are unknown to the methods employed. Adhering to the framework of black-box optimization, we assume that solving the PDEs incurs a substantial computational cost. The figure illustrates the spatial distribution of temperature values $T(x,y)$ across domain $[0, 2\pi] \times [0, 2\pi]$, with each subfigure corresponding to one of the aforementioned boundary conditions. 
-% \begin{figure}[ht]
-%     \centering
-%     \begin{subfigure}[b]{0.3\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{Figures/PINN-BO/heat_py_pde_1000_test_1.pdf}
-%         \caption{Solution of Temperature Equation with boundary conditions 1}
-%  \label{fig:heat_1_dist}
-%     \end{subfigure}
-%     \hfill
-%     \begin{subfigure}[b]{0.3\textwidth}
-%         \centering
-%         \includegraphics[width=1\textwidth]{Figures/PINN-BO/heat_py_pde_1000_test_2.pdf}
-%         \caption{Solution of Temperature Equation with boundary conditions 2}
-%         \label{fig:heat_2_dist}
-%     \end{subfigure}
-%     \hfill
-%     \begin{subfigure}[b]{0.3\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{Figures/PINN-BO/heat_py_pde_1000_test_3.pdf}
-%         \caption{Solution of Temperature Equation with boundary conditions 3}
-%         \label{fig:heat_3_dist}
-%     \end{subfigure}
-%     \caption{The figures depict the solutions for temperature distributions governed by the heat equation, with each figure corresponding to a specific tuple of boundary conditions described in Section \ref{section:pinn-bo_experiments_2d_laplace}. It is evident that the region with the highest temperature is relatively small in comparison to the entire domain.}
-%     \label{fig:heat_dist}
-% \end{figure}
-
-% We conducted temperature optimization by identifying the locations $(x,y)$ where the temperature reaches its maximum. As illustrated in Figure \ref{fig:heat_dist}, the area with high temperatures is relatively small in comparison to the regions with medium or low temperatures. For each baseline, we performed the optimization process 10 times, computing the average results. The comparative outcomes are presented in Figure \ref{fig:heat_opt}. 
-% \begin{figure}[ht]
-%     \centering
-%     \begin{subfigure}[b]{0.3\textwidth}
-%         \centering
-%     \includegraphics[width=\textwidth]{Figures/PINN-BO/Heat_dim_2_bc1.pdf}
-%         \caption{Temperature Optimization in case of boundary conditions 1}
-%  \label{fig:heat_1_opt}
-%     \end{subfigure}
-%     \hfill
-%     \begin{subfigure}[b]{0.3\textwidth}
-%         \centering
-%         \includegraphics[width=1\textwidth]{Figures/PINN-BO/Heat_dim_2_bc2.pdf}
-%         \caption{Temperature Optimization in case of boundary conditions 2}
-%         \label{fig:heat_2_opt}
-%     \end{subfigure}
-%     \hfill
-%     \begin{subfigure}[b]{0.3\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{Figures/PINN-BO/Heat_dim_2_bc3.pdf}
-%         \caption{Temperature Optimization in case of boundary conditions 3}
-%         \label{fig:heat_3_opt}
-%     \end{subfigure}
-%     \caption{The figure shows the temperature optimization results of our PINN-BO and other baselines. For all three cases with different positions of maximum temperature, our PINN-BO performs better than all other baselines.}
-%     \label{fig:heat_opt}
-% \end{figure}
-
-
-% \subsubsection{Optimizing Beam Displacement}
-% We showcase the benchmark optimization outcomes obtained through our proposed method, PINN-BO, and the baseline approaches, addressing the task of minimizing the deflection of a non-uniform Euler-Bernoulli beam. The governing differential equation describing the behavior of a non-uniform Euler-Bernoulli beam is provided below: 
-% \begin{equation*}
-%     \frac{d^2}{dx^2} \left( EI(x) \frac{d^2 w(x)}{dx^2} \right) = q(x),
-% \end{equation*}
-% where
-% $EI(x)$ represents the flexural rigidity of the beam, which can vary with position $x$, and $w(x)$ represents the vertical displacement of the beam at position $x$ and 
-% $q(x)$ represents the distributed or concentrated load applied to the beam. 
-% In our implementation, we consider the detailed expression of $EI(x)$ and $q(x)$ as follows:
-% \begin{align*}
-%     EI(x) &= \frac{e^x}{\rho(x)},\\
-%     \rho(x) &= 2.4 x - 64 \pi^{2} e^{4 x} \sin{\left(4 \pi e^{2 x} \right)} - 396 e^{2 x} \sin{\left(20 x \right)} \\
-%     &+ 80 e^{2 x} \cos{\left(20 x \right)} + 16 \pi e^{2 x} \cos{\left(4 \pi e^{2 x} \right)} + 0.4
-% \end{align*}
-% We employed the Finite Difference Method (FDM) to solve the non-uniform Euler-Bernoulli beam equation. It's crucial to note that this step is solely for generating observations at each input point. Despite obtaining this solution, our methods and all baseline techniques continue to treat this solution as a black-box function, accessing observations solely through querying. In Figure \ref{fig:beam_illustration}, the displacement values $w(x)$ for $x \in (0,1)$ are illustrated. The optimization results for both our PINN-BO and the other baseline methods are presented in Figure \ref{fig:beam_opt}.
-
-% \begin{figure}[ht]
-%     \centering
-%     \begin{subfigure}[b]{0.44\textwidth}
-%         \centering
-%     \includegraphics[width=\textwidth]{Figures/PINN-BO/beam.pdf}
-%     \caption{Displacement of non-uniform Euler beam}
-%      \label{fig:beam_illustration}
-%     \end{subfigure}
-%     \hfill
-%     \begin{subfigure}[b]{0.49\textwidth}
-%         \centering
-%         \includegraphics[width=1\textwidth]{Figures/PINN-BO/BeamDeflection_dim_1.pdf}
-%         \caption{Displacement Optimization of non-uniform Euler beam}
-%         \label{fig:beam_opt}
-%     \end{subfigure}
-%     \caption{Displacement of a Non-uniform Euler Beam and minimum displacement found by our PINN-BO and the other baselines. The left panel illustrates the natural displacement profile of the non-uniform Euler beam under given loads $q(x)$,  flexural rigidity $EI(x)$, and boundary conditions. The right panel depicts the optimized position on the beam where the displacement is minimized, highlighting the location where the structural response is at its lowest. }
-%     \label{fig:beam}
-% \end{figure}
-\section{Proof of Theoretical Analysis in Chapter \ref{chap:pinn-bo}}
+\section{Proof of Theoretical Results in Chapter \ref{chap:pinn-bo}}
 \label{section:pinn-bo_appendix}
 
+In this section, we present the detailed proof of Lemma \ref{lemma:pinn-bo_PINN_mean_cov}, Lemma \ref{lemma:pinn-bo_confidence_bound} and Theorem \ref{theorem:pinn-bo_main} in Chapter \ref{chap:pinn-bo}.
+ As these theoretical results require auxiliary lemmas to complete their proofs, we provide auxiliary lemmas in Section \ref{section:pinn-bo_aux_appendix} and later prove in Section \ref{section:pinn-bo_aux_proofs}. 
 \subsection{Proof of Lemma \ref{lemma:pinn-bo_PINN_mean_cov}}
-In this section, we present the detailed proof of Lemma \ref{lemma:pinn-bo_PINN_mean_cov} in Chapter \ref{chap:pinn-bo}. Before going to the proof, we repeat Lemma \ref{lemma:pinn-bo_PINN_mean_cov} here:
+ Before going to the proof, we repeat Lemma \ref{lemma:pinn-bo_PINN_mean_cov} here:
 \PinnMeanCov*
 
 % \noindent \textbf{To prove Lemma \ref{lemma:pinn-bo_PINN_mean_cov}, we need the following lemma:}
-
-
-
-
 
 \begin{proof} [Proof of Lemma \ref{lemma:pinn-bo_PINN_mean_cov}]
 From Corollary \ref{corollary:pinn-bo_PINN_GP_func}, the priors for values of both $f$ and $g$ follow a joint Gaussian distribution with kernel $\mathbf{K}_\mathrm{NTK-PINN}$. Let $\mathbf{K_x}$ be the NTK matrix between point $\mathbf{x}$ and all training data: $\mathbf{K}_x = \begin{bmatrix}
@@ -208,7 +86,7 @@ Then the posterior of $f$ and $g$ evaluated at an input $\mathbf{x}$ will be a G
         \\
          &=\phi(\mathbf{x})^\top \boldsymbol{\xi}_t^\top \mathbf{\widehat{K}}_\mathrm{PINN}^{-1} \begin{bmatrix}
          \mathbf{Y}_t \\
-         \mathbf{U}_r\end{bmatrix}
+         \mathbf{U}_r\end{bmatrix}.
 \end{align*}
 
 \paragraph{Variance function:}
@@ -235,7 +113,7 @@ Let $\mathbf{K}_{\mathbf{xx}} = \begin{bmatrix}
         \end{bmatrix}  \begin{bmatrix}
                             \Sigma_a & \Sigma_b \\
                             \Sigma_c & \Sigma_d
-                        \end{bmatrix}  \\
+                        \end{bmatrix}.
 \end{align*}
 Therefore, 
 \begin{align*}
@@ -256,7 +134,7 @@ Therefore,
     \widetilde{\mathbf{C}} & \widetilde{\mathbf{D}}
         \end{bmatrix} \begin{bmatrix} \boldsymbol{\Phi}_t \phi(\mathbf{x}) \\ \boldsymbol{\Omega}_r \phi(\mathbf{x})  \end{bmatrix}  \\
         &= \nu_t^2 \langle \phi(\mathbf{x}),  \phi(\mathbf{x}) \rangle - \nu_t^2\phi(\mathbf{x})^\top \boldsymbol{\xi}_t^\top \mathbf{\widehat{K}}_\mathrm{PINN}^{-1} \boldsymbol{\xi}_t \phi(\mathbf{x})\\
-        &= \nu_t^2 (\sigma_t^f)^2(\mathbf{x})
+        &= \nu_t^2 (\sigma_t^f)^2(\mathbf{x}).
 \end{align*}
 \end{proof}
 
@@ -283,7 +161,7 @@ Using the properties of \acp{gp}, given a set of sampling points $\mathcal{D}_t\
     \mathbf{K}_{uu} & \mathbf{K}_{uu} & \mathbf{K}_{ur} \\
     \mathbf{K}_{uu} & \mathbf{K}_{uu} + \lambda_1 \mathbf{I} & \mathbf{K}_{ur} \\
     \mathbf{K}_{ru} & \mathbf{K}_{uu} & \mathbf{K}_{rr} + \lambda_2 \mathbf{I}
-\end{bmatrix} \right)   
+\end{bmatrix} \right).   
 \end{align} 
 Then, we have:
 
@@ -312,7 +190,7 @@ and
         \\
         & = \nu_t^2 (\boldsymbol{\Phi}_t \boldsymbol{\Phi}_t^\top - \boldsymbol{\Phi}_t \boldsymbol{\xi}_t^\top \mathbf{\widehat{K}}_\mathrm{PINN}^{-1} \boldsymbol{\xi}_t \boldsymbol{\Phi}_t^\top).  \label{Eqn:covar_f_condition_on_y_and_u}
 \end{align}
-Let $\mathbf{V} = \boldsymbol{\xi}_t^\top \mathbf{\widehat{K}}_\mathrm{PINN}^{-1} \boldsymbol{\xi}_t$, now we need to calculate $\mathbf{V}$. We have
+Let $\mathbf{V} = \boldsymbol{\xi}_t^\top \mathbf{\widehat{K}}_\mathrm{PINN}^{-1} \boldsymbol{\xi}_t$, now we need to calculate $\mathbf{V}$. We have:
 \begin{align*}
             \mathbf{V} &= \boldsymbol{\boldsymbol{\xi}_t}^\top \mathbf{\widehat{K}}_\mathrm{PINN}^{-1} \boldsymbol{\boldsymbol{\xi}_t} 
 \\
@@ -354,7 +232,7 @@ The second equality applied the formula of block matrix inversion\footnote{The i
     \end{bmatrix}$ is given as $\mathbf{K}^{-1} = \begin{bmatrix}
         \mathbf{P}^{-1} + \mathbf{P}^{-1} \mathbf{QMR}\mathbf{P}^{-1} & \mathbf{P}^{-1}\mathbf{QM} \\ -\mathbf{MR}\mathbf{P}^{-1} & \mathbf{M} 
     \end{bmatrix}$ with $\mathbf{M} = (\mathbf{S} - \mathbf{R}\mathbf{P}^{-1}\mathbf{Q})^{-1}$.}, 
-    while the last equality used push-through identity. Next, we have
+    while the last equality used push-through identity. Next, we have:
 \begin{align*}
             \mathbf{M} &= (\mathbf{S} - \mathbf{R}\mathbf{P}^{-1}\mathbf{Q})^{-1} 
 \\
@@ -366,7 +244,7 @@ The second equality applied the formula of block matrix inversion\footnote{The i
 \\ 
             &= \left[\lambda_2\mathbf{I} + \lambda_1\boldsymbol{\Omega}_r(\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t+ \lambda_1\mathbf{I})^{-1}\boldsymbol{\Omega}_r^\top\right]^{-1} 
 \\
-            &= \lambda_1^{-1} \left[\boldsymbol{\Omega}_r(\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t+ \lambda_1\mathbf{I})^{-1}\boldsymbol{\Omega}_r^\top + \frac{\lambda_2} {\lambda_1} \mathbf{I}\right]^{-1} 
+            &= \lambda_1^{-1} \left[\boldsymbol{\Omega}_r(\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t+ \lambda_1\mathbf{I})^{-1}\boldsymbol{\Omega}_r^\top + \frac{\lambda_2} {\lambda_1} \mathbf{I}\right]^{-1}, 
 \\
             V_1 & = \boldsymbol{\Omega}_r^\top - \boldsymbol{\Phi}_t^\top \mathbf{P}^{-1} \mathbf{Q}
 \\
@@ -378,7 +256,7 @@ The second equality applied the formula of block matrix inversion\footnote{The i
 \\
             & = \left[ \mathbf{I} - (\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_1\mathbf{I})^{-1} (\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t +\lambda_1 \mathbf{I} - \lambda_1 \mathbf{I})\right] \boldsymbol{\Omega}_r^\top 
 \\
-            & = \lambda_1(\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_1\mathbf{I})^{-1} \boldsymbol{\Omega}_r^\top 
+            & = \lambda_1(\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_1\mathbf{I})^{-1} \boldsymbol{\Omega}_r^\top, 
 \\
             V_2 & = \widetilde{\mathbf{C}}\boldsymbol{\Phi}_t  + \widetilde{\mathbf{D}}\boldsymbol{\Omega}_r 
 \\
@@ -392,7 +270,7 @@ The second equality applied the formula of block matrix inversion\footnote{The i
 \\
             & = \lambda_1 \mathbf{M} \boldsymbol{\Omega}_r (\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t + \lambda_1\mathbf{I})^{-1} 
 \\ 
-            & = \left[\boldsymbol{\Omega}_r(\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t+ \lambda_1\mathbf{I})^{-1}\boldsymbol{\Omega}_r^\top + \frac{\lambda_2} {\lambda_1} \mathbf{I}\right]^{-1} \boldsymbol{\Omega}_r (\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t + \lambda_1\mathbf{I})^{-1}
+            & = \left[\boldsymbol{\Omega}_r(\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t+ \lambda_1\mathbf{I})^{-1}\boldsymbol{\Omega}_r^\top + \frac{\lambda_2} {\lambda_1} \mathbf{I}\right]^{-1} \boldsymbol{\Omega}_r (\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t + \lambda_1\mathbf{I})^{-1}.
 \end{align*}
 Then we have, 
     \begin{align*}
@@ -418,7 +296,7 @@ Then we have,
             & \;\;\;\;\; \cdot \left[\mathbf{I} -  \mathbf{I} + \frac{\lambda_2}{\lambda_1}\left(\boldsymbol{\Omega}_r^\top\boldsymbol{\Omega}_r(\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t+ \lambda_1\mathbf{I})^{-1}+\frac{\lambda_2} {\lambda_1} \mathbf{I}\right)^{-1} \right] \\ 
             & = \mathbf{I} - \lambda_2 (\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t+ \lambda_1\mathbf{I})^{-1}\left(\boldsymbol{\Omega}_r^\top\boldsymbol{\Omega}_r(\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t+ \lambda_1\mathbf{I})^{-1}+\frac{\lambda_2} {\lambda_1} \mathbf{I}\right)^{-1} \\
             & =\mathbf{I} - \lambda_2 \left(\boldsymbol{\Omega}_r^\top\boldsymbol{\Omega}_r+\frac{\lambda_2} {\lambda_1} (\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t+ \lambda_1\mathbf{I})\right)^{-1} \\
-            & =\mathbf{I} - \lambda_2 \left(\boldsymbol{\Omega}_r^\top\boldsymbol{\Omega}_r+\frac{\lambda_2} {\lambda_1} \boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t+ \lambda_2 \mathbf{I}\right)^{-1}  
+            & =\mathbf{I} - \lambda_2 \left(\boldsymbol{\Omega}_r^\top\boldsymbol{\Omega}_r+\frac{\lambda_2} {\lambda_1} \boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t+ \lambda_2 \mathbf{I}\right)^{-1}. 
     \end{align*}
 In conclusion, we have 
 \begin{align}
@@ -430,7 +308,7 @@ Replace Eqn. \eqref{Eqn:xi_t-K-xi} to the expression of $\textup{Cov}(f_t \rvert
 
 \begin{equation}
 \label{Eqn:covar_f_condition_on_y_and_u_final}
-    \textup{Cov}(f \rvert \mathbf{Y}_t; \mathbf{U}_r) = \nu_t^2\boldsymbol{\Phi}_t \left(\frac{\boldsymbol{\Omega}_r^\top\boldsymbol{\Omega}_r}{\lambda_2}+\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t} {\lambda_1} + \mathbf{I}\right)^{-1} \boldsymbol{\Phi}_t^\top
+    \textup{Cov}(f \rvert \mathbf{Y}_t; \mathbf{U}_r) = \nu_t^2\boldsymbol{\Phi}_t \left(\frac{\boldsymbol{\Omega}_r^\top\boldsymbol{\Omega}_r}{\lambda_2}+\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t} {\lambda_1} + \mathbf{I}\right)^{-1} \boldsymbol{\Phi}_t^\top.
 \end{equation}
 Combining the expression of $\textup{Cov}(f\rvert \mathbf{U}_r)$ in Eqn. \eqref{Eqn:covar_f_condition_on_u} with Eqn. \eqref{Eqn:covar_f_condition_on_y_and_u_final}, with $H$ is the entropy function, we have:
 \begin{align}
@@ -444,7 +322,7 @@ Combining the expression of $\textup{Cov}(f\rvert \mathbf{U}_r)$ in Eqn. \eqref{
 \\
      & - \frac{1}{2}\log\det (\nu_t^2\boldsymbol{\Phi}_t \left(\frac{\boldsymbol{\Omega}_r^\top\boldsymbol{\Omega}_r}{\lambda_2}+\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t} {\lambda_1} + \mathbf{I}\right)^{-1} \boldsymbol{\Phi}_t^\top) \nonumber
 \\
-     &= \frac{1}{2} \log \frac{\det(\boldsymbol{\Phi}_t \left(\frac{\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r}{\lambda_2} + \mathbf{I}\right)^{-1} \boldsymbol{\Phi}_t^\top)}{\det(\boldsymbol{\Phi}_t \left(\frac{\boldsymbol{\Omega}_r^\top\boldsymbol{\Omega}_r}{\lambda_2}+\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t} {\lambda_1} + \mathbf{I}\right)^{-1} \boldsymbol{\Phi}_t^\top)}, \label{Eqn:conditional_information_f_and_Yt_give_Ur}
+     &= \frac{1}{2} \log \frac{\det(\boldsymbol{\Phi}_t \left(\frac{\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r}{\lambda_2} + \mathbf{I}\right)^{-1} \boldsymbol{\Phi}_t^\top)}{\det(\boldsymbol{\Phi}_t \left(\frac{\boldsymbol{\Omega}_r^\top\boldsymbol{\Omega}_r}{\lambda_2}+\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t} {\lambda_1} + \mathbf{I}\right)^{-1} \boldsymbol{\Phi}_t^\top)}. \label{Eqn:conditional_information_f_and_Yt_give_Ur}
 \end{align}
 Then we have 
 \begin{align}
@@ -489,10 +367,12 @@ Before going to the proof, we repeat Lemma \ref{lemma:pinn-bo_confidence_bound}
 \paragraph{Extra Definitions}
 Let us define terms for the convenience as follows:
 \begin{align*}
-     \mathbf{F}_t & = (f(\mathbf{x}_1), \cdots, f(\mathbf{x}_t))^\top 
+     \mathbf{F}_t & = (f(\mathbf{x}_1), \cdots, f(\mathbf{x}_t))^\top, 
      \\
-      \mathbf{G}_r & = (g(\mathbf{z}_1), \cdots, g(\mathbf{z}_{N_r}))^\top \\
-     \boldsymbol{\epsilon}_t & = (y_1 - f(\mathbf{x}_1), \cdots, y_t - f(\mathbf{x}_t))^\top \\
+      \mathbf{G}_r & = (g(\mathbf{z}_1), \cdots, g(\mathbf{z}_{N_r}))^\top, 
+\\
+     \boldsymbol{\epsilon}_t & = (y_1 - f(\mathbf{x}_1), \cdots, y_t - f(\mathbf{x}_t))^\top, 
+\\
      \boldsymbol{\eta}_r & = (u_1 - g(\mathbf{z}_1), \cdots, u_{N_r} - g(\mathbf{z}_{N_r}))^\top,
 \end{align*}
 where $\{y_i\}_{i=1}^T$ and $\{u_j\}_{j=1}^{N_r}$ are defined in Lemma \ref{lemma:pinn-bo_PINN_mean_cov}. Now we are ready to prove Lemma \ref{lemma:pinn-bo_confidence_bound}.
@@ -524,7 +404,7 @@ From Lemma \ref{lemma:pinn-bo_PINN_mean_cov}, we have $\mu_t^f(\mathbf{x}) =\phi
             \boldsymbol{\Phi}_t^\top \widetilde{\mathbf{A}}\mathbf{F}_t + \boldsymbol{\Omega}_r^\top \widetilde{\mathbf{C}}\mathbf{F}_t + \boldsymbol{\Phi}_t^\top \widetilde{\mathbf{B}}\mathbf{G}_r+ \boldsymbol{\Omega}_r^\top \widetilde{\mathbf{D}}\mathbf{G}_r
         \end{bmatrix} \right\rvert}_{T_1} 
 \\ 
-        & + \underbrace{\left\lvert \phi(\mathbf{x})^\top \boldsymbol{\Phi}_t^\top \widetilde{\mathbf{A}}\boldsymbol{\epsilon}_t +  \phi(\mathbf{x})^\top \boldsymbol{\Omega}_r^\top \widetilde{\mathbf{C}}\boldsymbol{\epsilon}_t +  \phi(\mathbf{x})^\top \boldsymbol{\Phi}_t^\top \widetilde{\mathbf{B}}\boldsymbol{\eta}_r) + \phi(\mathbf{x})^\top \boldsymbol{\Omega}_r^\top \widetilde{\mathbf{D}}\boldsymbol{\eta}_r)\right\rvert}_{T_2}
+        & + \underbrace{\left\lvert \phi(\mathbf{x})^\top \boldsymbol{\Phi}_t^\top \widetilde{\mathbf{A}}\boldsymbol{\epsilon}_t +  \phi(\mathbf{x})^\top \boldsymbol{\Omega}_r^\top \widetilde{\mathbf{C}}\boldsymbol{\epsilon}_t +  \phi(\mathbf{x})^\top \boldsymbol{\Phi}_t^\top \widetilde{\mathbf{B}}\boldsymbol{\eta}_r) + \phi(\mathbf{x})^\top \boldsymbol{\Omega}_r^\top \widetilde{\mathbf{D}}\boldsymbol{\eta}_r)\right\rvert}_{T_2}.
     \end{align*}
     
     \paragraph{Bound term $T_1 = \left\lvert f(\mathbf{x}) - \phi(\mathbf{x})^\top \begin{bmatrix}
@@ -551,7 +431,7 @@ From Lemma \ref{lemma:pinn-bo_PINN_mean_cov}, we have $\mu_t^f(\mathbf{x}) =\phi
             & \le \norm{f}_{k_\textup{NTK-PINN}} \sqrt{\lambda_2\phi(\mathbf{x})^\top (\mathbf{Z} + \lambda_2\mathbf{I})^{-1} \lambda_2 \mathbf{I} (\mathbf{Z} + \lambda_2\mathbf{I})^{-1} \phi(\mathbf{x})} \\
             & \le \norm{f}_{k_\textup{NTK-PINN}} \sqrt{\lambda_2 \phi(\mathbf{x})^\top (\mathbf{Z} + \lambda_2\mathbf{I})^{-1}  (\lambda_2 \mathbf{I} + \mathbf{Z})(\mathbf{Z} + \lambda_2\mathbf{I})^{-1} \phi(\mathbf{x})}\\
             & = \norm{f}_{k_\textup{NTK-PINN}} \sqrt{\lambda_2 \phi(\mathbf{x})^\top (\mathbf{Z} + \lambda_2\mathbf{I})^{-1} \phi(\mathbf{x})} \\
-            & = B \sigma_t^f(\mathbf{x})
+            & = B \sigma_t^f(\mathbf{x}).
     \end{align*}
     The first inequality is by Cauchy-Schwartz while the third inequality uses the fact that matrix $\mathbf{Z} = \boldsymbol{\Omega}_r^\top\boldsymbol{\Omega}_r+\frac{\lambda_2} {\lambda_1} \boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t$ is positive semi-definite. The fifth equality inherits the expression of term $\mathbf{V} = \boldsymbol{\xi}_t ^\top \mathbf{\widehat{K}}_\textup{PINN}^{-1} \boldsymbol{\xi}_t$ calculated in line (\ref{Eqn:xi_t-K-xi}). The last equality is from the fact that:
     \begin{align}
@@ -572,61 +452,65 @@ From Lemma \ref{lemma:pinn-bo_PINN_mean_cov}, we have $\mu_t^f(\mathbf{x}) =\phi
     \end{align*}
    We need to calculate $T_{2a}$:
    \begin{align*}
-       T_{2a} &= (\boldsymbol{\Phi}_t^\top \widetilde{\mathbf{A}} +  \boldsymbol{\Omega}_r^\top \widetilde{\mathbf{C}})\boldsymbol{\epsilon}_t + (\boldsymbol{\Phi}_t^\top\widetilde{\mathbf{B}} + \boldsymbol{\Omega}_r^\top\widetilde{\mathbf{D}}) \boldsymbol{\eta}_r) 
+       T_{2a} &= (\boldsymbol{\Phi}_t^\top \widetilde{\mathbf{A}} +  \boldsymbol{\Omega}_r^\top \widetilde{\mathbf{C}})\boldsymbol{\epsilon}_t + (\boldsymbol{\Phi}_t^\top\widetilde{\mathbf{B}} + \boldsymbol{\Omega}_r^\top\widetilde{\mathbf{D}}) \boldsymbol{\eta}_r 
 \\
-       & = \left[\boldsymbol{\Phi}_t^\top (\mathbf{P}^{-1} - \mathbf{P}^{-1}\mathbf{Q}\widetilde{\mathbf{C}}) +  \boldsymbol{\Omega}_r^\top \widetilde{\mathbf{C}}\right]\boldsymbol{\epsilon}_t + (\boldsymbol{\Omega}_r^\top - \boldsymbol{\Phi}_t^\top\mathbf{P}^{-1}\mathbf{Q})\widetilde{\mathbf{D}} \boldsymbol{\eta}_r) 
+       & = \left[\boldsymbol{\Phi}_t^\top (\mathbf{P}^{-1} - \mathbf{P}^{-1}\mathbf{Q}\widetilde{\mathbf{C}}) +  \boldsymbol{\Omega}_r^\top \widetilde{\mathbf{C}}\right]\boldsymbol{\epsilon}_t + (\boldsymbol{\Omega}_r^\top - \boldsymbol{\Phi}_t^\top\mathbf{P}^{-1}\mathbf{Q})\widetilde{\mathbf{D}} \boldsymbol{\eta}_r 
 \\ 
-       & = \boldsymbol{\Phi}_t^\top \mathbf{P}^{-1} \boldsymbol{\Phi}_t \boldsymbol{\epsilon}_t + \underbrace{(\boldsymbol{\Omega}_r^\top - \boldsymbol{\Phi}_t^\top\mathbf{P}^{-1}\mathbf{Q})}_{V_1}(\widetilde{\mathbf{C}} \boldsymbol{\epsilon}_t + \widetilde{\mathbf{D}} \boldsymbol{\eta}_r) ) \\
-       & = \boldsymbol{\Phi}_t^\top (\boldsymbol{\Phi}_t\boldsymbol{\Phi}_t^\top + \lambda_1\mathbf{I})^{-1} \boldsymbol{\epsilon}_t + \lambda_1(\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_1\mathbf{I})^{-1} \boldsymbol{\Omega}_r^\top (\widetilde{\mathbf{C}} \boldsymbol{\epsilon}_t + \widetilde{\mathbf{D}} \boldsymbol{\eta}_r) ) 
+       & = \boldsymbol{\Phi}_t^\top \mathbf{P}^{-1} \boldsymbol{\Phi}_t \boldsymbol{\epsilon}_t + (\underbrace{\boldsymbol{\Omega}_r^\top - \boldsymbol{\Phi}_t^\top\mathbf{P}^{-1}\mathbf{Q}}_{V_1})(\widetilde{\mathbf{C}} \boldsymbol{\epsilon}_t + \widetilde{\mathbf{D}} \boldsymbol{\eta}_r) 
 \\
-       & = (\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_1\mathbf{I})^{-1} \boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \lambda_1(\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_1\mathbf{I})^{-1} \boldsymbol{\Omega}_r^\top (\widetilde{\mathbf{C}} \boldsymbol{\epsilon}_t + \widetilde{\mathbf{D}} \boldsymbol{\eta}_r) ) 
+       & = \boldsymbol{\Phi}_t^\top (\boldsymbol{\Phi}_t\boldsymbol{\Phi}_t^\top + \lambda_1\mathbf{I})^{-1} \boldsymbol{\epsilon}_t + \lambda_1(\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_1\mathbf{I})^{-1} \boldsymbol{\Omega}_r^\top (\widetilde{\mathbf{C}} \boldsymbol{\epsilon}_t + \widetilde{\mathbf{D}} \boldsymbol{\eta}_r) 
+\\
+       & = (\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_1\mathbf{I})^{-1} \boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \lambda_1(\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_1\mathbf{I})^{-1} \boldsymbol{\Omega}_r^\top (\widetilde{\mathbf{C}} \boldsymbol{\epsilon}_t + \widetilde{\mathbf{D}} \boldsymbol{\eta}_r) 
 \\
        & = (\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_1\mathbf{I})^{-1} (\boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \lambda_1\boldsymbol{\Omega}_r^\top \widetilde{\mathbf{C}} \boldsymbol{\epsilon}_t +  \lambda_1\boldsymbol{\Omega}_r\widetilde{\mathbf{D}} \boldsymbol{\eta}_r) 
 \\
-       & = (\underbrace{\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_1\mathbf{I}}_\mathbf{U})^{-1} (\underbrace{\boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \lambda_1\boldsymbol{\Omega}_r^\top \mathbf{MR}\mathbf{P}^{-1} \boldsymbol{\epsilon}_t -  \lambda_1\boldsymbol{\Omega}_r \mathbf{M} \boldsymbol{\eta}_r)}_{T_{2a}^\prime})
-\\
+       & = (\underbrace{\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_1\mathbf{I}}_\mathbf{U})^{-1} (\underbrace{\boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \lambda_1\boldsymbol{\Omega}_r^\top \mathbf{MR}\mathbf{P}^{-1} \boldsymbol{\epsilon}_t -  \lambda_1\boldsymbol{\Omega}_r \mathbf{M} \boldsymbol{\eta}_r}_{T_{2a}^\prime}).
    \end{align*}
-   Then, let $\mathbf{U} = \boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_1\mathbf{I}$ and $\mathbf{J} = \boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r$, we have 
+   Then, let $\mathbf{U} = \boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_1\mathbf{I}$ and $\mathbf{J} = \boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r$, we have: 
    \begin{align*}
        T_{2a}^\prime &= \boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t -
-       \lambda_1\boldsymbol{\Omega}_r^\top \mathbf{MR}\mathbf{P}^{-1} \boldsymbol{\epsilon}_t +  \lambda_1\boldsymbol{\Omega}_r \mathbf{M} \boldsymbol{\eta}_r) 
+       \lambda_1\boldsymbol{\Omega}_r^\top \mathbf{MR}\mathbf{P}^{-1} \boldsymbol{\epsilon}_t +  \lambda_1\boldsymbol{\Omega}_r \mathbf{M} \boldsymbol{\eta}_r 
 \\
        &=\boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t - \boldsymbol{\Omega}_r^\top \left(\boldsymbol{\Omega}_r\mathbf{U}^{-1} \boldsymbol{\Omega}_r^\top + \frac{\lambda_2}{\lambda_1}\mathbf{I}\right)^{-1} \boldsymbol{\Omega}_r \boldsymbol{\Phi}_t^\top (\boldsymbol{\Phi}_t\boldsymbol{\Phi}_t^\top + \lambda_1\mathbf{I})^{-1}\boldsymbol{\epsilon}_t  
 \\
        & + \boldsymbol{\Omega}_r^\top\left[\boldsymbol{\Omega}_r\mathbf{U}^{-1} \boldsymbol{\Omega}_r^\top + \frac{\lambda_2}{\lambda_1}\mathbf{I}\right]^{-1}\boldsymbol{\eta}_r 
-       \\
+\\
        & = \boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t - \boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r \left(\mathbf{U}^{-1}\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r + \frac{\lambda_2}{\lambda_1}\mathbf{I} \right)^{-1} \mathbf{U}^{-1} \boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t 
-       \\
+\\
        & + \left(\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r\mathbf{U}^{-1} +  \frac{\lambda_2}{\lambda_1}\mathbf{I}\right) ^{-1} \boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r  
-       \\
-       & = \boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t - \mathbf{J} \left(\mathbf{U}^{-1} \mathbf{J} + \frac{\lambda_2}{\lambda_1}\mathbf{I} \right)^{-1} \mathbf{U}^{-1} \boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \left(\mathbf{J} \mathbf{U}^{-1} + \frac{\lambda_2}{\lambda_1}\mathbf{I}\right) \boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r) 
 \\
-       & = \boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t -  \left(\mathbf{J}\mathbf{U}^{-1}  + \frac{\lambda_2}{\lambda_1}\mathbf{I} \right)^{-1} \mathbf{J}\mathbf{U}^{-1} \boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \left(\mathbf{J} \mathbf{U}^{-1} + \frac{\lambda_2}{\lambda_1}\mathbf{I}\right) \boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r) 
+       & = \boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t - \mathbf{J} \left(\mathbf{U}^{-1} \mathbf{J} + \frac{\lambda_2}{\lambda_1}\mathbf{I} \right)^{-1} \mathbf{U}^{-1} \boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \left(\mathbf{J} \mathbf{U}^{-1} + \frac{\lambda_2}{\lambda_1}\mathbf{I}\right) \boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r 
+\\
+       & = \boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t -  \left(\mathbf{J}\mathbf{U}^{-1}  + \frac{\lambda_2}{\lambda_1}\mathbf{I} \right)^{-1} \mathbf{J}\mathbf{U}^{-1} \boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \left(\mathbf{J} \mathbf{U}^{-1} + \frac{\lambda_2}{\lambda_1}\mathbf{I}\right) \boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r 
 \\ 
-       & = \left[ \mathbf{I} -\left(\mathbf{J}\mathbf{U}^{-1}  + \frac{\lambda_2}{\lambda_1}\mathbf{I} \right)^{-1} \mathbf{J}\mathbf{U}^{-1} \right] \boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \left(\mathbf{J} \mathbf{U}^{-1} + \frac{\lambda_2}{\lambda_1}\mathbf{I}\right) \boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r) 
+       & = \left[ \mathbf{I} -\left(\mathbf{J}\mathbf{U}^{-1}  + \frac{\lambda_2}{\lambda_1}\mathbf{I} \right)^{-1} \mathbf{J}\mathbf{U}^{-1} \right] \boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \left(\mathbf{J} \mathbf{U}^{-1} + \frac{\lambda_2}{\lambda_1}\mathbf{I}\right) \boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r 
 \\
-       & = \frac{\lambda_2}{\lambda_1} \left(\mathbf{J}\mathbf{U}^{-1}  + \frac{\lambda_2}{\lambda_1}\mathbf{I} \right)^{-1}\boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t +  \left(\mathbf{J}\mathbf{U}^{-1}  + \frac{\lambda_2}{\lambda_1}\mathbf{I} \right)^{-1}\boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r) 
+       & = \frac{\lambda_2}{\lambda_1} \left(\mathbf{J}\mathbf{U}^{-1}  + \frac{\lambda_2}{\lambda_1}\mathbf{I} \right)^{-1}\boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t +  \left(\mathbf{J}\mathbf{U}^{-1}  + \frac{\lambda_2}{\lambda_1}\mathbf{I} \right)^{-1}\boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r 
 \\
-       & = \left(\mathbf{J}\mathbf{U}^{-1}  + \frac{\lambda_2}{\lambda_1}\mathbf{I} \right)^{-1} \left(\frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r) \right).
+       & = \left(\mathbf{J}\mathbf{U}^{-1}  + \frac{\lambda_2}{\lambda_1}\mathbf{I} \right)^{-1} \left(\frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r \right).
    \end{align*}
     Therefore, 
     \begin{align*}
             T_{2a} &= \mathbf{U}^{-1}  T_{2a}^\prime \\ 
-            &= \mathbf{U}^{-1}\left(\mathbf{J}\mathbf{U}^{-1}  + \frac{\lambda_2}{\lambda_1}\mathbf{I} \right)^{-1} \left(\frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r) \right) \\
-            & = \left(\mathbf{J} + \frac{\lambda_2}{\lambda_1}\mathbf{U} \right)^{-1} \left(\frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r) \right) \\
-            & = \left(\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r + \frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_2\mathbf{I}\right)^{-1}\left(\frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r) \right),
+            &= \mathbf{U}^{-1}\left(\mathbf{J}\mathbf{U}^{-1}  + \frac{\lambda_2}{\lambda_1}\mathbf{I} \right)^{-1} \left(\frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r \right) 
+\\
+            & = \left(\mathbf{J} + \frac{\lambda_2}{\lambda_1}\mathbf{U} \right)^{-1} \left(\frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r \right) 
+\\
+            & = \left(\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r + \frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_2\mathbf{I}\right)^{-1}\left(\frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r \right),
     \end{align*}
     and 
     \begin{align*} 
             T_2 &= \phi(\mathbf{x}) T_{2a} 
             \\
-                & = \phi(\mathbf{x})\left(\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r + \frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_2\mathbf{I}\right)^{-1}\left(\frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r) \right)
-                \\
-                & \le  \norm{\phi(\mathbf{x}) \left(\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r + \frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_2\mathbf{I}\right)^{-1/2}}_{k_\textup{NTK-PINN}} \notag \\
-                & \;\;\;\;\; \cdot \norm{\left(\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r + \frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_2\mathbf{I}\right)^{-1/2}\left(\frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r) \right)}_{k_\textup{NTK-PINN}}
-                \\
-                & = \sqrt{\phi(\mathbf{x})^\top\left(\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r + \frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_2\mathbf{I}\right)^{-1}\phi(\mathbf{x})} \notag \\
-                & \;\;\;\;\;  \cdot \norm{\left(\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r + \frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_2\mathbf{I}\right)^{-1/2}\left(\frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r) \right)}_{k_\textup{NTK-PINN}}
+                & = \phi(\mathbf{x})\left(\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r + \frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_2\mathbf{I}\right)^{-1}\left(\frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r \right)
+            \\
+                & \le  \norm{\phi(\mathbf{x}) \left(\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r + \frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_2\mathbf{I}\right)^{-1/2}}_{k_\textup{NTK-PINN}} \notag 
+\\
+                & \;\;\;\;\; \cdot \norm{\left(\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r + \frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_2\mathbf{I}\right)^{-1/2}\left(\frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r \right)}_{k_\textup{NTK-PINN}}
+\\
+                & = \sqrt{\phi(\mathbf{x})^\top\left(\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r + \frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_2\mathbf{I}\right)^{-1}\phi(\mathbf{x})} \notag 
+\\
+                & \;\;\;\;\;  \cdot \norm{\left(\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r + \frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_2\mathbf{I}\right)^{-1/2}\left(\frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r \right)}_{k_\textup{NTK-PINN}}
                 \\
                 &=\frac{\sigma_t^f(\mathbf{x})}{\lambda_2}\norm{\left(\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r + \frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top\boldsymbol{\Phi}_t + \lambda_2\mathbf{I}\right)^{-1/2}\left(\frac{\lambda_2}{\lambda_1}\boldsymbol{\Phi}_t^\top \boldsymbol{\epsilon}_t + \boldsymbol{\Omega}_r^\top \boldsymbol{\eta}_r \right)}_{k_\textup{NTK-PINN}} 
                 \\
@@ -666,21 +550,21 @@ From Lemma \ref{lemma:pinn-bo_PINN_mean_cov}, we have $\mu_t^f(\mathbf{x}) =\phi
                  \\
                  & \le \frac{\sigma_t^f(\mathbf{x})}{\lambda_2} \sqrt{\left(\frac{\lambda_2}{\lambda_1}R_1\right)^2 + R_2^2} \sqrt{2\gamma_t - 2 I(f; \mathbf{Y}_t; \mathbf{U}_r) + \mathcal{O}(1) + \log(\frac{1}{\delta})} 
                  \\
-                 & \le \sigma_t^f(\mathbf{x}) \sqrt{\left(\frac{R_1}{\lambda_1}\right)^2 + \left(\frac{R_2}{\lambda_2}\right)^2} \sqrt{2\gamma_t - 2 I(f; \mathbf{Y}_t; \mathbf{U}_r) + \mathcal{O}(1) + \log(\frac{1}{\delta})}
+                 & \le \sigma_t^f(\mathbf{x}) \sqrt{\left(\frac{R_1}{\lambda_1}\right)^2 + \left(\frac{R_2}{\lambda_2}\right)^2} \sqrt{2\gamma_t - 2 I(f; \mathbf{Y}_t; \mathbf{U}_r) + \mathcal{O}(1) + \log(\frac{1}{\delta})}.
     \end{align*}
 The second inequality is based on triangle inequality while the third inequality relies on Lemma \ref{lemma:pinn-bo_self-normalized_bound}. The fourth inequality employs the Cauchy-Schwarz inequality and the fifth inequality is based on Lemma \ref{lemma:pinn-bo_IG_with_pde_upper_bound}. The final inequality stems from the choice of the number of PDE data points, denoted as $N_r$ as stated in Lemma \ref{lemma:pinn-bo_confidence_bound}. We also utilize the expression of $\left(\sigma_t^f\right)^2(\mathbf{x})$ at line \eqref{Eqn:sigma_f_by_V}.
 \end{proof}
 
-\subsection{Proof of Theorem \ref{theorem:pinn-bo_regret_bound}}
-Before going to the proof, we repeat Theorem \ref{theorem:pinn-bo_regret_bound} here:
+\subsection{Proof of Theorem \ref{theorem:pinn-bo_main}}
+Before going to the proof, we repeat Theorem \ref{theorem:pinn-bo_main} here:
 \PINNBORegretBound*
 
 
-% \noindent \textbf{To prove Theorem \ref{theorem:pinn-bo_regret_bound}, we start by proving the following lemmas:}
+% \noindent \textbf{To prove Theorem \ref{theorem:pinn-bo_main}, we start by proving the following lemmas:}
 
-\noindent \textbf{Now we are ready to prove the Theorem \ref{theorem:pinn-bo_regret_bound}}.
+\noindent \textbf{Now we are ready to prove the Theorem \ref{theorem:pinn-bo_main}}.
 
-\begin{proof}[Proof of Theorem \ref{theorem:pinn-bo_regret_bound}]
+\begin{proof}[Proof of Theorem \ref{theorem:pinn-bo_main}]
     
 
 To perform analysis for continuous search space, we use a discretization technique. At each time $t$, we use a discretization $\mathcal{D}_t^{dis} \subset \mathcal{D} \subset [0, r]^d$, where $d$ is the dimension, which satisfies the property that $\lvert f(\mathbf{x}) - f([\mathbf{x}]_t) \rvert \leq \frac{1}{t^2}$ where $[\mathbf{x}]_t \in \mathcal{D}_t^{dis}$ is the closest point to $\mathbf{x} \in \mathcal{D}$. Then we choose $\mathcal{D}_t^{dis}$ 
@@ -737,7 +621,7 @@ Lemma \ref{lemma:pinn-bo_sampling_bound} implies that event $E^{f_t}(t)$ holds w
 
 
 \subsection{Auxiliary Lemmas}
-
+\label{section:pinn-bo_aux_appendix}
 \begin{auxlemma}{(Theorem 4.1, \citet{wang2022and})}
 \label{lemma:PINN_GP}
 A sufficiently wide physics-informed neural network for modeling the problem defined in Section \ref{section:pinn-bo_proposed_method} induces a joint multivariate
@@ -753,15 +637,17 @@ where $\mathbf{K}_\mathrm{NTK-PINN} = \begin{bmatrix}
     \mathbf{K}_{ru} & \mathbf{K}_{rr}
 \end{bmatrix}$ is the NTK matrix of PINN, with
 \begin{align*}
-    (\mathbf{K}_{uu})_{ij} &= \langle \phi(\mathbf{x}_i), \phi(\mathbf{x}_j) \rangle \\ 
-    (\mathbf{K}_{ur})_{ij} &= \langle \phi(\mathbf{x}_i), \omega(\mathbf{z}_j) \rangle
+    (\mathbf{K}_{uu})_{ij} &= \langle \phi(\mathbf{x}_i), \phi(\mathbf{x}_j) \rangle, 
+\\ 
+    (\mathbf{K}_{ur})_{ij} &= \langle \phi(\mathbf{x}_i), \omega(\mathbf{z}_j) \rangle,
     \\
-    (\mathbf{K}_{uu})_{ij} &= \langle \omega(\mathbf{z}_i), \omega(\mathbf{z}_j) \rangle
+    (\mathbf{K}_{uu})_{ij} &= \langle \omega(\mathbf{z}_i), \omega(\mathbf{z}_j) \rangle,
     \\
-    \mathbf{K}_{ru} &= \mathbf{K}_{ur}^\top, \\ 
-    \mathbf{h}_{\boldsymbol{\theta}} &= [h(\mathbf{x}_1, \boldsymbol{\theta}), \dots, h(\mathbf{x}_t, \boldsymbol{\theta})]^\top
+    \mathbf{K}_{ru} &= \mathbf{K}_{ur}^\top, 
+\\ 
+    \mathbf{h}_{\boldsymbol{\theta}} &= [h(\mathbf{x}_1, \boldsymbol{\theta}), \dots, h(\mathbf{x}_t, \boldsymbol{\theta})]^\top,
     \\
-    \mathbf{g}_{\boldsymbol{\theta}} &= \left[\mathcal{N}[h](\mathbf{z}_1, \boldsymbol{\theta}), \dots, \mathcal{N}[h](\mathbf{z}_{N_r}, \boldsymbol{\theta}) \right]^\top
+    \mathbf{g}_{\boldsymbol{\theta}} &= \left[\mathcal{N}[h](\mathbf{z}_1, \boldsymbol{\theta}), \dots, \mathcal{N}[h](\mathbf{z}_{N_r}, \boldsymbol{\theta}) \right]^\top,
 \end{align*}
 where $\mathbf{x}_i, \mathbf{x}_j \in \mathcal{D}_t$ and $\mathbf{z}_i, \mathbf{z}_j \in \mathcal{R}$ are two arbitrary points belonging to the set $\mathcal{R}$ defined in Algorithm \ref{alg:PINN-BO} and $\mathcal{N}[h]$ denotes a differential operator of the neural network $h(\cdot, \boldsymbol{\theta})$ with respect to the input $\mathbf{x}$. 
 \end{auxlemma}
@@ -781,7 +667,7 @@ where $\mathbf{x}_i, \mathbf{x}_j \in \mathcal{D}_t$ and $\mathbf{z}_i, \mathbf{
     \label{lemma:pinn-bo_det_division}
     Let $\mathbf{u} \in \mathrm{R}^{n \times p}$ and $\mathbf{K} \in \mathrm{R}^{p \times p}$ is a positive semi-definite matrix and $p \ge n$. Then 
     \begin{align*}
-    \frac{\det [\mathbf{u}\left(\mathbf{K}(\mathbf{u}^\top\mathbf{u}+\mathbf{I})^{-1} + \mathbf{I}\right)^{-1}\mathbf{u}^\top]}{[\mathbf{u}\left(\mathbf{K} + \mathbf{I}\right)^{-1}\mathbf{u}^\top]} =  \frac{\det \left(\mathbf{K}(\mathbf{u}^\top\mathbf{u}+\mathbf{I})^{-1} + \mathbf{I}\right)^{-1}}{\det \left(\mathbf{K} + \mathbf{I}\right)^{-1}}   
+    \frac{\det [\mathbf{u}\left(\mathbf{K}(\mathbf{u}^\top\mathbf{u}+\mathbf{I})^{-1} + \mathbf{I}\right)^{-1}\mathbf{u}^\top]}{[\mathbf{u}\left(\mathbf{K} + \mathbf{I}\right)^{-1}\mathbf{u}^\top]} =  \frac{\det \left(\mathbf{K}(\mathbf{u}^\top\mathbf{u}+\mathbf{I})^{-1} + \mathbf{I}\right)^{-1}}{\det \left(\mathbf{K} + \mathbf{I}\right)^{-1}}.   
     \end{align*}
 \end{auxlemma}
 
@@ -793,37 +679,36 @@ Let $\mathbf{u} \in \mathrm{R}^{n \times p}$ and $\mathbf{K} \in \mathrm{R}^{p \
 \end{align*}
 \end{subcorollary}
 
-\begin{auxlemma}[Theorem 1, \citet{zhou2008derivative})]
+\begin{auxlemma}[Theorem 1, \citet{zhou2008derivative}]
 \label{lemma:pinn-bo_rkhs_derivative}
-    Let $s \in \mathbb{N}$ and $k \colon X \times X \rightarrow \mathbb{R}$ be a Mercer kernel such that $k \in C^{2s} (X \times X)$. Denote $D^\alpha f(\mathbf{x}), \alpha \in \mathbb{Z}^n_+$ is the partial derivative of $f$ at $\mathbf{x} \in \mathbb{R}^n$ (if it exists) as:
+    Let $s \in \mathbb{N}$ and $k \colon \mathcal{X} \times \mathcal{X} \rightarrow \mathbb{R}$ be a Mercer kernel such that $k \in C^{2s} (\mathcal{X} \times \mathcal{X})$. Denote $D^\alpha f(\mathbf{x}), \alpha \in \mathbb{Z}^n_+$ is the partial derivative of $f$ at $\mathbf{x} \in \mathcal{X}$ (if it exists) as:
 \begin{align*}
     D^\alpha f(\mathbf{x}) =  \frac{\partial ^ {\lvert \alpha \rvert}}{\partial{\mathbf{x}_1^{\alpha_1}} \dots \partial{\mathbf{x}_n^{\alpha_n}}} f(\mathbf{x}),
 \end{align*}
-where $\lvert \alpha \rvert = \sum_{j=1}^n \alpha_j$. Denote $\mathbb{I}_s = \{\alpha \in \mathbb{Z}_+^n, \lvert \alpha \rvert \le s\}$ and  $(D^\alpha k)_\mathbf{x}$ as the function on X given by $(D^\alpha k)_\mathbf{x} (\mathbf{y}) = D^\alpha k(\mathbf{x}, \mathbf{y}) =  \frac{\partial^ {\lvert \alpha \rvert}}{\partial{\mathbf{x}_1^{\alpha_1}} \dots \partial{\mathbf{x}_n^{\alpha_n}}} k(\mathbf{x}, \mathbf{y})$.
+where $\lvert \alpha \rvert = \sum_{j=1}^n \alpha_j$. Denote $\mathbb{I}_s = \{\alpha \in \mathbb{Z}_+^n, \lvert \alpha \rvert \le s\}$ and  $(D^\alpha k)_\mathbf{x}$ as the function on $\mathcal{X}$ given by $(D^\alpha k)_\mathbf{x} (\mathbf{y}) = D^\alpha k(\mathbf{x}, \mathbf{y}) =  \frac{\partial^ {\lvert \alpha \rvert}}{\partial{\mathbf{x}_1^{\alpha_1}} \dots \partial{\mathbf{x}_n^{\alpha_n}}} k(\mathbf{x}, \mathbf{y})$.
 
 Then the following statements hold: 
 
 \begin{enumerate}
-    \item For any $\mathbf{x} \in X$ and  $\alpha \in \mathbb{I}_s$, $(D^\alpha k)_\mathbf{x} \in \mathcal{H}_k$.
+    \item For any $\mathbf{x} \in \mathcal{X}$ and  $\alpha \in \mathbb{I}_s$, $(D^\alpha k)_\mathbf{x} \in \mathcal{H}_k$.
     \item A partial derivative reproducing property holds true for $\alpha \in \mathbb{I}_s$
     \begin{align*}
-        D^\alpha f(\mathbf{x}) = \langle (D^\alpha k)_\mathbf{x}, f \rangle,  \forall \mathbf{x} \in X, f \in \mathcal{H}_k
+        D^\alpha f(\mathbf{x}) = \langle (D^\alpha k)_\mathbf{x}, f \rangle,  \forall \mathbf{x} \in X, f \in \mathcal{H}_k.
     \end{align*}
 \end{enumerate}
 \end{auxlemma}
 
 \begin{auxlemma}[Theorem 1, \citet{abbasi2011improved}]
 \label{lemma:pinn-bo_self-normalized_bound}
-Let $\{\mathcal{F}_t\}_{t=0}^\infty$ be a filtration. Let $\{\eta_t\}_{t=0}^\infty$ be a real-valued stochastic process such that $\eta_t$ is $\mathcal{F}_t$-measurable and $\eta_t$ is conditionally
-$R$-sub-Gaussian for some $R \ge 0$. Let $\{X_t\}_{t=0}^\infty$ be an $\mathbb{R}^d$-valued stochastic process such that $X_t$ is $\mathcal{F}_{t-1}$-measurable. Assume that $\mathbf{V}$
+Let $\{\mathcal{F}_t\}_{t=0}^\infty$ be a filtration. Let $\{\eta_t\}_{t=0}^\infty$ be a real-valued stochastic process such that $\eta_t$ is $\mathcal{F}_t$-measurable and $\eta_t$ is conditionally $R$-sub-Gaussian for some $R \ge 0$. Let $\{X_t\}_{t=0}^\infty$ be an $\mathbb{R}^d$-valued stochastic process such that $X_t$ is $\mathcal{F}_{t-1}$-measurable. Assume that $\mathbf{V}$
 is a $d \times d$ positive definite matrix. For any $t \ge 0$, define
 \begin{align*}
-    \overline{\mathbf{V}}_t &= \mathbf{V} + \sum_{s=1}^t X_s X_s^\top  \\
-    S_t &= \sum_{s=1}^t \eta_s X_s
+    \overline{\mathbf{V}}_t &= \mathbf{V} + \sum_{s=1}^t X_s X_s^\top, \\
+    S_t &= \sum_{s=1}^t \eta_s X_s.
 \end{align*}
 Then, for any $\delta > 0$, with probability at least $1 - \delta$, for all $t \ge 0$,
 \[
-\norm{S_t}^2_{\overline{\mathbf{V}}_t^{-1}} \le 2R^2\log(\frac{\det(\overline{\mathbf{V}}_t)^{1/2}\det(\mathbf{V})^{-1/2}}{\delta})
+\norm{S_t}^2_{\overline{\mathbf{V}}_t^{-1}} \le 2R^2\log(\frac{\det(\overline{\mathbf{V}}_t)^{1/2}\det(\mathbf{V})^{-1/2}}{\delta}).
 \] 
 \end{auxlemma}
 
@@ -831,9 +716,7 @@ Then, for any $\delta > 0$, with probability at least $1 - \delta$, for all $t \
 \label{lemma:pinn-bo_IG_with_pde_upper_bound}
     Assume that $\norm{\omega(\cdot)}_2 \le L$, where $\omega(\cdot)  = \nabla_{\boldsymbol{\theta}} \mathcal{N}[h] (\cdot, \boldsymbol{\theta}_0)$ defined in Section \ref{section:pinn-bo_experiments} of Chapter \ref{chap:pinn-bo}, and denote $\rho_{min}(\mathbf{K}_{uu})$ is the smallest eigenvalue of kernel matrix $\mathbf{K}_{uu}$ defined in Lemma \ref{lemma:PINN_GP}. Then we have:
 \begin{align*}
-    & \frac{1}{2}\log \det(\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t}{\lambda_1} + \frac{\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r}{\lambda_2} + \mathbf{I})
-    \notag \\
-    & \le  \frac{1}{2}\log\det (\frac{\mathbf{K}_{uu}}{\lambda_1} +\mathbf{I})+\frac{N_r L^2}{2(1+ \rho_{min}(\mathbf{K}_{uu})/\lambda_1)}
+    \frac{1}{2}\log \det(\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t}{\lambda_1} + \frac{\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r}{\lambda_2} + \mathbf{I}) & \le  \frac{1}{2}\log\det (\frac{\mathbf{K}_{uu}}{\lambda_1} +\mathbf{I})+\frac{N_r L^2}{2(1+ \rho_{min}(\mathbf{K}_{uu})/\lambda_1)}
     \\
     & \le \gamma_t +  \frac{N_r  L^2}{2(1+ \rho_{min}(\mathbf{K}_{uu})/\lambda_1)}
 \end{align*}
@@ -841,11 +724,11 @@ Then, for any $\delta > 0$, with probability at least $1 - \delta$, for all $t \
 
 \begin{auxlemma}
 \label{lemma:pinn-bo_var_sum_bound}
-    Let $\mathbf{x}_1, \mathbf{x}_2,\dots, \mathbf{x}_T$ be the points selected by the Algorithms 1, then:
+    Let $\mathbf{x}_1, \mathbf{x}_2,\dots, \mathbf{x}_T$ be the points selected by the Algorithms \ref{alg:PINN-BO} in Chapter \ref{chap:pinn-bo}, then:
     \[\sum_{i=1}^T \sigma_t^f(\mathbf{x}) \le \sqrt{2T \left(\gamma_T - I_0 + \frac{N_r L^2}{2(1+ \rho_{min}(\mathbf{K}_{uu})/\lambda_1)}\right)}, \]
     where $\mathbf{K}_{uu}, \mathbf{K}_{ur}, \mathbf{K}_{ru}$ and $\mathbf{K}_{rr}$ are defined as in Lemma \ref{lemma:pinn-bo_PINN_mean_cov} and $I_0 =\frac{1}{2}\log \frac{\det(\mathbf{K}_{rr} + \lambda_2\mathbf{I})}{\det(\mathbf{K}_{rr} + \lambda_2\mathbf{I} - \mathbf{K}_{ru} \mathbf{K}_{uu}^{-1} \mathbf{K}_{ur})}$.
 \end{auxlemma}
-t
+
 \begin{auxlemma}[Lemma 5, \citet{chowdhury2017kernelized}]
 \label{lemma:pinn-bo_sampling_bound}
 For any $t \in [T]$, and any finite subset $\mathcal{D}_t \subset\ \mathcal{D}$,  pick $\widetilde{c}_t =  \sqrt{4\log t + 2 \log \ \lvert \mathcal D_t \rvert}$. Then  
@@ -864,9 +747,10 @@ where $p=\frac{1}{4e\pi}$ and $c_T$ is a time-dependent factor.
 \end{auxlemma}
 
 \subsection{Proof of Auxiliary Lemmas}
+\label{section:pinn-bo_aux_proofs}
 \subsubsection{Proof of Corollary  \ref{corollary:pinn-bo_PINN_GP_func}}
 The algorithm updates the neural network by minimizing the loss function: \begin{align*}
-    \mathcal{L}(t) = \sum^{t-1}_{i=1} [y_i - \nu_t h(\mathbf{x}_i; \boldsymbol{\theta}_{t-1})]^2 + \sum^{N_r}_{j=1}[u_j - \nu_t \mathcal{N}[h](\mathbf{z}_j; \boldsymbol{\theta}_{t-1})]^2
+    \mathcal{L}(t) = \sum^{t-1}_{i=1} [y_i - \nu_t h(\mathbf{x}_i; \boldsymbol{\theta}_{t-1})]^2 + \sum^{N_r}_{j=1}[u_j - \nu_t \mathcal{N}[h](\mathbf{z}_j; \boldsymbol{\theta}_{t-1})]^2.
 \end{align*} 
 As the function prediction and its ``derivatives'' prediction of each observation $\mathbf{x}_i$ and $\mathbf{z}_j$ at iteration $t$ is modeled by $\nu_t h(\mathbf{x}_i; \boldsymbol{\theta}_{t-1})$ and $\nu_t \mathcal{N}[h](\mathbf{z}_j; \boldsymbol{\theta}_{t-1})$, it is clear to see, from Lemma \ref{lemma:PINN_GP}, that the function values of the unknown function $f$ can be assumed to follow a joint Gaussian prior with zero means and covariance matrix $\nu_t^2 \mathbf{K}_\mathrm{NTK-PINN}$. A similar argument can be applied to the function $g$, where $g(\cdot) = \mathcal{N}[f] (\cdot)$ with $\mathcal{N}[f]$ is a differential operator. 
 \subsubsection{Proof of Lemma \ref{lemma:pinn-bo_det_division}}
@@ -887,12 +771,12 @@ We start the proof by gradually calculating the denominator and numerator.
 \\
 & = \det (\mathbf{u} \mathbf{u}^\top) \det \left((\mathbf{I}+\mathbf{K})^{-1}\right) \det \left( \mathbf{K}(\mathbf{I} + \mathbf{K}) \mathbf{K}^{-1} - \mathbf{K}\mathbf{u}^\top (\mathbf{u} \mathbf{u}^\top)^{-1} \mathbf{u}\right)  \label{Eqn:u_K_inv_uT}
 \\
-& = \det (\mathbf{u} \mathbf{u}^\top) \det \left((\mathbf{I}+\mathbf{K})^{-1}\right) \det \left(\mathbf{I} + \mathbf{K} - \mathbf{K}\mathbf{u}^\top (\mathbf{u} \mathbf{u}^\top)^{-1} \mathbf{u}\right) \nonumber
+& = \det (\mathbf{u} \mathbf{u}^\top) \det \left((\mathbf{I}+\mathbf{K})^{-1}\right) \det \left(\mathbf{I} + \mathbf{K} - \mathbf{K}\mathbf{u}^\top (\mathbf{u} \mathbf{u}^\top)^{-1} \mathbf{u}\right). \nonumber
 \end{align}
 The first equation utilizes the Woodbury matrix inversion formula while the third equation uses generalized matrix determinant lemma\footnote{Suppose $\mathbf{A}$ is an invertible $n$-by-$n$ matrix and $\mathbf{U}, \mathbf{V}$ are $n$-by-$m$ matrices, $m \le n$. Then $\det(\mathbf{A} + \mathbf{U}\mathbf{W}\mathbf{V}^\top) = \det(\mathbf{A}) \det(\mathbf{W})\det(\mathbf{W}^{-1} + \mathbf{V}^\top \mathbf{A}^{-1} \mathbf{U})$}.
 
 \paragraph{Numerator}
-Let $\widetilde{\mathbf{K}} = \mathbf{K} (\mathbf{u}^\top \mathbf{u} + \mathbf{I})^{-1}$, then we have
+Let $\widetilde{\mathbf{K}} = \mathbf{K} (\mathbf{u}^\top \mathbf{u} + \mathbf{I})^{-1}$, then we have:
 \begin{align*}
     &\det [\mathbf{u}\left(\mathbf{K}(\mathbf{u}^\top\mathbf{u}+\mathbf{I})^{-1} + \mathbf{I}\right)^{-1}\mathbf{u}^\top] 
     \\
@@ -920,9 +804,9 @@ Therefore, we have the final expression of the numerator:
 \begin{align*}
     &\det \left( (\mathbf{I} + \widetilde{\mathbf{K}}) - \widetilde{\mathbf{K}}\mathbf{u}^\top (\mathbf{u} \mathbf{u}^\top)^{-1} \mathbf{u}\right) 
 \\
-    &= \det (\mathbf{u} \mathbf{u}^\top) \det \left((\mathbf{I}+\widetilde{\mathbf{K}})^{-1}\right) \det \left( \mathbf{I} + \mathbf{K} - \mathbf{K} \mathbf{u}^\top (\mathbf{u} \mathbf{u}^\top)^{-1}  \mathbf{u} \right)
+    &= \det (\mathbf{u} \mathbf{u}^\top) \det \left((\mathbf{I}+\widetilde{\mathbf{K}})^{-1}\right) \det \left( \mathbf{I} + \mathbf{K} - \mathbf{K} \mathbf{u}^\top (\mathbf{u} \mathbf{u}^\top)^{-1}  \mathbf{u} \right).
 \end{align*}
-Using the derived numerator and denominator, we have 
+Using the derived numerator and denominator, we have:
 \begin{align*}
     & \frac{\det [\mathbf{u}\left(\mathbf{K}(\mathbf{u}^\top\mathbf{u}+\mathbf{I})^{-1} + \mathbf{I}\right)^{-1}\mathbf{u}^\top]}{[\mathbf{u}\left(\mathbf{K} + \mathbf{I}\right)^{-1}\mathbf{u}^\top]} 
 \\
@@ -930,7 +814,7 @@ Using the derived numerator and denominator, we have
 \\
     &=\frac{\det (\mathbf{I}+\widetilde{\mathbf{K}})^{-1}}{\det (\mathbf{I}+\mathbf{K})^{-1}} 
 \\
-    &=\frac{\det \left(\mathbf{K}(\mathbf{u}^\top\mathbf{u}+\mathbf{I})^{-1} + \mathbf{I}\right)^{-1}}{\det \left(\mathbf{K} + \mathbf{I}\right)^{-1}}   
+    &=\frac{\det \left(\mathbf{K}(\mathbf{u}^\top\mathbf{u}+\mathbf{I})^{-1} + \mathbf{I}\right)^{-1}}{\det \left(\mathbf{K} + \mathbf{I}\right)^{-1}}.   
     \end{align*} 
 \subsubsection{Proof of Corollary \ref{corollary:pinn-bo_det_divison_corollary}}
 By direct calculation, we have:
@@ -945,7 +829,7 @@ By direct calculation, we have:
 \\
     &=\frac{1}{\det (\mathbf{u} ^\top \mathbf{u}+\mathbf{I})^{-1}} \frac{\det[(\mathbf{K}+\mathbf{I})^{-1}]}{\det [ (\mathbf{K} (\mathbf{u}^\top \mathbf{u} + \mathbf{I})^{-1} + \mathbf{I})^{-1}]}
 \\
-    &= \frac{\det (\mathbf{K}+\mathbf{I})^{-1}}{\det(\mathbf{K}+\mathbf{u}^\top \mathbf{u}+\mathbf{I})^{-1}}
+    &= \frac{\det (\mathbf{K}+\mathbf{I})^{-1}}{\det(\mathbf{K}+\mathbf{u}^\top \mathbf{u}+\mathbf{I})^{-1}}.
 \end{align*}
 The second equation uses the matrix inversion identity of two non-singular matrices $\mathbf{A}$ and $\mathbf{B}$, i.e., $(\mathbf{A}\mathbf{B})^{-1} = \mathbf{B}^{-1} \mathbf{A}^{-1}$ while the fourth equation directly utilizes Lemma \ref{lemma:pinn-bo_det_division}.
 \subsubsection{Proof of Lemma \ref{lemma:pinn-bo_IG_with_pde_upper_bound}}
@@ -973,15 +857,15 @@ The second equation uses the matrix inversion identity of two non-singular matri
              \\
              & \le \gamma_t + \frac{N_r L^2}{2 \rho_{min}\left(\frac{\mathbf{K}_{uu}}{\lambda_1} + \mathbf{I}\right)} 
              \\
-             &= \gamma_t + \frac{N_r L^2}{2(1+ \rho_{min}(\mathbf{K}_{uu})/\lambda_1)}
+             &= \gamma_t + \frac{N_r L^2}{2(1+ \rho_{min}(\mathbf{K}_{uu})/\lambda_1)}.
     \end{align*}
-The fourth equality leveraged the property that a matrix in the form of $\mathbf{I} + vv^\top$ has an eigenvalue of $1 + \lVert v \rVert^2$, associated with the eigenvector $v$, while all other eigenvalues are equal to 1. The 7th equality utilized Weinstein-Aronszajn identity, which indicates that $\det(\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t}{\lambda_1} + \mathbf{I}) = \det(\frac{\mathbf{K}_{uu}}{\lambda_1} + \mathbf{I})$. The first inequality is from $\log(1+a) \le a$ and $\gamma_t := \max_{\mathcal{A} \subset \mathcal{D}: \lvert \mathcal{A} \rvert=t} I(\mathbf{Y}_\mathcal{A}; f_\mathcal{A}) \ge \frac{1}{2}\log \det(\frac{\mathbf{K}_{uu}}{\lambda_1} + \mathbf{I})$, while the second inequality uses the min-max theorem for Hermitian matrices. The last equality used properties of eigenvalues of shifted matrices. 
+The fourth equality leveraged the property that a matrix in the form of $\mathbf{I} + \mathbf{v}\mathbf{v}^\top$ has an eigenvalue of $1 + \lVert \mathbf{v} \rVert^2$, associated with the eigenvector $\mathbf{v}$, while all other eigenvalues are equal to one. The 7th equality utilized Weinstein-Aronszajn identity, which indicates that $\det(\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t}{\lambda_1} + \mathbf{I}) = \det(\frac{\mathbf{K}_{uu}}{\lambda_1} + \mathbf{I})$. The first inequality is from $\log(1+a) \le a$ and $\gamma_t := \max_{\mathcal{A} \subset \mathcal{D}: \lvert \mathcal{A} \rvert=t} I(\mathbf{Y}_\mathcal{A}; f_\mathcal{A}) \ge \frac{1}{2}\log \det(\frac{\mathbf{K}_{uu}}{\lambda_1} + \mathbf{I})$, while the second inequality uses the min-max theorem for Hermitian matrices. The last equality used properties of eigenvalues of shifted matrices. 
 
 
 
 
 \subsubsection{Proof of Lemma \ref{lemma:pinn-bo_var_sum_bound}}
-Conditioned on observations vector $\mathbf{Y}_{1:s-1}$  observed at points $\mathcal{A}_{s-1} \in \mathcal{D}$, and the PDE vector $\mathbf{U}_r = \mathbf{U}_{1:N_r}$, the reward $y_s$ at round $s$ observed at
+Conditioned on observations vector $\mathbf{Y}_{1:s-1}$  observed at points $\mathcal{A}_{s-1} \subset \mathcal{D}$, and the PDE vector $\mathbf{U}_r = \mathbf{U}_{1:N_r}$, the reward $y_s$ at round $s$ observed at
 $\mathbf{x}_s$ is believed to follow the distribution $\mathcal{N}\left(\mu_s^f(\mathbf{x}_s); \nu_s^2[\lambda_1 + \left(\sigma_s^f\right)^2(\mathbf{x}_s)]\right)$, which gives:
 \begin{align*}
 H(y_s \rvert \mathbf{Y}_{1:s-1}, \mathbf{U}_r) &= \frac{1}{2} \log\left[ 2\pi e \nu_s^2\left(\lambda_1 + \left(\sigma_s^f\right)^2(\mathbf{x}) \right) \right]\\
@@ -995,14 +879,14 @@ Now by chain rule of entropy function $H$:
     \\
     &= H(\mathbf{U}_r) + \sum_{s=1}^t H(y_s \rvert \mathbf{y}_{1:s-1}, \mathbf{U}_r) \nonumber
     \\ 
-    & = H(\mathbf{U}_r) + \frac{t}{2}\log(2\pi e \lambda_1\nu_s^2) + \frac{1}{2}\sum_{s=1}^t \log \left[1+ \frac{\left(\sigma_s^f\right)^2(\mathbf{x})}{\lambda_1}\right] \label{Eqn:joint_entropy_Yt_Ur}
+    & = H(\mathbf{U}_r) + \frac{t}{2}\log(2\pi e \lambda_1\nu_s^2) + \frac{1}{2}\sum_{s=1}^t \log \left[1+ \frac{\left(\sigma_s^f\right)^2(\mathbf{x})}{\lambda_1}\right]. \label{Eqn:joint_entropy_Yt_Ur}
 \end{align}
 Next, by definition of interaction information of three random variables $f, \mathbf{Y}_t$ and $\mathbf{U}_r$, we have: 
     \begin{align*}
         I(f; \mathbf{Y}_t; \mathbf{U}_r) &= H(f) + H(\mathbf{Y}_t) + H(\mathbf{U}_r) \notag \\
         & - [H(f; \mathbf{Y}_t) + H(\mathbf{Y}_t; \mathbf{U}_r) + H(f; \mathbf{U}_r)] + H (f; \mathbf{Y}_t; \mathbf{U}_r)
         \\
-        &= H(f) - H(f \rvert \mathbf{Y}_t) - H(f \rvert \mathbf{U}_r) + H(f \rvert \mathbf{Y}_t; \mathbf{U}_r)
+        &= H(f) - H(f \rvert \mathbf{Y}_t) - H(f \rvert \mathbf{U}_r) + H(f \rvert \mathbf{Y}_t; \mathbf{U}_r).
     \end{align*}
     Therefore,  
     \begin{align}
@@ -1028,7 +912,7 @@ Next, by definition of interaction information of three random variables $f, \ma
         &=\frac{1}{2}\log \det(\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t}{\lambda_1} + \frac{\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r}{\lambda_2} + \mathbf{I}) \label{Eqn:H(f)_minus_H(f_give_Yt_Ur)}
 \\
         &=
-        H(\mathbf{Y}_t; \mathbf{U}_r) - H(\mathbf{Y}_t; \mathbf{U}_r \rvert f)  \nonumber
+        H(\mathbf{Y}_t; \mathbf{U}_r) - H(\mathbf{Y}_t; \mathbf{U}_r \rvert f).  \nonumber
     \end{align} 
     The fourth equation uses the expression of $(f;\mathbf{Y}_t\rvert\mathbf{U}_r)$ in Eqn. \eqref{Eqn:conditional_information_f_and_Yt_give_Ur} and the fifth equation directly uses the result in Corollary \ref{corollary:pinn-bo_det_divison_corollary}.
     The sixth equation is obtained by using the expression of $I(f;\mathbf{Y}_t; \mathbf{U}_r)$  in Lemma \ref{lemma:pinn-bo_interaction_information_formula} while the last equation uses the symmetry of mutual information.
@@ -1044,7 +928,7 @@ Next, by definition of interaction information of three random variables $f, \ma
       \\
       &= \frac{1}{2}\log \det(\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t}{\lambda_1} + \frac{\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r}{\lambda_2} + \mathbf{I}) - \left[H(\mathbf{U}_r) - H(\mathbf{Y}_t; \mathbf{U}_r \rvert f) \right] - \frac{t}{2}\log(2\pi e \lambda_1\nu_s^2) 
       \\
-      &= \frac{1}{2}\log \det(\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t}{\lambda_1} + \frac{\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r}{\lambda_2} + \mathbf{I}) - \frac{1}{2} \log \frac{\det (\mathbf{K}_{rr} + \lambda_2\mathbf{I})}{\det(\mathbf{K}_{rr} + \lambda_2 \mathbf{I} -  \mathbf{K}_{ru} \mathbf{K}_{uu}^{-1} \mathbf{K}_{ur})}
+      &= \frac{1}{2}\log \det(\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t}{\lambda_1} + \frac{\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r}{\lambda_2} + \mathbf{I}) - \frac{1}{2} \log \frac{\det (\mathbf{K}_{rr} + \lambda_2\mathbf{I})}{\det(\mathbf{K}_{rr} + \lambda_2 \mathbf{I} -  \mathbf{K}_{ru} \mathbf{K}_{uu}^{-1} \mathbf{K}_{ur})}.
     \end{align*}
     Finally, we have
     \begin{align*}

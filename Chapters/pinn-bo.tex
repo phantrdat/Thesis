@@ -47,9 +47,9 @@ h(\mathbf{x};\boldsymbol{\theta}) = \frac{1}{\sqrt{m}} \mathbf{W}_L \psi(\mathbf
 where $\psi\colon \mathbb{R} \rightarrow \mathbb{R}$ is a coordinate-wise smooth activation function (e.g., ReLU, Tanh), $\mathbf{W}_1 \in \mathbb{R}^{m \times d}, \mathbf{W}_i \in \mathbb{R}^{m \times m}, 2\leq i \leq L-1, \mathbf{W}_L \in \mathbb{R}^{1 \times m}$, and $\boldsymbol{\theta} \in \mathbb{R}^p$ is the collection of parameters of the neural network, $p=md+m^2(L-2)+m$ and $d$ is the dimension of inputs, i.e., $\mathbf{x} \in \mathcal{D} \subset \mathbb{R}^d$. We initialize all the weights to be independent and identically distributed as standard normal distribution $\mathcal{N}(0,1)$ random variables. To leverage the information embedded within the \ac{pde} governing the objective function $f$, our algorithm generates a set of $N_r$ \ac{pde} data points denoted as $\mathcal{R} =  \{\mathbf{z}_j, u_j\}_{j=1}^{N_r}$. Here, $u_j$ represents the noisy evaluations of the function $g$ at the corresponding point $\mathbf{z}_j$, where $u_j = g(\mathbf{z}_j) + \eta_j$. Besides, we denote $\mathcal{D}_t = \{\mathbf{x}_i, y_i\}_{i=1}^t$ as the set of noisy observations of the unknown function $f$ after $t$ optimization iterations, where $y_t = f(\mathbf{x}_t) + \epsilon_t$. We further define some other notations:
 \begin{equation*}
         \phi(\cdot) = \nabla_{\boldsymbol{\theta}} h(\cdot; \boldsymbol{\theta}_0) ; \; \; \; \;
-        \omega(\cdot)  = \nabla_{\boldsymbol{\theta}} \mathcal{N}[h] (\cdot; \boldsymbol{\theta}_0)\\
+        \omega(\cdot)  = \nabla_{\boldsymbol{\theta}} \mathcal{N}[h] (\cdot; \boldsymbol{\theta}_0),
 \end{equation*}
-where $\phi(\cdot)$ is the gradient of $h(\cdot; \boldsymbol{\theta}_0)$ with respect to the parameter $\boldsymbol{\theta}$, evaluated at initialization $\boldsymbol{\theta}_0$. Similarly, $\omega(\cdot)$ represents the gradient of $\mathcal{N}[h](\cdot; \boldsymbol{\theta}_0)$ with respect to model parameters $\boldsymbol{\theta}$ and evaluated at initialization $\boldsymbol{\theta}_0$, where $\mathcal{N}[h](\cdot; \boldsymbol{\theta}_0)$ is the result of applying differential operator $\mathcal{N}$ (with respect to the input) to $h(\cdot; \boldsymbol{\theta}_0)$. In our paper, we focus on cases where the differential operator \( \mathcal{N} \), when applied to a \textit{real-valued} function \( h \), produces another \textit{real-valued} function \( \mathcal{N}[h] \) (e.g., linear differential operator with real constant coefficients). 
+where $\phi(\cdot)$ is the gradient of $h(\cdot; \boldsymbol{\theta}_0)$ with respect to the parameter $\boldsymbol{\theta}$, evaluated at initialization $\boldsymbol{\theta}_0$. Similarly, $\omega(\cdot)$ represents the gradient of $\mathcal{N}[h](\cdot; \boldsymbol{\theta}_0)$ with respect to model parameters $\boldsymbol{\theta}$ and evaluated at initialization $\boldsymbol{\theta}_0$, where $\mathcal{N}[h](\cdot; \boldsymbol{\theta}_0)$ is the result of applying differential operator $\mathcal{N}$ (with respect to the input) to $h(\cdot; \boldsymbol{\theta}_0)$. In this chapter, we focus on cases where the differential operator \( \mathcal{N} \), when applied to a \textit{real-valued} function \( h \), produces another \textit{real-valued} function \( \mathcal{N}[h] \) (e.g., linear differential operator with real constant coefficients). 
 
 Both $\mathcal{D}_t$ and $\mathcal{R}$ play an important role in the subsequent stages of the algorithm, specifically in the minimization of the loss function associated with learning the network $h(\mathbf{x}, \boldsymbol{\theta}_t)$ at optimization iteration $t$:
 \begin{equation}
@@ -59,6 +59,8 @@ $\mathcal{L}(t) = \sum^{t-1}_{i=1} [y_i - \nu_t h(\mathbf{x}_i; \boldsymbol{\the
 }
 \end{equation}
 where $\nu_t$ is a scale parameter that controls the exploration-exploitation trade-off. 
+
+It is important to note that the physics information, expressed via the governing PDE, are incorporated into the loss function as additional penalty terms. These terms encourage the surrogate model not only to fit the observed data but also to satisfy the underlying physical laws of the problem domain. By penalizing deviations from the PDE constraints during training, the surrogate is guided to produce predictions that are consistent with established scientific knowledge, thereby improving both model fidelity and generalization in regions with limited data.
 
 For the second step, we employ a greedy strategy to pick the next sample point $\mathbf{x}_t$. At each iteration $t$, the algorithm updates the neural network by optimizing the loss function described in Eqn \ref{eqn:pinn_loss} by gradient descent, with scaled function value predictions $\nu_t h(\cdot; \boldsymbol{\theta}_{t-1})$ and scaled predictions with respect to the governed \ac{pde} $\nu_t \mathcal{N}[h](\cdot; \boldsymbol{\theta}_{t-1})$. In the proof of Section \ref{section:pinn-bo_theoretical_analysis}, we show this action is equivalent to placing the \ac{gp} prior over function values $f_{1:t}$ and \ac{pde} values $g_{1:N_r}$ (Corollary \ref{corollary:pinn-bo_PINN_GP_func} in Appendix \ref{section:pinn-bo_supp}). 
 
@@ -70,7 +72,7 @@ To enhance the exploration step, it is important to bring the additional informa
 $\boldsymbol{\Omega}_r  = [\omega(\mathbf{z}_1)^\top, \dots, \omega(\mathbf{z}_{N_r})^\top ]$. The value of $\nu_t$ signifies how our algorithm continues the exploration in regions of search space where the function $f$ has no implicit knowledge through \ac{pde} observations. These are the regions indicated by $\gamma_t - I(f; \mathbf{Y}_t; \mathbf{U}_r)$, which is the amount of information about the unknown function $f$ remains after our algorithm interacts with \ac{pde} data $\mathbf{U}_r$.  
 
 \begin{algorithm}[!ht]
-\caption{Physics-informed Neural Network based Black-box optimization (PINN-BO)}
+\caption{Physics-informed Neural Network Black-box Optimization (PINN-BO)}
 \label{alg:PINN-BO}
 \textbf{Input}: The input space $\mathcal D$, the optimization budget $T$, \ac{pde} training set size $N_r$, $\delta \in (0,1)$, parameters $B, R_1, R_2, \lambda_1, \lambda_2$ (see Assumption \ref{assumption:pinn-bo_subgaussian} and \ref{assumption:pinn-bo_rkhs} in Section \ref{section:pinn-bo_theoretical_analysis}).
 \begin{algorithmic}[1]
@@ -112,8 +114,8 @@ where $(\mathbf{K}_{uu})_{ij} = \langle \phi(\mathbf{x}_i), \phi(\mathbf{x}_j) \
  We assume the noises $\{\epsilon_i\}_{i=1}^T$ where $\epsilon_i = y_i - f(\mathbf{x}_i)$ and $\{\eta_j\}_{j=1}^{N_r}$ where $\eta_j = u_j - g(\mathbf{z}_j)$  are conditionally sub-Gaussian with parameter $R_1 > 0$ and $R_2 >0$, where $\{\epsilon_i\}_{i=1}^T$ and $\{\eta_j\}_{j=1}^{N_r}$ is assumed to capture the noises induced by querying the black-box, expensive function $f(\cdot)$  and cheap-to-evaluate \ac{pde}-related function $g(\cdot)$ respectively. 
  \begin{equation*}
      \begin{split}
-         \forall i \ge 0, & \; \forall \lambda_1 \in \mathbb{R}, \;  \mathbb{E}[e^{\lambda_1\epsilon_i} \rvert \mathcal{F}_{t-1}] \le e^\frac{\lambda_1^2 R_1^2}{2} \\
-         \forall j \ge 0, & \; \forall \lambda_2 \in \mathbb{R}, \;  \mathbb{E}[e^{\lambda_2\eta_j} \rvert \mathcal{F}_{N_r-1}^\prime] \le e^\frac{\lambda_2^2 R_2^2}{2}
+         \forall i \ge 0, & \; \forall \lambda_1 \in \mathbb{R}, \;  \mathbb{E}[e^{\lambda_1\epsilon_i} \rvert \mathcal{F}_{t-1}] \le e^\frac{\lambda_1^2 R_1^2}{2}, \\
+         \forall j \ge 0, & \; \forall \lambda_2 \in \mathbb{R}, \;  \mathbb{E}[e^{\lambda_2\eta_j} \rvert \mathcal{F}_{N_r-1}^\prime] \le e^\frac{\lambda_2^2 R_2^2}{2},
      \end{split}
  \end{equation*}
 where $\mathcal{F}_{t-1}, \mathcal{F}_{N_r-1}^\prime$ are the $\sigma$-algebra generated by the random variables $\{\mathbf{x}_i, \epsilon_i\} 
@@ -130,7 +132,7 @@ where $\mathcal{F}_{t-1}, \mathcal{F}_{N_r-1}^\prime$ are the $\sigma$-algebra g
 
 Assumptions \ref{assumption:pinn-bo_subgaussian} and \ref{assumption:pinn-bo_rkhs} represent commonly employed and well-established assumptions in GP-based Bandits and Bayesian Optimization \citep{chowdhury2017kernelized,vakili2021optimal}. We are now prepared to establish an upper bound on the regret incurred by our proposed PINN-BO algorithm.  
 
-We begin by presenting key lemmas for establishing the regret bound in Theorem \ref{theorem:pinn-bo_regret_bound} of the proposed algorithms. The following lemma demonstrates that, given the assumption of an infinitely wide network, the output of the trained physics-informed neural network used to model the unknown function $f$ governed by a linear \ac{pde}, after running $t$ optimization iterations in Algorithm \ref{alg:PINN-BO}, can be regarded as sampling from a \ac{gp} with specific mean and covariance functions.
+We begin by presenting key lemmas for establishing the regret bound in Theorem \ref{theorem:pinn-bo_main} of the proposed algorithms. The following lemma demonstrates that, given the assumption of an infinitely wide network, the output of the trained physics-informed neural network used to model the unknown function $f$ governed by a linear \ac{pde}, after running $t$ optimization iterations in Algorithm \ref{alg:PINN-BO}, can be regarded as sampling from a \ac{gp} with specific mean and covariance functions.
 \begin{restatable}{lemma}{PinnMeanCov} 
 \label{lemma:pinn-bo_PINN_mean_cov}
 Conditioned on $\mathcal{D}_t = \{\mathbf{x}_i, y_i\}_{i=1}^t, \mathcal{R} = \{\mathbf{z}_j, u_j\}_{j=1}^{N_r}$, the acquisition function $\widetilde{f}_t(\mathbf{x}) = h(\mathbf{x}; \boldsymbol{\theta}_{t-1})$ can be viewed as a random draw from a $\mathrm{GP}\left(\mu_{t}^f (\mathbf{x}), \nu_t^2 \left(\sigma^f_t\right)^2(\mathbf{x})\right)$ with the following mean and covariance functions:
@@ -141,7 +143,7 @@ Conditioned on $\mathcal{D}_t = \{\mathbf{x}_i, y_i\}_{i=1}^t, \mathcal{R} = \{\
      \begin{bmatrix}
          \mathbf{Y}_t \\
          \mathbf{U}_r
-     \end{bmatrix} \\
+     \end{bmatrix}, \\
     \left(\sigma^f_t\right)^2(\mathbf{x}) &=  \langle \phi(\mathbf{x}),  \phi(\mathbf{x}) \rangle - \phi(\mathbf{x})^\top \boldsymbol{\xi}_t^\top \mathbf{\widehat{K}}_\mathrm{PINN}^{-1} \boldsymbol{\xi}_t \phi(\mathbf{x}), \\
 \end{split}
 \end{equation*}
@@ -156,19 +158,19 @@ where
     \end{bmatrix} ^{-1}  = \begin{bmatrix}
     \widetilde{\mathbf{A}} & \widetilde{\mathbf{B}} \\
     \widetilde{\mathbf{C}} & \widetilde{\mathbf{D}}
-    \end{bmatrix}\\
-    \boldsymbol{\Phi}_t & = [\phi(\mathbf{x}_1)^\top,\dots, \phi(\mathbf{x}_t)^\top ]  
+    \end{bmatrix}, \\
+    \boldsymbol{\Phi}_t & = [\phi(\mathbf{x}_1)^\top,\dots, \phi(\mathbf{x}_t)^\top ], 
 \\
-    \boldsymbol{\Omega}_r & = [\omega(\mathbf{z}_1)^\top, \dots, \omega(\mathbf{z}_{N_r})^\top ] \\ 
+    \boldsymbol{\Omega}_r & = [\omega(\mathbf{z}_1)^\top, \dots, \omega(\mathbf{z}_{N_r})^\top ], \\ 
  \boldsymbol{\xi}_t &= \begin{bmatrix}
     \boldsymbol{\Phi}_t^\top & \boldsymbol{\Omega}_r^\top  
-    \end{bmatrix}^\top 
+    \end{bmatrix}^\top, 
 \\
     \mathbf{K}_{uu} &= \boldsymbol{\Phi}_t \boldsymbol{\Phi}_t^\top, \;  \mathbf{K}_{ur} = \boldsymbol{\Phi}_t \boldsymbol{\Omega}_r^\top, \;
-    \mathbf{K}_{ru} = \mathbf{K}_{ur}^\top, \mathbf{K}_{rr} = \boldsymbol{\Omega}_r \boldsymbol{\Omega}_r^\top 
+    \mathbf{K}_{ru} = \mathbf{K}_{ur}^\top, \mathbf{K}_{rr} = \boldsymbol{\Omega}_r \boldsymbol{\Omega}_r^\top, 
 \\
     \mathbf{Y}_t &= [y_1, y_2, \dots, y_t]^\top, 
-    \mathbf{U}_r = [u_1, u_2, \dots, u_{N_r}]^\top \\
+    \mathbf{U}_r = [u_1, u_2, \dots, u_{N_r}]^\top. \\
     \end{split}
 \end{equation*}
 \end{restatable}
@@ -189,7 +191,7 @@ The next lemma provides the closed-form expression of the interaction informatio
     \label{lemma:pinn-bo_interaction_information_formula}
     The interaction information between $f$ and observation $\mathbf{Y}_t$ and \ac{pde} data $\mathbf{U}_r$, for the points chosen from Algorithm \ref{alg:PINN-BO} can be calculated as:
     \begin{equation*}
-        I (f; \mathbf{Y}_t; \mathbf{U}_r) = \frac{1}{2}  \log (\frac{\det(\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t}{\lambda_1} + \mathbf{I})\det(\frac{\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r}{\lambda_2} + \mathbf{I})}{\det(\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t}{\lambda_1} + \frac{\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r}{\lambda_2} + \mathbf{I})})
+        I (f; \mathbf{Y}_t; \mathbf{U}_r) = \frac{1}{2}  \log (\frac{\det(\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t}{\lambda_1} + \mathbf{I})\det(\frac{\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r}{\lambda_2} + \mathbf{I})}{\det(\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t}{\lambda_1} + \frac{\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r}{\lambda_2} + \mathbf{I})}).
     \end{equation*}
 \end{restatable}
 
@@ -199,7 +201,7 @@ The next lemma provides the closed-form expression of the interaction informatio
     \begin{equation*}
     \begin{aligned}
             I (f; \mathbf{Y}_t; \mathbf{U}_r) &= \frac{1}{2}  \log (\frac{\det(\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t}{\lambda_1} + \mathbf{I})\det(\frac{\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r}{\lambda_2} + \mathbf{I})}{\det(\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t}{\lambda_1} + \frac{\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r}{\lambda_2} + \mathbf{I})}) \\
-            &= \frac{1}{2}  \log (\frac{\det(\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t}{\lambda_1} + \frac{\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r}{\lambda_2}  + \mathbf{I} + \frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t \boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r}{\lambda_1 \lambda_2})}{\det(\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t}{\lambda_1} + \frac{\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r}{\lambda_2} + \mathbf{I})}) \ge 0
+            &= \frac{1}{2}  \log (\frac{\det(\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t}{\lambda_1} + \frac{\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r}{\lambda_2}  + \mathbf{I} + \frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t \boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r}{\lambda_1 \lambda_2})}{\det(\frac{\boldsymbol{\Phi}_t^\top \boldsymbol{\Phi}_t}{\lambda_1} + \frac{\boldsymbol{\Omega}_r^\top \boldsymbol{\Omega}_r}{\lambda_2} + \mathbf{I})}) \ge 0.
         \end{aligned}
     \end{equation*}
     The inequality uses the identity $\det(\mathbf{A}+ \mathbf{B}) \ge \det(\mathbf{A})$, where $\mathbf{A},\mathbf{B}$ are two positive semi-definite matrices. 
@@ -213,7 +215,7 @@ Our next result shows how the prediction of the neural network model is concentr
     \begin{aligned}
             & \lvert f(\mathbf{x}) - \mu_t^f(\mathbf{x}) \rvert \\
             & \le \sigma_t^f(\mathbf{x}) \left(B +   \widetilde{R}\sqrt{2 I (f; \mathbf{Y}_t) - 2I (f; \mathbf{Y}_t; \mathbf{U}_r) + \mathcal{O}(1) + \log(1/\delta)}  \right) \\
-            & \le \sigma_t^f(\mathbf{x}) \left(B +   \widetilde{R}\sqrt{2 \gamma_t - 2I (f; \mathbf{Y}_t; \mathbf{U}_r) + \mathcal{O}(1) + \log(1/\delta)}  \right)
+            & \le \sigma_t^f(\mathbf{x}) \left(B +   \widetilde{R}\sqrt{2 \gamma_t - 2I (f; \mathbf{Y}_t; \mathbf{U}_r) + \mathcal{O}(1) + \log(1/\delta)}  \right).
         \end{aligned}
     \end{equation*}
 \end{restatable}
@@ -230,9 +232,10 @@ I(f; \mathbf{Y}_t; \mathbf{U}_r) = \Theta\left(\frac{d N_r}{d N_r+1}(1-1/T)\righ
 \] 
 which is a constant. This is because the linear kernel differential feature map sends all \ac{pde} points to the same vector in the \ac{rkhs}. This example aims to show how to bound the interaction information for a known \ac{pde}. 
 \end{remark}
-We are now ready to present the main theoretical result of the paper: 
+We are now ready to present the main theoretical result of this chapter: 
 \begin{restatable}{theorem}{PINNBORegretBound}
-\label{theorem:pinn-bo_regret_bound}
+\label{theorem:pinn-bo_main}
+
 Let $\mathbf{K}_{uu}, \mathbf{K}_{ur}, \mathbf{K}_{ru},$ and $\mathbf{K}_{rr}$ be four matrices as defined in Lemma \ref{lemma:pinn-bo_PINN_mean_cov}. 
 Let $\delta \in (0,1)$. Assume that $\norm{\omega(\cdot)}_2 \le L$ and  $\rho_{min}(\mathbf{K}_{uu})$ be the smallest eigenvalue of kernel matrix $\mathbf{K}_{uu}$. Set $N_r = c_r\left(1+ \frac{\rho_{min}(\mathbf{K}_{uu})}{\lambda_1}\right)/L^2$ for a constant $c_r > 0$. Additionally,  let $\widetilde{R} = \sqrt{\left(\frac{R_1}{\lambda_1}\right)^2 + \left(\frac{R_2}{\lambda_2}\right)^2}$ and $I_0 = \frac{1}{2}\log \frac{\det(\mathbf{K}_{rr} + \lambda_2\mathbf{I})}{\det(\mathbf{K}_{rr} + \lambda_2\mathbf{I} - \mathbf{K}_{ru} \mathbf{K}_{uu}^{-1} \mathbf{K}_{ur})}$. Then with probability at least $1-\delta$, the regret of PINN-BO running for an unknown function $f$ governed by a linear \ac{pde}, lying in the $\mathcal{H}_{k_\textup{NTK-PINN}}$, $\norm{f}_{{H}_{k_\textup{NTK-PINN}}} \le B$ as stated in Assumption \ref{assumption:pinn-bo_rkhs}, after $T$ iterations satisfies:
 \begin{equation*}
@@ -240,7 +243,7 @@ Let $\delta \in (0,1)$. Assume that $\norm{\omega(\cdot)}_2 \le L$ and  $\rho_{m
         R_T  = \mathcal{O} \Bigg(\sqrt{T d\log BdT} &\bigg[B \sqrt{\gamma_T - I_0 + \log(2/\delta)} 
         \\
         & + \widetilde{R} \sqrt{\gamma_T} \sqrt{\gamma_T - I (f; \mathbf{Y}_T; \mathbf{U}_r) - I_0 + \log(2/\delta
-        )} \bigg] \Bigg)
+        )} \bigg] \Bigg).
     \end{aligned}
 \end{equation*}
 \end{restatable}
@@ -280,26 +283,55 @@ In this section, we explore two real-world applications where the objective func
 In this study, we showcase the benchmark optimization outcomes achieved by our proposed PINN-BO algorithm, comparing them with baseline methods for the steady-state temperature optimization task. The steady-state heat equation represents a special case of the heat equation when the temperature distribution no longer changes over time. It describes the equilibrium state of a system where the temperature is constant, and no heat is being added or removed.  The governing PDE for the temperature distribution is expressed as: $\nabla^2 T(x, y) = 0$, where $x, y$ are spatial variables that represent the positions within a two-dimensional space. We explore the heat equation in a domain where $x$ and $y$ lie within the defined range of $[0,2\pi]$. To thoroughly investigate the problem, we consider three different heat equations, where the solution of each problem is associated with one (unknown) boundary condition, each contributing to a deeper understanding of the system: 
 
 
-
-
-
  \paragraph{Heat Equation with Boundary Conditions 1}
  \label{para:heat1}
  \begin{align*}
-     T(x, 0) &= 5\sin(y) + \sqrt{1+y} \\
-    T(x, 2\pi) &= y\sin\left(3\cos(y) + 2\exp(y)\sin(y)\right) \\
-   T(0, y) &= 10\cos(x) + x\exp(\sqrt{x^2 + \sin(x)}) \\
-   T(2\pi, y) &= 3\sqrt{\exp(x\exp(-x))}\sin(x) + \cos(3x)\cos(3x)
+     T(x, 0) &= 5\sin(y) + \sqrt{1+y}, \\
+    T(x, 2\pi) &= y\sin\left(3\cos(y) + 2\exp(y)\sin(y)\right), \\
+   T(0, y) &= 10\cos(x) + x\exp(\sqrt{x^2 + \sin(x)}), \\
+   T(2\pi, y) &= 3\sqrt{\exp(x\exp(-x))}\sin(x) + \cos(3x)\cos(3x).
  \end{align*}
+
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+    \includegraphics[width=\textwidth]{Figures/PINN-BO/Heat_dim_2_bc1.pdf}
+        \caption{Temperature Optimization in case of boundary conditions 1}
+ \label{fig:heat_1_opt}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{Figures/PINN-BO/Heat_dim_2_bc2.pdf}
+        \caption{Temperature Optimization in case of boundary conditions 2}
+        \label{fig:heat_2_opt}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/PINN-BO/Heat_dim_2_bc3.pdf}
+        \caption{Temperature Optimization in case of boundary conditions 3}
+        \label{fig:heat_3_opt}
+    \end{subfigure}
+    \caption{The figure shows the temperature optimization results of our PINN-BO and other baselines. For all three cases with different positions of maximum temperature, our PINN-BO performs better than all other baselines.}
+    \label{fig:heat_opt}
+\end{figure}
+
+
+
  \paragraph{Heat Equation with Boundary Conditions 2}
  \label{para:heat2}
 \begin{align*}
-    T(x, 0) &= \sin(x) \cos(2x) + x^2\sqrt{3x}  + e^{\sin(x)} \\
-    T(x, 2\pi) &= e^{\sin(x)} \sqrt{3x} + x^2 \cos(x)  \sin^2(x)   + e^{\cos(x)} \\
-    T(0, y) &= \sqrt{2y}  \sin(y) + y^3\cos(2y)   + e^{\cos(y)} \\
-    T(2\pi, y) &= \sin(y) \cos(2y) + y^3\sqrt{2y}   + e^{\sin(y)}
+    T(x, 0) &= \sin(x) \cos(2x) + x^2\sqrt{3x}  + e^{\sin(x)},
+\\
+    T(x, 2\pi) &= e^{\sin(x)} \sqrt{3x} + x^2 \cos(x)  \sin^2(x)   + e^{\cos(x)}, 
+\\
+    T(0, y) &= \sqrt{2y}  \sin(y) + y^3\cos(2y)   + e^{\cos(y)},
+\\
+    T(2\pi, y) &= \sin(y) \cos(2y) + y^3\sqrt{2y}   + e^{\sin(y)}.
 \end{align*}
-
 
 \begin{figure}[H]
     \centering
@@ -330,46 +362,24 @@ In this study, we showcase the benchmark optimization outcomes achieved by our p
 \paragraph{Heat Equation with Boundary Conditions 3}
 \label{para:heat3}
 \begin{align*}
-    T(x, 0) &= \left(\sin(x) + \cos(2x) \right) \sqrt{3x} + x^2 + e^{\sin(x)} \\
-    T(x, 2\pi) &= \left(e^{\sin(x)} + \sqrt{3x} \right) \cos(x) + \left(\sin^2(x) + x^2\right)  e^{\cos(x)}
+    T(x, 0) &= \left(\sin(x) + \cos(2x) \right) \sqrt{3x} + x^2 + e^{\sin(x)}, 
+\\
+    T(x, 2\pi) &= \left(e^{\sin(x)} + \sqrt{3x} \right) \cos(x) + \left(\sin^2(x) + x^2\right)  e^{\cos(x)},
     \\
-    T(0, y) &= \left(\sqrt{2y} + \sin(y)\right)  \left(\cos(2y) + y^3 \right) + e^{\cos(y)}\\
-    T(2\pi, y) &= \left(\sin(y) + \cos(2y)\right) \left(\sqrt{2y} + y^3\right) + e^{\sin(y)}
+    T(0, y) &= \left(\sqrt{2y} + \sin(y)\right)  \left(\cos(2y) + y^3 \right) + e^{\cos(y)},
+\\
+    T(2\pi, y) &= \left(\sin(y) + \cos(2y)\right) \left(\sqrt{2y} + y^3\right) + e^{\sin(y)}.
 \end{align*}
  
-
-
-
-
-
-\begin{figure}[H]
-    \centering
-    \begin{subfigure}[b]{0.49\textwidth}
-        \centering
-    \includegraphics[width=\textwidth]{Figures/PINN-BO/Heat_dim_2_bc1.pdf}
-        \caption{Temperature Optimization in case of boundary conditions 1}
- \label{fig:heat_1_opt}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.49\textwidth}
-        \centering
-        \includegraphics[width=1\textwidth]{Figures/PINN-BO/Heat_dim_2_bc2.pdf}
-        \caption{Temperature Optimization in case of boundary conditions 2}
-        \label{fig:heat_2_opt}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.5\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Figures/PINN-BO/Heat_dim_2_bc3.pdf}
-        \caption{Temperature Optimization in case of boundary conditions 3}
-        \label{fig:heat_3_opt}
-    \end{subfigure}
-    \caption{The figure shows the temperature optimization results of our PINN-BO and other baselines. For all three cases with different positions of maximum temperature, our PINN-BO performs better than all other baselines.}
-    \label{fig:heat_opt}
-\end{figure}
 We utilized \texttt{py-pde}, a Python package designed for solving partial differential equations (PDEs), available at the following GitHub repository: \url{https://github.com/zwicker-group/py-pde}. This tool enabled us to obtain solutions to heat equations at various input points, with specific boundary conditions serving as the input data. In Figure \ref{fig:heat_dist}, the temperature distribution within the defined domain $[0, 2\pi]$ is visualized. It is important to emphasize that the boundary conditions used for benchmarking purposes are unknown to the methods employed. Adhering to the framework of black-box optimization, we assume that solving the PDEs incurs a substantial computational cost. The figure illustrates the spatial distribution of temperature values $T(x,y)$ across domain $[0, 2\pi] \times [0, 2\pi]$, with each subfigure corresponding to one of the mentioned boundary conditions. 
 
 We conducted temperature optimization by identifying the locations $(x,y)$ where the temperature reaches its maximum. As illustrated in Figure \ref{fig:heat_dist}, the area with high temperatures is relatively small in comparison to the regions with medium or low temperatures. For each baseline, we performed the optimization process 10 times, computing the average results. The comparative outcomes are presented in Figure \ref{fig:heat_opt}. 
+
+
+
+
+
+
 
 \subsubsection{Optimizing Beam Displacement}
 We present the benchmark optimization outcomes obtained through our proposed method, PINN-BO, and the baseline approaches, addressing the task of minimizing the deflection of a non-uniform Euler-Bernoulli beam. The governing differential equation describing the behavior of a non-uniform Euler-Bernoulli beam is provided below: 
@@ -383,12 +393,9 @@ In our implementation, we consider the detailed expression of $\text{EI}(x)$ and
 \begin{align*}
     \text{EI}(x) &= \frac{e^x}{\rho(x)},\\
     \rho(x) &= 2.4 x - 64 \pi^{2} e^{4 x} \sin{\left(4 \pi e^{2 x} \right)} - 396 e^{2 x} \sin{\left(20 x \right)} \\
-    &+ 80 e^{2 x} \cos{\left(20 x \right)} + 16 \pi e^{2 x} \cos{\left(4 \pi e^{2 x} \right)} + 0.4
+    &+ 80 e^{2 x} \cos{\left(20 x \right)} + 16 \pi e^{2 x} \cos{\left(4 \pi e^{2 x} \right)} + 0.4.
 \end{align*}
 We employed the Finite Difference Method (FDM) to solve the non-uniform Euler-Bernoulli beam equation. It's crucial to note that this step is solely for generating observations at each input point. Despite obtaining this solution, our methods and all baseline techniques continue to treat this solution as a black-box function, accessing observations solely through querying. In Figure \ref{fig:beam_illustration}, the displacement values $w(x)$ for $x \in (0,1)$ are illustrated. The optimization results for both our PINN-BO and the other baseline methods are presented in Figure \ref{fig:beam_opt}.
-
-\section{Conclusion}
-We introduced a novel black-box optimization scenario incorporating \aclp{pde} as additional information. Our solution, PINN-BO, is a new algorithm tailored to this challenge. We conducted a theoretical analysis, demonstrating its convergence with a tighter regret bound. Through experiments involving synthetic benchmark functions and real-world optimization tasks, we validated the efficacy of our approach. Our method, due to using a neural network, is applicable to a broad set of optimization problems where the input space is complex (e.g. drug discovery), and can significantly accelerate the optimization by leveraging the auxiliary knowledge via \acp{pde}.
 
 \begin{figure}[H]
     \centering
@@ -409,6 +416,7 @@ We introduced a novel black-box optimization scenario incorporating \aclp{pde} a
     \label{fig:beam}
 \end{figure}
 
-  
+\section{Conclusion}
+We introduced a novel black-box optimization scenario incorporating \aclp{pde} as additional information. Our solution, PINN-BO, is a new algorithm tailored to this challenge. We conducted a theoretical analysis, demonstrating its convergence with a tighter regret bound. Through experiments involving synthetic benchmark functions and real-world optimization tasks, we validated the efficacy of our approach. Our method, due to using a neural network, is applicable to a broad set of optimization problems where the input space is complex (e.g. drug discovery), and can significantly accelerate the optimization by leveraging the auxiliary knowledge via \acp{pde}.
 
   

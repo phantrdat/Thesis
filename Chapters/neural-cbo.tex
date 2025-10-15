@@ -35,7 +35,7 @@ Here, we first introduce the general \acp{dnn} architecture used to model the ob
 \label{section:neural-cbo_arbitrary_nn}
 Given a black-box, expensive function $f_a$, we use a fully connected neural network, denoted as $a(\mathbf{x}; \mathbf{W})$, to model $f_a$:
 \begin{equation}
-\label{eqn:fcn}
+\label{eqn:neural-cbo_fcn}
     a(\mathbf{x}; \mathbf{W}) = \frac{\mathbf{q}^\top}{\sqrt{m}} \mathbf{D}^{(L)}(\mathbf{x}) \mathbf{W}^{(L)} \dots \frac{1}{\sqrt{m}} \mathbf{D}^{(1)}(\mathbf{x}) \mathbf{W}^{(1)} \mathbf{x}, 
 \end{equation}
 where $\mathbf{q} \in \mathbb{R}^m$ is the last layer weight, $\mathbf{W}^{(1)} \in \mathbb{R}^{m \times d}$, $\mathbf{W}^{(l)} \in \mathbb{R}^{m \times m}$ for $2 \leq l \leq L$ is the weight of the $l$-th hidden layer. The matrix $\mathbf{D}^{(l)}(\mathbf{x})$ is associated with the ReLU activation function and is defined as:
@@ -57,7 +57,7 @@ can be verified that, with this initialization scheme, $a(\mathbf{x}; \mathbf{W}
 
 The neural network is trained by running the stochastic gradient descent on the streaming data in \textit{one pass}. In particular, given the initialization $\{\mathbf{W}_0^{(l)} \}_{l=1}^L$ and last layer weight $\mathbf{q}$, the $l$-th layer weight matrix at the $t$-th iteration is updated by minimizing the $L_2$ loss as:
 \begin{equation}
-    \label{eqn:train_NN}
+    \label{eqn:neural-cbo_train_NN}
     \mathbf{W}_{t+1}^{(l)} = \mathbf{W}_{t}^{(l)} + \alpha_t (y_t - a(\mathbf{x}_t; \mathbf{W}_t)) \frac{\partial a(\mathbf{x}_t; \mathbf{W}_t)}{\partial \mathbf{W}^{(l)}},
 \end{equation}
 where $\alpha_t$ is the step size, and $\{\mathbf{x}_t, y_t\}$ is the observation at the $t$-th optimization iteration. 
@@ -73,7 +73,7 @@ To estimate the uncertainty of the function $f_a$ modeled by $a(\mathbf{x}; \mat
 where
 
 \begin{equation}
-\label{eqn:ntk_cov}
+\label{eqn:neural-cbo_ntk_cov}
 \begin{aligned}
     \mathbf{g}_{a}(\mathbf{x}; \mathbf{W}) &= \nabla_{\mathbf{W}}a(\mathbf{x}; \mathbf{W}), \text{ and}\\
      \mathbf{U}_{a, t} &= \mathbf{U}_{a, t-1} + \mathbf{g}_{a}(\mathbf{x}_t; \mathbf{W}_0) \mathbf{g}_{a}(\mathbf{x}_t; \mathbf{W}_0)^\top,
@@ -83,7 +83,7 @@ where
 We again inherit the concept of \acf{ntk} introduced in Section \ref{section:NTK} for our theoretical analysis. We briefly remind this concept through the following definition: 
 \begin{definition}
     \label{def:neural-cbo_ntk}
-    Given the $L$-layer neural network $a(\mathbf{x}; \mathbf{W})$ with input $\mathbf{x}$ and parameter $\mathbf{W}$ as defined in Eqn. \ref{eqn:fcn}, a \ac{ntk} matrix $\mathbf{H}_t$ for a sequence of weights {$\mathbf{W}_t$} can be defined as:
+    Given the $L$-layer neural network $a(\mathbf{x}; \mathbf{W})$ with input $\mathbf{x}$ and parameter $\mathbf{W}$ as defined in Eqn. \eqref{eqn:neural-cbo_fcn}, a \ac{ntk} matrix $\mathbf{H}_t$ for a sequence of weights {$\mathbf{W}_t$} can be defined as:
     \begin{equation*}
         \mathbf{H}_t [i, j] \coloneqq \left \langle \frac{\partial a(\mathbf{x}_i; \mathbf{W}_t)}{\partial \mathbf{W}},  \frac{\partial a(\mathbf{x}_j; \mathbf{W}_t)}{\partial \mathbf{W}}\right \rangle = \sum_{l=1}^L \mathbf{H}^{(l)}_t[i, j],
     \end{equation*}
@@ -93,7 +93,7 @@ We again inherit the concept of \acf{ntk} introduced in Section \ref{section:NTK
 
 Next, we present the common and well-established assumptions. The following assumption indicates the smoothness property of the unknown function $f_a$.
 \begin{assumption}
-\label{assumption:rkhs}
+\label{assumption:neural-cbo_rkhs}
 We assume that $f_a \in \mathcal{H}_{k_a}(\mathcal{D})$, where $\mathcal{H}_{k_a}(\mathcal{D})$ is the Reproducing Kernel Hilbert Space (RKHS) associated with a real-valued function $f_a$ defined on the domain $\mathcal{D}$. This space is induced by the Neural Tangent Kernel $k_a$, which arises from a neural network $a(\mathbf{x}; \mathbf{W})$. In particular, the RKHS $\mathcal{H}_{k_a}$ induces an inner product $\langle \cdot, \cdot \rangle_{\mathcal{H}_{k_a}} $ with the reproducing property: for all $f_a \in \mathcal{H}_{k_a}(\mathcal{D})$, we have 
 $f_a(\mathbf{x}) = \langle f_a, k_a(\cdot, \mathbf{x}) \rangle_{\mathcal{H}_{k_a}}$. 
 The induced norm is bounded and 
@@ -112,9 +112,9 @@ To ensure that the noise arising from querying unknown function $f_a$ remains bo
 ^{t-1}_{i=1} \cup \{\mathbf{x}_t\}$.
 \end{assumption}
 
-To manage the approximation error, several technical lemmas impose the following condition on the width of the neural network introduced in Eqn. \ref{eqn:fcn}.
+To manage the approximation error, several technical lemmas impose the following condition on the width of the neural network introduced in Eqn. \eqref{eqn:neural-cbo_fcn}.
 \begin{condition}
-    \label{condition:network_width}
+    \label{condition:neural-cbo_network_width}
     Throughout the section, the width of each hidden layer m satisfies is assumed to satisfy:
     \begin{align}
         m \ge d^9 \exp (\Omega(\nu LC^L\log T)), 
@@ -123,11 +123,11 @@ for some absolute constant $C$. Besides, the step size $\alpha_t \le \frac{\nu}{
 \end{condition}
 
 
-Before going to our \textbf{main algorithm}, we provide the confidence bound, the fundamental component in almost all \ac{bo} algorithms to guide algorithm design and ensure theoretical guarantee. The lemma demonstrates that by following the network width condition stated in Condition \ref{condition:network_width},  the prediction of the trained neural network $a(\cdot;\mathbf{W}_{t-1})$ is concentrated at the actual value of the function $f_a(\cdot)$. 
-\begin{restatable}{lemma}{ConfidenceBound}
+Before going to our \textbf{main algorithm}, we provide the confidence bound, the fundamental component in almost all \ac{bo} algorithms to guide algorithm design and ensure theoretical guarantee. The lemma demonstrates that by following the network width condition stated in Condition \ref{condition:neural-cbo_network_width},  the prediction of the trained neural network $a(\cdot;\mathbf{W}_{t-1})$ is concentrated at the actual value of the function $f_a(\cdot)$. 
+\begin{restatable}{lemma}{NeuralCBOConfidenceBound}
 
 \label{lemma:neural-cbo_confidence_bound}
-Let Assumptions \ref{assumption:rkhs} and \ref{assumption:subgaussian_noise} hold. Using neural network $a(\mathbf{x}; \mathbf{W})$ satisfied Condition \ref{condition:network_width} to model an arbitrary function $f_a$. Setting the step size at training step $t$ as $\alpha_t \le \frac{\nu}{(T+1)^2}$, then for any $\delta \in (0,1)$,  with probability at least $1 - \delta \exp (\Omega(C^{-L} m^{1/36}))$, the following holds for all $\mathbf{x} \in \mathcal{D}$ and $1 \le t \le T$:
+Let Assumptions \ref{assumption:neural-cbo_rkhs} and \ref{assumption:subgaussian_noise} hold. Using neural network $a(\mathbf{x}; \mathbf{W})$ satisfied Condition \ref{condition:neural-cbo_network_width} to model an arbitrary function $f_a$. Setting the step size at training step $t$ as $\alpha_t \le \frac{\nu}{(T+1)^2}$, then for any $\delta \in (0,1)$,  with probability at least $1 - \delta \exp (\Omega(C^{-L} m^{1/36}))$, the following holds for all $\mathbf{x} \in \mathcal{D}$ and $1 \le t \le T$:
 \begin{align*}
      & \lvert f_a(\mathbf{x}) - a(\mathbf{x}; \mathbf{W}_{t-1}) \rvert 
     \le \beta_{a,t} \sigma_{a, t-1}(\mathbf{x}) + \frac{\mathcal{E}(m)}{T+1},
@@ -145,10 +145,10 @@ To facilitate the following algorithm design and discussion, we introduce the \a
 \\
 \text{UCB}_{a,t}(\mathbf{x}, \mathbf{W}_{t}) &= a(\mathbf{x}, \mathbf{W}_{t}) + \beta_{a,t} \sigma_{a,t} (\mathbf{x}) + \frac{\mathcal{E}(m)}{T+1},  
 \end{align*}
-where $\sigma_{a,t}(\mathbf{x})$ is calculated using the formulate given in Eqn. \ref{Eqn:neural_cbo_variance_formula}. Then, with high probability,  $f_a$ is bounded by $\text{LCB}_{a,t}(\mathbf{x}, \mathbf{W}_{t})$ and $\text{UCB}_{a,t}(\mathbf{x}, \mathbf{W}_{t})$ as in the following corollary:
+where $\sigma_{a,t}(\mathbf{x})$ is calculated using the formulate given in Eqn. \eqref{Eqn:neural_cbo_variance_formula}. Then, with high probability,  $f_a$ is bounded by $\text{LCB}_{a,t}(\mathbf{x}, \mathbf{W}_{t})$ and $\text{UCB}_{a,t}(\mathbf{x}, \mathbf{W}_{t})$ as in the following corollary:
 \begin{corollary}
 \label{corrolary:f_in_lcb_ucb}
-Let Assumptions \ref{assumption:rkhs}, \ref{assumption:subgaussian_noise} and Condition \ref{condition:network_width} hold. Then with probability at least $1 - \delta \exp (\Omega(C^{-L} m^{1/36}))$, the following holds for all $\mathbf{x} \in \mathcal{D}$
+Let Assumptions \ref{assumption:neural-cbo_rkhs}, \ref{assumption:subgaussian_noise} and Condition \ref{condition:neural-cbo_network_width} hold. Then with probability at least $1 - \delta \exp (\Omega(C^{-L} m^{1/36}))$, the following holds for all $\mathbf{x} \in \mathcal{D}$
 and $1 \le t \le T$:
 \begin{align*}
     f_a (\mathbf{x}) \in [\textnormal{LCB}_{a,t}(\mathbf{x}, \mathbf{W}_{t}), \textnormal{UCB}_{a,t}(\mathbf{x}, \mathbf{W}_{t})].
@@ -183,7 +183,7 @@ where $
 $
  
 
-Then, we updated the dataset $\mathcal{D}_t = \mathcal{D}_{t-1} \cup \{\mathbf{x}_t, y_t, z_{c_1,t}, \dots, z_{{c_K}, t}\}$. The parameters $\boldsymbol{\theta}$ (for the objective function) and $\{ \boldsymbol{\omega}_{c_i} \}_{i=1}^K$ (for the constraints) are then updated separately by minimizing the $L_2$ loss on the new observation using stochastic gradient descent (SGD) described in Eqn. \ref{eqn:train_NN}.
+Then, we updated the dataset $\mathcal{D}_t = \mathcal{D}_{t-1} \cup \{\mathbf{x}_t, y_t, z_{c_1,t}, \dots, z_{{c_K}, t}\}$. The parameters $\boldsymbol{\theta}$ (for the objective function) and $\{ \boldsymbol{\omega}_{c_i} \}_{i=1}^K$ (for the constraints) are then updated separately by minimizing the $L_2$ loss on the new observation using stochastic gradient descent (SGD) described in Eqn. \eqref{eqn:neural-cbo_train_NN}.
 
 
 \begin{algorithm}[!ht]
@@ -205,24 +205,41 @@ Then, we updated the dataset $\mathcal{D}_t = \mathcal{D}_{t-1} \cup \{\mathbf{x
  Update observations set $\mathcal{D}_t = \mathcal{D}_{t-1} \cup \{\mathbf{x}_t, y_t, z_{c_1,t}, \dots, z_{{c_K}, t}\}$
 }
 \State \parbox[t]{\dimexpr\linewidth-\algorithmicindent}{% 
- Update the neural network parameters $\boldsymbol{\theta}_0, \{ \boldsymbol{\omega}_{c_i,0} \}_{i=1}^K$ using Eqn \ref{eqn:train_NN}.
+ Update the neural network parameters $\boldsymbol{\theta}_0, \{ \boldsymbol{\omega}_{c_i,0} \}_{i=1}^K$ using Eqn \eqref{eqn:neural-cbo_train_NN}.
 }
 \State \parbox[t]{\dimexpr\linewidth-\algorithmicindent}{%
- Update $\mathbf{U}_{f,t}$ and $\mathbf{U}_{c_i,t}, \forall i \in [1 \dots K]$ separately using Eqn. \ref{eqn:ntk_cov}.
+ Update $\mathbf{U}_{f,t}$ and $\mathbf{U}_{c_i,t}, \forall i \in [1 \dots K]$ separately using Eqn. \eqref{eqn:neural-cbo_ntk_cov}.
 }
 \EndFor
 
 \end{algorithmic}
 \end{algorithm}
 
-\begin{figure}[h]
+\begin{figure*}[t]
     \centering
-   \includegraphics[width=\textwidth]{Figures/Neural-CBO/1d_toy.pdf}
-    \caption{Minimization result with 1-D objective function $f(x) = \sin(x) + \sin(\frac{10x}{3})$ under the constraint $c(x) = (x-7)^2 -1 \le 0$}
-    \label{fig:neural_cbo_toy_sample}
-\end{figure}
-In Figure \ref{fig:neural_cbo_toy_sample}, minimization result with 1-D objective function $f(x) = \sin(x) + \sin(\frac{10x}{3})$ under the constraint $c(x) = (x-7)^2 -1 \le 0$ is given to illustrate how variance formula in Eqn. \ref{Eqn:neural_cbo_variance_formula} and Alg. \ref{alg:neural_cbo} work. As shown in this figure, the variance formula performs well with relatively small values in feasible regions and larger values in infeasible regions. These results also demonstrate that the constraint model effectively guides our algorithm toward the feasible region, ensuring subsequent selection points remain within feasible regions and gradually approach the true minimum. 
+    \begin{subfigure}[t]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Neural-CBO/1d_toy_lcb_ei.pdf}
+        \caption{LCB for constraints, EI for objective.}
+        \label{fig:neural_cbo_toy_sample_ei}
+    \end{subfigure}%
+    \hfill
+    \begin{subfigure}[t]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Neural-CBO/1d_toy_lcb_lcb.pdf}
+        \caption{LCB for both constraints and objective.}
+        \label{fig:neural_cbo_toy_sample_lcb}
+    \end{subfigure}
+    \caption{Minimization results for the 1-D objective $f(x) = \sin(x) + \sin\left(\frac{10x}{3}\right)$ under the constraint $c(x) = (x - 7)^2 - 1 \leq 0$, using different acquisition strategies.}
+    \label{fig:neural_cbo_toy_sample_compare}
+\end{figure*}
 
+
+Figure \ref{fig:neural_cbo_toy_sample_compare} illustrates the minimization of a 1-D objective function $f(x) = \sin(x) + \sin(\frac{10x}{3})$ subject to the constraint $c(x) = (x-7)^2 -1 \le 0$ at the 200-th iteration. This figure justifies the \textbf{three different components} of our algorithm: the neural network surrogate model, the LCB-bassed constraint satisfaction, and the EI acquisition for objective function. The top half of the figure shows the predicted mean and variance of the objective function modelled by a deep neural network, showing the behavior of the variance formula in Equation \eqref{Eqn:neural_cbo_variance_formula} and the operation of Algorithm \ref{alg:neural_cbo}. This part of the figure shows that the variance is low in feasible regions and higher in infeasible regions, supporting the effectiveness of our uncertainty estimation. 
+
+To justify the choice of LCB for constraints, we plot the LCB of the constraint function in the bottom half of the figure. First, as shown in this part, the true constraint function $c(\mathbf{x})$ consistently lies within the predicted confidence bounds. This behavior aligns well with the theoretical guarantees provided in Corollary \ref{corrolary:f_in_lcb_ucb}. By conditioning on the lower confidence bound, our algorithm gains valuable information about constraint satisfaction, enabling it to identify feasible solutions successfully. The precise LCB guides the Expected Improvement (EI) for the objective function, helping to approach the true feasible minimum.
+
+To explain for the choice of EI for the objective function, we compare Figure \ref{fig:neural_cbo_toy_sample_ei} with the results of using LCB for both objective and constraints, provided in Figure \ref{fig:neural_cbo_toy_sample_lcb}. These figures support our design choice of acquisition functions. Specifically, while using LCB for the constraints still effectively guides the search toward feasible regions, using LCB for the objective tends to favor excessive exploration. In contrast, combining LCB for constraints with EI for the objective (LCB-EI) provides a better balance between exploration and exploitation. This is especially evident in our figures, where the feasible region is relatively small.
 
 
 \section{Theoretical Analysis}
@@ -239,14 +256,14 @@ Then, we introduce the \textit{cumulative positive regret} for the objective fun
     \begin{align*}
         R_T^+ &=\sum_{t=1}^T [f(\mathbf{x}_t) - f(\mathbf{x^*})]^+,
         \\
-        V_{c_i, T}  &= \sum_{t=1}^T [c_i(\mathbf{x}_t)]^+, \forall i \in [K]
+        V_{c_i, T}  &= \sum_{t=1}^T [c_i(\mathbf{x}_t)]^+, \forall i \in [K].
     \end{align*}
         
 \end{definition}
-\subsection{Detailed Assumptions for Objective Function and Constraints}
+\paragraph{Detailed Assumptions for Objective Function and Constraints}
 
 % \subsubsection{Assumption on black-box objective function and constraints}
-We apply the general assumption stated in the Assumption \ref{assumption:rkhs} and \ref{assumption:subgaussian_noise} on both objective function and constraints:
+We apply the general assumption stated in the Assumption \ref{assumption:neural-cbo_rkhs} and \ref{assumption:subgaussian_noise} on both objective function and constraints:
 
 \begin{itemize}
     \item \textbf{Objective function}: $f \in \mathcal{H}_{k_f}(\mathcal{D})$, $\norm{f}_{\mathcal{H}_{k_f}} \leq B$,  where $k_f$ is corresponding to $v(\cdot, \boldsymbol{\theta})$. The noisy observation at step $t$ is $y_t = f(\mathbf{x}_t) +  \epsilon_t$, where $\{\epsilon_i\}_{i=1}^t$ is sub-Gaussian with parameter $R_f$ and variance $\lambda_f$.
@@ -254,9 +271,9 @@ We apply the general assumption stated in the Assumption \ref{assumption:rkhs} a
     \item \textbf{Constraint}: $c_i \in \mathcal{H}_{k_{c_i}}(\mathcal{D}), \norm{c_i}_{\mathcal{H}_{k_{c_i}}} \leq S_i$, where $k_{c_i}$ is corresponding to $u_{c_i}(\cdot, \boldsymbol{\omega}_{c_i}), \forall i = 1, \dots, K$. The noisy observation at step $t$ is $z_{c_i,t} = c_i(\mathbf{x}_t) + \eta_{c_i, t}$, where $\{\eta_{c_i, t}\}_{i=1}^t$ is sub-Gaussian with parameter $R_{c_i}$ and variance $\lambda_{c_i}$.
 \end{itemize}
 Now we can now state our main theorem:
-\begin{restatable}{theorem}{TheoremMain}
+\begin{restatable}{theorem}{NeuralCBOTheoremMain}
 \label{theorem:neural-cbo_main}
-    Under Assumption \ref{assumption:rkhs}, Assumption \ref{assumption:subgaussian_noise} and Condition \ref{condition:network_width}, set the step size used to train the neural networks in Alg. \ref{alg:neural_cbo} as $\alpha_t \le \frac{\nu}{(T+1)^2}$, then for any $\delta \in (0,1)$,  with probability at least $1 - \delta \exp (\Omega(C^{-L} m^{1/36}))$, the Cumulative Regret $R_T$ and Cumulative Violation $V_{c_i, T}$ after $T$ iterations are bounded as:
+    Under Assumption \ref{assumption:neural-cbo_rkhs}, Assumption \ref{assumption:subgaussian_noise} and Condition \ref{condition:neural-cbo_network_width}, set the step size used to train the neural networks in Alg. \ref{alg:neural_cbo} as $\alpha_t \le \frac{\nu}{(T+1)^2}$, then for any $\delta \in (0,1)$,  with probability at least $1 - \delta \exp (\Omega(C^{-L} m^{1/36}))$, the Cumulative Regret $R_T$ and Cumulative Violation $V_{c_i, T}$ after $T$ iterations are bounded as:
     \begin{align*}
         & V_{c_i, T} \le 2 \beta_{c_i,T} \sqrt{\frac{S_i T}{\log(S_i+1)} (2\gamma_{c_i,T}+1)} + 2\mathcal{E}(m),
         \\
@@ -285,7 +302,7 @@ For all experiments, we compared our algorithm with well-known Constrained \ac{e
     Similar to ConfigOpt, but using a UCB-based acquisition function for the objective, we utilized the implementation obtained directly from the authors.
 \end{itemize}
 \paragraph{Neural-CBO implementation details:}
-As described in Section \ref{section:neural-cbo}, the network's weights are initialized with independent samples drawn from a normal distribution $\mathcal{N} (0, 1)$. We also initialize fixed outer weight $\mathbf{q}$ to be a symmetric Bernoulli random variable with equal probability to be $-1$ or $1$. To train the surrogate neural network models, we use a Gradient Descent optimizer described in the main paper with a learning rate $\alpha = 0.001$. The network width depends on the tasks and is set to be $m = T$, where $T$ is the number of optimization iterations. We choose the network depth $L=2$ to reduce computational costs. 
+As described in Section \ref{section:neural-cbo}, the network's weights are initialized with independent samples drawn from a normal distribution $\mathcal{N} (0, 1)$. We also initialize fixed outer weight $\mathbf{q}$ to be a symmetric Bernoulli random variable with equal probability to be $-1$ or $1$. To train the surrogate neural network models, we use a Gradient Descent optimizer described in Chapter \ref{chap:neural-cbo} with a learning rate $\alpha = 0.001$. The network width depends on the tasks and is set to be $m = T$, where $T$ is the number of optimization iterations. We choose the network depth $L=2$ to reduce computational costs. 
 
 \subsection{Synthetic Benchmark Functions}
 \label{section:neural-cbo_synthetic}
@@ -337,19 +354,21 @@ To ensure statistical significance, we performed one-sided $t$-tests to assess w
     \label{fig:neural-cbo_synthetic}
 \end{figure}
 
+\subsection{Real-world Applications}
 We analyse three real-world constrained black-box optimization tasks: gas transmission compressor and speed reducer designs from \citet{kumar2020test}, and a third inspired by \citet{he2018verideep}. Details of each task will follow in the upcoming sections.  
-\subsection{Gas Transmission Compressor Design}
+
+\subsubsection{Gas Transmission Compressor Design}
 \label{section:neural-cbo_gas}
      The main objective is to minimize operational costs or energy consumption. This requires identifying the optimal configuration of the compressor by optimizing four design variables. The problem involves $d = 4$ input dimensions and includes $K = 1$ constraint. The mathematics formula for this problem is:
     \begin{align*}
         f(\mathbf{x}) & = 8.61 \times 10^5\mathbf{x}_1^{1/2} \mathbf{x}_2\mathbf{x}_3^{-2/3} \mathbf{x}_4^{-1/2}  + 3.69 \times 10^4\mathbf{x}_3 + 7.72 \times 10^8 \mathbf{x}_1^{-1} \mathbf{x}_2^{0.219} \\
         & \;\;\; \; - 765.43 \times 10^6\mathbf{x}_1^{-1},
         \\
-        \text{s.t }  c(\mathbf{x}) &= \mathbf{x}_4\mathbf{x}_2^{-2} + \mathbf{x}_2^{-2} - 1 \le 0
+        \text{s.t }  c(\mathbf{x}) &= \mathbf{x}_4\mathbf{x}_2^{-2} + \mathbf{x}_2^{-2} - 1 \le 0.
     \end{align*}
 
     
- \subsection{Speed Reducer Design}
+ \subsubsection{Speed Reducer Design}
 \label{section:neural-cbo_speed}
 This task involves designing a speed reducer for a small aircraft engine, focusing on minimizing weight while meeting several constraints, including bending stress on gear teeth, surface stress, transverse deflections of shafts, and shaft stresses. The problem includes 7 decision variables and 11 constraints, resulting in an input dimension of $d=7$ and $K=11$ constraints and can be formulated as:
 \begin{align*}
@@ -359,64 +378,64 @@ This task involves designing a speed reducer for a small aircraft engine, focusi
     & \;\;\;\; +0.7854(\mathbf{x}_5\mathbf{x}_7^2 + \mathbf{x}_4\mathbf{x}_6^2) - 1.508\mathbf{x}_1(\mathbf{x}_7^2 + \mathbf{x}_6^2) + 7.477(\mathbf{x}_7^3 + \mathbf{x}_6^3), 
     \\
     \text{s.t. } & \begin{cases} 
-    c_1(\mathbf{x}) = -\mathbf{x}_1\mathbf{x}_2^2\mathbf{x}_3 + 27  & \le 0 
+    c_1(\mathbf{x}) = -\mathbf{x}_1\mathbf{x}_2^2\mathbf{x}_3 + 27  & \le 0, 
     \\
-    c_2(\mathbf{x}) = -\mathbf{x}_1\mathbf{x}_2^2\mathbf{x}_3^2 + 397.5 & \le 0 
+    c_2(\mathbf{x}) = -\mathbf{x}_1\mathbf{x}_2^2\mathbf{x}_3^2 + 397.5 & \le 0, 
     \\
     c_3(\mathbf{x}) = -\mathbf{x}_2\mathbf{x}_6^4
-    \mathbf{x}_3\mathbf{x}_4^{-3}+ 1.93 &\le 0 
+    \mathbf{x}_3\mathbf{x}_4^{-3}+ 1.93 &\le 0, 
     \\
     c_4(\mathbf{x}) = -\mathbf{x}_2\mathbf{x}_7^4
-    \mathbf{x}_3\mathbf{x}_5^{-3}+ 1.93 & \le 0 
+    \mathbf{x}_3\mathbf{x}_5^{-3}+ 1.93 & \le 0, 
     \\
     c_5(\mathbf{x}) = 10\mathbf{x}_6^{-3} \sqrt{16.91 \times 10^6 + (745\mathbf{x}_4\mathbf{x}_2^{-1}
     \mathbf{x}_3^{-1}
-    )^2} -1100 & \le 0
+    )^2} -1100 & \le 0,
     \\
     c_6(\mathbf{x}) = 10\mathbf{x}_7^{-3} \sqrt{157.5 \times 10^6 + (745\mathbf{x}_5\mathbf{x}_2^{-1}
     \mathbf{x}_3^{-1}
-    )^2} - 850 & \le 0
+    )^2} - 850 & \le 0,
     \\
-    c_7(\mathbf{x}) = \mathbf{x}_2\mathbf{x}_3 -40 & \le 0 
+    c_7(\mathbf{x}) = \mathbf{x}_2\mathbf{x}_3 -40 & \le 0,
     \\
-    c_8(\mathbf{x}) = -\mathbf{x}_1 \mathbf{x}_2^{-1} + 5 & \le 0
+    c_8(\mathbf{x}) = -\mathbf{x}_1 \mathbf{x}_2^{-1} + 5 & \le 0,
     \\
-    c_9(\mathbf{x}) = -\mathbf{x}_1 \mathbf{x}_2^{-1} - 12  & \le 0
+    c_9(\mathbf{x}) = -\mathbf{x}_1 \mathbf{x}_2^{-1} - 12  & \le 0,
     \\
-    c_{10}(\mathbf{x}) = 1.5\mathbf{x}_6 - \mathbf{x}_4  + 1.9  & \le 0
+    c_{10}(\mathbf{x}) = 1.5\mathbf{x}_6 - \mathbf{x}_4  + 1.9  & \le 0,
     \\
-    c_{11}(\mathbf{x}) = 1.1\mathbf{x}_7 - \mathbf{x}_5  + 1.9  & \le 0
+    c_{11}(\mathbf{x}) = 1.1\mathbf{x}_7 - \mathbf{x}_5  + 1.9  & \le 0.
     \\
-    \end{cases},
+    \end{cases}
 \end{align*}
 
-We report numerical results of Section \ref{section:neural-cbo_gas} and  \ref{section:neural-cbo_speed} in Figure \ref{fig:neural-cbo_synthetic} and Table \ref{tab:neural-cbo_t-test}.
-\subsection{Designing Sensitive Samples for Model Tampering Detection}
+\noindent We report numerical results of Section \ref{section:neural-cbo_gas} and  \ref{section:neural-cbo_speed} in Figure \ref{fig:neural-cbo_synthetic} and Table \ref{tab:neural-cbo_t-test}.
+\subsubsection{Designing Sensitive Samples for Model Tampering Detection}
 \label{section:neural-cbo_sensitive_sample}
 
 
 We build on the sensitive sample generation example described in Section \ref{section:neural-bo_sensitive_samples} to address an additional practical challenge: incorporating constraints on the generated samples to ensure their realism. Specifically, in scenarios where tampered machine learning models are hosted on cloud services, attackers may attempt to bypass detection by modifying models while keeping their behavior on plausible inputs unchanged. To prevent attackers from evading detection, sensitive samples must resemble normal inputs. Therefore, a human-in-the-loop process is employed, where reviewers rate the realism of each sample on a scale of $(0,1)$; higher scores indicate more realistic samples. These scores serve as constraints in the optimization, where obtaining human feedback can be costly. Assuming a pre-trained model $s_\varphi(\mathbf{x})$ may have been altered after being uploaded, the goal is to find sensitive samples by solving the optimization problem: 
 \begin{align*}
-    v &= \argmax_\mathbf{x} \norm{\frac{\partial s_\varphi(\mathbf{x})}{\partial \varphi}}_F 
+    v &= \argmax_\mathbf{x} \norm{\frac{\partial s_\varphi(\mathbf{x})}{\partial \varphi}}_F, 
     \\
     \text{s.t. } &  realistic(v) \ge h, 
 \end{align*}
 where $\norm{\cdot}_F$ denotes the Frobenius norm, $realistic(\cdot)$ is the human-based scoring function and $h$ is a pre-defined threshold. A detection is \emph{successful} if at least one of the $N_S$ sensitive samples shows a different top-1 prediction between the tampered and original models.  
 
 We employed the same experimental setup outlined in Section \ref{section:neural-bo_sensitive_samples}, using a pre-trained MNIST handwritten digit classification model and compared our method's performance against several baselines based on average detection rates for sensitive samples. The model was tampered with by adding noise to its weights 1,000 times, producing 1,000 distinct versions. While the original model had a top-1 accuracy of 93\%, this dropped to $87.73\% \pm 0.08\%$ after tampering. To reduce computational costs, we downscaled the images from $28 \times 28$ to $7 \times 7$, optimized in this 49-dimensional space, and then restored them to the original resolution to generate sensitive samples. Feasible samples were chosen based on their realistic scores. Figure \ref{fig:neural-cbo_sensitive_sample} shows the detection rates of (feasible) sensitive samples generated by our method compared to four baselines, demonstrating that our samples achieved higher detection rates. As expected, the detection rate improves with more samples and our method is consistently competitive.
-
-
-
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
 \includegraphics[width=\textwidth]{Figures/Neural-CBO/sensitive_sample_detection_rate.pdf}
     \caption{Detection Rates w.r.t to the number of samples for the MNIST dataset. As shown in the figure, Neural-CBO can generate sensitive samples that achieve nearly 85\% of the detection rate with just 10 samples.}
     \label{fig:neural-cbo_sensitive_sample}
-\end{figure}
-
-
-
+\end{figure}    
 \section{Conclusion}
 We proposed a novel algorithm for black-box optimization with unknown constraints, utilizing deep neural networks as surrogate models for both the objective function and constraints. Our algorithm leverages the bounded nature of constraint values by applying LCB conditions at each iteration to ensure feasibility. We also employ EI as the acquisition function to balance exploration and exploitation, especially in scenarios where feasible regions are significantly smaller than the search space. Our theoretical analysis shows that, under mild conditions regarding neural network width, our algorithm achieves upper bounds on cumulative regret and constraint violations comparable to previous GPs-based methods. We validate our approach through experiments on synthetic and real-world benchmark tasks involving structural data, with results demonstrating competitive performance against state-of-the-art methods.
+
+
+
+
+
+
 
 % as our baseline and tampered it by adding noise to each weight 1,000 times, resulting in 1,000 distinct models. The original model had a top-1 accuracy of $93\%$, which dropped to $87.73\% \pm 0.08\%$ after tampering. To reduce computational costs, we downscaled the images from $28 \times 28$ to $7 \times 7$, optimizing in this 49-dimensional space. After identifying the optimal points, we restored them to the original resolution to generate sensitive samples.

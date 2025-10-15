@@ -56,7 +56,7 @@ While sub-Gaussian random variables provide valuable tools for modeling uncertai
 \label{section:gaussian_process}
 A \acf{gp} is defined as a (infinite) collection of random variables such that any finite set of them follow a multivariate normal distribution. \ac{gp} offers a prior distribution over smooth functions and are completely specified by a mean function, $\mu(\mathbf{x})$ and covariance function, $k(\mathbf{x}, \mathbf{x}^\prime)$. We have \begin{equation*}
     \label{def:GP}
-    f({\bf x})\sim\mathrm{GP}(\mu({\bf x}),k({\bf x},{\bf x}^\prime))
+    f({\bf x})\sim\mathrm{GP}(\mu({\bf x}),k({\bf x},{\bf x}^\prime)).
 \end{equation*}
 Without loss in generality, $f(\mathbf{x})$ values can be assumed as a realization of random variables with prior mean as zero thus making the Gaussian process fully specified by the covariance matrix \citep{rasmussen2006gaussian}. There are many popular covariance functions including Mat\'ern kernel, Linear kernel, Squared Exponential kernel. These kernels will be briefly introduced in the next section.
 
@@ -74,7 +74,7 @@ values $f(\mathbf{x}_{1:t})$ follow a multivariate Gaussian distribution $\mathc
     k(\mathbf{x}_1, \mathbf{x}_1) & \dots  & k(\mathbf{x}_1, \mathbf{x}_t)\\
     \vdots & \ddots & \vdots\\
     k(\mathbf{x}_t, \mathbf{x}_1) & \dots  & k(\mathbf{x}_t, \mathbf{x}_t)
-    \end{bmatrix}
+    \end{bmatrix}.
 \]
 Given a new point $\mathbf{x}_{t+1}$, then $y_{1:t}$ and $f(\mathbf{x}_{t+1})$ are jointly Gaussian. By the properties of \ac{gp} we can write
 
@@ -104,7 +104,7 @@ The choice of kernel is a critical aspect of \ac{gp} modeling, as it directly im
 
 \paragraph{Linear Kernel:}
 The linear kernel is defined as:
-\[k(\mathbf{x}, \mathbf{x}^\prime) = \mathbf{x}^T \mathbf{x}^\prime\]
+\[k(\mathbf{x}, \mathbf{x}^\prime) = \mathbf{x}^T \mathbf{x}^\prime,\]
 where $\mathbf{x}$ and $\mathbf{x}^\prime$ are vectors in the input space. This kernel assumes that the underlying function values are linearly dependent on the inputs. This kernel is useful when there is a reason to assume that the underlying data has a linear structure, or when working with high-dimensional data where the kernel has less sensitivity to changes in the input. However, this kernel is often too restrictive for complex functions due to its lack of flexibility and can't capture non-linear patterns. 
 
 \paragraph{Squared Exponential (RBF) Kernel}
@@ -116,7 +116,7 @@ where $\ell$ is the length-scale parameter. The RBF kernel assumes that the func
 \paragraph{Mat\'ern Kernel}
 
 The Mat\'ern kernel is a more general kernel and is defined as:
-\[ k(\mathbf{x}, \mathbf{x}^\prime) = \frac{2^{1-\nu}}{\Gamma(\nu)}\left(\frac{\sqrt{2\nu}\norm{\mathbf{x}-\mathbf{x}^\prime}}{\ell}\right)^\nu K_\nu\left(\frac{\sqrt{2\nu}\norm{\mathbf{x}-\mathbf{x}^\prime}}{\ell}\right)\]
+\[ k(\mathbf{x}, \mathbf{x}^\prime) = \frac{2^{1-\nu}}{\Gamma(\nu)}\left(\frac{\sqrt{2\nu}\norm{\mathbf{x}-\mathbf{x}^\prime}}{\ell}\right)^\nu K_\nu\left(\frac{\sqrt{2\nu}\norm{\mathbf{x}-\mathbf{x}^\prime}}{\ell}\right),\]
 where $\nu > 0$ is the smoothness parameter, $\ell$ is the length-scale parameter, and $K_\nu$ is the modified Bessel function of the second kind. The Mat\'ern kernel is a generalization of the RBF kernel, which is obtained in the limit of large $\nu$.  This kernel allows for controlling the smoothness of the underlying function, providing a continuous range of possibilities. The smoothness of functions associated with the Mat\'ern kernel is determined by the parameter $\nu$. A low $\nu$ implies less smooth functions, whereas, as $\nu$ increases, the functions become increasingly smoother. This parameter also has an impact on the convergence of Bayesian Optimization algorithms. Mat\'ern kernels with different smoothness parameters have also been found to have a crucial effect in the generalization capacity of \ac{gp} models, as it reflects the trade-off between modeling data and having a smooth prior \citep{rasmussen2006gaussian}. The Mat\'ern kernel allows the flexibility of the RBF kernel, but includes an additional parameter that enables one to control the smoothness of the modeled function. This parameter is not present in RBF kernels.
 
 The choice of the kernel is not merely a matter of convenience; it directly influences the properties of the function space over which the \ac{gp} operates. Selecting an appropriate kernel demands a careful understanding of the underlying assumptions of each kernel type and considering the characteristics of the function to be modeled. Kernels enable us to encode our prior beliefs about the function, and hence, proper selection is crucial for the efficiency and generalization capability of our \ac{gp} model. We have presented three common kernels that are often used in practice, and their differences highlight the importance of selecting the appropriate kernel for the task. Choosing between them requires an understanding of the properties of the data and the functions to be modeled.
@@ -171,7 +171,7 @@ and \( \mathbf{I}_t \) is the identity matrix.
 
 The \textit{information gain} obtained is highly dependent on the specific locations where observations are made. To address this variability, the \acf{mig} after observing $t$ data points, represented as $\gamma_t$, is introduced as an upper bound. Instead of focusing on a particular point selection, \ac{mig} quantifies the maximum possible information that could be gained from any set of $t$ points in the input space. \ac{mig} provides an input-independent and kernel-specific bound on the information that can be acquired:
 
-\[ \gamma_t := \max_{\mathcal{A} \subset \mathcal{X}, \lvert \mathcal{A} \rvert = t} I(\mathbf{y}_A; \mathbf{f}_A),\]
+\[ \gamma_t := \max_{\mathcal{A} \subset \mathcal{X}, \lvert \mathcal{A} \rvert = t} I(\mathbf{y}_A; \mathbf{f}_A).\]
 
 As mentioned above, $\mathcal{A}$ represents a set of $t$ input points in the input space $\mathcal{X}$, $\mathbf{y}_\mathcal{A}$ denotes the noisy observations of the objective function $f$ at these points, and $\mathbf{f}_\mathcal{A}$ represents the corresponding function values \textit{without} noise. $I(\mathbf{y}_\mathcal{A}; \mathbf{f}_\mathcal{A})$ is the mutual information between the observed data $\mathbf{y}_\mathcal{A}$ and the underlying function values $\mathbf{f}_\mathcal{A}$. Basically, the \ac{mig} quantifies the maximum amount of information that \textit{any} set of $t$ points could possibly reveal about the unknown objective function $f$. Specifically, the \ac{mig} serves as an upper bound on the information obtained by any selection of $t$ points. This means that even in the worst-case scenario (i.e., the scenario where we choose the least informative set of points within the optimization algorithm), the amount of information to be gained will never surpass the \ac{mig}. The work by \citet{srinivas2009gaussian} provides crucial kernel-specific bounds on the \ac{mig}. Specifically, they analyzed three common kernels: Linear, RBF, and Mat\'ern introduced in Section \ref{section:kernels}. The bounds on \ac{mig} for these kernels are:
 
@@ -312,7 +312,7 @@ We will now provide a detailed examination of the mathematical foundations of va
 \noindent In its simplest form, \ac{gd} updates the solution by moving in the direction of the negative gradient. The negative gradient points towards the direction of the steepest descent on the error surface. This update pushes the solution in the direction that decreases the objective function the most.
 
 \begin{equation*}
-d_k = -\nabla f(\mathbf{x}_k)
+d_k = -\nabla f(\mathbf{x}_k).
 \end{equation*}
 
 \noindent The update rule of Eqn. \eqref{eq:general_update} thus becomes:
@@ -339,7 +339,7 @@ The update rule involves an intermediate variable called velocity $\mathbf{v}_k$
 where $\beta$ is the momentum parameter, typically a scalar in the range \( [0, 1) \), controlling the influence of past gradients. Then the update of $\mathbf{x}_k$ becomes:
 
 \begin{equation*}
-\mathbf{x}_{k+1} = \mathbf{x}_k + \mathbf{v}_k
+\mathbf{x}_{k+1} = \mathbf{x}_k + \mathbf{v}_k.
 \label{eq:momentum_update}
 \end{equation*}
 The momentum term $\beta \mathbf{v}_{k-1}$ effectively remembers previous gradients, adding them to the current gradient, which acts as a smoothing filter. This helps the solution continue in a similar direction even if it encounters small hills or valleys on the error surface. Momentum-based methods, such as classical Momentum and \ac{nag}, are widely used for their ability to overcome challenges like slow convergence on flat surfaces and oscillations in steep directions. These methods are particularly beneficial for optimizing non-convex functions, where standard \ac{gd} often struggles.
@@ -795,7 +795,7 @@ where:
 \[
 \mathbf{f}_t = [f(\mathbf{x}_1, \boldsymbol{\theta}_t), f(\mathbf{x}_2, \boldsymbol{\theta}_t), \ldots, f(\mathbf{x}_n, \boldsymbol{\theta}_t)]^\top
 \]
-denotes the vector of network outputs for the training inputs at time \( t \), and:
+denotes the vector of network outputs for the training inputs at time \( t \), and
 \[
 \mathbf{y} = [y_1, y_2, \ldots, y_n]^\top
 \]
@@ -842,7 +842,7 @@ The \ac{PI} acquisition function, introduced by \citet{kushner1964new}, is a str
 
 Given the best-observed objective function value \(f(\mathbf{x}^+)\) up to the current iteration $t$, and the predictive mean \(\mu_t(\mathbf{x})\) and standard deviation \(\sigma_t(\mathbf{x})\) of a point \(\mathbf{x}\), the \ac{PI} function is defined as:
 \begin{equation*}
-\alpha_{\text{PI}}(\mathbf{x}) = P(f(\mathbf{x}) > f(\mathbf{x}^+) + \xi) = \Phi\left( \frac{\mu_t(\mathbf{x}) - f(\mathbf{x}^+) - \xi}{\sigma_t(\mathbf{x})} \right)
+\alpha_{\text{PI}}(\mathbf{x}) = P(f(\mathbf{x}) > f(\mathbf{x}^+) + \xi) = \Phi\left( \frac{\mu_t(\mathbf{x}) - f(\mathbf{x}^+) - \xi}{\sigma_t(\mathbf{x})} \right),
 \label{eq:pi_formula}
 \end{equation*}
 where:
@@ -879,7 +879,7 @@ In the context of \ac{bo}, at the optimization iteration $t$, assuming that the 
 where: \(z =  \frac{f(\mathbf{x}^+) - \mu_t(\mathbf{x})}{\sigma_t(\mathbf{x})}\); \(f(\mathbf{x}^+)\) is the best function value observed so far in the optimization process; \(\mu_t(\mathbf{x})\) is the predicted mean of the objective function at point \(\mathbf{x}\); \(\sigma_t(\mathbf{x})\) is the predicted standard deviation (or uncertainty) of the objective function at point \(\mathbf{x}\); \(\Phi(\cdot)\) is the \ac{cdf} of the standard normal distribution; and \(\phi(\cdot)\) is the \ac{pdf} of the standard Normal distribution. The next evaluation point is then selected by maximizing the \ac{ei} function:
 
 \[
-\mathbf{x}_t = \argmax_{\mathbf{x} \in \mathcal{D}}  \alpha_{\text{EI}}(\mathbf{x})
+\mathbf{x}_t = \argmax_{\mathbf{x} \in \mathcal{D}}  \alpha_{\text{EI}}(\mathbf{x}).
 \]
 
 The formulation in Eqn. \eqref{eq:ei_formula} allows computation of the \ac{ei} by combining the mean and standard deviation predicted by a \ac{gp}. Intuitively, it represents a trade-off between the standard deviation \(\sigma_t(\mathbf{x})\), which tends to promote exploration, and the \(z\) term which tends to promote exploitation of promising areas. This makes it a more comprehensive approach compared to other methods such as \ac{PI}, which focuses mainly on the probability of improvement, rather than its magnitude as well.
@@ -962,7 +962,7 @@ This information-theoretic perspective naturally emphasizes exploration in regio
 However, while the theoretical formulation of \ac{es} is elegant and well-suited to complex optimization problems, it is computationally intensive. The evaluation of the entropy terms and the expectation over the posterior distributions often requires solving high-dimensional integrals, which can be challenging and time-consuming. Approximations and sampling methods are typically employed to make the computations tractable, but these can introduce additional complexity and computational overhead. Consequently, while \ac{es} offers significant advantages in terms of guiding the search effectively, its application is often limited to problems with manageable computational demands or where its potential benefits justify the additional cost.
 
 \subsubsection{Predictive Entropy Search}
-While \ac{es} focuses on reducing the entropy of the posterior distribution over the location of the global optimum, \acf{pes} offers a computationally efficient reformulation by directly evaluating the expected reduction in entropy of the predictive distribution over the function values.
+While \ac{es} focuses on reducing the entropy of the posterior distribution over the location of the global optimum, \acf{pes} \citep{hernandez2014predictive} offers a computationally efficient reformulation by directly evaluating the expected reduction in entropy of the predictive distribution over the function values.
 
 The fundamental idea behind \ac{pes} is to quantify the expected information gain about the location of the global optimum $\mathbf{x}^*$ when observing the objective function at a new point $\mathbf{x}$. However, instead of working with the posterior distribution over $\mathbf{x}^*$, \ac{pes} reformulates the acquisition function by focusing on the entropy of the predictive distribution of the function values. This reformulation simplifies the computation while preserving the core objective of reducing uncertainty about $\mathbf{x}^*$. The acquisition function for \ac{pes} is defined as:
 \begin{equation*}
@@ -1125,7 +1125,7 @@ To address these challenges, various algorithms have been proposed using both li
 \subsubsection{Linear Bandits}
 Linear models assume that the expected reward for a given context and action can be represented as a linear combination of some features. Specifically, we assume there exists an unknown parameter vector $\boldsymbol{\theta}$ such that the expected reward can be approximated by the inner product of this vector with a context-action feature vector:
 \begin{equation*}
-    \mathbb{E}[r_t  \vert  \mathbf{c}_t, a_t] = \boldsymbol{\theta}^T \phi(\mathbf{c}_t, a_t)
+    \mathbb{E}[r_t  \vert  \mathbf{c}_t, a_t] = \boldsymbol{\theta}^T \phi(\mathbf{c}_t, a_t),
 \end{equation*}
 where $\phi(\mathbf{c}_t, a_t)$ is the feature mapping of context $\mathbf{c}_t$ and action $a_t$ into a feature vector.
 
@@ -1138,15 +1138,15 @@ LinUCB in \citet{dani2008stochastic, li2010contextual} operates by maintaining a
               \item Observe context $\mathbf{c}_t$.
               \item For each action $a \in \mathcal{A}$, compute:
               \begin{align*}
-                \hat{r}_t(a) &= \hat{\boldsymbol{\theta}}_{t-1}^T \phi(\mathbf{c}_t, a) + \alpha \sqrt{ \phi(\mathbf{c}_t, a)^T \mathbf{A}_{t-1}^{-1} \phi(\mathbf{c}_t, a)}
+                \hat{r}_t(a) &= \hat{\boldsymbol{\theta}}_{t-1}^T \phi(\mathbf{c}_t, a) + \alpha \sqrt{ \phi(\mathbf{c}_t, a)^T \mathbf{A}_{t-1}^{-1} \phi(\mathbf{c}_t, a)}.
               \end{align*}
               \item Select action $a_t = \text{argmax}_{a \in \mathcal{A}} \hat{r}_t(a)$.
               \item Observe reward $r_t$.
               \item Update parameters:
               \begin{align*}
-                  \mathbf{A}_t &= \mathbf{A}_{t-1} + \phi(\mathbf{c}_t, a_t) \phi(\mathbf{c}_t, a_t)^T \\
-                  \mathbf{b}_t &= \mathbf{b}_{t-1} + r_t \phi(\mathbf{c}_t, a_t) \\
-                  \hat{\boldsymbol{\theta}}_t &= \mathbf{A}_t^{-1} \mathbf{b}_t
+                  \mathbf{A}_t &= \mathbf{A}_{t-1} + \phi(\mathbf{c}_t, a_t) \phi(\mathbf{c}_t, a_t)^T, \\
+                  \mathbf{b}_t &= \mathbf{b}_{t-1} + r_t \phi(\mathbf{c}_t, a_t), \\
+                  \hat{\boldsymbol{\theta}}_t &= \mathbf{A}_t^{-1} \mathbf{b}_t.
               \end{align*}
           \end{enumerate}
     \end{enumerate}
@@ -1163,9 +1163,9 @@ LinUCB is proved to achieve a regret bound of \( \tilde{\mathcal{O}}(d \sqrt{T})
         \item Observe reward $r_t$.
         \item Update parameters:
               \begin{align*}
-                  \mathbf{A}_t &= \mathbf{A}_{t-1} + \phi(\mathbf{c}_t, a_t) \phi(\mathbf{c}_t, a_t)^T \\
-                  \mathbf{b}_t &= \mathbf{b}_{t-1} + r_t \phi(\mathbf{c}_t, a_t) \\
-                  \hat{\boldsymbol{\theta}}_t &= \mathbf{A}_t^{-1} \mathbf{b}_t
+                  \mathbf{A}_t &= \mathbf{A}_{t-1} + \phi(\mathbf{c}_t, a_t) \phi(\mathbf{c}_t, a_t)^T, \\
+                  \mathbf{b}_t &= \mathbf{b}_{t-1} + r_t \phi(\mathbf{c}_t, a_t), \\
+                  \hat{\boldsymbol{\theta}}_t &= \mathbf{A}_t^{-1} \mathbf{b}_t.
               \end{align*}
       \end{enumerate}
     \end{enumerate}
@@ -1356,7 +1356,7 @@ s_{v,t}(\mathbf{x}) = l_{v,t}^+(\mathbf{x}) + l_{-v,t}^+(\mathbf{x}) = \max(0, l
 \]  
 The acquisition function for this penalty-based CBO approach is defined as:  
 \[
-\alpha_t(\mathbf{x}; \rho) = l_{f,t}(x) + \rho \left[ \sum_{i=1}^p s_{h_i,t}^+(\mathbf{x}) + \sum_{i=j}^K  l_{c_j,t}^+(\mathbf{x}) \right]
+\alpha_t(\mathbf{x}; \rho) = l_{f,t}(x) + \rho \left[ \sum_{i=1}^p s_{h_i,t}^+(\mathbf{x}) + \sum_{i=j}^K  l_{c_j,t}^+(\mathbf{x}) \right],
 \] 
 where \( l_{f,t}(\mathbf{x}) \) is the lower confidence bound of the objective function, \( s_{h_i,t}^+(\mathbf{x}) \) are slack penalties for equality constraints \( h_i(\mathbf{x}) = 0  \), and \( \rho \geq 0 \) is the penalty weight that scales constraint violations. 
 
